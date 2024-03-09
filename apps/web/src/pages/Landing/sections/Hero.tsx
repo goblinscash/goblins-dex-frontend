@@ -76,15 +76,15 @@ export function Hero({ scrollToRef }: HeroProps) {
           <Box direction="column" align="center">
             <StyledH1>
               <RiseInText delay={0.0}>
-                <Trans>Swap</Trans>
+                <Trans>BCH</Trans>
               </RiseInText>{' '}
               <RiseInText delay={0.1}>
-                <Trans>anytime,</Trans>
+                <Trans>Liquidity</Trans>
               </RiseInText>
             </StyledH1>
             <RiseIn delay={0.2}>
               <StyledH1>
-                <Trans>anywhere.</Trans>
+                <Trans>Engine.</Trans>
               </StyledH1>
             </RiseIn>
           </Box>

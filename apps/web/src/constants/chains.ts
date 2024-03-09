@@ -78,15 +78,14 @@ export const TESTNET_CHAIN_IDS = [
  */
 export const L1_CHAIN_IDS = [
   ChainId.MAINNET,
-  ChainId.GOERLI,
-  ChainId.SEPOLIA,
-  ChainId.POLYGON,
-  ChainId.POLYGON_MUMBAI,
-  ChainId.CELO,
-  ChainId.CELO_ALFAJORES,
+  // ChainId.GOERLI,
+  // ChainId.SEPOLIA,
+  // ChainId.POLYGON,
+  // ChainId.POLYGON_MUMBAI,
+  // ChainId.CELO,
+  // ChainId.CELO_ALFAJORES,
   ChainId.BNB,
-  ChainId.AVALANCHE,
-  // '10001'
+  // ChainId.AVALANCHE,
 ] as const
 
 export type SupportedL1ChainId = (typeof L1_CHAIN_IDS)[number]
@@ -98,9 +97,10 @@ export type SupportedL1ChainId = (typeof L1_CHAIN_IDS)[number]
 export const L2_CHAIN_IDS = [
   ChainId.ARBITRUM_ONE,
   ChainId.ARBITRUM_GOERLI,
-  ChainId.OPTIMISM,
-  ChainId.OPTIMISM_GOERLI,
-  ChainId.BASE,
+  // ChainId.OPTIMISM,
+  // ChainId.OPTIMISM_GOERLI,
+  ChainId.SMARTBCH,
+  // ChainId.BASE,
 ] as const
 
 export type SupportedL2ChainId = (typeof L2_CHAIN_IDS)[number]

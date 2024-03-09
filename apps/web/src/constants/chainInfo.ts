@@ -224,6 +224,19 @@ const CHAIN_INFO: ChainInfoMap = {
     nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
     color: darkTheme.chain_84531,
   },
+  [ChainId.SMARTBCH]: {
+    networkType: NetworkType.L2,
+    blockWaitMsBeforeWarning: ms(`25m`),
+    bridge: 'https://bridge.base.org/deposit',
+    defaultListUrl: BASE_LIST,
+    docs: 'https://docs.base.org',
+    explorer: 'https://basescan.org/',
+    infoLink: 'https://info.uniswap.org/#/base/',
+    label: 'SBCH',
+    statusPage: 'https://status.base.org/',
+    nativeCurrency: { name: 'BCH', symbol: 'BCH', decimals: 18 },
+    color: darkTheme.chain_84531,
+  },
 } as const
 
 export function getChainInfo(
