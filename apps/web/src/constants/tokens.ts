@@ -345,6 +345,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } =
     'WAVAX',
     'Wrapped AVAX'
   ),
+  [ChainId.SMARTBCH]: new Token(
+    ChainId.SMARTBCH,
+    '0x17F4FCF5b6E0A95D4eE331c8529041896A073F9b',
+    18,
+    'WBCH',
+    'Wrapped BCH'
+  ),
 }
 
 export function isCelo(chainId: number): chainId is ChainId.CELO | ChainId.CELO_ALFAJORES {

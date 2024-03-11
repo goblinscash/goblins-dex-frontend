@@ -69,7 +69,6 @@ interface SwapFormProps {
   disableTokenInputs?: boolean
   onCurrencyChange?: (selected: CurrencyState) => void
 }
-
 export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapFormProps) {
   const connectionReady = useConnectionReady()
   const { account, chainId: connectedChainId, connector } = useWeb3React()

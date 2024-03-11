@@ -47,7 +47,7 @@ export function asSupportedChain(
 }
 
 export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [
-  ChainId.MAINNET,
+  // ChainId.MAINNET,
   // ChainId.POLYGON,
   // ChainId.CELO,
   // ChainId.OPTIMISM,
@@ -77,7 +77,7 @@ export const TESTNET_CHAIN_IDS = [
  * All the chain IDs that are running the Ethereum protocol.
  */
 export const L1_CHAIN_IDS = [
-  ChainId.MAINNET,
+  // ChainId.MAINNET,
   // ChainId.GOERLI,
   // ChainId.SEPOLIA,
   // ChainId.POLYGON,
