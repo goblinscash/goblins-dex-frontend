@@ -271,6 +271,9 @@ export const MNW = new Token(
   'Morpheus.Network'
 )
 
+export const USDT_SBCH = new Token(ChainId.SMARTBCH, '0x55d398326f99059fF775485246999027B3197955', 18, 'bcUSDT', 'bcUSDT')
+
+
 export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } = {
   ...(WETH9 as Record<ChainId, Token>),
   [ChainId.OPTIMISM]: new Token(
@@ -435,6 +438,27 @@ class AvaxNativeCurrency extends NativeCurrency {
   }
 }
 
+export function isSbch(chainId: number): chainId is ChainId.AVALANCHE {
+  return chainId === ChainId.SMARTBCH
+}
+class SbchNativeCurrency extends NativeCurrency {
+  equals(other: Currency): boolean {
+    return other.isNative && other.chainId === this.chainId
+  }
+
+  get wrapped(): Token {
+    if (!isSbch(this.chainId)) throw new Error('Not avalanche')
+    const wrapped = WRAPPED_NATIVE_CURRENCY[this.chainId]
+    invariant(wrapped instanceof Token)
+    return wrapped
+  }
+
+  public constructor(chainId: number) {
+    if (!isSbch(chainId)) throw new Error('Not avalanche')
+    super(chainId, 18, 'BCH', 'BCH')
+  }
+}
+
 class ExtendedEther extends Ether {
   public get wrapped(): Token {
     const wrapped = WRAPPED_NATIVE_CURRENCY[this.chainId]
@@ -461,6 +485,8 @@ export function nativeOnChain(chainId: number): NativeCurrency | Token {
     nativeCurrency = new BscNativeCurrency(chainId)
   } else if (isAvalanche(chainId)) {
     nativeCurrency = new AvaxNativeCurrency(chainId)
+  } else if (isSbch(chainId)) {
+    nativeCurrency = new SbchNativeCurrency(chainId)
   } else {
     nativeCurrency = ExtendedEther.onChain(chainId)
   }
