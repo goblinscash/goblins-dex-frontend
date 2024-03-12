@@ -271,8 +271,13 @@ export const MNW = new Token(
   'Morpheus.Network'
 )
 
-export const USDT_SBCH = new Token(ChainId.SMARTBCH, '0x55d398326f99059fF775485246999027B3197955', 18, 'bcUSDT', 'bcUSDT')
-
+export const USDT_SBCH = new Token(
+  ChainId.SMARTBCH,
+  '0x55d398326f99059fF775485246999027B3197955',
+  18,
+  'bcUSDT',
+  'bcUSDT'
+)
 
 export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } = {
   ...(WETH9 as Record<ChainId, Token>),
@@ -438,7 +443,7 @@ class AvaxNativeCurrency extends NativeCurrency {
   }
 }
 
-export function isSbch(chainId: number): chainId is ChainId.AVALANCHE {
+function isSbch(chainId: number): chainId is ChainId.AVALANCHE {
   return chainId === ChainId.SMARTBCH
 }
 class SbchNativeCurrency extends NativeCurrency {
