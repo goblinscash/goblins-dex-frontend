@@ -273,7 +273,7 @@ export const MNW = new Token(
 
 export const USDT_SBCH = new Token(
   ChainId.SMARTBCH,
-  '0x55d398326f99059fF775485246999027B3197955',
+  '0x96917995f030f8fC3D8fDF40F3a6422547c877c1',
   18,
   'bcUSDT',
   'bcUSDT'
