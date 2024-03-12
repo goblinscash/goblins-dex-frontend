@@ -11347,16 +11347,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uniswap/v2-sdk@file:./packages/v2-sdk::locator=universe%40workspace%3A.":
+"@uniswap/v2-sdk@npm:4.1.0":
   version: 4.1.0
-  resolution: "@uniswap/v2-sdk@file:./packages/v2-sdk#./packages/v2-sdk::hash=aafeb2&locator=universe%40workspace%3A."
+  resolution: "@uniswap/v2-sdk@npm:4.1.0"
   dependencies:
     "@ethersproject/address": ^5.0.0
     "@ethersproject/solidity": ^5.0.0
-    "@uniswap/sdk-core": "file:../sdk-core"
+    "@uniswap/sdk-core": ^4.0.7
     tiny-invariant: ^1.1.0
     tiny-warning: ^1.0.3
-  checksum: e173d7af16c01d4157819a53ac52e04c22a26562f3f62dc5c06c2b2f6bc5454de158aa58dff048e99162f9bfe7cdf2b61df4a3d9318b61a5285b8635d0613574
+  checksum: c2722fc800339fd0cd4c3aa9aa2b083e3f29ce6df15ddf0e6f671c378d50a9ec2d05035d80e9ecf6418aeb716a26c43e13f79b6e7c05931f324954ed4f44b0e7
   languageName: node
   linkType: hard
 
