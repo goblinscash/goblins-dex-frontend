@@ -181,6 +181,7 @@ enum Chain {
   BNB
   BASE
   UNKNOWN_CHAIN
+  SMARTBCH = "sbch-testnet"
 }
 
 enum CollectionSortableField {

@@ -18,7 +18,7 @@ const SENTRY_USER_ID_KEY = 'sentry-user-id'
 
 // Actual KEYs are set by proxy servers.
 const AMPLITUDE_DUMMY_KEY = '00000000000000000000000000000000'
-export const STATSIG_DUMMY_KEY = 'client-0000000000000000000000000000000000000000000'
+export const STATSIG_DUMMY_KEY = 'client-ORku4iJ7BCkt31XOwioXlrIzMgKubbaC0GP00p88xPv'
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
