@@ -9,8 +9,8 @@ import { memo } from 'react'
 export {
   type ITraceContext,
   getDeviceId,
-  initializeAnalytics,
-  OriginApplication,
+  // initializeAnalytics,
+  // OriginApplication,
   user,
   useTrace,
 } from '@uniswap/analytics'
