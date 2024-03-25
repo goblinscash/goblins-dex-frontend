@@ -84,7 +84,7 @@ export function Hero({ scrollToRef }: HeroProps) {
             </StyledH1>
             <RiseIn delay={0.2}>
               <StyledH1>
-                <Trans>Engine.</Trans>
+                <Trans>Engine</Trans>
               </StyledH1>
             </RiseIn>
           </Box>
