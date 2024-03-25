@@ -44,10 +44,10 @@ function Updaters() {
       <Helmet>
         <link rel="canonical" href={getCanonicalUrl(location.pathname)} />
       </Helmet>
-      <RadialGradientByChainUpdater />
+      {/* <RadialGradientByChainUpdater />
       <ListsUpdater />
       <SystemThemeUpdater />
-      <ThemeColorMetaUpdater />
+      <ThemeColorMetaUpdater /> */}
       <ApplicationUpdater />
       <TransactionUpdater />
       <OrderUpdater />
