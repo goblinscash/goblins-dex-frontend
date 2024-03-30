@@ -5,5 +5,6 @@ export function useLandingPageV2Flag(): BaseVariant {
 }
 
 export function useNewLandingPage(): boolean {
-  return useLandingPageV2Flag() === BaseVariant.Enabled
+  return false
+  // return useLandingPageV2Flag() === BaseVariant.Enabled
 }
