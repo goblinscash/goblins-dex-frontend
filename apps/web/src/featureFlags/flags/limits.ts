@@ -5,5 +5,6 @@ export function useLimitsEnabledFlag(): BaseVariant {
 }
 
 export function useLimitsEnabled(): boolean {
-  return useLimitsEnabledFlag() === BaseVariant.Enabled
+  return false;
+  // return useLimitsEnabledFlag() === BaseVariant.Enabled
 }

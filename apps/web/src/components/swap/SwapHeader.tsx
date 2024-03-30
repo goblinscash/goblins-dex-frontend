@@ -10,7 +10,7 @@ import { isIFramed } from 'utils/isIFramed'
 import { RowBetween, RowFixed } from '../Row'
 import SettingsTab from '../Settings'
 import { SwapTab } from './constants'
-import SwapBuyFiatButton from './SwapBuyFiatButton'
+// import SwapBuyFiatButton from './SwapBuyFiatButton'
 
 const StyledSwapHeader = styled(RowBetween)`
   margin-bottom: 10px;
@@ -65,7 +65,7 @@ export default function SwapHeader() {
         >
           <Trans>Swap</Trans>
         </StyledTextButton>
-        <SwapBuyFiatButton />
+        {/* <SwapBuyFiatButton /> */}
         {sendEnabled && (
           <StyledTextButton $isActive={currentTab === SwapTab.Send} onClick={() => setCurrentTab(SwapTab.Send)}>
             <Trans>Send</Trans>

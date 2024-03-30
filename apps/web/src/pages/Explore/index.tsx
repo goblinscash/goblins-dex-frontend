@@ -201,11 +201,11 @@ const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
         ) : (
           <TitleContainer>
             <MouseoverTooltip
-              text={<Trans>This table contains the top tokens by Uniswap volume, sorted based on your input.</Trans>}
+              text={<Trans>This table contains the top tokens by Gobswap volume, sorted based on your input.</Trans>}
               placement="bottom"
             >
               <ThemedText.H1Large>
-                <Trans>Top tokens on Uniswap</Trans>
+                <Trans>Top tokens on Gobswap</Trans>
               </ThemedText.H1Large>
             </MouseoverTooltip>
           </TitleContainer>

@@ -396,7 +396,7 @@ export default function Landing() {
           >
             <>
               <UniswapAppLogo width="20" height="20" />
-              Download the Uniswap app
+              Download the Gobswap app
             </>
           </DownloadWalletLink>
         </ContentContainer>

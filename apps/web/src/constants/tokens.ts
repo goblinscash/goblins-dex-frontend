@@ -278,6 +278,13 @@ export const USDT_SBCH = new Token(
   'bcUSDT',
   'bcUSDT'
 )
+export const BC_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195',
+  18,
+  'bcBCH',
+  'bcBCH'
+)
 
 export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } = {
   ...(WETH9 as Record<ChainId, Token>),

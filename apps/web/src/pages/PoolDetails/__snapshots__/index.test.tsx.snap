@@ -2417,12 +2417,12 @@ exports[`PoolDetailsPage pool header is displayed when data is received from the
                   <img
                     class="c17"
                     size="32"
-                    src="https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                    src="https://raw.githubusercontent.com/Gobswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
                   />
                   <img
                     class="c17"
                     size="32"
-                    src="https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                    src="https://raw.githubusercontent.com/Gobswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
                   />
                 </div>
               </div>
@@ -5244,7 +5244,7 @@ exports[`PoolDetailsPage pool header is displayed when data is received from the
                                         alt="USDC logo"
                                         class="c102"
                                         loading="lazy"
-                                        src="https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                                        src="https://raw.githubusercontent.com/Gobswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
                                       />
                                     </div>
                                   </div>
@@ -5376,7 +5376,7 @@ exports[`PoolDetailsPage pool header is displayed when data is received from the
                                           alt="WETH logo"
                                           class="c102"
                                           loading="lazy"
-                                          src="https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                                          src="https://raw.githubusercontent.com/Gobswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
                                         />
                                       </div>
                                     </div>
@@ -5466,7 +5466,7 @@ exports[`PoolDetailsPage pool header is displayed when data is received from the
                       alt="USDC logo"
                       class="c123"
                       loading="lazy"
-                      src="https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                      src="https://raw.githubusercontent.com/Gobswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
                     />
                   </div>
                 </div>
@@ -5492,7 +5492,7 @@ exports[`PoolDetailsPage pool header is displayed when data is received from the
                       alt="WETH logo"
                       class="c123"
                       loading="lazy"
-                      src="https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                      src="https://raw.githubusercontent.com/Gobswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
                     />
                   </div>
                 </div>
@@ -5643,12 +5643,12 @@ exports[`PoolDetailsPage pool header is displayed when data is received from the
                   <img
                     class="c137"
                     size="20"
-                    src="https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                    src="https://raw.githubusercontent.com/Gobswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
                   />
                   <img
                     class="c137"
                     size="20"
-                    src="https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                    src="https://raw.githubusercontent.com/Gobswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
                   />
                 </div>
               </div>
@@ -5745,7 +5745,7 @@ exports[`PoolDetailsPage pool header is displayed when data is received from the
                     alt="USDC logo"
                     class="c147"
                     loading="lazy"
-                    src="https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                    src="https://raw.githubusercontent.com/Gobswap/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
                   />
                 </div>
               </div>
@@ -5861,7 +5861,7 @@ exports[`PoolDetailsPage pool header is displayed when data is received from the
                     alt="WETH logo"
                     class="c147"
                     loading="lazy"
-                    src="https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                    src="https://raw.githubusercontent.com/Gobswap/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
                   />
                 </div>
               </div>

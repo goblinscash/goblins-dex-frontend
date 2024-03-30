@@ -153,13 +153,13 @@ export function NewsletterEtc() {
               backgroundColor={theme.accent2}
               initial="initial"
               whileHover="hover"
-              href="https://twitter.com/Uniswap/"
+              href="https://twitter.com/Gobswap/"
               target="_blank"
               rel="noopener noreferrer"
             >
               <PillButton icon={<ChatBubbles fill={theme.accent1} />} color={theme.accent1} label={t`Stay connected`} />
               <H3 color={theme.accent1}>
-                <Trans>Follow @Uniswap on X for the latest updates</Trans>
+                <Trans>Follow @Gobswap on X for the latest updates</Trans>
               </H3>
             </RectCard>
           </Layout>

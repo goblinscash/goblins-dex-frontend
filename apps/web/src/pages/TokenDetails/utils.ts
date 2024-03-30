@@ -5,7 +5,7 @@ export const getTokenPageTitle = (tokenQuery: TokenQuery, omitSearchDetail?: boo
   const tokenName = tokenQuery?.token?.name
   const tokenSymbol = tokenQuery?.token?.symbol
   const baseTitle = 'Buy & Trade'
-  const searchDetail = omitSearchDetail ? '' : ': Live Price & Chart on Uniswap'
+  const searchDetail = omitSearchDetail ? '' : ': Live Price & Chart on Gobswap'
   if (!tokenName && !tokenSymbol) {
     return t`${baseTitle}${searchDetail}`
   }
