@@ -270,10 +270,10 @@ export const MNW = new Token(
   'MNW',
   'Morpheus.Network'
 )
-
+// INFO: address for the mainnet
 export const USDT_SBCH = new Token(
   ChainId.SMARTBCH,
-  '0x96917995f030f8fC3D8fDF40F3a6422547c877c1',
+  '0xbc2f884680c95a02cea099da2f524b366d9028ba',
   18,
   'bcUSDT',
   'bcUSDT'

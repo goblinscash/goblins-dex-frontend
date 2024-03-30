@@ -123,7 +123,7 @@ export const FALLBACK_URLS = {
     'https://1rpc.io/base',
     'https://base.meowrpc.com',
   ],
-  [ChainId.SMARTBCH]: ['http://rpc-testnet.smartbch.org'],
+  [ChainId.SMARTBCH]: ['https://smartbch.greyh.at'],
 }
 
 /**

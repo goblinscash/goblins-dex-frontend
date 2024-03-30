@@ -14,7 +14,7 @@ import { ReactComponent as celoLight } from './ChainSymbols/celo_light.svg'
 import { ReactComponent as ethereum } from './ChainSymbols/ethereum.svg'
 import { ReactComponent as optimism } from './ChainSymbols/optimism.svg'
 import { ReactComponent as polygon } from './ChainSymbols/polygon.svg'
-import { ReactComponent as sbch } from './ChainSymbols/polygon.svg'
+import { ReactComponent as sbch } from './ChainSymbols/sbch.svg'
 
 type SVG = FunctionComponent<React.SVGProps<SVGSVGElement>>
 type ChainUI = { Symbol: SVG; bgColor: string; textColor: string }

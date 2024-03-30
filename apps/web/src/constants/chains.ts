@@ -55,7 +55,6 @@ export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [
   // ChainId.AVALANCHE,
   // ChainId.BASE,
   ChainId.SMARTBCH,
-  // '10000'
 ] as const
 
 /**
@@ -83,7 +82,7 @@ export const L1_CHAIN_IDS = [
   // ChainId.POLYGON_MUMBAI,
   // ChainId.CELO,
   // ChainId.CELO_ALFAJORES,
-  ChainId.BNB,
+  // ChainId.BNB,
   // ChainId.AVALANCHE,
 ] as const
 
@@ -94,8 +93,8 @@ export type SupportedL1ChainId = (typeof L1_CHAIN_IDS)[number]
  * The expectation is that all of these networks have immediate transaction confirmation.
  */
 export const L2_CHAIN_IDS = [
-  ChainId.ARBITRUM_ONE,
-  ChainId.ARBITRUM_GOERLI,
+  // ChainId.ARBITRUM_ONE,
+  // ChainId.ARBITRUM_GOERLI,
   // ChainId.OPTIMISM,
   // ChainId.OPTIMISM_GOERLI,
   ChainId.SMARTBCH,
