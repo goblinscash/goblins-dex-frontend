@@ -69,12 +69,12 @@ export function Socials({ iconSize }: { iconSize?: string }) {
   return (
     <Box gap="24px">
       <SocialIcon hoverColor="#00C32B">
-        <StyledExternalLink href="https://github.com/Gobswap">
+        <StyledExternalLink href="https://github.com/Goblins">
           <Github size={iconSize} fill="inherit" />
         </StyledExternalLink>
       </SocialIcon>
       <SocialIcon hoverColor="#20BAFF">
-        <StyledExternalLink href="https://twitter.com/Gobswap">
+        <StyledExternalLink href="https://twitter.com/Goblins">
           <Twitter size={iconSize} fill="inherit" />
         </StyledExternalLink>
       </SocialIcon>
@@ -98,7 +98,7 @@ export function Footer() {
           <Box direction="column" height="100%" gap="64px">
             <Box direction="column" gap="10px">
               <H3>© 2024</H3>
-              <H3>Gobswap Labs</H3>
+              <H3>Goblins Labs</H3>
             </Box>
             <HideWhenSmall>
               <Socials />
@@ -144,7 +144,7 @@ export function Footer() {
                 <StyledExternalLink href="https://blog.uniswap.org/">
                   <Trans>Blog</Trans>
                 </StyledExternalLink>
-                <StyledExternalLink href="https://github.com/Gobswap/brand-assets">
+                <StyledExternalLink href="https://github.com/Goblins/brand-assets">
                   <Trans>Brand Assets</Trans>
                 </StyledExternalLink>
                 <ModalItem onClick={togglePrivacyPolicy}>

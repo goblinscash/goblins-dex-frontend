@@ -167,13 +167,13 @@ export default function Landing() {
                 <AutoColumn gap="md">
                   <RowBetween>
                     <Header>
-                      <Trans>Gobswap governance</Trans>
+                      <Trans>Goblins governance</Trans>
                     </Header>
                   </RowBetween>
                   <RowBetween>
                     <ThemedText.DeprecatedWhite fontSize={14}>
                       <Trans>
-                        UNI tokens represent voting shares in Gobswap governance. You can vote on each proposal yourself
+                        UNI tokens represent voting shares in Goblins governance. You can vote on each proposal yourself
                         or delegate your votes to a third party.
                       </Trans>
                     </ThemedText.DeprecatedWhite>
@@ -187,7 +187,7 @@ export default function Landing() {
                     target="_blank"
                   >
                     <ThemedText.DeprecatedWhite fontSize={14}>
-                      <Trans>Read more about Gobswap governance</Trans>
+                      <Trans>Read more about Goblins governance</Trans>
                     </ThemedText.DeprecatedWhite>
                   </ExternalLink>
                 </AutoColumn>

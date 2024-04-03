@@ -70,10 +70,10 @@ export function GetTheAppModal() {
         <ColumnCenter gap="xl">
           <ColumnCenter gap="sm">
             <ThemedText.H1Medium textAlign="center">
-              <Trans>Download the Gobswap app</Trans>
+              <Trans>Download the Goblins app</Trans>
             </ThemedText.H1Medium>
             <ThemedText.BodySecondary textAlign="center" maxWidth="400px">
-              <Trans>Scan the QR code with your phone to download the Gobswap app</Trans>
+              <Trans>Scan the QR code with your phone to download the Goblins app</Trans>
             </ThemedText.BodySecondary>
           </ColumnCenter>
           <BadgeLink href="https://uniswapwallet.onelink.me/8q3y/m4i9qsez?af_qr=true">

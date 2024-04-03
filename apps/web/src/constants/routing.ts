@@ -17,6 +17,7 @@ import {
   DAI_OPTIMISM,
   DAI_POLYGON,
   ETH_BSC,
+  GOB,
   nativeOnChain,
   OP,
   PORTAL_ETH_CELO,
@@ -133,7 +134,7 @@ export const COMMON_BASES: ChainCurrencyList = {
     USDT_AVALANCHE,
     WETH_AVALANCHE,
   ],
-  [ChainId.SMARTBCH]: [nativeOnChain(ChainId.SMARTBCH), WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, USDT_SBCH, BC_BCH],
+  [ChainId.SMARTBCH]: [nativeOnChain(ChainId.SMARTBCH), WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, USDT_SBCH, BC_BCH, GOB],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend

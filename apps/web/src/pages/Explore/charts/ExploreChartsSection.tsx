@@ -106,7 +106,7 @@ function VolumeChartSection({ data }: { data: StackedBarsData[] }) {
   if (isSmallScreen) {
     return (
       <MinimalStatDisplay
-        title={<Trans>Gobswap volume</Trans>}
+        title={<Trans>Goblins volume</Trans>}
         value={cumulativeVolume}
         time={<Trans>Past month</Trans>}
       />
@@ -117,7 +117,7 @@ function VolumeChartSection({ data }: { data: StackedBarsData[] }) {
     <SectionContainer>
       <RowBetween>
         <SectionTitle>
-          <Trans>Gobswap volume</Trans>
+          <Trans>Goblins volume</Trans>
         </SectionTitle>
         <div style={{ position: 'absolute', right: 0 }}>
           <StyledTimePeriodSelector
@@ -155,13 +155,13 @@ function TVLChartSection({ data }: { data: StackedLineData[] }) {
   const isSmallScreen = !useScreenSize()['sm']
   if (isSmallScreen) {
     const currentTVL = lastEntry?.values.reduce((acc, curr) => acc + curr, 0)
-    return <MinimalStatDisplay title={<Trans>Gobswap TVL</Trans>} value={currentTVL} time={<Trans>All time</Trans>} />
+    return <MinimalStatDisplay title={<Trans>Goblins TVL</Trans>} value={currentTVL} time={<Trans>All time</Trans>} />
   }
 
   return (
     <SectionContainer>
       <SectionTitle>
-        <Trans>Gobswap TVL</Trans>
+        <Trans>Goblins TVL</Trans>
       </SectionTitle>
       <StyledChart Model={TVLChartModel} params={params}>
         {(crosshairData) => (

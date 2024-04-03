@@ -670,7 +670,7 @@ function PositionPageContent() {
     <Trace page={InterfacePageName.POOL_PAGE} shouldLogImpression>
       <>
         <Helmet>
-          <title>{t`Manage ${currencyQuote?.symbol}/${currencyBase?.symbol} pool liquidity on Gobswap`}</title>
+          <title>{t`Manage ${currencyQuote?.symbol}/${currencyBase?.symbol} pool liquidity on Goblins`}</title>
         </Helmet>
         <PageWrapper>
           <TransactionConfirmationModal

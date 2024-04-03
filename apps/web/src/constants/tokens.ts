@@ -285,6 +285,13 @@ export const BC_BCH = new Token(
   'bcBCH',
   'bcBCH'
 )
+export const GOB = new Token(
+  ChainId.SMARTBCH,
+  '0x56381cB87C8990971f3e9d948939e1a95eA113a3',
+  18,
+  'GOB',
+  'GOB'
+)
 
 export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } = {
   ...(WETH9 as Record<ChainId, Token>),
@@ -450,7 +457,7 @@ class AvaxNativeCurrency extends NativeCurrency {
   }
 }
 
-function isSbch(chainId: number): chainId is ChainId.AVALANCHE {
+function isSbch(chainId: number): chainId is ChainId.SMARTBCH {
   return chainId === ChainId.SMARTBCH
 }
 class SbchNativeCurrency extends NativeCurrency {
@@ -459,14 +466,14 @@ class SbchNativeCurrency extends NativeCurrency {
   }
 
   get wrapped(): Token {
-    if (!isSbch(this.chainId)) throw new Error('Not avalanche')
+    if (!isSbch(this.chainId)) throw new Error('Not SBCH')
     const wrapped = WRAPPED_NATIVE_CURRENCY[this.chainId]
     invariant(wrapped instanceof Token)
     return wrapped
   }
 
   public constructor(chainId: number) {
-    if (!isSbch(chainId)) throw new Error('Not avalanche')
+    if (!isSbch(chainId)) throw new Error('Not SBCH')
     super(chainId, 18, 'BCH', 'BCH')
   }
 }

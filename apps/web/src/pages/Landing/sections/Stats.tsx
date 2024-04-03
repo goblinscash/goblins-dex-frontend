@@ -140,7 +140,7 @@ const LearnMoreArrow = styled(ArrowRightCircle)`
 `
 const ProtocolDescription = () => (
   <Trans>
-    Gobswap products are powered by the Gobswap Protocol. The protocol is the largest onchain marketplace, with billions
+    Goblins products are powered by the Goblins Protocol. The protocol is the largest onchain marketplace, with billions
     of dollars in weekly volume across thousands of tokens on Ethereum and 7+ additional chains.
   </Trans>
 )

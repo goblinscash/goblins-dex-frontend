@@ -129,14 +129,14 @@ export default function MigrateV2() {
               <Trans>Migrate V2 liquidity</Trans>
             </MigrateHeader>
             <div>
-              <QuestionHelper text={<Trans>Migrate your liquidity tokens from Gobswap V2 to Gobswap V3.</Trans>} />
+              <QuestionHelper text={<Trans>Migrate your liquidity tokens from Goblins V2 to Goblins V3.</Trans>} />
             </div>
           </AutoRow>
 
           <ThemedText.DeprecatedBody style={{ marginBottom: 8, fontWeight: 485 }}>
             <Trans>
-              For each pool shown below, click migrate to remove your liquidity from Gobswap V2 and deposit it into
-              Gobswap V3.
+              For each pool shown below, click migrate to remove your liquidity from Goblins V2 and deposit it into
+              Goblins V3.
             </Trans>
           </ThemedText.DeprecatedBody>
 

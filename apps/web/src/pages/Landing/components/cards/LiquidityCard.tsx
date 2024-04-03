@@ -54,7 +54,7 @@ export function LiquidityCard(props: LiquidityCardProps) {
       textColor={primary}
       backgroundColor={{ dark: 'rgba(136, 63, 255, 0.12)', light: 'rgba(136, 63, 255, 0.06)' }}
       button={<PillButton color={primary} label="Liquidity" icon={<Bars size="24px" fill={primary} />} />}
-      titleText={t`Provide liquidity to pools on the Gobswap Protocol and earn fees on swaps.`}
+      titleText={t`Provide liquidity to pools on the Goblins Protocol and earn fees on swaps.`}
       paddingRight={screenIsXLarge ? '16%' : '0%'}
       alignTextToBottom
     >

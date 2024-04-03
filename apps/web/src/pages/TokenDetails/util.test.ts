@@ -19,22 +19,22 @@ describe('pages/TokenDetails/util', () => {
   describe('getTokenPageTitle', () => {
     it('should return the correct title when tokenName and tokenSymbol are undefined', () => {
       const result = getTokenPageTitle(getMockTokenQuery(undefined, undefined))
-      expect(result).toBe('Buy & Trade: Live Price & Chart on Gobswap')
+      expect(result).toBe('Buy & Trade: Live Price & Chart on Goblins')
     })
 
     it('should return the correct title when only tokenName is defined', () => {
       const result = getTokenPageTitle(getMockTokenQuery('Baby Doge Token', undefined))
-      expect(result).toBe('Buy & Trade Baby Doge Token: Live Price & Chart on Gobswap')
+      expect(result).toBe('Buy & Trade Baby Doge Token: Live Price & Chart on Goblins')
     })
 
     it('should return the correct title when only tokenSymbol is defined', () => {
       const result = getTokenPageTitle(getMockTokenQuery(undefined, 'BDT'))
-      expect(result).toBe('Buy & Trade BDT: Live Price & Chart on Gobswap')
+      expect(result).toBe('Buy & Trade BDT: Live Price & Chart on Goblins')
     })
 
     it('should return the correct title when tokenName and tokenSymbol are defined', () => {
       const result = getTokenPageTitle(getMockTokenQuery('Baby Doge Token', 'BDT'))
-      expect(result).toBe('Buy & Trade Baby Doge Token (BDT): Live Price & Chart on Gobswap')
+      expect(result).toBe('Buy & Trade Baby Doge Token (BDT): Live Price & Chart on Goblins')
     })
   })
 })

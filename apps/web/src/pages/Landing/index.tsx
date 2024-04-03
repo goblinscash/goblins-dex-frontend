@@ -389,16 +389,16 @@ export default function Landing() {
             <Trans>Learn more</Trans>
           </LearnMoreContainer>
 
-          <DownloadWalletLink
+          {/* <DownloadWalletLink
             {...getDownloadAppLinkProps({
               element: InterfaceElementName.UNISWAP_WALLET_LANDING_PAGE_DOWNLOAD_BUTTON,
             })}
           >
             <>
               <UniswapAppLogo width="20" height="20" />
-              Download the Gobswap app
+              Download the Goblins app
             </>
-          </DownloadWalletLink>
+          </DownloadWalletLink> */}
         </ContentContainer>
         <AboutContentContainer isDarkMode={isDarkMode}>
           <CardGrid cols={cards.length} ref={cardsRef}>

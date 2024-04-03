@@ -48,7 +48,7 @@ export function DownloadWalletCard() {
       button={
         <PillButton
           color={theme.accent1}
-          label={t`Gobswap wallet`}
+          label={t`Goblins wallet`}
           icon={<Wallet size="24px" fill={theme.accent1} />}
         />
       }
