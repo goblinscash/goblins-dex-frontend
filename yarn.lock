@@ -10999,10 +10999,10 @@ __metadata:
     "@uniswap/universal-router-sdk": 1.5.8
     "@uniswap/v2-core": 1.0.1
     "@uniswap/v2-periphery": 1.1.0-beta.0
-    "@uniswap/v2-sdk": 4.1.0
+    "@uniswap/v2-sdk": 4.3.0
     "@uniswap/v3-core": 1.0.1
     "@uniswap/v3-periphery": 1.4.4
-    "@uniswap/v3-sdk": 3.10.2
+    "@uniswap/v3-sdk": 3.11.0
     "@vanilla-extract/css": 1.14.0
     "@vanilla-extract/dynamic": 2.1.0
     "@vanilla-extract/jest-transform": 1.1.1
@@ -11347,16 +11347,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uniswap/v2-sdk@npm:4.1.0":
-  version: 4.1.0
-  resolution: "@uniswap/v2-sdk@npm:4.1.0"
+"@uniswap/v2-sdk@npm:4.3.0":
+  version: 4.3.0
+  resolution: "@uniswap/v2-sdk@npm:4.3.0"
   dependencies:
     "@ethersproject/address": ^5.0.0
     "@ethersproject/solidity": ^5.0.0
-    "@uniswap/sdk-core": ^4.0.7
+    "@uniswap/sdk-core": ^4.2.0
     tiny-invariant: ^1.1.0
     tiny-warning: ^1.0.3
-  checksum: c2722fc800339fd0cd4c3aa9aa2b083e3f29ce6df15ddf0e6f671c378d50a9ec2d05035d80e9ecf6418aeb716a26c43e13f79b6e7c05931f324954ed4f44b0e7
+  checksum: 1cc5a19486ec9832e674d642c2c715f8db9282ae4075df949a0667c7e1ba270c62c4bdd9d12a0698c44bfc7fc3e8352d2ccc97a800ab554e00938892405463ab
   languageName: node
   linkType: hard
 
@@ -11387,19 +11387,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uniswap/v3-sdk@npm:3.10.2, @uniswap/v3-sdk@npm:^3.10.0":
-  version: 3.10.2
-  resolution: "@uniswap/v3-sdk@npm:3.10.2"
+"@uniswap/v3-sdk@npm:3.11.0":
+  version: 3.11.0
+  resolution: "@uniswap/v3-sdk@npm:3.11.0"
   dependencies:
     "@ethersproject/abi": ^5.0.12
     "@ethersproject/solidity": ^5.0.9
-    "@uniswap/sdk-core": ^4.0.7
+    "@uniswap/sdk-core": ^4.2.0
     "@uniswap/swap-router-contracts": ^1.2.1
     "@uniswap/v3-periphery": ^1.1.1
     "@uniswap/v3-staker": 1.0.0
     tiny-invariant: ^1.1.0
     tiny-warning: ^1.0.3
-  checksum: 187c34255fc082f8d424bd6e5faba825cd8dda01a9ae1d3a4377c4f11cec123562426afedff8c0513ad86f4458f37ee4ef8a186b86a087b8bd2736d74402cc92
+  checksum: 35850a2f171ece5de27ab5066f983fdbc806b08b7a0db03c27b1fe4502176ab44136427f7b2a41c7476ec2b80398a9d74b5397f5d7bc35d174f888458e491a57
   languageName: node
   linkType: hard
 

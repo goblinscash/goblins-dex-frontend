@@ -27,7 +27,7 @@ if (UNISWAP_API_URL === undefined || UNISWAP_GATEWAY_DNS_URL === undefined) {
 }
 
 const CLIENT_PARAMS = {
-  protocols: [Protocol.V3],
+  protocols: [Protocol.V2, Protocol.V3, Protocol.MIXED],
 }
 
 const protocols: Protocol[] = [Protocol.V3]
