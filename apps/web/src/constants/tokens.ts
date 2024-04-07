@@ -288,7 +288,7 @@ export const BC_BCH = new Token(
 export const GOB = new Token(
   ChainId.SMARTBCH,
   '0x56381cB87C8990971f3e9d948939e1a95eA113a3',
-  18,
+  9,
   'GOB',
   'GOB'
 )
