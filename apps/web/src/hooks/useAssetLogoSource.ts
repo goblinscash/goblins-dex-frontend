@@ -38,6 +38,7 @@ function prioritizeLogoSources(uris: string[]) {
   return coingeckoUrl ? [...preferredUris, coingeckoUrl] : preferredUris
 }
 
+// TODO: FIX bandaid for now, remove when tokenlist is fixed
 function getInitialUrl(
   address?: string | null,
   chainId?: number | null,
@@ -54,7 +55,11 @@ function getInitialUrl(
   }
 
   if (checksummedAddress) {
-    return `https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
+    if (chainId == 10000) {
+      return `https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
+    } else {
+      return `https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
+    }
   } else {
     return backupImg ?? undefined
   }

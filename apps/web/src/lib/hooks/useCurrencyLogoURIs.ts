@@ -8,9 +8,10 @@ import AvaxLogo from '../../assets/svg/avax_logo.svg'
 import BnbLogo from '../../assets/svg/bnb-logo.svg'
 import CeloLogo from '../../assets/svg/celo_logo.svg'
 import MaticLogo from '../../assets/svg/matic-token-icon.svg'
+// import SbchLogo from '../../assets/svg/sbch-logo.svg'
 import { isCelo, NATIVE_CHAIN_ID, nativeOnChain } from '../../constants/tokens'
 
-type Network = 'ethereum' | 'arbitrum' | 'optimism' | 'polygon' | 'smartchain' | 'celo' | 'avalanchec' | 'base'
+type Network = 'ethereum' | 'arbitrum' | 'optimism' | 'polygon' | 'smartchain' | 'celo' | 'avalanchec' | 'base' | 'smartbch'
 
 export function chainIdToNetworkName(networkId: ChainId): Network {
   switch (networkId) {
@@ -30,6 +31,8 @@ export function chainIdToNetworkName(networkId: ChainId): Network {
       return 'avalanchec'
     case ChainId.BASE:
       return 'base'
+    case ChainId.SMARTBCH:
+      return 'smartbch'
     default:
       return 'ethereum'
   }
@@ -47,6 +50,8 @@ export function getNativeLogoURI(chainId: ChainId = ChainId.MAINNET): string {
       return CeloLogo
     case ChainId.AVALANCHE:
       return AvaxLogo
+    case ChainId.SMARTBCH:
+      return 'https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04/logo.png'
     default:
       return EthereumLogo
   }
