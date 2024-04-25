@@ -51,7 +51,7 @@ export function getNativeLogoURI(chainId: ChainId = ChainId.MAINNET): string {
     case ChainId.AVALANCHE:
       return AvaxLogo
     case ChainId.SMARTBCH:
-      return 'https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04/logo.png'
+      return 'https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/logo.png'
     default:
       return EthereumLogo
   }

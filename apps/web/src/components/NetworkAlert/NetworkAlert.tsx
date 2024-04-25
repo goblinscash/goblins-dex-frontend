@@ -52,15 +52,15 @@ export function NetworkAlert() {
   if (!chainId || !isSupportedChain(chainId)) return null
 
   const { Symbol: ChainSymbol, bgColor, textColor } = getChainUI(chainId, darkMode)
-  const { label, bridge } = getChainInfo(chainId)
+  const { label, bridge, bridgeLabels } = getChainInfo(chainId)
 
-  return bridge ? (
+  const bridgeSection = (bridge: string, bridgeLabel: string) =>  (
     <BridgeLink href={bridge} bgColor={bgColor}>
       <ChainSymbol width={40} height={40} stroke="none" />
       <RowBetween>
         <Column>
           <TitleText $color={textColor}>
-            <Trans>{label} token bridge</Trans>
+            <Trans>{bridgeLabel} token bridge</Trans>
           </TitleText>
           <HideSmall>
             <SubtitleText $color={textColor}>
@@ -71,5 +71,18 @@ export function NetworkAlert() {
         <ArrowUpRight width="24px" height="24px" color={textColor} />
       </RowBetween>
     </BridgeLink>
-  ) : null
+  )
+  let bridges: string[] = Array<string>()
+  let labels: string[] = Array<string>() 
+  if (!Array.isArray(bridge)) {
+     bridges.push(bridge as string)
+  } else {
+    bridges = bridge
+  }
+  if (bridgeLabels) {
+    labels = bridgeLabels as string[] 
+  } else {
+    labels.push(label)
+  }
+  return bridges ? bridges.map((bridge, i) => bridgeSection(bridge, labels[i])) : null
 }

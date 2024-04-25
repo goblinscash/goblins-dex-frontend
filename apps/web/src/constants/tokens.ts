@@ -285,6 +285,20 @@ export const BC_BCH = new Token(
   'bcBCH',
   'bcBCH'
 )
+export const BB_USDC = new Token(
+  ChainId.SMARTBCH,
+  '0xbb2A35cc3e3dDb679fe30A82051633bC822e4191',
+  18,
+  'bbUSDC',
+  'bbUSDC'
+)
+export const BB_USDT = new Token(
+  ChainId.SMARTBCH,
+  '0xbbb3700F33fCb64437Dc28A7Beb6b21f5cC76FB9',
+  18,
+  'bbUSDT',
+  'bbUSDT'
+)
 export const GOB = new Token(
   ChainId.SMARTBCH,
   '0x56381cB87C8990971f3e9d948939e1a95eA113a3',

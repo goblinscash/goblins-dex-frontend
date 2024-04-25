@@ -27,7 +27,8 @@ interface BaseChainInfo {
   readonly networkType: NetworkType
   readonly blockWaitMsBeforeWarning?: number
   readonly docs: string
-  readonly bridge?: string
+  readonly bridge?: string | string[]
+  readonly bridgeLabels?: string[] 
   readonly explorer: string
   readonly infoLink: string
   readonly label: string
@@ -48,7 +49,7 @@ interface L1ChainInfo extends BaseChainInfo {
 
 export interface L2ChainInfo extends BaseChainInfo {
   readonly networkType: NetworkType.L2
-  readonly bridge: string
+  readonly bridge: string | string[]
   readonly statusPage?: string
   readonly defaultListUrl: string
 }
@@ -228,7 +229,8 @@ const CHAIN_INFO: ChainInfoMap = {
   [ChainId.SMARTBCH]: {
     networkType: NetworkType.L2,
     blockWaitMsBeforeWarning: ms(`25m`),
-    bridge: 'https://blockng.money/#/bridge',
+    bridge: ['https://blockng.money/#/bridge', 'https://benswap.cash/bridge', 'https://atomicswap.cash/'],
+    bridgeLabels: ['BlockNG', 'Benswap', 'Atomicswap'],
     defaultListUrl: BASE_LIST,
     docs: 'https://docs.smartbch.org/smartbch',
     explorer: 'https://smartscout.cash/',
