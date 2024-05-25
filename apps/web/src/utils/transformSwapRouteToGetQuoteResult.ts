@@ -1,5 +1,5 @@
 import { Protocol } from '@uniswap/router-sdk'
-import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
+import { Currency, CurrencyAmount, Percent, TradeType } from '@uniswap/sdk-core'
 // This file is lazy-loaded, so the import of smart-order-router is intentional.
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import { routeAmountsToString, SwapRoute } from '@uniswap/smart-order-router'
@@ -128,6 +128,10 @@ export function transformSwapRouteToGetQuoteResult(
     gasPriceWei: gasPriceWei.toString(),
     route: routeResponse,
     routeString: routeAmountsToString(route),
+    portionBips: 25,
+    portionRecipient: '0x2deaEc93d899B9f7fA060b79078DEc170494ff24',
+    portionAmount: quote.multiply(new Percent(25, 10_000)).quotient.toString(),
+    
   }
 
   return { state: QuoteState.SUCCESS, data: { routing: URAQuoteType.CLASSIC, quote: result, allQuotes: [] } }

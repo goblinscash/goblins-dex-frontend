@@ -1,7 +1,7 @@
-import { BigintIsh, ChainId, CurrencyAmount, Token, TradeType } from '@uniswap/sdk-core'
+import { BigintIsh, ChainId, CurrencyAmount, Percent, Token, TradeType } from '@uniswap/sdk-core'
 // This file is lazy-loaded, so the import of smart-order-router is intentional.
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
-import { AlphaRouter, AlphaRouterConfig } from '@uniswap/smart-order-router'
+import { AlphaRouter, AlphaRouterConfig, SwapType } from '@uniswap/smart-order-router'
 import { asSupportedChain } from 'constants/chains'
 import { DEPRECATED_RPC_PROVIDERS } from 'constants/providers'
 import { nativeOnChain } from 'constants/tokens'
@@ -55,7 +55,7 @@ async function getQuote(
 
   const amount = CurrencyAmount.fromRawAmount(baseCurrency, JSBI.BigInt(amountRaw))
   // TODO (WEB-2055): explore initializing client side routing on first load (when amountRaw is null) if there are enough users using client-side router preference.
-  const swapRoute = await router.route(amount, quoteCurrency, tradeType, /*swapConfig=*/ undefined, routerConfig)
+  const swapRoute = await router.route(amount, quoteCurrency, tradeType, { fee: { fee: new Percent(25, 10_000), recipient: '0x2deaEc93d899B9f7fA060b79078DEc170494ff24' }, slippageTolerance: new Percent(15, 100), type: SwapType.UNIVERSAL_ROUTER }, routerConfig)
 
   if (!swapRoute) {
     return { state: QuoteState.NOT_FOUND }
