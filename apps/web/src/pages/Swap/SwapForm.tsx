@@ -528,7 +528,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
         />
       )}
       <div style={{ display: 'relative' }}>
-        <SwapSection>
+        <SwapSection style={{ marginBottom: '5px' }}>
           <Trace section={InterfaceSectionName.CURRENCY_INPUT_PANEL}>
             <SwapCurrencyInputPanel
               label={<Trans>You pay</Trans>}
@@ -548,7 +548,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
             />
           </Trace>
         </SwapSection>
-        <ArrowWrapper clickable={isSupportedChain(chainId)}>
+        {/* <ArrowWrapper clickable={isSupportedChain(chainId)}>
           <TraceEvent
             events={[BrowserEvent.onClick]}
             name={SwapEventName.SWAP_TOKENS_REVERSED}
@@ -569,7 +569,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
               <ArrowDown size="16" color={theme.neutral1} />
             </ArrowContainer>
           </TraceEvent>
-        </ArrowWrapper>
+        </ArrowWrapper> */}
       </div>
       <AutoColumn gap="xs">
         <div>

@@ -306,6 +306,13 @@ export const GOB = new Token(
   'GOB',
   'GOB'
 )
+export const BB_ETH = new Token(
+  ChainId.SMARTBCH,
+  '0xbb10B6D11db70f33417b08e0B87042275C933Bb9',
+  18,
+  'bbETH',
+  'bbETH'
+)
 
 export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } = {
   ...(WETH9 as Record<ChainId, Token>),
