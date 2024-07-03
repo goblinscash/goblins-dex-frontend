@@ -1,4 +1,5 @@
 import { StaticJsonRpcProvider } from '@ethersproject/providers'
+import { ethers } from 'ethers'
 import { ChainId } from '@uniswap/sdk-core'
 import AppJsonRpcProvider from 'rpc/AppJsonRpcProvider'
 
@@ -6,10 +7,16 @@ import { CHAIN_IDS_TO_NAMES, SupportedInterfaceChain } from './chains'
 import { RPC_URLS } from './networks'
 
 const providerFactory = (chainId: SupportedInterfaceChain, i = 0) => {
-  return new StaticJsonRpcProvider(
-    RPC_URLS[chainId][i],
-    /* networkish= */ { chainId, name: CHAIN_IDS_TO_NAMES[chainId] }
-  )
+
+  // return new StaticJsonRpcProvider(
+  //   RPC_URLS[chainId][i],
+  // /* networkish= */ { chainId, name: CHAIN_IDS_TO_NAMES[chainId] }
+  // )
+
+  return new ethers.providers.JsonRpcProvider(
+    RPC_URLS[chainId][i], { chainId, name: CHAIN_IDS_TO_NAMES[chainId] }
+  );
+
 }
 // Including networkish allows ethers to skip the initial detectNetwork call.
 
@@ -25,6 +32,7 @@ export const RPC_PROVIDERS: { [key in SupportedInterfaceChain]: StaticJsonRpcPro
   [ChainId.SEPOLIA]: providerFactory(ChainId.SEPOLIA),
   [ChainId.OPTIMISM]: providerFactory(ChainId.OPTIMISM),
   [ChainId.OPTIMISM_GOERLI]: providerFactory(ChainId.OPTIMISM_GOERLI),
+
   [ChainId.ARBITRUM_ONE]: new AppJsonRpcProvider(ChainId.ARBITRUM_ONE, [
     providerFactory(ChainId.ARBITRUM_ONE),
     providerFactory(ChainId.ARBITRUM_ONE, 1),
@@ -57,3 +65,5 @@ export const DEPRECATED_RPC_PROVIDERS: { [key in SupportedInterfaceChain]: Stati
   [ChainId.BASE]: providerFactory(ChainId.BASE),
   [ChainId.SMARTBCH]: providerFactory(ChainId.SMARTBCH),
 }
+
+

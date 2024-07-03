@@ -123,7 +123,9 @@ export const FALLBACK_URLS = {
     'https://1rpc.io/base',
     'https://base.meowrpc.com',
   ],
-  [ChainId.SMARTBCH]: ['https://smartbch.fountainhead.cash/mainnet'],
+  [ChainId.SMARTBCH]: ['https://smartbch.fountainhead.cash/mainnet', 'https://rpc-goblins.dfd.cash/', 'https://global.uat.cash',
+    'https://smartbch.greyh.at',
+    'https://rpc.smartbch.org']
 }
 
 /**
@@ -162,5 +164,5 @@ export const RPC_URLS = {
   [ChainId.BNB]: [QUICKNODE_BNB_RPC_URL, ...FALLBACK_URLS[ChainId.BNB]],
   [ChainId.AVALANCHE]: [`https://avalanche-mainnet.infura.io/v3/${INFURA_KEY}`, ...FALLBACK_URLS[ChainId.AVALANCHE]],
   [ChainId.BASE]: [`https://base-mainnet.infura.io/v3/${INFURA_KEY}`, ...FALLBACK_URLS[ChainId.BASE]],
-  [ChainId.SMARTBCH]: [`https://smartbch.greyh.at`, ...FALLBACK_URLS[ChainId.SMARTBCH]],
+  [ChainId.SMARTBCH]: [`https://rpc-goblins.dfd.cash/`, ...FALLBACK_URLS[ChainId.SMARTBCH]],
 }

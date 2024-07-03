@@ -138,6 +138,7 @@ const URL_CHAIN_PARAM_TO_BACKEND: { [key: string]: InterfaceGqlChain } = {
   bnb: Chain.Bnb,
   avalanche: Chain.Avalanche,
   base: Chain.Base,
+  smartbch: Chain.Smartbch
 }
 
 /**
@@ -201,13 +202,8 @@ export function logSentryErrorForUnsupportedChain({
 }
 
 export const BACKEND_SUPPORTED_CHAINS = [
-  Chain.Ethereum,
-  Chain.Arbitrum,
-  Chain.Optimism,
-  Chain.Polygon,
-  Chain.Base,
-  Chain.Bnb,
-  Chain.Celo,
+  // Chain.Ethereum,
+  Chain.Smartbch,
 ] as const
 export const BACKEND_NOT_YET_SUPPORTED_CHAIN_IDS = [ChainId.AVALANCHE] as const
 

@@ -76,44 +76,46 @@ function LoadingTokenTable({ rowCount = PAGE_SIZE }: { rowCount?: number }) {
 
 export default function OldTokenTable() {
   const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
-  const { tokens, tokenSortRank, loadingTokens, sparklines } = useTopTokens(chainName)
+  // const { tokens, tokenSortRank, loadingTokens, sparklines } = useTopTokens(chainName)
 
   /* loading and error state */
-  if (loadingTokens && !tokens) {
-    return <LoadingTokenTable rowCount={PAGE_SIZE} />
-  } else if (!tokens) {
-    return (
-      <NoTokensState
-        message={
-          <>
-            <AlertTriangle size={16} />
-            <Trans>An error occurred loading tokens. Please try again.</Trans>
-          </>
-        }
-      />
-    )
-  } else if (tokens?.length === 0) {
-    return <NoTokensState message={<Trans>No tokens found</Trans>} />
-  } else {
-    return (
-      <GridContainer>
-        <HeaderRow />
-        <TokenDataContainer>
-          {tokens.map(
-            (token, index) =>
-              token?.address && (
-                <LoadedRow
-                  key={token.address}
-                  tokenListIndex={index}
-                  tokenListLength={tokens.length}
-                  token={token}
-                  sparklineMap={sparklines}
-                  sortRank={tokenSortRank[token.address]}
-                />
-              )
-          )}
-        </TokenDataContainer>
-      </GridContainer>
-    )
-  }
+  // if (loadingTokens && !tokens) {
+  //   return <LoadingTokenTable rowCount={PAGE_SIZE} />
+  // } else if (!tokens) {
+  //   return (
+  //     <NoTokensState
+  //       message={
+  //         <>
+  //           <AlertTriangle size={16} />
+  //           <Trans>An error occurred loading tokens. Please try again.</Trans>
+  //         </>
+  //       }
+  //     />
+  //   )
+  // } else if (tokens?.length === 0) {
+  //   return <NoTokensState message={<Trans>No tokens found</Trans>} />
+  // } else {
+  //   return (
+  //     <GridContainer>
+  //       <HeaderRow />
+  //       <TokenDataContainer>
+  //         {tokens.map(
+  //           (token, index) =>
+  //             token?.address && (
+  //               <LoadedRow
+  //                 key={token.address}
+  //                 tokenListIndex={index}
+  //                 tokenListLength={tokens.length}
+  //                 token={token}
+  //                 sparklineMap={sparklines}
+  //                 sortRank={tokenSortRank[token.address]}
+  //               />
+  //             )
+  //         )}
+  //       </TokenDataContainer>
+  //     </GridContainer>
+  //   )
+  // }
+
+  return <>Working on it</>
 }

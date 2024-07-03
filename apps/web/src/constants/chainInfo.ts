@@ -28,7 +28,7 @@ interface BaseChainInfo {
   readonly blockWaitMsBeforeWarning?: number
   readonly docs: string
   readonly bridge?: string | string[]
-  readonly bridgeLabels?: string[] 
+  readonly bridgeLabels?:string | string[] 
   readonly explorer: string
   readonly infoLink: string
   readonly label: string
@@ -59,6 +59,7 @@ type ChainInfoMap = { readonly [chainId: number]: L1ChainInfo | L2ChainInfo } & 
 } & { readonly [chainId in SupportedL1ChainId]: L1ChainInfo }
 
 const CHAIN_INFO: ChainInfoMap = {
+  
   [ChainId.MAINNET]: {
     networkType: NetworkType.L1,
     docs: 'https://docs.uniswap.org/',
@@ -229,8 +230,10 @@ const CHAIN_INFO: ChainInfoMap = {
   [ChainId.SMARTBCH]: {
     networkType: NetworkType.L2,
     blockWaitMsBeforeWarning: ms(`25m`),
-    bridge: ['https://blockng.money/#/bridge', 'https://benswap.cash/bridge', 'https://atomicswap.cash/'],
-    bridgeLabels: ['BlockNG', 'Benswap', 'Atomicswap'],
+    // bridge: ['https://blockng.money/#/bridge', 'https://benswap.cash/bridge', 'https://atomicswap.cash/'],
+    bridge: "https://benswap.cash/bridge",
+    // bridgeLabels: ['BlockNG', 'Benswap', 'Atomicswap'],
+    bridgeLabels:  'Benswap', 
     defaultListUrl: BASE_LIST,
     docs: 'https://docs.smartbch.org/smartbch',
     explorer: 'https://smartscout.cash/',
@@ -284,3 +287,4 @@ const MAINNET_INFO = CHAIN_INFO[ChainId.MAINNET]
 export function getChainInfoOrDefault(chainId: number | undefined, featureFlags?: Record<number, boolean>) {
   return getChainInfo(chainId, featureFlags) ?? MAINNET_INFO
 }
+

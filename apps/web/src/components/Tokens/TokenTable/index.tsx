@@ -62,27 +62,29 @@ function TokenDescription({ token }: { token: TopToken }) {
 export function TopTokensTable() {
   const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
   const chainId = supportedChainIdFromGQLChain(chainName)
-  const { tokens, tokenSortRank, loadingTokens, sparklines, error } = useTopTokens(chainName)
+  // const { tokens, tokenSortRank, loadingTokens, sparklines, error } = useTopTokens(chainName)
 
-  if (error) {
-    return (
-      <TableWrapper>
-        <ThemedText.BodyPrimary>
-          <Trans>Error loading Top Tokens</Trans>
-        </ThemedText.BodyPrimary>
-      </TableWrapper>
-    )
-  }
+  // if (error) {
+  //   return (
+  //     <TableWrapper>
+  //       <ThemedText.BodyPrimary>
+  //         <Trans>Error loading Top Tokens</Trans>
+  //       </ThemedText.BodyPrimary>
+  //     </TableWrapper>
+  //   )
+  // }
 
   return (
     <TableWrapper data-testid="top-tokens-explore-table">
-      <TokenTable
+
+      Working On It.
+      {/* <TokenTable
         tokens={tokens}
         tokenSortRank={tokenSortRank}
         sparklines={sparklines}
         loading={loadingTokens}
         chainId={chainId}
-      />
+      /> */}
     </TableWrapper>
   )
 }

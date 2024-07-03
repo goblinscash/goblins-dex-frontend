@@ -94,7 +94,7 @@ export default function NetworkFilter() {
               </InternalMenuItem>
             )
           })}
-          {BACKEND_NOT_YET_SUPPORTED_CHAIN_IDS.map((network) => {
+          {/* {BACKEND_NOT_YET_SUPPORTED_CHAIN_IDS.map((network) => {
             const chainInfo = getChainInfo(network)
             return (
               <InternalMenuItem key={network} data-testid={`tokens-network-filter-option-${network}-chain`} disabled>
@@ -104,7 +104,7 @@ export default function NetworkFilter() {
                 <Tag>Coming soon</Tag>
               </InternalMenuItem>
             )
-          })}
+          })} */}
         </>
       }
       buttonCss={StyledButton}

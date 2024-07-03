@@ -74,18 +74,24 @@ export const PageTabs = () => {
       <MenuItem href="/swap" isActive={pathname.startsWith('/swap')}>
         <Trans>Swap</Trans>
       </MenuItem>
-      {infoExplorePageEnabled ? (
+   
         <MenuItem href="/explore" isActive={pathname.startsWith('/explore')}>
           <Trans>Explore</Trans>
         </MenuItem>
-      ) : 
-      (<div></div>)
-    }
+
+     
+ 
       {!shouldDisableNFTRoutes && (
         <MenuItem dataTestId="nft-nav" href="/nfts" isActive={isNftPage}>
           <Trans>NFTs</Trans>
         </MenuItem>
       )}
+         <MenuItem href="https://app.goblins.cash/staking" >
+          <Trans>Staking</Trans>
+        </MenuItem>
+        <MenuItem href="https://app.goblins.cash/farming" >
+          <Trans>Farming</Trans>
+        </MenuItem>
       <Box display={{ sm: 'flex', lg: 'none', xxl: 'flex' }} width="full">
         <MenuItem href="/pools" dataTestId="pool-nav-link" isActive={isPoolActive}>
           <Trans>Pools</Trans>

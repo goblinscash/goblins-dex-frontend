@@ -195,6 +195,7 @@ const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
       page={isInfoExplorePageEnabled ? InterfacePageName.EXPLORE_PAGE : InterfacePageName.TOKENS_PAGE}
       shouldLogImpression
     >
+      
       <ExploreContainer isInfoExplorePageEnabled={isInfoExplorePageEnabled}>
         {isInfoExplorePageEnabled ? (
           <ExploreChartsSection />
