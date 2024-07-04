@@ -1,0 +1,94 @@
+"use strict";(self.webpackChunk_uniswap_interface=self.webpackChunk_uniswap_interface||[]).push([[8951],{87876:(e,i,n)=>{n.d(i,{Z:()=>_});var t=n(21339),d=n(88693),r=n(75422),s=n(70357),c=n(32345),o=n(65023),a=n(44680),l=n(17734),C=n(17358),u=n(39491),p=n(33552),g=n(10548),N=n(48664),x=n(12973),R=n(54359);const h=p.default.div.withConfig({displayName:"UnsupportedCurrencyFooter__DetailsFooter",componentId:"sc-b083a83b-0"})`
+  padding-top: calc(16px + 2rem);
+  padding-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -2rem;
+  width: 100%;
+  max-width: 400px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  color: ${({theme:e})=>e.neutral2};
+  background-color: ${({theme:e})=>e.surface2};
+  z-index: ${N.k.deprecated_zero};
+
+  transform: ${({show:e})=>e?"translateY(0%)":"translateY(-100%)"};
+  transition: transform 300ms ease-in-out;
+  text-align: center;
+`,m=(0,p.default)(s.qL).withConfig({displayName:"UnsupportedCurrencyFooter__StyledButtonEmpty",componentId:"sc-b083a83b-1"})`
+  text-decoration: none;
+`,j=(0,p.default)(g.Tv.DeprecatedBlue).withConfig({displayName:"UnsupportedCurrencyFooter__AddressText",componentId:"sc-b083a83b-2"})`
+  font-size: 12px;
+
+  ${({theme:e})=>e.deprecated_mediaWidth.deprecated_upToSmall`
+    font-size: 10px;
+`}
+`;function _({show:e,currencies:i}){const{chainId:n}=(0,r.useWeb3React)(),[s,p]=(0,u.useState)(!1),N=n&&i?i.map((e=>e?.wrapped)):[],_=(0,x.l6)();return(0,t.jsxs)(h,{show:e,children:[(0,t.jsx)(l.Z,{isOpen:s,onDismiss:()=>p(!1),children:(0,t.jsx)(c.ZP,{padding:"2rem",children:(0,t.jsxs)(o.Tz,{gap:"lg",children:[(0,t.jsxs)(C.m0,{children:[(0,t.jsx)(g.Tv.DeprecatedMediumHeader,{children:(0,t.jsx)(d.cC,{id:"7Osz32"})}),(0,t.jsx)(g.Tw,{onClick:()=>p(!1),"data-testid":"close-icon"})]}),N.map((e=>e&&_&&Object.keys(_).includes(e.address)&&(0,t.jsx)(c.nq,{"data-testid":"unsupported-token-card",children:(0,t.jsxs)(o.Tz,{gap:"10px",children:[(0,t.jsxs)(C.BA,{gap:"5px",align:"center",children:[(0,t.jsx)(a.Z,{currency:e,size:"24px"}),(0,t.jsx)(g.Tv.DeprecatedBody,{fontWeight:535,children:e.symbol})]}),n&&(0,t.jsx)(g.dL,{href:(0,R.E)(n,e.address,R.r.ADDRESS),children:(0,t.jsx)(j,{children:e.address})})]})},e.address?.concat("not-supported")))),(0,t.jsx)(o.Tz,{gap:"lg",children:(0,t.jsx)(g.Tv.DeprecatedBody,{fontWeight:535,children:(0,t.jsx)(d.cC,{id:"l7X7DE"})})})]})})}),(0,t.jsx)(m,{padding:"0",onClick:()=>p(!0),"data-testid":"read-more-button",children:(0,t.jsx)(g.Tv.DeprecatedBlue,{children:(0,t.jsx)(d.cC,{id:"bIjYSY"})})})]})}},78951:(e,i,n)=>{n.r(i),n.d(i,{default:()=>oe});var t=n(21339),d=n(92686),r=n(54100),s=n(88693),c=n(56542),o=n(82032),a=n(75422),l=n(4570),C=n(91997),u=n(87876),p=n(12159),g=n(96305),N=n(68858),x=n(39491),R=n(95267),h=n(9726),m=n(33552),j=n(10548),_=n(70357),E=n(32345),y=n(65023),U=n(28243),f=n(94727),Y=n(98976),b=n(70359),v=n(17358),T=n(69947),A=n(59926),B=n(46778),D=n(12973),w=n(81672),S=n(22855),I=n(15426),q=n(66850),k=n(65850),P=n(52148),L=n(44595),z=n.n(L),O=n(83014),$=n(21914),M=n(62855),W=n(61265);const F=z().BigInt(0);function V(){return(0,$.C)((e=>e.mint))}var Z=n(15574),G=n(53055),H=n(59251),J=n(9988),Q=n(54286),X=n(51232),K=n(93081),ee=n(89982),ie=n(1707),ne=n(44680);function te({noLiquidity:e,price:i,currencies:n,parsedAmounts:d,poolTokenPercentage:r,onAdd:c}){return(0,t.jsxs)(t.Fragment,{children:[(0,t.jsxs)(v.m0,{children:[(0,t.jsx)(j.Tv.DeprecatedBody,{children:(0,t.jsx)(s.cC,{id:"C7f3au",values:{0:n[P.gN.CURRENCY_A]?.symbol}})}),(0,t.jsxs)(v.DA,{children:[(0,t.jsx)(ne.Z,{currency:n[P.gN.CURRENCY_A],style:{marginRight:"8px"}}),(0,t.jsx)(j.Tv.DeprecatedBody,{children:d[P.gN.CURRENCY_A]?.toSignificant(6)})]})]}),(0,t.jsxs)(v.m0,{children:[(0,t.jsx)(j.Tv.DeprecatedBody,{children:(0,t.jsx)(s.cC,{id:"C7f3au",values:{0:n[P.gN.CURRENCY_B]?.symbol}})}),(0,t.jsxs)(v.DA,{children:[(0,t.jsx)(ne.Z,{currency:n[P.gN.CURRENCY_B],style:{marginRight:"8px"}}),(0,t.jsx)(j.Tv.DeprecatedBody,{children:d[P.gN.CURRENCY_B]?.toSignificant(6)})]})]}),(0,t.jsxs)(v.m0,{children:[(0,t.jsx)(j.Tv.DeprecatedBody,{children:(0,t.jsx)(s.cC,{id:"3XOwjg"})}),(0,t.jsx)(j.Tv.DeprecatedBody,{children:`1 ${n[P.gN.CURRENCY_A]?.symbol} = ${i?.toSignificant(4)} ${n[P.gN.CURRENCY_B]?.symbol}`})]}),(0,t.jsx)(v.m0,{style:{justifyContent:"flex-end"},children:(0,t.jsx)(j.Tv.DeprecatedBody,{children:`1 ${n[P.gN.CURRENCY_B]?.symbol} = ${i?.invert().toSignificant(4)} ${n[P.gN.CURRENCY_A]?.symbol}`})}),(0,t.jsxs)(v.m0,{children:[(0,t.jsx)(j.Tv.DeprecatedBody,{children:(0,t.jsx)(s.cC,{id:"6MJHcQ"})}),(0,t.jsx)(j.Tv.DeprecatedBody,{children:(0,t.jsx)(s.cC,{id:"hbO8db",values:{0:e?"100":r?.toSignificant(4)}})})]}),(0,t.jsx)(_.DF,{style:{margin:"20px 0 0 0"},onClick:c,children:(0,t.jsx)(h.xv,{fontWeight:535,fontSize:20,children:e?(0,t.jsx)(s.cC,{id:"ELJdCv"}):(0,t.jsx)(s.cC,{id:"xqNrBs"})})})]})}function de({currencies:e,noLiquidity:i,poolTokenPercentage:n,price:d}){const r=(0,m.useTheme)();let c;try{c=d?.invert()?.toSignificant(6)}catch(o){c=void 0}return(0,t.jsx)(y.Tz,{gap:"md",children:(0,t.jsxs)(v.BA,{justify:"space-around",gap:"4px",children:[(0,t.jsxs)(y.Tz,{justify:"center",children:[(0,t.jsx)(j.Tv.DeprecatedBlack,{"data-testid":"currency-b-price",children:d?.toSignificant(6)??"-"}),(0,t.jsx)(h.xv,{fontWeight:535,fontSize:14,color:r.neutral2,pt:1,children:(0,t.jsx)(s.cC,{id:"7Z4WfS",values:{0:e[P.gN.CURRENCY_B]?.symbol,1:e[P.gN.CURRENCY_A]?.symbol}})})]}),(0,t.jsxs)(y.Tz,{justify:"center",children:[(0,t.jsx)(j.Tv.DeprecatedBlack,{"data-testid":"currency-a-price",children:c??"-"}),(0,t.jsx)(h.xv,{fontWeight:535,fontSize:14,color:r.neutral2,pt:1,children:(0,t.jsx)(s.cC,{id:"7Z4WfS",values:{0:e[P.gN.CURRENCY_A]?.symbol,1:e[P.gN.CURRENCY_B]?.symbol}})})]}),(0,t.jsxs)(y.Tz,{justify:"center",children:[(0,t.jsxs)(j.Tv.DeprecatedBlack,{children:[i&&d?"100":(n?.lessThan(A.IS)?"<0.01":n?.toFixed(2))??"0","%"]}),(0,t.jsx)(h.xv,{fontWeight:535,fontSize:14,color:r.neutral2,pt:1,children:(0,t.jsx)(s.cC,{id:"SbBMxj"})})]})]})})}const re=new o.Percent(50,1e4),se=(0,m.default)(y.Tz).withConfig({displayName:"AddLiquidityV2__AddLiquidityHeaderContainer",componentId:"sc-9cf6ee41-0"})`
+  gap: 20px;
+  margin-bottom: 16px;
+`;function ce(){const{currencyIdA:e,currencyIdB:i}=(0,d.UO)(),n=(0,d.s0)(),{account:L,chainId:ne,provider:ce}=(0,a.useWeb3React)(),oe=(0,m.useTheme)(),ae=(0,l.oO)(),le=(0,D.U8)(e),Ce=(0,D.U8)(i),ue=ne?B.Fl[ne]:void 0,pe=Boolean(ne&&ue&&(le&&le.equals(ue)||Ce&&Ce.equals(ue))),ge=(0,C.LK)(),{independentField:Ne,typedValue:xe,otherTypedValue:Re}=V(),{dependentField:he,currencies:me,pair:je,pairState:_e,currencyBalances:Ee,parsedAmounts:ye,price:Ue,noLiquidity:fe,liquidityMinted:Ye,poolTokenPercentage:be,error:ve}=function(e,i){const{account:n}=(0,a.useWeb3React)(),{independentField:d,typedValue:r,otherTypedValue:c}=V(),l=d===P.gN.CURRENCY_A?P.gN.CURRENCY_B:P.gN.CURRENCY_A,C=(0,x.useMemo)((()=>({[P.gN.CURRENCY_A]:e??void 0,[P.gN.CURRENCY_B]:i??void 0})),[e,i]),[u,p]=(0,k.Oo)(C[P.gN.CURRENCY_A],C[P.gN.CURRENCY_B]),g=(0,M.A)(p?.liquidityToken),N=u===k._G.NOT_EXISTS||Boolean(g&&z().equal(g.quotient,F))||Boolean(u===k._G.EXISTS&&p&&z().equal(p.reserve0.quotient,F)&&z().equal(p.reserve1.quotient,F)),R=(0,W.K5)(n??void 0,(0,x.useMemo)((()=>[C[P.gN.CURRENCY_A],C[P.gN.CURRENCY_B]]),[C])),h={[P.gN.CURRENCY_A]:R[0],[P.gN.CURRENCY_B]:R[1]},m=(0,O.Z)(r,C[d]),j=(0,x.useMemo)((()=>{if(N)return c&&C[l]?(0,O.Z)(c,C[l]):void 0;if(m){const n=m?.wrapped,[t,d]=[e?.wrapped,i?.wrapped];if(t&&d&&n&&p){const r=l===P.gN.CURRENCY_B?i:e,s=l===P.gN.CURRENCY_B?p.priceOf(t).quote(n):p.priceOf(d).quote(n);return r?.isNative?o.CurrencyAmount.fromRawAmount(r,s.quotient):s}}}),[N,c,C,l,m,e,i,p]),_=(0,x.useMemo)((()=>({[P.gN.CURRENCY_A]:d===P.gN.CURRENCY_A?m:j,[P.gN.CURRENCY_B]:d===P.gN.CURRENCY_A?j:m})),[j,m,d]),E=(0,x.useMemo)((()=>{if(!N){const i=e?.wrapped;return p&&i?p.priceOf(i):void 0}{const{[P.gN.CURRENCY_A]:e,[P.gN.CURRENCY_B]:i}=_;if(e?.greaterThan(0)&&i?.greaterThan(0)){const n=i.divide(e);return new o.Price(e.currency,i.currency,n.denominator,n.numerator)}}}),[e,N,p,_]),y=(0,x.useMemo)((()=>{const{[P.gN.CURRENCY_A]:e,[P.gN.CURRENCY_B]:i}=_,[n,t]=[e?.wrapped,i?.wrapped];if(p&&g&&n&&t)try{return p.getLiquidityMinted(g,n,t)}catch(f){return void console.error(f)}}),[_,p,g]),U=(0,x.useMemo)((()=>y&&g?new o.Percent(y.quotient,g.add(y).quotient):void 0),[y,g]);let f;n||(f=(0,t.jsx)(s.cC,{id:"VHOVEJ"})),u===k._G.INVALID&&(f=f??(0,t.jsx)(s.cC,{id:"R7D79P"})),_[P.gN.CURRENCY_A]&&_[P.gN.CURRENCY_B]||(f=f??(0,t.jsx)(s.cC,{id:"iPMIoT"}));const{[P.gN.CURRENCY_A]:Y,[P.gN.CURRENCY_B]:b}=_;return Y&&h?.[P.gN.CURRENCY_A]?.lessThan(Y)&&(f=(0,t.jsx)(s.cC,{id:"m6RmA/",values:{0:C[P.gN.CURRENCY_A]?.symbol}})),b&&h?.[P.gN.CURRENCY_B]?.lessThan(b)&&(f=(0,t.jsx)(s.cC,{id:"m6RmA/",values:{0:C[P.gN.CURRENCY_B]?.symbol}})),{dependentField:l,currencies:C,pair:p,pairState:u,currencyBalances:h,parsedAmounts:_,price:E,noLiquidity:N,liquidityMinted:y,poolTokenPercentage:U,error:f}}(le??void 0,Ce??void 0),{onFieldAInput:Te,onFieldBInput:Ae}=function(e){const i=(0,$.T)();return{onFieldAInput:(0,x.useCallback)((n=>{i((0,P.LC)({field:P.gN.CURRENCY_A,typedValue:n,noLiquidity:!0===e}))}),[i,e]),onFieldBInput:(0,x.useCallback)((n=>{i((0,P.LC)({field:P.gN.CURRENCY_B,typedValue:n,noLiquidity:!0===e}))}),[i,e])}}(fe),Be=!ve,[De,we]=(0,x.useState)(!1),[Se,Ie]=(0,x.useState)(!1),qe=(0,q.Z)(),ke=(0,H.eq)(re),[Pe,Le]=(0,x.useState)(""),ze={[Ne]:xe,[he]:fe?Re:ye[he]?.toSignificant(6)??""},Oe=[P.gN.CURRENCY_A,P.gN.CURRENCY_B].reduce(((e,i)=>({...e,[i]:(0,K.i)(Ee[i])})),{}),$e=[P.gN.CURRENCY_A,P.gN.CURRENCY_B].reduce(((e,i)=>({...e,[i]:Oe[i]?.equalTo(ye[i]??"0")})),{}),Me=(0,S.XF)(),[We,Fe]=(0,w.q)(ye[P.gN.CURRENCY_A],Me?.address),[Ve,Ze]=(0,w.q)(ye[P.gN.CURRENCY_B],Me?.address),Ge=(0,Z.h7)(),He=(0,N.G)();async function Je(){if(!ne||!ce||!L||!Me||!He)return;const{[P.gN.CURRENCY_A]:e,[P.gN.CURRENCY_B]:i}=ye;if(!e||!i||!le||!Ce||!qe)return;const n={[P.gN.CURRENCY_A]:(0,Q.u)(e,fe?A.fI:ke)[0],[P.gN.CURRENCY_B]:(0,Q.u)(i,fe?A.fI:ke)[0]};let t,d,s,o;if(le.isNative||Ce.isNative){const c=Ce.isNative;t=Me.estimateGas.addLiquidityETH,d=Me.addLiquidityETH,s=[(c?le:Ce)?.wrapped?.address??"",(c?e:i).quotient.toString(),n[c?P.gN.CURRENCY_A:P.gN.CURRENCY_B].toString(),n[c?P.gN.CURRENCY_B:P.gN.CURRENCY_A].toString(),L,qe.toHexString()],o=r.O$.from((c?i:e).quotient.toString())}else t=Me.estimateGas.addLiquidity,d=Me.addLiquidity,s=[le?.wrapped?.address??"",Ce?.wrapped?.address??"",e.quotient.toString(),i.quotient.toString(),n[P.gN.CURRENCY_A].toString(),n[P.gN.CURRENCY_B].toString(),L,qe.toHexString()],o=null;Ie(!0),await t(...s,o?{value:o}:{}).then((e=>d(...s,{...o?{value:o}:{},gasLimit:(0,J.y)(e)}).then((e=>{Ie(!1);const i={type:G.i.ADD_LIQUIDITY_V2_POOL,baseCurrencyId:(0,X.H)(le),expectedAmountBaseRaw:ye[P.gN.CURRENCY_A]?.quotient.toString()??"0",quoteCurrencyId:(0,X.H)(Ce),expectedAmountQuoteRaw:ye[P.gN.CURRENCY_B]?.quotient.toString()??"0"};Ge(e,i),Le(e.hash),(0,l._P)(c.vp.ADD_LIQUIDITY_SUBMITTED,{label:[me[P.gN.CURRENCY_A]?.symbol,me[P.gN.CURRENCY_B]?.symbol].join("/"),...ae,...i})})))).catch((e=>{Ie(!1),4001!==e?.code&&console.error(e)}))}const Qe=()=>(0,t.jsx)(se,{children:fe?(0,t.jsx)(E.hl,{mt:"20px",$borderRadius:"20px",children:(0,t.jsxs)(v.BA,{justify:"space-between",children:[(0,t.jsx)(h.xv,{fontSize:"24px",fontWeight:535,lineHeight:"42px",marginRight:10,children:me[P.gN.CURRENCY_A]?.symbol+"/"+me[P.gN.CURRENCY_B]?.symbol}),(0,t.jsx)(f.Z,{currency0:me[P.gN.CURRENCY_A],currency1:me[P.gN.CURRENCY_B],size:30})]})}):(0,t.jsxs)(t.Fragment,{children:[(0,t.jsxs)(v.v3,{style:{marginTop:"20px"},children:[(0,t.jsx)(h.xv,{fontSize:"48px",fontWeight:535,lineHeight:"42px",marginRight:10,children:Ye?.toSignificant(6)}),(0,t.jsx)(f.Z,{currency0:me[P.gN.CURRENCY_A],currency1:me[P.gN.CURRENCY_B],size:30})]}),(0,t.jsx)(v.ZP,{children:(0,t.jsx)(h.xv,{fontSize:"24px",children:me[P.gN.CURRENCY_A]?.symbol+"/"+me[P.gN.CURRENCY_B]?.symbol+" Pool Tokens"})}),(0,t.jsx)(j.Tv.DeprecatedItalic,{fontSize:12,textAlign:"left",padding:"8px 0 0 0 ",children:(0,t.jsx)(s.cC,{id:"4nBvG6",values:{0:ke.toSignificant(4)}})})]})}),Xe=()=>(0,t.jsx)(te,{price:Ue,currencies:me,parsedAmounts:ye,noLiquidity:fe,onAdd:Je,poolTokenPercentage:be}),Ke=(0,t.jsx)(s.cC,{id:"+U2TkE",values:{0:ye[P.gN.CURRENCY_A]?.toSignificant(6),1:me[P.gN.CURRENCY_A]?.symbol,2:ye[P.gN.CURRENCY_B]?.toSignificant(6),3:me[P.gN.CURRENCY_B]?.symbol}}),ei=(0,x.useCallback)((t=>{const d=(0,X.H)(t);n(d===i?`/add/v2/${i}/${e}`:`/add/v2/${d}/${i}`)}),[i,n,e]),ii=(0,x.useCallback)((t=>{const d=(0,X.H)(t);n(e===d?i?`/add/v2/${i}/${d}`:`/add/v2/${d}`:`/add/v2/${e||"ETH"}/${d}`)}),[e,n,i]),ni=(0,x.useCallback)((()=>{we(!1),Pe&&Te(""),Le("")}),[Te,Pe]),{pathname:ti}=(0,d.TH)(),di=ti.includes("/create"),ri=(0,I.G)(me?.CURRENCY_A,me?.CURRENCY_B);return He?(0,t.jsxs)(t.Fragment,{children:[(0,t.jsxs)(ee.Z,{children:[(0,t.jsx)(Y.w,{creating:di,adding:!0,autoSlippage:re}),(0,t.jsxs)(ie.im,{children:[(0,t.jsx)(T.Z,{isOpen:De,onDismiss:ni,attemptingTxn:Se,hash:Pe,reviewContent:()=>(0,t.jsx)(T.p,{title:fe?(0,t.jsx)(s.cC,{id:"aM1tos"}):(0,t.jsx)(s.cC,{id:"AeZIvT"}),onDismiss:ni,topContent:Qe,bottomContent:Xe}),pendingText:Ke,currencyToAdd:je?.liquidityToken}),(0,t.jsxs)(y.Tz,{gap:"20px",children:[fe||(di?(0,t.jsx)(y.lg,{children:(0,t.jsx)(E.Pj,{children:(0,t.jsxs)(y.Tz,{gap:"10px",children:[(0,t.jsx)(j.Tv.DeprecatedLink,{fontWeight:535,color:"accent1",children:(0,t.jsx)(s.cC,{id:"thdBpY"})}),(0,t.jsx)(j.Tv.DeprecatedLink,{fontWeight:485,color:"accent1",children:(0,t.jsx)(s.cC,{id:"TscS1q"})}),(0,t.jsx)(j.Tv.DeprecatedLink,{fontWeight:485,color:"accent1",children:(0,t.jsx)(s.cC,{id:"UEmvHF"})})]})})}):(0,t.jsx)(y.lg,{children:(0,t.jsx)(E.Pj,{children:(0,t.jsx)(y.Tz,{gap:"10px",children:(0,t.jsxs)(j.Tv.DeprecatedLink,{fontWeight:485,color:"accent1",children:[(0,t.jsx)("b",{children:(0,t.jsx)(s.cC,{id:"0l56BI"})})," ",(0,t.jsx)(s.cC,{id:"NqgbmN"})]})})})})),(0,t.jsx)(U.Z,{value:ze[P.gN.CURRENCY_A],onUserInput:Te,onMax:()=>{Te(Oe[P.gN.CURRENCY_A]?.toExact()??"")},onCurrencySelect:ei,showMaxButton:!$e[P.gN.CURRENCY_A],currency:me[P.gN.CURRENCY_A]??null,id:"add-liquidity-input-tokena",showCommonBases:!0}),(0,t.jsx)(y.lg,{children:(0,t.jsx)(R.Z,{size:"16",color:oe.neutral2})}),(0,t.jsx)(U.Z,{value:ze[P.gN.CURRENCY_B],onUserInput:Ae,onCurrencySelect:ii,onMax:()=>{Ae(Oe[P.gN.CURRENCY_B]?.toExact()??"")},showMaxButton:!$e[P.gN.CURRENCY_B],currency:me[P.gN.CURRENCY_B]??null,id:"add-liquidity-input-tokenb",showCommonBases:!0}),me[P.gN.CURRENCY_A]&&me[P.gN.CURRENCY_B]&&_e!==k._G.INVALID&&(0,t.jsx)(t.Fragment,{children:(0,t.jsxs)(E.hl,{padding:"0px",$borderRadius:"20px",children:[(0,t.jsx)(v.m0,{padding:"1rem",children:(0,t.jsx)(j.Tv.DeprecatedSubHeader,{fontWeight:535,fontSize:14,children:fe?(0,t.jsx)(s.cC,{id:"D52j9u"}):(0,t.jsx)(s.cC,{id:"vmTbpu"})})})," ",(0,t.jsx)(E.hl,{padding:"1rem",$borderRadius:"20px",children:(0,t.jsx)(de,{currencies:me,poolTokenPercentage:be,noLiquidity:fe,price:Ue})})]})}),ri?(0,t.jsx)(_.DF,{disabled:!0,children:(0,t.jsx)(j.Tv.DeprecatedMain,{mb:"4px",children:(0,t.jsx)(s.cC,{id:"Z941Tw"})})}):L?(0,t.jsxs)(y.Tz,{gap:"md",children:[(We===w.U.NOT_APPROVED||We===w.U.PENDING||Ve===w.U.NOT_APPROVED||Ve===w.U.PENDING)&&Be&&(0,t.jsxs)(v.m0,{children:[We!==w.U.APPROVED&&(0,t.jsx)(_.DF,{onClick:Fe,disabled:We===w.U.PENDING,width:Ve!==w.U.APPROVED?"48%":"100%",children:We===w.U.PENDING?(0,t.jsx)(ie.bb,{children:(0,t.jsx)(s.cC,{id:"MfyhMG",values:{0:me[P.gN.CURRENCY_A]?.symbol}})}):(0,t.jsx)(s.cC,{id:"fgGids",values:{0:me[P.gN.CURRENCY_A]?.symbol}})}),Ve!==w.U.APPROVED&&(0,t.jsx)(_.DF,{onClick:Ze,disabled:Ve===w.U.PENDING,width:We!==w.U.APPROVED?"48%":"100%",children:Ve===w.U.PENDING?(0,t.jsx)(ie.bb,{children:(0,t.jsx)(s.cC,{id:"MfyhMG",values:{0:me[P.gN.CURRENCY_B]?.symbol}})}):(0,t.jsx)(s.cC,{id:"fgGids",values:{0:me[P.gN.CURRENCY_B]?.symbol}})})]}),(0,t.jsx)(_.Kd,{onClick:()=>{we(!0)},disabled:!Be||We!==w.U.APPROVED||Ve!==w.U.APPROVED,error:!Be&&!!ye[P.gN.CURRENCY_A]&&!!ye[P.gN.CURRENCY_B],children:(0,t.jsx)(h.xv,{fontSize:20,fontWeight:535,children:ve??(0,t.jsx)(s.cC,{id:"bwSQI0"})})})]}):(0,t.jsx)(l.M8,{events:[c.TM.onClick],name:c.Je.CONNECT_WALLET_BUTTON_CLICKED,properties:{received_swap_quote:!1},element:c.xo.CONNECT_WALLET_BUTTON,children:(0,t.jsx)(_.Sy,{onClick:ge,children:(0,t.jsx)(s.cC,{id:"VHOVEJ"})})})]})]})]}),(0,t.jsx)(p.c,{}),ri?(0,t.jsx)(u.Z,{show:ri,currencies:[me.CURRENCY_A,me.CURRENCY_B]}):je&&!fe&&_e!==k._G.INVALID?(0,t.jsx)(y.Tz,{style:{minWidth:"20rem",width:"100%",maxWidth:"400px",marginTop:"1rem"},children:(0,t.jsx)(b.WP,{showUnwrapped:pe,pair:je})}):null]}):(0,t.jsx)(g.A,{})}function oe(){const{currencyIdA:e,currencyIdB:i}=(0,d.UO)();return e&&i&&e.toLowerCase()===i.toLowerCase()?(0,t.jsx)(d.Fg,{to:`/add/v2/${e}`,replace:!0}):(0,t.jsx)(ce,{})}},1707:(e,i,n)=>{n.d(i,{DC:()=>c,ER:()=>o,bb:()=>a,im:()=>s,pr:()=>l});var t=n(29826),d=n(9726),r=n(33552);const s=r.default.div.withConfig({displayName:"styled__Wrapper",componentId:"sc-bfb6c8b8-0"})`
+  position: relative;
+  padding: 20px;
+`,c=(0,r.default)(d.xv).withConfig({displayName:"styled__ClickableText",componentId:"sc-bfb6c8b8-1"})`
+  :hover {
+    cursor: pointer;
+  }
+  color: ${({theme:e})=>e.accent1};
+`,o=r.default.button.withConfig({displayName:"styled__MaxButton",componentId:"sc-bfb6c8b8-2"})`
+  padding: 0.5rem 1rem;
+  background-color: ${({theme:e})=>e.accent2};
+  border: 1px solid ${({theme:e})=>e.accent2};
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  ${({theme:e})=>e.deprecated_mediaWidth.deprecated_upToSmall`
+    padding: 0.25rem 0.5rem;
+  `};
+  font-weight: 535;
+  cursor: pointer;
+  margin: 0.25rem;
+  overflow: hidden;
+  color: ${({theme:e})=>e.accent1};
+  :hover {
+    border: 1px solid ${({theme:e})=>e.accent1};
+  }
+  :focus {
+    border: 1px solid ${({theme:e})=>e.accent1};
+    outline: none;
+  }
+`,a=r.default.span.withConfig({displayName:"styled__Dots",componentId:"sc-bfb6c8b8-3"})`
+  &::after {
+    display: inline-block;
+    animation: ellipsis 1.25s infinite;
+    content: '.';
+    width: 1em;
+    text-align: left;
+  }
+  @keyframes ellipsis {
+    0% {
+      content: '.';
+    }
+    33% {
+      content: '..';
+    }
+    66% {
+      content: '...';
+    }
+  }
+`,l=(0,r.default)(t.pr).withConfig({displayName:"styled__LoadingRows",componentId:"sc-bfb6c8b8-4"})`
+  padding-top: 36px;
+  min-width: 75%;
+  max-width: 960px;
+  grid-column-gap: 0.5em;
+  grid-row-gap: 0.8em;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 8px;
+
+  & > div:nth-child(4n + 1) {
+    grid-column: 1 / 3;
+  }
+  & > div:nth-child(4n) {
+    grid-column: 3 / 4;
+    margin-bottom: 2em;
+  }
+`}}]);
+//# sourceMappingURL=8951.276c97a9.chunk.js.map
