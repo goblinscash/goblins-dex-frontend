@@ -73,6 +73,9 @@ function PoolDescription({
   )
 }
 
+
+
+
 export type PoolTableSortState = {
   sortBy: Pool_OrderBy
   sortDirection: OrderDirection
@@ -209,7 +212,7 @@ export function PoolsTable({
                 <ClickableHeaderRow $justify="flex-end" onClick={() => handleHeaderClick(Pool_OrderBy.TxCount)}>
                   {sortState.sortBy === Pool_OrderBy.TxCount && <HeaderArrow direction={sortState.sortDirection} />}
                   <ThemedText.BodySecondary>
-                    <Trans>Transactions</Trans>
+                    <Trans>Transactions</Trans>            
                   </ThemedText.BodySecondary>
                 </ClickableHeaderRow>
               </Cell>
@@ -311,3 +314,7 @@ export function PoolsTable({
 
   return <Table columns={columns} data={poolTableValues} loading={loading} loadMore={loadMore} maxHeight={maxHeight} />
 }
+
+
+
+

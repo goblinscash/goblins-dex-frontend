@@ -141,6 +141,8 @@ interface Page {
   component: () => JSX.Element
   loggingElementName: string
 }
+
+
 const Pages: Array<Page> = [
   {
     title: <Trans>Tokens</Trans>,
