@@ -12,6 +12,7 @@ const CHAIN_SUBGRAPH_URL: Record<number, string> = {
   [ChainId.BNB]: 'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v3-bsc?source=uniswap',
   [ChainId.AVALANCHE]: 'https://api.thegraph.com/subgraphs/name/lynnshaoyu/uniswap-v3-avax?source=uniswap',
   [ChainId.BASE]: 'https://api.studio.thegraph.com/query/48211/uniswap-v3-base/version/latest?source=uniswap',
+  [ChainId.SMARTBCH]: 'https://graph.dfd.cash/subgraphs/name/goblins/subgraph-v3',
 }
 
 const CHAIN_BLOCK_SUBGRAPH_URL: Record<number, string> = {
@@ -73,6 +74,10 @@ export const chainToApolloClient: Record<number, ApolloClient<NormalizedCacheObj
   [ChainId.AVALANCHE]: new ApolloClient({
     cache: new InMemoryCache(),
     uri: CHAIN_SUBGRAPH_URL[ChainId.AVALANCHE],
+  }),
+  [ChainId.SMARTBCH]: new ApolloClient({
+    cache: new InMemoryCache(),
+    uri: CHAIN_SUBGRAPH_URL[ChainId.SMARTBCH],
   }),
 }
 

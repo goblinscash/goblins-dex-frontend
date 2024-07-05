@@ -151,7 +151,11 @@ export function useRecentTransactions(
   orderDirection: OrderDirection = OrderDirection.Desc,
   filter: TransactionType[] = [TransactionType.SWAP, TransactionType.MINT, TransactionType.BURN]
 ) {
+
+  console.log(chainId, "<===chainId")
   const apolloClient = chainToApolloClient[chainId || ChainId.MAINNET]
+
+  
   const { data, loading, fetchMore } = useTransactionsQuery({
     variables: {
       first: 20,
@@ -161,6 +165,8 @@ export function useRecentTransactions(
     },
     client: apolloClient,
   })
+
+
   const loadingMore = useRef(false)
   const loadMore = useCallback(
     ({ onComplete }: { onComplete?: () => void }) => {
@@ -191,6 +197,8 @@ export function useRecentTransactions(
       (data as TransactionResults)?.transactions?.reduce((accum: Transaction[], t: TransactionEntry) => {
         const mints = filter.includes(TransactionType.MINT)
           ? t.mints.map((m) => {
+
+            console.log(t, "<=====t")
               return {
                 type: TransactionType.MINT,
                 hash: t.id,

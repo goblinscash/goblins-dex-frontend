@@ -48,18 +48,20 @@ export default function RecentTransactions() {
   ])
 
   const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
-  const chainId = supportedChainIdFromGQLChain(chainName)
+  const chainId = supportedChainIdFromGQLChain(chainName) 
+  // const chainId = 10000/
 
   const [sortState, setSortMethod] = useState<ExploreTxTableSortState>({
     sortBy: Transaction_OrderBy.Timestamp,
     sortDirection: OrderDirection.Desc,
   })
   const { transactions, loading, loadMore } = useRecentTransactions(
-    chainId ?? ChainId.MAINNET,
+    chainId ?? ChainId.SMARTBCH,
     sortState.sortBy,
     sortState.sortDirection,
     filter
   )
+
 
   const handleHeaderClick = useCallback(
     (newSortMethod: Transaction_OrderBy) => {
