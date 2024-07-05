@@ -33,6 +33,14 @@ export function usePollQueryWhileMounted<T, K extends OperationVariables>(
   return queryResult
 }
 
+interface unWrapTokenInterface {
+  readonly __typename?: "Token";
+  readonly id: string;
+  readonly name?: string;
+  readonly symbol?: string;
+  readonly address?: string | null;
+}
+
 export enum TimePeriod {
   HOUR,
   DAY,
@@ -225,10 +233,10 @@ export function getTokenDetailsURL({
 }
 
 export function unwrapToken<
-  T extends {
-    address?: string | null
-  } | null
+  T extends unWrapTokenInterface | null
 >(chainId: number, token: T): T {
+
+  // console.log(token, "<====token")
   if (!token?.address) return token
 
   const address = token.address.toLowerCase()

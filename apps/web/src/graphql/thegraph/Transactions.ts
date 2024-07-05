@@ -152,7 +152,6 @@ export function useRecentTransactions(
   filter: TransactionType[] = [TransactionType.SWAP, TransactionType.MINT, TransactionType.BURN]
 ) {
 
-  console.log(chainId, "<===chainId")
   const apolloClient = chainToApolloClient[chainId || ChainId.MAINNET]
 
   

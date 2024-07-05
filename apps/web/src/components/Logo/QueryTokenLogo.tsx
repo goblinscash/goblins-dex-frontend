@@ -2,7 +2,7 @@ import { ChainId } from '@uniswap/sdk-core'
 import { PortfolioLogo } from 'components/AccountDrawer/MiniPortfolio/PortfolioLogo'
 import { SearchToken } from 'graphql/data/SearchTokens'
 import { TokenQueryData } from 'graphql/data/Token'
-import { TopToken } from 'graphql/data/TopTokens'
+import { TokenList, TopToken } from 'graphql/data/TopTokens'
 import { gqlToCurrency, supportedChainIdFromGQLChain } from 'graphql/data/util'
 import { useMemo } from 'react'
 
