@@ -7,13 +7,15 @@ import AddLiquidity from './index'
 export default function AddLiquidityWithTokenRedirects() {
   const { currencyIdA, currencyIdB } = useParams<{ currencyIdA: string; currencyIdB: string; feeAmount?: string }>()
 
-  const { chainId } = useWeb3React()
+  const { chainId } = useWeb3React();
+
+
 
   // prevent weth + eth
   const isETHOrWETHA =
-    currencyIdA === 'ETH' || (chainId !== undefined && currencyIdA === WRAPPED_NATIVE_CURRENCY[chainId]?.address)
+    currencyIdA === 'smartbch' || (chainId !== undefined && currencyIdA === WRAPPED_NATIVE_CURRENCY[chainId]?.address)
   const isETHOrWETHB =
-    currencyIdB === 'ETH' || (chainId !== undefined && currencyIdB === WRAPPED_NATIVE_CURRENCY[chainId]?.address)
+    currencyIdB === 'smartbch' || (chainId !== undefined && currencyIdB === WRAPPED_NATIVE_CURRENCY[chainId]?.address)
 
   if (
     currencyIdA &&

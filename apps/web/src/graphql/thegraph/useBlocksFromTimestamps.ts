@@ -40,10 +40,12 @@ export function useBlocksFromTimestamps(
 
   // derive blocks based on active network
   const networkBlocks = blocks?.[chainId]
-
+console.log(GET_BLOCKS, chainBlockClient, [], timestamps, "<====timestampstimestamps")
   useEffect(() => {
     async function fetchData() {
       const results = await splitQuery(GET_BLOCKS, chainBlockClient, [], timestamps)
+
+      console.log(results, "<====results")
       if (results) {
         setBlocks({ ...(blocks ?? {}), [chainId]: results })
       } else {
@@ -53,7 +55,7 @@ export function useBlocksFromTimestamps(
     if (!networkBlocks && !error) {
       fetchData()
     }
-  })
+  },[])
 
   const blocksFormatted = useMemo(() => {
     if (blocks?.[chainId]) {

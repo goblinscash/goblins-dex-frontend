@@ -297,6 +297,8 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
     [dependentField, formatCurrencyAmount, independentField, parsedAmounts, showWrap, typedValue]
   )
 
+  
+
   const userHasSpecifiedInputOutput = Boolean(
     currencies[Field.INPUT] && currencies[Field.OUTPUT] && parsedAmounts[independentField]?.greaterThan(JSBI.BigInt(0))
   )
@@ -469,7 +471,10 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
   const switchChain = useSwitchChain()
   const switchingChain = useAppSelector((state) => state.wallets.switchingChain)
 
-  const isNewSwapFlowEnabled = useNewSwapFlow()
+  const isNewSwapFlowEnabled = useNewSwapFlow();
+
+
+
 
   return (
     <>
@@ -548,7 +553,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
             />
           </Trace>
         </SwapSection>
-        {/* <ArrowWrapper clickable={isSupportedChain(chainId)}>
+        <ArrowWrapper clickable={isSupportedChain(chainId)}>
           <TraceEvent
             events={[BrowserEvent.onClick]}
             name={SwapEventName.SWAP_TOKENS_REVERSED}
@@ -569,7 +574,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
               <ArrowDown size="16" color={theme.neutral1} />
             </ArrowContainer>
           </TraceEvent>
-        </ArrowWrapper> */}
+        </ArrowWrapper>
       </div>
       <AutoColumn gap="xs">
         <div>

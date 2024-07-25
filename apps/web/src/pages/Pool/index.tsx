@@ -275,7 +275,7 @@ export default function Pool() {
                     )}
                   />
                 )}
-                <ResponsiveButtonPrimary data-cy="join-pool-button" id="join-pool-button" as={Link} to="/add/ETH">
+                <ResponsiveButtonPrimary data-cy="join-pool-button" id="join-pool-button" as={Link} to="/add/smartbch">
                   + <Trans>New position</Trans>
                 </ResponsiveButtonPrimary>
               </ButtonRow>
@@ -325,7 +325,7 @@ export default function Pool() {
               )}
             </MainContentWrapper>
             <HideSmall>
-              <CTACards />
+              {/* <CTACards /> */}
             </HideSmall>
           </AutoColumn>
         </AutoColumn>

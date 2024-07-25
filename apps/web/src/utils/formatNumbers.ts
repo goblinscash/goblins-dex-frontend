@@ -191,15 +191,15 @@ const SEVEN_SIG_FIGS__SCI_NOTATION_CURRENCY: NumberFormatOptions = {
 // if hardcodedinput is supplied it will override the input value or use the hardcoded output
 type HardCodedInputFormat =
   | {
-      input: number
-      prefix?: string
-      hardcodedOutput?: undefined
-    }
+    input: number
+    prefix?: string
+    hardcodedOutput?: undefined
+  }
   | {
-      input?: undefined
-      prefix?: undefined
-      hardcodedOutput: string
-    }
+    input?: undefined
+    prefix?: undefined
+    hardcodedOutput: string
+  }
 
 type FormatterBaseRule = { formatterOptions: NumberFormatOptions }
 type FormatterExactRule = { upperBound?: undefined; exact: number } & FormatterBaseRule
@@ -530,7 +530,11 @@ function formatNumber({
     return placeholder
   }
 
+
+
   const { hardCodedInput, formatterOptions } = getFormatterRule(input, type, conversionRate)
+
+
 
   if (formatterOptions.currency) {
     input = conversionRate ? input * conversionRate : input
@@ -539,15 +543,18 @@ function formatNumber({
   }
 
   if (!hardCodedInput) {
+
     return new Intl.NumberFormat(locale, formatterOptions).format(input)
   }
 
   if (hardCodedInput.hardcodedOutput) {
+
     return hardCodedInput.hardcodedOutput
   }
 
   const { input: hardCodedInputValue, prefix } = hardCodedInput
   if (hardCodedInputValue === undefined) return placeholder
+
   return (prefix ?? '') + new Intl.NumberFormat(locale, formatterOptions).format(hardCodedInputValue)
 }
 

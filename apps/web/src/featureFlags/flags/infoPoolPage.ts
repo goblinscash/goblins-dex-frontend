@@ -5,5 +5,5 @@ export function useInfoPoolPageFlag(): BaseVariant {
 }
 
 export function useInfoPoolPageEnabled(): boolean {
-  return useInfoPoolPageFlag() === BaseVariant.Enabled
+  return true;
 }

@@ -52,7 +52,7 @@ export default function SwapDetailsDropdown(props: SwapDetailsProps) {
   const theme = useTheme()
   const [showDetails, setShowDetails] = useState(false)
   const trace = useTrace()
-
+// console.log(trade,trade && trade.executionPrice, "<====trade")
   return (
     <Wrapper>
       <TraceEvent

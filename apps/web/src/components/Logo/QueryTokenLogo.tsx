@@ -13,8 +13,10 @@ export default function QueryTokenLogo(
     token?: TopToken | TokenQueryData | SearchToken
   }
 ) {
-  const chainId =
-    (props.token?.chain ? supportedChainIdFromGQLChain(props.token?.chain) : ChainId.MAINNET) ?? ChainId.MAINNET
+
+
+
+  const chainId = ChainId.SMARTBCH;
   const currency = props.token ? gqlToCurrency(props.token) : undefined
 
   return <PortfolioLogo currencies={useMemo(() => [currency], [currency])} chainId={chainId} {...props} />

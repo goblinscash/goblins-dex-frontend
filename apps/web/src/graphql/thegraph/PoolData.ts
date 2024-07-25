@@ -99,6 +99,8 @@ export function usePoolData(
   // get blocks from historic timestamps
   const [t24, t48, tWeek] = useDeltaTimestamps()
   const { blocks, error: blockError } = useBlocksFromTimestamps([t24, t48, tWeek], chainId || ChainId.MAINNET)
+
+
   const [block24, block48, blockWeek] = blocks ?? []
 
   const { loading, error, data } = usePoolDataQuery({
@@ -106,6 +108,9 @@ export function usePoolData(
     client: apolloClient,
     fetchPolicy: 'no-cache',
   })
+
+
+
 
   const {
     loading: loading24,
@@ -116,6 +121,9 @@ export function usePoolData(
     client: apolloClient,
     fetchPolicy: 'no-cache',
   })
+
+
+
   const {
     loading: loading48,
     error: error48,
@@ -135,8 +143,10 @@ export function usePoolData(
     fetchPolicy: 'no-cache',
   })
 
+
+
   return useMemo(() => {
-    const anyError = Boolean(error || error24 || error48 || blockError || errorWeek)
+    const anyError = Boolean(error || error24 || error48 || errorWeek)
     const anyLoading = Boolean(loading || loading24 || loading48 || loadingWeek)
 
     // return early if not all data yet

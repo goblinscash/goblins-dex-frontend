@@ -110,4 +110,8 @@ export const chainToApolloBlockClient: Record<number, ApolloClient<NormalizedCac
     uri: CHAIN_BLOCK_SUBGRAPH_URL[ChainId.AVALANCHE],
     cache: new InMemoryCache(),
   }),
+  [ChainId.SMARTBCH]: new ApolloClient({
+    cache: new InMemoryCache(),
+    uri: CHAIN_SUBGRAPH_URL[ChainId.SMARTBCH],
+  }),
 }
