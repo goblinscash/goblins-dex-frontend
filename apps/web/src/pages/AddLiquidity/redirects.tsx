@@ -17,6 +17,8 @@ export default function AddLiquidityWithTokenRedirects() {
   const isETHOrWETHB =
     currencyIdB === 'smartbch' || (chainId !== undefined && currencyIdB === WRAPPED_NATIVE_CURRENCY[chainId]?.address)
 
+
+    
   if (
     currencyIdA &&
     currencyIdB &&
