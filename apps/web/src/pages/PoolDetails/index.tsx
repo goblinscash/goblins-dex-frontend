@@ -120,7 +120,7 @@ export default function PoolDetailsPage() {
 
   const isInvalidPool = !chainName || !poolAddress || !getValidUrlChainName(chainName) || !isAddress(poolAddress)
   const poolNotFound = (!loading && !poolData) || isInvalidPool
-  const [chartType, setChartType] = useState<PoolsDetailsChartType>(ChartType.PRICE)
+  const [chartType, setChartType] = useState<PoolsDetailsChartType>(ChartType.VOLUME)
   const [priceChartType, setPriceChartType] = useState<PriceChartType>(PriceChartType.LINE)
 
   if (poolNotFound) return <NotFound />
@@ -145,17 +145,17 @@ export default function PoolDetailsPage() {
               loading={loading}
             />
             <ChartTypeSelectorContainer>
-              {chartType === ChartType.PRICE && (
+              {chartType === ChartType.VOLUME && (
                 <AdvancedPriceChartToggle currentChartType={priceChartType} onChartTypeChange={setPriceChartType} />
               )}
-              <ChartTypeSelector
+              {/* <ChartTypeSelector
                 options={PDP_CHART_SELECTOR_OPTIONS}
                 currentChartType={chartType}
                 onChartTypeChange={(c) => {
                   setChartType(c)
                   if (c === ChartType.PRICE) setPriceChartType(PriceChartType.LINE)
                 }}
-              />
+              /> */}
             </ChartTypeSelectorContainer>
           </Row>
           <ChartSection
