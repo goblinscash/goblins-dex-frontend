@@ -6,13 +6,22 @@ import {
   TEST_TRADE_EXACT_INPUT,
   TEST_TRADE_FEE_ON_BUY,
   TEST_TRADE_FEE_ON_SELL,
+  USDC,
+  WETH
 } from 'test-utils/constants'
 import { act, render, screen } from 'test-utils/render'
 
 import SwapDetailsDropdown from './SwapDetailsDropdown'
 
+
+
+
 jest.mock('../../featureFlags/flags/useFees', () => ({ useFeesEnabled: () => true }))
 
+
+
+const currencies = { input: USDC, output: WETH };
+const formattedAmounts = { input: '100.00', output: '0.30' }; // Example formatted amounts
 describe('SwapDetailsDropdown.tsx', () => {
   it('renders a trade', () => {
     const { asFragment } = render(
@@ -21,6 +30,8 @@ describe('SwapDetailsDropdown.tsx', () => {
         syncing={false}
         loading={false}
         allowedSlippage={TEST_ALLOWED_SLIPPAGE}
+        currencies={currencies}
+        formattedAmounts={formattedAmounts}
       />
     )
     expect(asFragment()).toMatchSnapshot()
@@ -28,7 +39,9 @@ describe('SwapDetailsDropdown.tsx', () => {
 
   it('renders loading state', () => {
     render(
-      <SwapDetailsDropdown trade={undefined} syncing={true} loading={true} allowedSlippage={TEST_ALLOWED_SLIPPAGE} />
+      <SwapDetailsDropdown trade={undefined} syncing={true} loading={true} allowedSlippage={TEST_ALLOWED_SLIPPAGE}
+      currencies={currencies}
+      formattedAmounts={formattedAmounts} />
     )
     expect(screen.getByText('Fetching best price...')).toBeInTheDocument()
   })
@@ -41,6 +54,8 @@ describe('SwapDetailsDropdown.tsx', () => {
         syncing={false}
         loading={false}
         allowedSlippage={TEST_ALLOWED_SLIPPAGE}
+        currencies={currencies}
+        formattedAmounts={formattedAmounts}
       />
     )
     expect(screen.getByTestId('swap-details-header-row')).toBeInTheDocument()
@@ -56,6 +71,8 @@ describe('SwapDetailsDropdown.tsx', () => {
         syncing={false}
         loading={true}
         allowedSlippage={TEST_ALLOWED_SLIPPAGE}
+        currencies={currencies}
+        formattedAmounts={formattedAmounts}
       />
     )
     await act(() => userEvent.click(screen.getByTestId('swap-details-header-row')))
@@ -75,6 +92,8 @@ describe('SwapDetailsDropdown.tsx', () => {
         syncing={false}
         loading={true}
         allowedSlippage={TEST_ALLOWED_SLIPPAGE}
+        currencies={currencies}
+        formattedAmounts={formattedAmounts}
       />
     )
     await act(() => userEvent.click(screen.getByTestId('swap-details-header-row')))

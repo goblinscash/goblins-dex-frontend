@@ -8,7 +8,8 @@ import { ThemedText } from 'theme/components'
 import { NumberType, useFormatter } from 'utils/formatNumbers'
 
 interface TradePriceProps {
-  price: Price<Currency, Currency>
+  price: Price<Currency, Currency>,
+
 }
 
 const StyledPriceContainer = styled.button`
@@ -34,7 +35,7 @@ export default function TradePrice({ price }: TradePriceProps) {
 
   const { baseCurrency, quoteCurrency } = price
 
-console.log(price,price.invert().toSignificant(),price.toSignificant(),showInverted, "<=====price")
+
   const { data: usdPrice } = useUSDPrice(tryParseCurrencyAmount('1', showInverted ? baseCurrency : quoteCurrency))
   
 
@@ -46,7 +47,6 @@ console.log(price,price.invert().toSignificant(),price.toSignificant(),showInver
     }
   }, [formatPrice, price, showInverted])
 
-  console.log(formattedPrice, "<===formattedPrice")
 
   const label = showInverted ? `${price.quoteCurrency?.symbol}` : `${price.baseCurrency?.symbol} `
   const labelInverted = showInverted ? `${price.baseCurrency?.symbol} ` : `${price.quoteCurrency?.symbol}`

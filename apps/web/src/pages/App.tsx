@@ -1,5 +1,5 @@
-import { CustomUserProperties, getBrowser, SharedEventName } from '@uniswap/analytics-events'
 import { useWeb3React } from '@web3-react/core'
+import { CustomUserProperties, getBrowser, SharedEventName } from '@uniswap/analytics-events'
 import { getDeviceId, sendAnalyticsEvent, sendInitializationEvent, Trace, user } from 'analytics'
 import ErrorBoundary from 'components/ErrorBoundary'
 import Loader from 'components/Icons/LoadingSpinner'
@@ -27,7 +27,6 @@ import { getEnvName } from 'utils/env'
 import { MICROSITE_LINK } from 'utils/openDownloadApp'
 import { getCurrentPageFromLocation } from 'utils/urlRoutes'
 import { getCLS, getFCP, getFID, getLCP, Metric } from 'web-vitals'
-
 import { findRouteByPath, RouteDefinition, routes, useRouterConfig } from './RouteDefinitions'
 
 const AppChrome = lazy(() => import('./AppChrome'))
@@ -129,7 +128,7 @@ export default function App() {
   }, [])
 
   const isBagExpanded = useBag((state) => state.bagExpanded)
-  const isHeaderTransparent = !scrolledState && !isBagExpanded
+  const isHeaderTransparent = !scrolledState && !isBagExpanded;
 
   const { account } = useWeb3React()
   const statsigUser: StatsigUser = useMemo(

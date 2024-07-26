@@ -128,20 +128,18 @@ export type SwapInfo = {
 // from the current swap inputs, compute the best trade and return it.
 export function useDerivedSwapInfo(state: SwapState): SwapInfo {
   const { account } = useWeb3React()
-console.log(state,TradeType, "<====state")
   const {
     currencyState: { inputCurrency, outputCurrency },
   } = useSwapAndLimitContext()
   const { independentField, typedValue } = state
 
-  console.log(inputCurrency, outputCurrency,independentField, Field.INPUT, "<====inputCurrency, outputCurrency")
 
   const { inputTax, outputTax } = useSwapTaxes(
     inputCurrency?.isToken ? inputCurrency.address : undefined,
     outputCurrency?.isToken ? outputCurrency.address : undefined
   )
 
-  console.log(inputTax, outputTax, "<====inputTax, outputTax")
+
 
 
   const relevantTokenBalances = useCurrencyBalances(
@@ -151,12 +149,12 @@ console.log(state,TradeType, "<====state")
 
   const isExactIn: boolean = independentField === Field.INPUT
 
-  console.log(isExactIn, "<====isExactIn")
+
   const parsedAmount = useMemo(
     () => tryParseCurrencyAmount(typedValue, (isExactIn ? inputCurrency : outputCurrency) ?? undefined),
     [inputCurrency, isExactIn, outputCurrency, typedValue]
   )
-  console.log(parsedAmount, "<====parsedAmount")
+
 
   const trade = useDebouncedTrade(
     isExactIn ? TradeType.EXACT_INPUT : TradeType.EXACT_OUTPUT,
@@ -229,7 +227,7 @@ console.log(state,TradeType, "<====state")
   }, [account, currencies, parsedAmount, currencyBalances, trade?.trade, allowedSlippage, connectionReady])
 
 
-  console.log(trade, "<====trade")
+
   return useMemo(
     () => ({
       currencies,

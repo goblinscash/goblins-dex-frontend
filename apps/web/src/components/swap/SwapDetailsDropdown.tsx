@@ -17,7 +17,7 @@ import { useFormatter } from 'utils/formatNumbers'
 
 import GasEstimateTooltip from './GasEstimateTooltip'
 import SwapLineItem, { SwapLineItemType } from './SwapLineItem'
-import TradePrice from './TradePrice'
+import TradePrice from './SwapDetailTradePrice'
 
 const StyledHeaderRow = styled(RowBetween)<{ disabled: boolean; open: boolean }>`
   padding: 0;
@@ -45,14 +45,16 @@ interface SwapDetailsProps {
   syncing: boolean
   loading: boolean
   allowedSlippage: Percent
+  currencies: any | undefined
+  formattedAmounts: any | undefined
 }
 
 export default function SwapDetailsDropdown(props: SwapDetailsProps) {
-  const { trade, syncing, loading, allowedSlippage } = props
+  const { trade, syncing, loading, allowedSlippage, currencies,formattedAmounts  } = props
   const theme = useTheme()
   const [showDetails, setShowDetails] = useState(false)
   const trace = useTrace()
-// console.log(trade,trade && trade.executionPrice, "<====trade")
+
   return (
     <Wrapper>
       <TraceEvent
@@ -74,7 +76,7 @@ export default function SwapDetailsDropdown(props: SwapDetailsProps) {
           <RowFixed>
             {trade ? (
               <LoadingOpacityContainer $loading={syncing} data-testid="trade-price-container">
-                <TradePrice price={trade.executionPrice} />
+                <TradePrice formattedAmounts={formattedAmounts} currencies={currencies}  />
               </LoadingOpacityContainer>
             ) : loading || syncing ? (
               <ThemedText.DeprecatedMain fontSize={14}>

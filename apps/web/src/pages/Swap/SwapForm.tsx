@@ -111,18 +111,18 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
     () =>
       urlLoadedTokens && !isEmptyObject(defaultTokens)
         ? urlLoadedTokens
-            .filter((token: Token) => {
-              return !(token.address in defaultTokens)
+          .filter((token: Token) => {
+            return !(token.address in defaultTokens)
+          })
+          .filter((token: Token) => {
+            // Any token addresses that are loaded from the shorthands map do not need to show the import URL
+            const supported = asSupportedChain(chainId)
+            if (!supported) return true
+            return !Object.keys(TOKEN_SHORTHANDS).some((shorthand) => {
+              const shorthandTokenAddress = TOKEN_SHORTHANDS[shorthand][supported]
+              return shorthandTokenAddress && shorthandTokenAddress === token.address
             })
-            .filter((token: Token) => {
-              // Any token addresses that are loaded from the shorthands map do not need to show the import URL
-              const supported = asSupportedChain(chainId)
-              if (!supported) return true
-              return !Object.keys(TOKEN_SHORTHANDS).some((shorthand) => {
-                const shorthandTokenAddress = TOKEN_SHORTHANDS[shorthand][supported]
-                return shorthandTokenAddress && shorthandTokenAddress === token.address
-              })
-            })
+          })
         : [],
     [chainId, defaultTokens, urlLoadedTokens]
   )
@@ -171,13 +171,13 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
     () =>
       showWrap
         ? {
-            [Field.INPUT]: parsedAmount,
-            [Field.OUTPUT]: parsedAmount,
-          }
+          [Field.INPUT]: parsedAmount,
+          [Field.OUTPUT]: parsedAmount,
+        }
         : {
-            [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
-            [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
-          },
+          [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
+          [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
+        },
     [independentField, parsedAmount, showWrap, trade]
   )
 
@@ -214,9 +214,9 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
       routeIsSyncing || !isClassicTrade(trade) || showWrap
         ? [undefined, undefined]
         : [
-            computeFiatValuePriceImpact(fiatValueTradeInput.data, fiatValueTradeOutput.data),
-            computeFiatValuePriceImpact(fiatValueTradeInput.data, preTaxFiatValueTradeOutput.data),
-          ],
+          computeFiatValuePriceImpact(fiatValueTradeInput.data, fiatValueTradeOutput.data),
+          computeFiatValuePriceImpact(fiatValueTradeInput.data, preTaxFiatValueTradeOutput.data),
+        ],
     [fiatValueTradeInput, fiatValueTradeOutput, preTaxFiatValueTradeOutput, routeIsSyncing, trade, showWrap]
   )
 
@@ -289,15 +289,15 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
       [dependentField]: showWrap
         ? parsedAmounts[independentField]?.toExact() ?? ''
         : formatCurrencyAmount({
-            amount: parsedAmounts[dependentField],
-            type: NumberType.SwapTradeAmount,
-            placeholder: '',
-          }),
+          amount: parsedAmounts[dependentField],
+          type: NumberType.SwapTradeAmount,
+          placeholder: '',
+        }),
     }),
     [dependentField, formatCurrencyAmount, independentField, parsedAmounts, showWrap, typedValue]
   )
 
-  
+
 
   const userHasSpecifiedInputOutput = Boolean(
     currencies[Field.INPUT] && currencies[Field.OUTPUT] && parsedAmounts[independentField]?.greaterThan(JSBI.BigInt(0))
@@ -306,9 +306,9 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
   const maximumAmountIn = useMaxAmountIn(trade, allowedSlippage)
   const allowance = usePermit2Allowance(
     maximumAmountIn ??
-      (parsedAmounts[Field.INPUT]?.currency.isToken
-        ? (parsedAmounts[Field.INPUT] as CurrencyAmount<Token>)
-        : undefined),
+    (parsedAmounts[Field.INPUT]?.currency.isToken
+      ? (parsedAmounts[Field.INPUT] as CurrencyAmount<Token>)
+      : undefined),
     isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS(chainId) : undefined,
     trade?.fillType
   )
@@ -476,6 +476,9 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
 
 
 
+
+
+
   return (
     <>
       <TokenSafetyModal
@@ -616,6 +619,12 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
             syncing={routeIsSyncing}
             loading={routeIsLoading}
             allowedSlippage={allowedSlippage}
+            formattedAmounts={formattedAmounts}
+            currencies={currencies}
+
+
+
+            
           />
         )}
         {showPriceImpactWarning && <PriceImpactWarning priceImpact={largerPriceImpact} />}
