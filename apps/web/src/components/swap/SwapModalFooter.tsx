@@ -30,6 +30,7 @@ import Row, { AutoRow, RowBetween, RowFixed } from '../Row'
 import { SwapCallbackError, SwapShowAcceptChanges } from './styled'
 import { SwapLineItemProps, SwapLineItemType } from './SwapLineItem'
 import SwapLineItem from './SwapLineItem'
+import { useUSDPrice } from 'hooks/useUSDPrice'
 
 const DetailsContainer = styled(Column)<{ isNewSwapFlowEnabled?: boolean }>`
   ${({ isNewSwapFlowEnabled }) => (isNewSwapFlowEnabled ? 'padding: 0px 16px 12px 16px' : 'padding-bottom: 8px')};
@@ -113,6 +114,8 @@ export default function SwapModalFooter({
   showAcceptChanges,
   onAcceptChanges,
   isLoading,
+  formattedAmounts,
+  currencies
 }: {
   trade: InterfaceTrade
   allowance?: Allowance
@@ -126,7 +129,11 @@ export default function SwapModalFooter({
   showAcceptChanges: boolean
   onAcceptChanges: () => void
   isLoading: boolean
+  formattedAmounts?:any | undefined
+  currencies?:any | undefined
 }) {
+
+
   const transactionDeadlineSecondsSinceEpoch = useTransactionDeadline()?.toNumber() // in seconds since epoch
   const isAutoSlippage = useUserSlippageTolerance()[0] === 'auto'
   const [routerPreference] = useRouterPreference()
@@ -135,7 +142,9 @@ export default function SwapModalFooter({
   const [showMore, setShowMore] = useState(false)
   const isNewSwapFlowEnabled = useNewSwapFlow()
 
-  const lineItemProps = { trade, allowedSlippage, syncing: false }
+  const lineItemProps = { trade, allowedSlippage, syncing: false, formattedAmounts, currencies }
+
+
 
   const callToAction: CallToAction = useMemo(() => {
     if (allowance && allowance.state === AllowanceState.REQUIRED && allowance.needsSetupApproval) {
@@ -160,6 +169,9 @@ export default function SwapModalFooter({
       }
     }
   }, [allowance, trade])
+
+
+
 
   return (
     <>
@@ -259,11 +271,16 @@ function SwapLineItems({
   trade,
   allowedSlippage,
   syncing,
+  formattedAmounts,
+  currencies,
+
 }: {
   showMore: boolean
   trade: InterfaceTrade
   allowedSlippage: Percent
   syncing: boolean
+  formattedAmounts:any | undefined
+  currencies:any | undefined
 }) {
   return (
     <>
@@ -272,6 +289,8 @@ function SwapLineItems({
         allowedSlippage={allowedSlippage}
         syncing={syncing}
         type={SwapLineItemType.EXCHANGE_RATE}
+        formattedAmounts={formattedAmounts}
+        currencies={currencies}
       />
       <ExpandableLineItems trade={trade} allowedSlippage={allowedSlippage} open={showMore} />
       <SwapLineItem

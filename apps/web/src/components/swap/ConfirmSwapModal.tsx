@@ -349,6 +349,8 @@ export default function ConfirmSwapModal({
   }, [allowedSlippage, confirmModalState, showAcceptChanges, trade, inputCurrency])
 
   const modalBottom = useCallback(() => {
+
+
     if (confirmModalState === ConfirmModalState.REVIEWING || showAcceptChanges) {
       return (
         <SwapModalFooter

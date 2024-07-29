@@ -19,12 +19,14 @@ import { ExternalLink, ThemedText } from 'theme/components'
 import { NumberType, useFormatter } from 'utils/formatNumbers'
 import { getPriceImpactColor } from 'utils/prices'
 
+
 import { DetailLineItem, LineItemData } from './DetailLineItem'
 import { GasBreakdownTooltip, UniswapXDescription } from './GasBreakdownTooltip'
 import GasEstimateTooltip from './GasEstimateTooltip'
 import { MaxSlippageTooltip } from './MaxSlippageTooltip'
 import { RoutingTooltip, SwapRoute } from './SwapRoute'
 import TradePrice from './TradePrice'
+import SwapDetailTradePrice from "./SwapDetailTradePrice"
 
 export enum SwapLineItemType {
   EXCHANGE_RATE,
@@ -136,11 +138,14 @@ function useLineItem(props: SwapLineItemProps): LineItemData | undefined {
     if (trade.fillType !== TradeFillType.None) setLastSubmittableFillType(trade.fillType)
   }, [trade.fillType])
 
+
+
   switch (type) {
     case SwapLineItemType.EXCHANGE_RATE:
       return {
         Label: () => (isLimitTrade(trade) ? <Trans>Limit price</Trans> : <Trans>Rate</Trans>),
-        Value: () => <TradePrice price={trade.executionPrice} />,
+        Value: () => isLimitTrade(trade) ? <TradePrice price={trade.executionPrice} /> : <SwapDetailTradePrice formattedAmounts={props.formattedAmounts}
+          currencies={props.currencies} />,
         TooltipBody: !isPreview ? () => <RoutingTooltip trade={trade} /> : undefined,
         tooltipSize: isUniswapX ? TooltipSize.Small : TooltipSize.Large,
       }
@@ -253,6 +258,8 @@ export interface SwapLineItemProps {
   allowedSlippage?: Percent
   type: SwapLineItemType
   animatedOpacity?: SpringValue<number>
+  formattedAmounts?: any | undefined
+  currencies?: any | undefined
 }
 
 function SwapLineItem(props: SwapLineItemProps) {

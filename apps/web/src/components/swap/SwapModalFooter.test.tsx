@@ -31,6 +31,11 @@ describe('SwapModalFooter.tsx', () => {
         }}
         showAcceptChanges={false}
         onAcceptChanges={jest.fn()}
+        formattedAmounts={{
+          "INPUT": "",
+          "OUTPUT": ""
+        }}
+        currencies={{}}
       />
     )
     expect(asFragment()).toMatchSnapshot()
@@ -62,8 +67,15 @@ describe('SwapModalFooter.tsx', () => {
           data: undefined,
           isLoading: false,
         }}
+
         showAcceptChanges={true}
         onAcceptChanges={mockAcceptChanges}
+        formattedAmounts={{
+          "INPUT": "",
+          "OUTPUT": ""
+        }}
+        currencies={{}}
+
       />
     )
     const showAcceptChanges = screen.getByTestId('show-accept-changes')
@@ -92,6 +104,11 @@ describe('SwapModalFooter.tsx', () => {
         }}
         showAcceptChanges={false}
         onAcceptChanges={jest.fn()}
+        formattedAmounts={{
+          "INPUT": "",
+          "OUTPUT": ""
+        }}
+        currencies={{}}
       />
     )
     expect(asFragment()).toMatchSnapshot()
@@ -118,6 +135,11 @@ describe('SwapModalFooter.tsx', () => {
         }}
         showAcceptChanges={false}
         onAcceptChanges={jest.fn()}
+        formattedAmounts={{
+          "INPUT": "",
+          "OUTPUT": ""
+        }}
+        currencies={{}}
       />
     )
     expect(screen.getByText('Limit price')).toBeInTheDocument()

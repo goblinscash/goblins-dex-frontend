@@ -331,6 +331,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
   )
 
   const handleContinueToReview = useCallback(() => {
+
     setSwapFormState({
       tradeToConfirm: trade,
       swapError: undefined,
@@ -478,7 +479,6 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
 
 
 
-
   return (
     <>
       <TokenSafetyModal
@@ -505,6 +505,8 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
           onDismiss={handleConfirmDismiss}
           fiatValueInput={fiatValueTradeInput}
           fiatValueOutput={fiatValueTradeOutput}
+          formattedAmounts={formattedAmounts}
+          currencies={currencies}
         />
       )}
       {trade && showConfirm && !isNewSwapFlowEnabled && (

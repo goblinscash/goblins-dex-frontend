@@ -30,7 +30,7 @@ const StyledPriceContainer = styled.button`
 `
 
 export default function TradePrice({ currencies, formattedAmounts }: TradePriceProps) {
-  const { formatNumber, formatPrice } = useFormatter()
+  const { formatPrice } = useFormatter()
 
   const [showInverted, setShowInverted] = useState<boolean>(false)
 
@@ -71,7 +71,6 @@ try {
   const text = `${'1 ' + labelInverted + ' = ' + formattedPrice ?? '-'} ${label}`
 
 
-// console.log(price,isExecutionPrice, "<====isExecutionPrice")
   return (
     <StyledPriceContainer
       onClick={(e) => {
@@ -81,18 +80,7 @@ try {
       title={text}
     >
       <ThemedText.BodySmall>{text}</ThemedText.BodySmall>
-      {/* {usdPrice && (
-        <ThemedText.BodySmall color="neutral2">
-          <Trans>
-            (
-            {formatNumber({
-              input: usdPrice,
-              type: NumberType.FiatTokenPrice,
-            })}
-            )
-          </Trans>
-        </ThemedText.BodySmall>
-      )} */}
+
     </StyledPriceContainer>
   )
 }

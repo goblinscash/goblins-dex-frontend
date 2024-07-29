@@ -28,6 +28,9 @@ export default function SwapModalHeader({
   const fiatValueOutput = useUSDPrice(trade.outputAmount)
   const isNewSwapFlowEnabled = useNewSwapFlow()
 
+
+
+
   return (
     <HeaderContainer gap="sm" isNewSwapFlowEnabled={isNewSwapFlowEnabled}>
       <Column gap="lg">

@@ -60,6 +60,8 @@ export default function ConfirmSwapModalV2({
   onConfirm,
   onCurrencySelection,
   onDismiss,
+  formattedAmounts,
+  currencies
 }: {
   trade: InterfaceTrade
   originalTrade?: InterfaceTrade
@@ -70,6 +72,8 @@ export default function ConfirmSwapModalV2({
   fiatValueOutput: { data?: number; isLoading: boolean }
   swapResult?: SwapResult
   swapError?: Error
+  formattedAmounts:any
+  currencies:any
   clearSwapState: () => void
   onAcceptChanges: () => void
   onConfirm: () => void
@@ -187,6 +191,7 @@ export default function ConfirmSwapModalV2({
           <SwapPreview inputCurrency={inputCurrency} trade={trade} allowedSlippage={allowedSlippage} />
         </Container>
       )}
+      
       {/* Details section displays rate, fees, network cost, etc. w/ additional details in drop-down menu .*/}
       {showDetails && (
         <Container>
@@ -210,6 +215,8 @@ export default function ConfirmSwapModalV2({
                 showAcceptChanges={Boolean(showAcceptChanges)}
                 onAcceptChanges={onAcceptChanges}
                 swapErrorMessage={swapFailed ? swapError?.message : undefined}
+                formattedAmounts={formattedAmounts}
+                currencies={currencies}
               />
             </AutoColumn>
           </FadePresence>
