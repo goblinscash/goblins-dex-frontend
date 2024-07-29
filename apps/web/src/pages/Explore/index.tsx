@@ -148,6 +148,7 @@ const Pages: Array<Page> = [
     title: <Trans>Tokens</Trans>,
     key: ExploreTab.Tokens,
     component: TopTokensTable,
+    
     loggingElementName: InterfaceElementName.EXPLORE_TOKENS_TAB,
   },
   {

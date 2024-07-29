@@ -19,6 +19,7 @@ const themeContractValues = {
     scrim: '',
 
     white: '',
+   
 
     // OLD NAMES
     deprecated_accentFailureSoft: '',
@@ -227,6 +228,8 @@ export const vars = createGlobalTheme(':root', {
     success: '#40B66B',
     critical: '#FF5F52',
   },
+
+  
   border: {
     transculent: '1.5px solid rgba(0, 0, 0, 0.1)',
     none: 'none',

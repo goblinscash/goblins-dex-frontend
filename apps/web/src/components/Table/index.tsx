@@ -96,6 +96,10 @@ export function Table<Data extends RowData>({
     getCoreRowModel: getCoreRowModel(),
   })
 
+
+
+
+
   return (
     <div>
       <ScrollSync>

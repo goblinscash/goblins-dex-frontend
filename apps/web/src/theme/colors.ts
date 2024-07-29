@@ -83,7 +83,7 @@ export const colors = {
   blueVibrant: '#587BFF',
   // TODO: add magenta 50-900
   magenta300: '#FD82FF',
-  magentaVibrant: '#FC72FF',
+  magentaVibrant: '#00ff38',
   purple300: '#8440F2',
   purple900: '#1C0337',
   purpleVibrant: '#6100FF',
@@ -99,14 +99,17 @@ export const colors = {
   networkBase: '#0052FF',
   //NEW COLORS FOR SPORE - need to define light/dark here cause they are root colors now (different system)
   neutral1_dark: '#FFFFFF',
+  navbar_dark: '#FFFFFF',
+  navbar_light: 'red',
   neutral2_dark: '#9B9B9B',
+
   neutral3_dark: '#5E5E5E',
   surface1_dark: '#131313',
   surface2_dark: '#1B1B1B',
   surface3_dark: '#FFFFFF12',
   surface4_dark: '#FFFFFF20',
   surface5_dark: '#00000004',
-  accent1_dark: '#FC72FF',
+  accent1_dark: '#00ff38',
   accent2_dark: '#311C31',
   accent3_dark: '#4C82FB',
   neutral1_light: '#222222',
@@ -117,7 +120,7 @@ export const colors = {
   surface3_light: '#22222212',
   surface4_light: '#FFFFFF64',
   surface5_light: '#00000004',
-  accent1_light: '#FC72FF',
+  accent1_light: '#00ff38',
   accent2_light: '#FFEFFF',
   accent3_light: '#4C82FB',
   success: '#40B66B',
@@ -176,6 +179,7 @@ export const darkTheme = {
   accent3: colors.accent3_dark,
   success: colors.success,
   critical: colors.critical,
+
   scrim: colors.scrim,
 }
 
@@ -201,4 +205,6 @@ export const lightTheme: ThemeColors = {
   success: colors.success,
   critical: colors.critical,
   scrim: colors.scrim,
+
+
 }

@@ -860,13 +860,15 @@ export function useFormatter() {
 
   type LocalesType = 'locale' | 'localCurrency' | 'conversionRate'
   const formatNumberWithLocales = useCallback(
-    (options: Omit<FormatNumberOptions, LocalesType>) =>
-      formatNumber({
+    (options: Omit<FormatNumberOptions, LocalesType>) => {
+
+      return formatNumber({
         ...options,
         locale: formatterLocale,
         localCurrency: currencyToFormatWith,
         conversionRate: localCurrencyConversionRateToFormatWith,
-      }),
+      })
+    },
     [currencyToFormatWith, formatterLocale, localCurrencyConversionRateToFormatWith]
   )
 

@@ -90,22 +90,22 @@ export default function SettingsMenu({
             <Trans>Preferences</Trans>
           </SectionTitle>
           <ToggleWrapper currencyConversionEnabled={currencyConversionEnabled}>
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             <SmallBalanceToggle />
             <SpamToggle />
             <AnalyticsToggle />
-            <TestnetsToggle />
+            {/* <TestnetsToggle /> */}
           </ToggleWrapper>
-          {!currencyConversionEnabled && (
+          {/* {!currencyConversionEnabled && (
             <>
               <SectionTitle data-testid="wallet-header">
                 <Trans>Language</Trans>
               </SectionTitle>
               <LanguageMenuItems />
             </>
-          )}
+          )} */}
 
-          {currencyConversionEnabled && (
+          {/* {currencyConversionEnabled && (
             <Column>
               <SettingsButton
                 title={<Trans>Language</Trans>}
@@ -120,7 +120,7 @@ export default function SettingsMenu({
                 testId="local-currency-settings-button"
               />
             </Column>
-          )}
+          )} */}
         </div>
         <GitVersionRow />
       </Container>

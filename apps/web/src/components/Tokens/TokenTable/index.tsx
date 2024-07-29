@@ -37,6 +37,11 @@ const SparklineContainer = styled.div`
   height: 40px;
 `
 
+interface TokenDayData {
+  priceUSD: number;
+  open: number;
+  high: number;
+}
 interface TokenTableValues {
   index: number
   decimals: number
@@ -46,6 +51,9 @@ interface TokenTableValues {
   symbol: string
   totalSupply: any | undefined
   tokenDescription: ReactElement
+  volumeUSD: number
+  totalValueLockedUSD: number
+  tokenDayData: TokenDayData
 }
 
 function TokenDescription({ token }: { token: TokenList }) {
@@ -113,6 +121,7 @@ function TokenTable({
     () =>
       tokens?.map((token) => {
 
+
         return {
           index: tokenSortRank['NATIVE'],
           tokenDescription: <TokenDescription token={token} />,
@@ -129,8 +138,8 @@ function TokenTable({
           //     <DeltaText delta={delta1d}>{formatDelta(delta1d)}</DeltaText>
           //   </>
           // ),
-          // fdv: token?.project?.markets?.[0]?.fullyDilutedValuation?.value ?? 0,
-          // volume: token.market?.volume?.value ?? 0,
+          tvl: token?.totalValueLockedUSD ?? 0,
+          volume: token.volumeUSD ?? 0,
           // sparkline: (
           //   <SparklineContainer>
           //     <ParentSize>
@@ -148,12 +157,12 @@ function TokenTable({
           //     </ParentSize>
           //   </SparklineContainer>
           // ),
-          // link: getTokenDetailsURL({
-          //   // address: token.address,
-          //   address: "token.address",
-          //   chain: chainIdToBackendName(chainId),
-          //   isInfoExplorePageEnabled: true,
-          // }),
+          link: getTokenDetailsURL({
+            // address: token.address,
+            address: token.id,
+            chain: chainIdToBackendName(chainId),
+            isInfoExplorePageEnabled: true,
+          }),
         }
       }) ?? [],
     [chainId, formatDelta, tokenSortRank, tokens]
@@ -240,40 +249,41 @@ function TokenTable({
       //     </Cell>
       //   ),
       // }),
-      // columnHelper.accessor((row) => row.fdv, {
-      //   id: 'fdv',
-      //   header: () => (
-      //     <Cell minWidth={133} grow>
-      //       <ThemedText.BodySecondary>
-      //         <Trans>FDV</Trans>
-      //       </ThemedText.BodySecondary>
-      //     </Cell>
-      //   ),
-      //   cell: (fdv) => (
-      //     <Cell loading={loading} minWidth={133} grow>
-      //       <ThemedText.BodySecondary>
-      //         {formatNumber({ input: fdv.getValue?.(), type: NumberType.FiatTokenStats })}
-      //       </ThemedText.BodySecondary>
-      //     </Cell>
-      //   ),
-      // }),
-      // columnHelper.accessor((row) => row.volume, {
-      //   id: 'volume',
-      //   header: () => (
-      //     <Cell minWidth={133} grow>
-      //       <ThemedText.BodySecondary>
-      //         <Trans>Volume</Trans>
-      //       </ThemedText.BodySecondary>
-      //     </Cell>
-      //   ),
-      //   cell: (volume) => (
-      //     <Cell minWidth={133} loading={loading} grow>
-      //       <ThemedText.BodySecondary>
-      //         {formatNumber({ input: volume.getValue?.(), type: NumberType.FiatTokenStats })}
-      //       </ThemedText.BodySecondary>
-      //     </Cell>
-      //   ),
-      // }),
+      columnHelper.accessor((row) => row.totalValueLockedUSD, {
+        id: 'tvl',
+        header: () => (
+          <Cell minWidth={133} grow>
+            <ThemedText.BodySecondary>
+              <Trans>TVL</Trans>
+            </ThemedText.BodySecondary>
+          </Cell>
+        ),
+        cell: (tvl) => (
+          <Cell loading={loading} minWidth={133} grow>
+            <ThemedText.BodySecondary>
+              {formatNumber({ input: tvl.getValue?.(), type: NumberType.WholeNumber })}
+            </ThemedText.BodySecondary>
+          </Cell>
+        ),
+      }),
+      columnHelper.accessor((row) => row.volumeUSD, {
+        id: 'volume',
+        header: () => (
+          <Cell minWidth={133} grow>
+            <ThemedText.BodySecondary>
+              <Trans>Volume</Trans>
+            </ThemedText.BodySecondary>
+          </Cell>
+        ),
+        cell: (volume) => (
+          <Cell minWidth={133} loading={loading} grow>
+            <ThemedText.BodySecondary>
+              {/* {volume.getValue?.()} */}
+              {formatNumber({ input: volume.getValue?.(), type: NumberType.WholeNumber })}
+            </ThemedText.BodySecondary>
+          </Cell>
+        ),
+      }),
       // columnHelper.accessor((row) => row.sparkline, {
       //   id: 'sparkline',
       //   header: () => <Cell minWidth={172} />,

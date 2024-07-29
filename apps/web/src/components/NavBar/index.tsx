@@ -41,6 +41,7 @@ interface MenuItemProps {
   isActive?: boolean
   children: ReactNode
   dataTestId?: string
+  
 }
 
 const MenuItem = ({ href, dataTestId, id, isActive, children }: MenuItemProps) => {
@@ -132,7 +133,7 @@ const Navbar = ({ blur }: { blur: boolean }) => {
     <>
       {blur && <Blur />}
       <Nav>
-        <Box display="flex" height="full" flexWrap="nowrap">
+        <Box display="flex" height="full" flexWrap="nowrap" >
           <Box className={styles.leftSideContainer}>
             <Box className={styles.logoContainer}>
               <UniIcon
