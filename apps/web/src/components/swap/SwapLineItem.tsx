@@ -110,6 +110,14 @@ function CurrencyAmountRow({ amount }: { amount: CurrencyAmount<Currency> }) {
   return <>{`${formattedAmount} ${amount.currency.symbol}`}</>
 }
 
+function FeeAmountRow({ amount, fee }: { amount: any | undefined, fee?: any | undefined }) {
+
+  const formattedAmount = (fee * amount.toSignificant()) / 100
+
+  // const formattedAmount = "";
+  return <>{`${formattedAmount} ${amount.currency.symbol}`}</>
+}
+
 function FeeRow({ trade: { swapFee, outputAmount } }: { trade: SubmittableTrade }) {
   const { formatNumber } = useFormatter()
 
@@ -117,7 +125,7 @@ function FeeRow({ trade: { swapFee, outputAmount } }: { trade: SubmittableTrade 
   const { data: outputFeeFiatValue } = useUSDPrice(feeCurrencyAmount, feeCurrencyAmount?.currency)
 
   // Fallback to displaying token amount if fiat value is not available
-  if (outputFeeFiatValue === undefined) return <CurrencyAmountRow amount={feeCurrencyAmount} />
+  if (outputFeeFiatValue === undefined) return <FeeAmountRow amount={outputAmount} fee={swapFee?.percent.toSignificant()} />
 
   return <>{formatNumber({ input: outputFeeFiatValue, type: NumberType.FiatGasPrice })}</>
 }
