@@ -120,8 +120,6 @@ function TokenTable({
 
         const greatestDateObject = token.tokenDayData.length ? token.tokenDayData.reduce((max: any, obj: any) => obj.date > max.date ? obj : max, token.tokenDayData[0]) : null;
 
-
-        console.log(greatestDateObject, "<=====greatestDateObject")
         const tokenSortIndex = tokenSortRank[token?.id ?? NATIVE_CHAIN_ID]
 
         return {
@@ -282,7 +280,7 @@ function TokenTable({
           <Cell minWidth={133} loading={loading} grow>
             <ThemedText.BodySecondary>
               {/* {volumeUSD.getValue?.()} */}
-              ${formatNumber({ input: volumeUSD.getValue?.(), type: NumberType.FiatTokenStats })}
+              {formatNumber({ input: volumeUSD.getValue?.(), type: NumberType.FiatTokenStats })}
             </ThemedText.BodySecondary>
           </Cell>
         ),
