@@ -1,9 +1,7 @@
 import { Trans } from '@lingui/macro'
 import { createColumnHelper } from '@tanstack/react-table'
 import { ChainId } from '@uniswap/sdk-core'
-import { ParentSize } from '@visx/responsive'
-import SparklineChart from 'components/Charts/SparklineChart'
-// import QueryTokenLogo from 'components/Logo/QueryTokenLogo'
+import { NATIVE_CHAIN_ID } from 'constants/tokens'
 import Row from 'components/Row'
 import { Table } from 'components/Table'
 import { Cell } from 'components/Table/Cell'
@@ -22,6 +20,7 @@ import { EllipsisStyle, ThemedText } from 'theme/components'
 import { NumberType, useFormatter } from 'utils/formatNumbers'
 
 import { DeltaArrow, DeltaText } from '../TokenDetails/Delta'
+import QueryTokenLogo from 'components/Logo/QueryTokenLogo'
 
 const TableWrapper = styled.div`
   margin: 0 auto;
@@ -47,6 +46,7 @@ interface TokenTableValues {
   decimals: number
   id: string
   name: string
+  price: any
   poolCount: number
   symbol: string
   totalSupply: any | undefined
@@ -114,18 +114,21 @@ function TokenTable({
   chainId: ChainId
 }) {
   const { formatFiatPrice, formatNumber, formatDelta } = useFormatter()
-
-
-  // console.log(tokens, "<===tokens")
   const tokenTableValues: any[] | undefined = useMemo(
     () =>
       tokens?.map((token) => {
 
+        const greatestDateObject = token.tokenDayData.length ? token.tokenDayData.reduce((max: any, obj: any) => obj.date > max.date ? obj : max, token.tokenDayData[0]) : null;
+
+
+        console.log(greatestDateObject, "<=====greatestDateObject")
+        const tokenSortIndex = tokenSortRank[token?.id ?? NATIVE_CHAIN_ID]
 
         return {
-          index: tokenSortRank['NATIVE'],
+          index: tokenSortIndex,
           tokenDescription: <TokenDescription token={token} />,
           totalSupply: token.totalSupply,
+          price: greatestDateObject ? greatestDateObject.priceUSD : 0,
           // percentChange1hr: (
           //   <>
           //     <DeltaArrow delta={delta1hr} />
@@ -138,8 +141,8 @@ function TokenTable({
           //     <DeltaText delta={delta1d}>{formatDelta(delta1d)}</DeltaText>
           //   </>
           // ),
-          tvl: token?.totalValueLockedUSD ?? 0,
-          volume: token.volumeUSD ?? 0,
+          totalValueLockedUSD: token?.totalValueLockedUSD ?? 0,
+          volumeUSD: token.volumeUSD ?? 0,
           // sparkline: (
           //   <SparklineContainer>
           //     <ParentSize>
@@ -199,22 +202,22 @@ function TokenTable({
           </Cell>
         ),
       }),
-      columnHelper.accessor((row) => row.totalSupply, {
-        id: 'totalSupply',
+      columnHelper.accessor((row) => row.price, {
+        id: 'price',
         header: () => (
           <Cell minWidth={133} grow>
             <ThemedText.BodySecondary>
-              <Trans>Total Supply</Trans>
+              <Trans>Price</Trans>
             </ThemedText.BodySecondary>
           </Cell>
         ),
-        cell: (totalSupply) => (
+        cell: (price) => (
           <Cell loading={loading} minWidth={133} grow>
             <ThemedText.BodySecondary>
-              {/* A simple 0 totalSupply indicates the totalSupply is not currently available from the api */}
-              {totalSupply.getValue?.() === 0
+              {/* A simple 0 price indicates the price is not currently available from the api */}
+              {price.getValue?.() === 0
                 ? '-'
-                : formatNumber({ input: totalSupply.getValue?.(), type: NumberType.WholeNumber })}
+                : formatNumber({ input: price.getValue?.(), type: NumberType.FiatTokenStats })}
             </ThemedText.BodySecondary>
           </Cell>
         ),
@@ -250,7 +253,7 @@ function TokenTable({
       //   ),
       // }),
       columnHelper.accessor((row) => row.totalValueLockedUSD, {
-        id: 'tvl',
+        id: 'totalValueLockedUSD',
         header: () => (
           <Cell minWidth={133} grow>
             <ThemedText.BodySecondary>
@@ -258,16 +261,16 @@ function TokenTable({
             </ThemedText.BodySecondary>
           </Cell>
         ),
-        cell: (tvl) => (
+        cell: (totalValueLockedUSD) => (
           <Cell loading={loading} minWidth={133} grow>
             <ThemedText.BodySecondary>
-              {formatNumber({ input: tvl.getValue?.(), type: NumberType.WholeNumber })}
+              {formatNumber({ input: totalValueLockedUSD.getValue?.(), type: NumberType.FiatTokenStats })}
             </ThemedText.BodySecondary>
           </Cell>
         ),
       }),
       columnHelper.accessor((row) => row.volumeUSD, {
-        id: 'volume',
+        id: 'volumeUSD',
         header: () => (
           <Cell minWidth={133} grow>
             <ThemedText.BodySecondary>
@@ -275,11 +278,11 @@ function TokenTable({
             </ThemedText.BodySecondary>
           </Cell>
         ),
-        cell: (volume) => (
+        cell: (volumeUSD) => (
           <Cell minWidth={133} loading={loading} grow>
             <ThemedText.BodySecondary>
-              {/* {volume.getValue?.()} */}
-              {formatNumber({ input: volume.getValue?.(), type: NumberType.WholeNumber })}
+              {/* {volumeUSD.getValue?.()} */}
+              ${formatNumber({ input: volumeUSD.getValue?.(), type: NumberType.FiatTokenStats })}
             </ThemedText.BodySecondary>
           </Cell>
         ),

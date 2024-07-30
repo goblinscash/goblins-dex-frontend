@@ -229,15 +229,15 @@ export function useTopTokens(chain: Chain): UseTopTokensReturnValue {
 
 
   const sortedTokens = useSortedTokens(unwrappedTokens)
-  // console.log(sortedTokens, "<=====sortedTokens")
+ 
 
   const tokenSortRank = useMemo(
     () =>
       sortedTokens?.reduce((acc, cur, i) => {
-        if (!isTokenWithAddress(cur)) return acc;
+        // if (!isTokenWithAddress(cur)) return acc;
         return {
           ...acc,
-          [cur.address]: i + 1,
+          [cur.id]: i + 1,
         };
       }, {} as { [key: string]: number }) ?? {},
     [sortedTokens]

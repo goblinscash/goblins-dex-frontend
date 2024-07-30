@@ -12,6 +12,8 @@ import styled from 'styled-components'
 import { getNativeTokenDBAddress } from 'utils/nativeTokens'
 
 import { getTokenPageTitle } from './utils'
+import { chainToApolloClient } from 'graphql/thegraph/apollo'
+import { ChainId } from '@uniswap/sdk-core'
 
 const StyledPrefetchBalancesWrapper = styled(PrefetchBalancesWrapper)`
   display: contents;
@@ -24,6 +26,13 @@ export default function TokenDetailsPage() {
   }>()
   const chain = validateUrlChainParam(chainName)
   const isNative = tokenAddress === NATIVE_CHAIN_ID
+
+
+  console.log(chain, "<===chain")
+
+  const apolloClient = chainToApolloClient[ChainId.SMARTBCH]
+
+   
   const [timePeriod, setTimePeriod] = useState<TimePeriod>(TimePeriod.DAY)
   const [detailedTokenAddress, duration] = useMemo(
     // tokenAddress will always be defined in the path for for this page to render, but useParams will always
@@ -36,12 +45,13 @@ export default function TokenDetailsPage() {
 
   const parsedInputTokenAddress: string | undefined = useMemo(() => {
     return typeof parsedQs.inputCurrency === 'string' ? (parsedQs.inputCurrency as string) : undefined
-  }, [parsedQs])
+  }, [parsedQs]);
 
   const { data: tokenQuery } = useTokenQuery({
+    client: apolloClient,
     variables: {
       address: detailedTokenAddress,
-      chain,
+   
     },
     errorPolicy: 'all',
   })
@@ -60,6 +70,7 @@ export default function TokenDetailsPage() {
   useEffect(() => {
     if (tokenPriceQuery) setCurrentPriceQuery(tokenPriceQuery)
   }, [setCurrentPriceQuery, tokenPriceQuery])
+
 
   if (!tokenQuery) return <TokenDetailsPageSkeleton />
 

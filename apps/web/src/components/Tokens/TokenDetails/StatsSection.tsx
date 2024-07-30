@@ -87,9 +87,11 @@ function Stat({
 type StatsSectionProps = {
   chainId: ChainId
   address: string
-  tokenQueryData: TokenQueryData
+  tokenQueryData: any
 }
 export default function StatsSection(props: StatsSectionProps) {
+
+  console.log(props, "<====props")
   const { chainId, address, tokenQueryData } = props
   const { label, infoLink } = getChainInfo(chainId)
   const isInfoTDPEnabled = useInfoTDPEnabled()
@@ -99,8 +101,8 @@ export default function StatsSection(props: StatsSectionProps) {
 
   const FDV = tokenProjectMarketInfo?.fullyDilutedValuation?.value
   const marketCap = tokenProjectMarketInfo?.marketCap?.value
-  const TVL = tokenMarketInfo?.totalValueLocked?.value
-  const volume24H = tokenMarketInfo?.volume24H?.value
+  const TVL = tokenQueryData?.totalValueLockedUSD
+  const volume24H = tokenQueryData?.volumeUSD
   const priceHigh52W = tokenMarketInfo?.priceHigh52W?.value
   const priceLow52W = tokenMarketInfo?.priceLow52W?.value
 
@@ -124,7 +126,7 @@ export default function StatsSection(props: StatsSectionProps) {
                   description={HEADER_DESCRIPTIONS[TokenSortMethod.TOTAL_VALUE_LOCKED]}
                   title={<Trans>TVL</Trans>}
                 />
-                <Stat
+                {/* <Stat
                   dataCy="market-cap"
                   value={marketCap}
                   description={
@@ -133,25 +135,25 @@ export default function StatsSection(props: StatsSectionProps) {
                     </Trans>
                   }
                   title={<Trans>Market cap</Trans>}
-                />
+                /> */}
               </StatPair>
               <StatPair>
-                <Stat
+                {/* <Stat
                   dataCy="fdv"
                   value={FDV}
                   description={HEADER_DESCRIPTIONS[TokenSortMethod.FULLY_DILUTED_VALUATION]}
                   title={<Trans>FDV</Trans>}
-                />
+                /> */}
                 <Stat
                   dataCy="volume-24h"
                   value={volume24H}
                   description={
                     <Trans>
-                      1 day volume is the amount of the asset that has been traded on Uniswap v3 during the past 24
+                      volume is the amount of the asset that has been traded on Uniswap v3 during the past 24
                       hours.
                     </Trans>
                   }
-                  title={<Trans>1 day volume</Trans>}
+                  title={<Trans>volume</Trans>}
                 />
               </StatPair>
             </>

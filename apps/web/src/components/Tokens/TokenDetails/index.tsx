@@ -178,13 +178,18 @@ export default function TokenDetails({
   )
 
   const { account, chainId: connectedChainId } = useWeb3React()
+
+
   const pageChainId = supportedChainIdFromGQLChain(chain)
   const inputCurrency = useCurrency(inputTokenAddress, pageChainId)
   const outputCurrency = useCurrency(address === NATIVE_CHAIN_ID ? 'ETH' : address, pageChainId)
 
   const tokenQueryData = tokenQuery.token
   const { data: balanceQuery } = useCachedPortfolioBalancesQuery({ account })
+
   const multiChainMap = useMemo(() => {
+
+    if (!balanceQuery) return null
     const tokenBalances = balanceQuery?.portfolios?.[0].tokenBalances
     const tokensAcrossChains = tokenQueryData?.project?.tokens
     if (!tokensAcrossChains) return {}
@@ -214,27 +219,27 @@ export default function TokenDetails({
 
   // Wrapping navigate in a transition prevents Suspense from unnecessarily showing fallbacks again.
   const [isPending, startTokenTransition] = useTransition()
-  const navigateToTokenForChain = useCallback(
-    (update: Chain) => {
-      if (!address) return
-      const bridgedAddress = multiChainMap[update]?.address
-      if (bridgedAddress) {
-        startTokenTransition(() =>
-          navigate(
-            getTokenDetailsURL({
-              address: bridgedAddress,
-              chain: update,
-              isInfoExplorePageEnabled,
-            })
-          )
-        )
-      } else if (didFetchFromChain || detailedToken?.isNative) {
-        startTokenTransition(() => navigate(getTokenDetailsURL({ address, chain: update, isInfoExplorePageEnabled })))
-      }
-    },
-    [address, multiChainMap, didFetchFromChain, detailedToken?.isNative, navigate, isInfoExplorePageEnabled]
-  )
-  useOnGlobalChainSwitch(navigateToTokenForChain)
+  // const navigateToTokenForChain = useCallback(
+  //   (update: Chain) => {
+  //     if (!address) return
+  //     const bridgedAddress = multiChainMap[update]?.address
+  //     if (bridgedAddress) {
+  //       startTokenTransition(() =>
+  //         navigate(
+  //           getTokenDetailsURL({
+  //             address: bridgedAddress,
+  //             chain: update,
+  //             isInfoExplorePageEnabled,
+  //           })
+  //         )
+  //       )
+  //     } else if (didFetchFromChain || detailedToken?.isNative) {
+  //       startTokenTransition(() => navigate(getTokenDetailsURL({ address, chain: update, isInfoExplorePageEnabled })))
+  //     }
+  //   },
+  //   [address, multiChainMap, didFetchFromChain, detailedToken?.isNative, navigate, isInfoExplorePageEnabled]
+  // )
+  // useOnGlobalChainSwitch(navigateToTokenForChain)
 
   const handleCurrencyChange = useCallback(
     (tokens: CurrencyState) => {
@@ -334,7 +339,7 @@ export default function TokenDetails({
                   </TokenTitle>
                 )}
               </TokenNameCell>
-              <ChartActions>
+              {/* <ChartActions>
                 {isInfoTDPEnabled ? (
                   <>
                     {chartType === ChartType.PRICE && (
@@ -356,16 +361,16 @@ export default function TokenDetails({
                 ) : (
                   <ShareButton name={twitterShareName} />
                 )}
-              </ChartActions>
+              </ChartActions> */}
             </TokenInfoContainer>
-            <ChartSection
+            {/* <ChartSection
               chartType={chartType}
               priceChartType={priceChartType}
               timePeriod={timePeriod}
               onChangeTimePeriod={onChangeTimePeriod}
               tokenPriceQuery={tokenPriceQuery}
               extractedColor={extractedColor}
-            />
+            /> */}
 
             <StatsSection chainId={pageChainId} address={address} tokenQueryData={tokenQueryData} />
             {!isInfoTDPEnabled && (
@@ -403,7 +408,7 @@ export default function TokenDetails({
             />
           </div>
           {tokenWarning && <TokenSafetyMessage tokenAddress={address} warning={tokenWarning} />}
-          {detailedToken && <BalanceSummary currency={detailedToken} chain={chain} multiChainMap={multiChainMap} />}
+          {/* {detailedToken && <BalanceSummary currency={detailedToken} chain={chain} multiChainMap={multiChainMap} />} */}
           {isInfoTDPEnabled && (
             <TokenDescription
               tokenAddress={address}
@@ -413,9 +418,9 @@ export default function TokenDetails({
             />
           )}
         </RightPanel>
-        {detailedToken && (
+        {/* {detailedToken && (
           <MobileBalanceSummaryFooter currency={detailedToken} pageChainBalance={multiChainMap[chain].balance} />
-        )}
+        )} */}
 
         <TokenSafetyModal
           isOpen={openTokenSafetyModal || !!continueSwap}
