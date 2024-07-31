@@ -119,7 +119,7 @@ export default function FiatOnrampModal() {
       // const { url } = await res.json()
 
       // console.log(url, "<===url")
-      setSignedIframeUrl("https://buy.onramper.com/?enableCountrySelector=true&apiKey=pk_prod_01GQS0CRGNRXXGV3A0S3A0AEWY&supportRecurringPayments=true&mode=buy")
+      setSignedIframeUrl("https://buy.onramper.com/?enableCountrySelector=true&apiKey=pk_prod_01HETEQF46GSK6BS5JWKDF31BT&supportRecurringPayments=true&mode=buy")
     } catch (e) {
       console.log('there was an error fetching the link', e)
       setError(e.toString())

@@ -5,7 +5,14 @@ const app = express();
 
 app.use(logger("dev"));
 
-const NODE_ENV = process.env.NODE_ENV;
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      frameAncestors: ["'self'", 'https://*.onramper.com', 'https://onramper.com', 'https://www.onramper.com', 'https://localhost', 'http://localhost',"https://goblins.cash/", "https://dex.goblins.cash/"]
+    }
+  })
+);
 
 app.use(express.static(path.join(__dirname, "build")));
 
