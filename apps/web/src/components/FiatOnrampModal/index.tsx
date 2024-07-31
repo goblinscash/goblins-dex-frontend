@@ -94,31 +94,31 @@ export default function FiatOnrampModal() {
 
 
       console.log(signedIframeUrlFetchEndpoint, "<====signedIframeUrlFetchEndpoint")
-      const res = await fetch(signedIframeUrlFetchEndpoint, {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify({
-          theme: isDarkMode ? 'dark' : 'light',
-          colorCode: theme.accent1,
-          defaultCurrencyCode: getDefaultCurrencyCode(tokenAddress, network),
-          redirectUrl: swapUrl,
-          walletAddresses: JSON.stringify(
-            MOONPAY_SUPPORTED_CURRENCY_CODES.reduce(
-              (acc, currencyCode) => ({
-                ...acc,
-                [currencyCode]: account,
-              }),
-              {}
-            )
-          ),
-        }),
-      })
-      const { url } = await res.json()
+      // const res = await fetch(signedIframeUrlFetchEndpoint, {
+      //   headers: {
+      //     Accept: 'application/json',
+      //     'Content-Type': 'application/json',
+      //   },
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //     theme: isDarkMode ? 'dark' : 'light',
+      //     colorCode: theme.accent1,
+      //     defaultCurrencyCode: getDefaultCurrencyCode(tokenAddress, network),
+      //     redirectUrl: swapUrl,
+      //     walletAddresses: JSON.stringify(
+      //       MOONPAY_SUPPORTED_CURRENCY_CODES.reduce(
+      //         (acc, currencyCode) => ({
+      //           ...acc,
+      //           [currencyCode]: account,
+      //         }),
+      //         {}
+      //       )
+      //     ),
+      //   }),
+      // })
+      // const { url } = await res.json()
 
-      console.log(url, "<===url")
+      // console.log(url, "<===url")
       setSignedIframeUrl("https://buy.onramper.com/?enableCountrySelector=true&apiKey=pk_prod_01GQS0CRGNRXXGV3A0S3A0AEWY&supportRecurringPayments=true&mode=buy")
     } catch (e) {
       console.log('there was an error fetching the link', e)
@@ -151,7 +151,9 @@ export default function FiatOnrampModal() {
             <StyledSpinner src={Circle} alt="loading spinner" size="90px" />
           ) : (
 
-            <iframe src="https://buy.onramper.com/" width="600" height="400"></iframe>
+       
+
+            <iframe src="https://buy.onramper.com/?enableCountrySelector=true&apiKey=pk_prod_01GQS0CRGNRXXGV3A0S3A0AEWY&supportRecurringPayments=true&mode=buy,sell" loading="lazy" sandbox="allow-same-origin allow-scripts allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"></iframe>
             // <StyledIframe
             //   src={signedIframeUrl ?? ''}
             //   frameBorder="0"
