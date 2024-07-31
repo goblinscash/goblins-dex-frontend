@@ -18,7 +18,7 @@
     <% const cspConfig = require('./csp.json'); %>
     <meta
       http-equiv="Content-Security-Policy" 
-      content="default-src <%= cspConfig.defaultSrc %>; script-src <%= cspConfig.scriptSrc %>; style-src <%= cspConfig.styleSrc %>; img-src <%= cspConfig.imgSrc %>; frame-src <%= cspConfig.frameSrc %>; connect-src <%= cspConfig.connectSrc %>; worker-src <%= cspConfig.workerSrc %>;"
+      content="default-src <%= cspConfig.defaultSrc %>; script-src <%= cspConfig.scriptSrc %>; style-src <%= cspConfig.styleSrc %>; img-src <%= cspConfig.imgSrc %>; frame-src <%= cspConfig.frameSrc %>; connect-src <%= cspConfig.connectSrc %>; worker-src <%= cspConfig.workerSrc %>; frame-ancestors <%= cspConfig.frameAncestors %>;"
     >
     
     <!-- 

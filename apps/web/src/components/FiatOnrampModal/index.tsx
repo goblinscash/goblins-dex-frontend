@@ -90,7 +90,10 @@ export default function FiatOnrampModal() {
     setLoading(true)
     setError(null)
     try {
-      const signedIframeUrlFetchEndpoint = process.env.REACT_APP_MOONPAY_LINK as string
+      const signedIframeUrlFetchEndpoint = process.env.REACT_APP_MOONPAY_LINK as string;
+
+
+      console.log(signedIframeUrlFetchEndpoint, "<====signedIframeUrlFetchEndpoint")
       const res = await fetch(signedIframeUrlFetchEndpoint, {
         headers: {
           Accept: 'application/json',
@@ -114,7 +117,9 @@ export default function FiatOnrampModal() {
         }),
       })
       const { url } = await res.json()
-      setSignedIframeUrl(url)
+
+      console.log(url, "<===url")
+      setSignedIframeUrl("https://buy.onramper.com/?enableCountrySelector=true&apiKey=pk_prod_01GQS0CRGNRXXGV3A0S3A0AEWY&supportRecurringPayments=true&mode=buy")
     } catch (e) {
       console.log('there was an error fetching the link', e)
       setError(e.toString())
@@ -145,12 +150,14 @@ export default function FiatOnrampModal() {
           ) : loading ? (
             <StyledSpinner src={Circle} alt="loading spinner" size="90px" />
           ) : (
-            <StyledIframe
-              src={signedIframeUrl ?? ''}
-              frameBorder="0"
-              title="fiat-onramp-iframe"
-              isDarkMode={isDarkMode}
-            />
+
+            <iframe src="https://buy.onramper.com/" width="600" height="400"></iframe>
+            // <StyledIframe
+            //   src={signedIframeUrl ?? ''}
+            //   frameBorder="0"
+            //   title="fiat-onramp-iframe"
+            //   isDarkMode={isDarkMode}
+            // />
           )}
         </Wrapper>
         <MoonpayTextWrapper>
