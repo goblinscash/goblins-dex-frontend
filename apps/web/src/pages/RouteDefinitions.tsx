@@ -24,6 +24,7 @@ const AddLiquidityV2WithTokenRedirects = lazy(() => import('pages/AddLiquidityV2
 const RedirectExplore = lazy(() => import('pages/Explore/redirects'))
 const MigrateV2 = lazy(() => import('pages/MigrateV2'))
 const MigrateV2Pair = lazy(() => import('pages/MigrateV2/MigrateV2Pair'))
+const Staking = lazy(() => import('pages/staking'))
 const NotFound = lazy(() => import('pages/NotFound'))
 const Pool = lazy(() => import('pages/Pool'))
 const PositionPage = lazy(() => import('pages/Pool/PositionPage'))
@@ -252,6 +253,11 @@ export const routes: RouteDefinition[] = [
   createRouteDefinition({
     path: '/migrate/v2/:address',
     getElement: () => <MigrateV2Pair />,
+    getTitle: () => t`Migrate v2 Pool Liquidity to Goblins v3`,
+  }),
+  createRouteDefinition({
+    path: '/staking',
+    getElement: () => <Staking />,
     getTitle: () => t`Migrate v2 Pool Liquidity to Goblins v3`,
   }),
   createRouteDefinition({

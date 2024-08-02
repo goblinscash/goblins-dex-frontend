@@ -15,6 +15,7 @@
     "i18next": "21.9.1",
     "i18next-parser": "8.6.0",
     "patch-package": "^7.0.0",
+    "react-toastify": "10.0.5",
     "syncpack": "^8.5.14",
     "turbo": "1.10.16"
   },
