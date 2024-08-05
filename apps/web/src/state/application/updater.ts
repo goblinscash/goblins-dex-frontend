@@ -4,7 +4,6 @@ import useDebounce from 'hooks/useDebounce'
 import useIsWindowVisible from 'hooks/useIsWindowVisible'
 import { useEffect, useState } from 'react'
 import { useAppDispatch } from 'state/hooks'
-
 import { updateChainId } from './reducer'
 
 export default function Updater(): null {

@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Image from "next/image";
 
-//css
-import styles from "../staking.module.scss";
 
 // image
 import logo from "@/Assets/Images/logoIcn.png";
@@ -101,7 +99,7 @@ function Withdraw({ getDetails, details, isBlocked }) {
   return (
     <div className="lg:col-span-4 sm:col-span-6 col-span-12">
       <div
-        className={`${styles?.cardCstm} cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
+        className={` cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
       >
         <div className="top pb-3 text-center lg:mb-3 border-b-2 border-white w-full">
           <h4 className="m-0 text-3xl font-extrabold text-white">STAKED</h4>
@@ -124,7 +122,7 @@ function Withdraw({ getDetails, details, isBlocked }) {
           <div className="contentBody lg:px-4 w-full">
             <div className="claimInput mt-4 my-2 text-center">
               {/* <div
-                      className={`${styles?.InputWrp} InputWrp cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
+                      className={` InputWrp cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
                     >
                       100
                     </div> */}
@@ -138,7 +136,7 @@ function Withdraw({ getDetails, details, isBlocked }) {
                   value={toCommas(amount)}
                   onChange={handleChange}
                   placeholder="Enter Amount"
-                  className={`${styles?.InputWrp} InputWrp text-center bg-transparent text-white cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
+                  className={` InputWrp text-center bg-transparent text-white cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
                   required
                 />
               </div>

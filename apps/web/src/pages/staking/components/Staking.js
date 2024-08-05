@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import Image from "next/image";
+
 
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 // image
-import logo from "@/Assets/Images/logoIcn.png";
+import logo from "assets/farmingAssets/Images/logoIcn.png";
 
-//css
-import styles from "../staking.module.scss";
+
 
 //hooks
-import Web3Intraction from "@/Utils/web3Intraction";
-import useWallet from "@/hooks/wallet";
-import { toCommas } from "@/helpers/utils";
+import Web3Intraction from "utils/web3Intraction";
+import {useWallet} from "hooks/useWallet";
+import { toCommas } from "helpers/utils";
 
 function Staking({ getDetails, isBlocked, details }) {
-  const { currentNetwork } = useSelector((state) => state.Dashboard);
+  const { currentNetwork } = useSelector((state) => state.dashboard);
   const wallet = useWallet();
 
   const [amount, setAmount] = useState("");
@@ -75,14 +74,14 @@ function Staking({ getDetails, isBlocked, details }) {
   return (
     <div className="lg:col-span-4 sm:col-span-6 col-span-12">
       <div
-        className={`${styles?.cardCstm} cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
+        className={` cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
       >
         <div className="top pb-3 text-center lg:mb-3 border-b-2 border-white w-full">
           <h4 className="m-0 text-3xl font-extrabold text-white">UNSTAKED</h4>
           <div className="pt-3">
             <h6 className="m-0 font-extrabold py-2 text-lg flex items-center justify-center">
               {toCommas(Number(details?.unStakedAmount).toFixed(2) || 0)} {details?.stakeSymbol}
-              <Image
+              <img
                 src={logo}
                 height={1000}
                 className="max-w-full flex-shrink-0 object-contain ms-2"
@@ -97,7 +96,7 @@ function Staking({ getDetails, isBlocked, details }) {
           <div className="contentBody lg:px-4 w-full">
             <div className="claimInput mt-4 my-2 text-center">
               {/* <div
-                      className={`${styles?.InputWrp} InputWrp cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
+                      className={` InputWrp cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
                     >
                       100
                     </div> */}
@@ -113,7 +112,7 @@ function Staking({ getDetails, isBlocked, details }) {
                   value={toCommas(amount)}
                   onChange={handleChange}
                   placeholder="Enter Amount"
-                  className={`${styles?.InputWrp} InputWrp text-center bg-transparent text-white cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
+                  className={` InputWrp text-center bg-transparent text-white cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
                   required
                 />
               </div>

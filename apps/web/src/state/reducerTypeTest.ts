@@ -27,6 +27,7 @@ import { TransactionDetails } from './transactions/types'
 import { UserState } from './user/reducer'
 import { SerializedPair, SerializedToken, SlippageTolerance } from './user/types'
 import { WalletState } from './wallets/reducer'
+import { DashboardState } from './dashboard/slice'
 import { Wallet } from './wallets/types'
 
 /**
@@ -55,6 +56,7 @@ type ExpectedAppState = CombinedState<{
   lists: ListsState
   application: ApplicationState
   wallets: WalletState
+  dashboard: DashboardState
   mint: MintState
   mintV3: MintV3State
   burn: BurnState

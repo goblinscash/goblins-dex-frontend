@@ -18,6 +18,7 @@ import signatures from './signatures/reducer'
 import transactions from './transactions/reducer'
 import user from './user/reducer'
 import wallets from './wallets/reducer'
+import dashboard from "./dashboard/slice"
 
 const persistedReducers = {
   user,
@@ -35,6 +36,7 @@ const appReducer = combineReducers({
   burnV3,
   multicall: multicall.reducer,
   logs,
+  dashboard,
   [routingApi.reducerPath]: routingApi.reducer,
   [quickRouteApi.reducerPath]: quickRouteApi.reducer,
   ...persistedReducers,

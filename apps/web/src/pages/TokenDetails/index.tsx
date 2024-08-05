@@ -2,7 +2,7 @@ import PrefetchBalancesWrapper from 'components/PrefetchBalancesWrapper/Prefetch
 import TokenDetails from 'components/Tokens/TokenDetails'
 import { TokenDetailsPageSkeleton } from 'components/Tokens/TokenDetails/Skeleton'
 import { NATIVE_CHAIN_ID } from 'constants/tokens'
-import { useTokenPriceQuery, useTokenQuery } from 'graphql/data/__generated__/types-and-hooks'
+import { useTokenPriceQuery, useTokenQuery } from 'graphql/data/types-and-hooks'
 import { TimePeriod, toHistoryDuration, validateUrlChainParam } from 'graphql/data/util'
 import useParsedQueryString from 'hooks/useParsedQueryString'
 import { useEffect, useMemo, useState } from 'react'
@@ -51,7 +51,7 @@ export default function TokenDetailsPage() {
     client: apolloClient,
     variables: {
       address: detailedTokenAddress,
-   
+
     },
     errorPolicy: 'all',
   })

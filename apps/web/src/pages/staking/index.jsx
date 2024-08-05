@@ -13,7 +13,7 @@ import logo from "assets/farmingAssets/Images/logo.png";
 
 ///component
 // import Rewards from "./components/Rewards";
-// import TokenStaking from "./components/Staking";
+import TokenStaking from "./components/Staking";
 // import Withdraw from "./components/Withdraw";
 // import { CommonLoader } from "@/Component/Common";
 
@@ -24,11 +24,13 @@ import * as request from "helpers/apiRequests";
 import { priceGraphQl } from "helpers/constants";
 import { toCommas } from "helpers/utils";
 
+import { useWallet } from "hooks/useWallet";
 
+let isBlocked = false
 
 const Staking = () => {
-  const { currentNetwork, isBlocked } = useSelector((state) => state.Dashboard);
-  const wallet = useWallet();
+  const { currentNetwork } = useSelector((state) => state.dashboard);
+  const wallet =  useWallet()
   const [loading, setLoading] = useState(false);
   const [apr, setApr] = useState(0);
 
@@ -41,12 +43,15 @@ const Staking = () => {
     stakeSymbol: null,
   });
 
+
+
+
   const getDetails = async () => {
     try {
       setLoading(true);
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       let detail = await web3.getDetailInfo();
-
+console.log(detail, "<====detail")
       setDetails({
         ...detail,
         unStakedAmountInDollar:
@@ -64,7 +69,7 @@ const Staking = () => {
 
   const getAPR = async (totalSupply, BCHPrice, GOBPrice) => {
     try {
-      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      const web3 = new Web3Intraction(currentNetwork, wallet?.provider);
       let getApr = await web3.getAPR(totalSupply, BCHPrice, GOBPrice);
       setApr(getApr);
     } catch (error) {
@@ -136,14 +141,13 @@ const Staking = () => {
   };
 
   useEffect(() => {
-    if (details.stakeSymbol && price.GOBInPrice && price.WBCHInPrice) {
+    if (details.stakeSymbol && price.GOBInPrice && price.WBCHInPrice && wallet.account) {
       getAPR(details.totalSupply, price.WBCHInPrice, price.GOBInPrice);
     }
-  }, [details, price]);
+  }, [details, price, wallet]);
 
   useEffect(() => {
-    if (
-      wallet.isActive &&
+    if (  
       wallet.address &&
       currentNetwork &&
       price.GOBInPrice
@@ -278,21 +282,21 @@ const Staking = () => {
               </div>
             </div>
 
-            {/* <TokenStaking
-              styles={styles}
+            <TokenStaking
+            
               details={details}
               getDetails={getDetails}
               isBlocked={isBlocked}
             />
-            <Rewards
-              styles={styles}
+            {/* <Rewards
+            
               details={details}
               getDetails={getDetails}
               isBlocked={isBlocked}
               apr={apr}
             />
             <Withdraw
-              styles={styles}
+            
               details={details}
               getDetails={getDetails}
               isBlocked={isBlocked}

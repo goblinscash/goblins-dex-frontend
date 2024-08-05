@@ -15,9 +15,15 @@ import {
   TopTokens100Query,
   useTopTokens100Query,
   useTopTokensSparklineQuery,
+  
+} from './__generated__/types-and-hooks'
+
+
+import {
+
   useTokensListQuery,
   TokensList
-} from './__generated__/types-and-hooks'
+} from './types-and-hooks'
 import {
   isPricePoint,
   PollingInterval,
@@ -220,6 +226,8 @@ export function useTopTokens(chain: Chain): UseTopTokensReturnValue {
     }),
     PollingInterval.Fast
   )
+
+  console.log(data, "<===data")
 
 
   const unwrappedTokens = useMemo(

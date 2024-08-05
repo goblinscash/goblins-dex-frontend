@@ -14,16 +14,10 @@ import { makeByteData, toFixedCustm } from "../helpers/utils";
 
 class Web3Intraction {
   constructor(currentNetwork, provider) {
+
+
     if (provider || window.ethereum) {
-      this.PROVIDER = new ethers.providers.Web3Provider(
-        provider || window.ethereum,
-        currentNetwork
-          ? {
-              name: currentNetwork.label,
-              chainId: Number(currentNetwork.chainId),
-            }
-          : "any"
-      );
+      this.PROVIDER = provider;
 
       this.SIGNER = this.PROVIDER.getSigner();
     } else if (currentNetwork) {
@@ -52,11 +46,14 @@ class Web3Intraction {
    */
   getContract = (abi, address, isSigner) => {
     try {
+
+
       let contract = new Contract(
         address,
         JSON.parse(abi),
         isSigner ? this.SIGNER : this.PROVIDER
       );
+
       return contract;
     } catch (error) {
       console.log("error", error);
@@ -1018,6 +1015,9 @@ class Web3Intraction {
           this.contractDetails.stakeContractAddress,
           true
         );
+
+
+    
         let walletAddress = this.SIGNER.getAddress();
 
         let getStakingContract = await contract.stakingToken();
@@ -1051,6 +1051,8 @@ class Web3Intraction {
             parseInt(stakeToken.totalSupply) - parseInt(totalSupply),
         });
       } catch (error) {
+
+        console.log(error, "<===error")
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }

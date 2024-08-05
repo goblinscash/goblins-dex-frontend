@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-// css
-import styles from "../staking.module.scss";
+
 
 // image
 import logo from "@/Assets/Images/wbchlogo.png";
@@ -38,7 +37,7 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
   return (
     <div className="lg:col-span-4 sm:col-span-6 col-span-12">
       <div
-        className={`${styles?.cardCstm} cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
+        className={` cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
       >
         <div className="top pb-3 text-center lg:mb-3 border-b-2 border-white w-full">
           <h4 className="m-0 text-3xl font-extrabold text-white">REWARDS</h4>

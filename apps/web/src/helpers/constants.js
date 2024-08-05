@@ -13,6 +13,42 @@ import Icon7 from "assets/farmingAssets/icons/0xBc9bD8DDe6C5a8e1CBE293356E02f598
 
 
 
+export const cryptoData =[
+
+
+    {
+      label: "SmartBCH",
+      symbol: "SmartBCH",
+      name: "SmartBCH",
+      type: "SmartBCH",
+      chainName: "Smart Bitcoin Cash",
+      rpcUrls: [
+        "https://rpc-sbch.goblins.cash/",
+        "https://smartbch.greyh.at",
+        "https://smartbch.greyh.at",
+        "https://smartbch.fountainhead.cash/mainnet",
+        "https://global.uat.cash",
+        "https://rpc.uatvo.com",
+        "https://api.tatum.io/v3/blockchain/node/bch-mainnet ",
+        "https://rpc-mainnet.smartbch.org",
+        "https://smartbch.devops.cash/mainnet",
+      ],
+      chainId: 10000,
+      rpcUrl: "https://rpc-sbch.goblins.cash/",
+      contractAddress: process.env.REACT_APP_BCH_STAKING_CONTRACT,
+      nftManagerContractAddress:
+        process.env.REACT_APP_BCH_NFT_MANAGER_CONTRACT,
+      stakeContractAddress: process.env.REACT_APP_BCH_TOKEN_STAKING_CONTRACT,
+      explorerLink: "https://smartscout.cash/",
+      rpcUrls: ["https://smartbch.greyh.at"],
+
+      blockExplorerUrls: ["https://smartbch.org/"],
+      nativeCurrency: { name: "Bitcoin Cash", symbol: "BCH", decimals: 18 },
+    },
+  ];
+
+
+
 export const graphQLUrl = {
   10000: "https://graph.dfd.cash/subgraphs/name/v3stakerminwidths",
   56: "https://api.studio.thegraph.com/query/78445/v3stakerminwidths/0.0.5",

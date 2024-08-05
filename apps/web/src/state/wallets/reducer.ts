@@ -11,6 +11,7 @@ export interface WalletState {
   switchingChain: ChainId | false
 }
 
+
 const initialState: WalletState = {
   connectedWallets: [],
   switchingChain: false,
