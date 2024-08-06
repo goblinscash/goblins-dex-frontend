@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Image from "next/image";
+
+//css
+import styles from "../staking.module.scss";
 
 
 // image
-import logo from "@/Assets/Images/logoIcn.png";
+import logo from "assets/farmingAssets/Images/logo.png";
 
-//hooks and helpers
-import useWallet from "@/hooks/wallet";
-import Web3Intraction from "@/Utils/web3Intraction";
-import { toCommas } from "@/helpers/utils";
+//hooks && helpers
+import {useWallet} from "hooks/useWallet";
+import Web3Intraction from "utils/web3Intraction";
+import { toCommas } from "helpers/utils";
 
 function Withdraw({ getDetails, details, isBlocked }) {
-  const { currentNetwork } = useSelector((state) => state.Dashboard);
+  const { currentNetwork } = useSelector((state) => state.dashboard);
   const wallet = useWallet();
 
   const [amount, setAmount] = useState("");
@@ -99,18 +101,18 @@ function Withdraw({ getDetails, details, isBlocked }) {
   return (
     <div className="lg:col-span-4 sm:col-span-6 col-span-12">
       <div
-        className={` cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
+        className={`${styles?.cardCstm} cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-col`}
       >
         <div className="top pb-3 text-center lg:mb-3 border-b-2 border-white w-full">
           <h4 className="m-0 text-3xl font-extrabold text-white">STAKED</h4>
           <div className="pt-3">
             <h6 className="m-0 font-extrabold py-2 text-lg flex items-center justify-center">
               {toCommas(Number(details?.stakedAmount).toFixed(2) || 0)} {details?.stakeSymbol}
-              <Image
+              <img
                 src={logo}
-                height={1000}
+                height={100}
                 className="max-w-full flex-shrink-0 object-contain ms-2"
-                width={10000}
+                width={100}
                 style={{ height: 20, width: 20 }}
                 alt=""
               />
@@ -122,7 +124,7 @@ function Withdraw({ getDetails, details, isBlocked }) {
           <div className="contentBody lg:px-4 w-full">
             <div className="claimInput mt-4 my-2 text-center">
               {/* <div
-                      className={` InputWrp cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
+                      className={`${styles?.InputWrp} InputWrp cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
                     >
                       100
                     </div> */}
@@ -136,7 +138,7 @@ function Withdraw({ getDetails, details, isBlocked }) {
                   value={toCommas(amount)}
                   onChange={handleChange}
                   placeholder="Enter Amount"
-                  className={` InputWrp text-center bg-transparent text-white cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
+                  className={`${styles?.InputWrp} InputWrp text-center bg-transparent text-white cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
                   required
                 />
               </div>

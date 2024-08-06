@@ -28,6 +28,10 @@ import { MICROSITE_LINK } from 'utils/openDownloadApp'
 import { getCurrentPageFromLocation } from 'utils/urlRoutes'
 import { getCLS, getFCP, getFID, getLCP, Metric } from 'web-vitals'
 import { findRouteByPath, RouteDefinition, routes, useRouterConfig } from './RouteDefinitions'
+import { ToastContainer } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 const AppChrome = lazy(() => import('./AppChrome'))
 
@@ -157,6 +161,7 @@ export default function App() {
   }
   return (
     <ErrorBoundary>
+      <ToastContainer />
       <DarkModeQueryParamReader />
       <Trace page={currentPage}>
         {/*

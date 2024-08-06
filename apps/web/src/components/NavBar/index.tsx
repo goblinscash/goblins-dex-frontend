@@ -87,10 +87,10 @@ export const PageTabs = () => {
           <Trans>NFTs</Trans>
         </MenuItem>
       )}
-         <MenuItem href="https://sbch.goblins.cash/staking" >
+         <MenuItem href="/staking" >
           <Trans>Staking</Trans>
         </MenuItem>
-        <MenuItem href="https://sbch.goblins.cash/farming" >
+        <MenuItem href="/farming">
           <Trans>Farming</Trans>
         </MenuItem>
       <Box display={{ sm: 'flex', lg: 'none', xxl: 'flex' }} width="full">

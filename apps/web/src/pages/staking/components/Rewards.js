@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import Image from "next/image";
+
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
+//css
+import styles from "../staking.module.scss";
 
 // image
-import logo from "@/Assets/Images/wbchlogo.png";
+import logo from "assets/farmingAssets/Images/logo.png";
 
 //hooks && helpers
-import useWallet from "@/hooks/wallet";
-import Web3Intraction from "@/Utils/web3Intraction";
-import { toCommas } from "@/helpers/utils";
+import {useWallet} from "hooks/useWallet";
+import Web3Intraction from "utils/web3Intraction";
+import { toCommas } from "helpers/utils";
 
 function Rewards({ details, getDetails, isBlocked, apr }) {
-  const { currentNetwork } = useSelector((state) => state.Dashboard);
+  const { currentNetwork } = useSelector((state) => state.dashboard);
   const wallet = useWallet();
   const [loading, setLoading] = useState(false);
 
@@ -37,7 +39,7 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
   return (
     <div className="lg:col-span-4 sm:col-span-6 col-span-12">
       <div
-        className={` cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
+        className={`${styles?.cardCstm} cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-col`}
       >
         <div className="top pb-3 text-center lg:mb-3 border-b-2 border-white w-full">
           <h4 className="m-0 text-3xl font-extrabold text-white">REWARDS</h4>
@@ -45,11 +47,11 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
             <h6 className="m-0 font-extrabold py-2 text-lg flex items-center justify-center">
               {toCommas(Number(details?.earnedAmount || 0).toFixed(4))}
               {details?.rewardSymbol ? details.rewardSymbol : ""}
-              <Image
+              <img
                 src={logo}
-                height={1000}
+                height={100}
                 className="max-w-full flex-shrink-0 object-contain ms-2"
-                width={10000}
+                width={100}
                 style={{ height: 20, width: 20 }}
                 alt=""
               />

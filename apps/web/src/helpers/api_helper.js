@@ -2,22 +2,14 @@ import axios from "axios";
 
 //apply base url for axios
 
-
 const axiosIcoApi = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL
+  baseURL: process.env.REACT_APP_API_BASE_URL
 });
-
-
-
-
-
 
 axiosIcoApi.interceptors.response.use(
   (response) => response,
   (error) => Promise.reject(error)
 );
-
-
 
 const checkStatusCode = (code, err) => {
   // console.log(err, "<====err")

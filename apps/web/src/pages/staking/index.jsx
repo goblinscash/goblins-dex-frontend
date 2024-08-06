@@ -1,36 +1,38 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
-// // css
-// import styles from "./staking.module.scss";
+// css
+import "assets/styles/main.css";
 
 // image
 import logo from "assets/farmingAssets/Images/logo.png";
 
-
-
 ///component
-// import Rewards from "./components/Rewards";
+import CommonLoader from "components/Loader/SpinningLoader";
+import Rewards from "./components/Rewards";
 import TokenStaking from "./components/Staking";
-// import Withdraw from "./components/Withdraw";
-// import { CommonLoader } from "@/Component/Common";
+import Withdraw from "./components/Withdraw";
 
 //hooks && helpers
 // import useWallet from "@/hooks/wallet";
-import Web3Intraction from "utils/web3Intraction";
 import * as request from "helpers/apiRequests";
 import { priceGraphQl } from "helpers/constants";
 import { toCommas } from "helpers/utils";
+import Web3Intraction from "utils/web3Intraction";
 
 import { useWallet } from "hooks/useWallet";
 
-let isBlocked = false
+// css
+import styles from "./staking.module.scss";
+
+
+let isBlocked = false;
 
 const Staking = () => {
-  const { currentNetwork } = useSelector((state) => state.dashboard);
-  const wallet =  useWallet()
+  const { currentNetwork, isBlocked } = useSelector((state) => state.dashboard);
+  const wallet = useWallet();
   const [loading, setLoading] = useState(false);
   const [apr, setApr] = useState(0);
 
@@ -43,15 +45,12 @@ const Staking = () => {
     stakeSymbol: null,
   });
 
-
-
-
   const getDetails = async () => {
     try {
       setLoading(true);
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       let detail = await web3.getDetailInfo();
-console.log(detail, "<====detail")
+
       setDetails({
         ...detail,
         unStakedAmountInDollar:
@@ -69,7 +68,7 @@ console.log(detail, "<====detail")
 
   const getAPR = async (totalSupply, BCHPrice, GOBPrice) => {
     try {
-      const web3 = new Web3Intraction(currentNetwork, wallet?.provider);
+      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       let getApr = await web3.getAPR(totalSupply, BCHPrice, GOBPrice);
       setApr(getApr);
     } catch (error) {
@@ -141,13 +140,14 @@ console.log(detail, "<====detail")
   };
 
   useEffect(() => {
-    if (details.stakeSymbol && price.GOBInPrice && price.WBCHInPrice && wallet.account) {
+    if (details.stakeSymbol && price.GOBInPrice && price.WBCHInPrice) {
       getAPR(details.totalSupply, price.WBCHInPrice, price.GOBInPrice);
     }
-  }, [details, price, wallet]);
+  }, [details, price]);
 
   useEffect(() => {
-    if (  
+    if (
+      wallet.isActive &&
       wallet.address &&
       currentNetwork &&
       price.GOBInPrice
@@ -160,27 +160,37 @@ console.log(detail, "<====detail")
     getUsdPrice();
   }, []);
 
-
   return (
     <>
-      {/* {loading && <CommonLoader />} */}
-      <section className={` staking relative py-4`}>
-        <div className="container">
+     {
+       loading &&  <div
+       className="fixed flex items-center justify-center w-full"
+       style={{
+         height: "calc(100vh - 72px)",
+         background: "#00000099",
+         zIndex: 9999,
+       }}
+     >
+       <CommonLoader />
+     </div>
+     }
+      <section className={`${styles?.stakingSec} staking relative py-5 w-full`}>
+        <div className="container mx-auto">
           <div className="grid gap-3  grid-cols-12">
             <div className="lg:col-span-4 sm:col-span-6 col-span-12">
               <div
-                className={`cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
+                className={`${styles?.cardCstm} cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-col`}
               >
-                <div className="top pb-3 text-center lg:mb-3">
+                <div className="top pb-3 text-center lg:mb-3 w-full">
                   <h4 className="m-0 text-3xl font-extrabold text-white">
                     YOUR BALANCE
                   </h4>
                 </div>
                 <div className="contentBody lg:px-4 w-full">
-                  <ul className="text-white">
+                  <ul className="text-white pl-0">
                     <li className="py-1 font-semibold text-lg flex items-start">
-                      <span className="w-50">Total Unstaked: </span>
-                      <span className=" w-50 pl-4 break-all">
+                      <span className="w-50 font-medium">Total Unstaked: </span>
+                      <span className=" w-50 font-medium pl-4 break-all">
                         $
                         {toCommas(
                           Number(details?.unStakedAmountInDollar || 0).toFixed(
@@ -190,8 +200,8 @@ console.log(detail, "<====detail")
                       </span>
                     </li>
                     <li className="py-1 font-semibold text-lg flex items-start">
-                      <span className="w-50">Total Staked: </span>
-                      <span className="underline pl-4 w-50 break-all">
+                      <span className="w-50 font-medium">Total Staked: </span>
+                      <span className="underline font-medium pl-4 w-50 break-all">
                         $
                         {toCommas(
                           Number(details?.stakedAmountInDollar || 0).toFixed(2)
@@ -200,9 +210,9 @@ console.log(detail, "<====detail")
                     </li>
 
                     <li className="py-1 font-semibold text-lg flex items-start">
-                      <span className="w-50">Total Balance: </span>
+                      <span className="w-50 font-medium">Total Balance: </span>
 
-                      <span className="pl-4 w-50 break-all">
+                      <span className="pl-4 font-medium w-50 break-all">
                         $
                         {toCommas(
                           Number(details?.balanceInDollar || 0).toFixed(2)
@@ -215,7 +225,7 @@ console.log(detail, "<====detail")
             </div>
             <div className="lg:col-span-4 sm:col-span-6 col-span-12">
               <div
-                className={` cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
+                className={`${styles?.cardCstm} cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-col`}
               >
                 <div className="contentBody text-center lg:px-4">
                   <div className="py-2">
@@ -223,8 +233,8 @@ console.log(detail, "<====detail")
                       <img
                         src={logo}
                         className="max-w-full w-auto h-auto mx-auto"
-                        height={10000}
-                        width={10000}
+                        height={100}
+                        width={100}
                         alt=""
                       />
                     </div>
@@ -249,31 +259,31 @@ console.log(detail, "<====detail")
             </div>
             <div className="lg:col-span-4 sm:col-span-6 col-span-12">
               <div
-                className={` cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
+                className={`${styles?.cardCstm} cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-col`}
               >
                 <div className="top pb-3 text-center lg:mb-3">
                   <h4 className="m-0 text-3xl font-extrabold text-white">
-                  GOB SUPPLY
+                    GOB SUPPLY
                   </h4>
                 </div>
 
                 <div className="contentBody lg:px-4 w-full">
                   <ul className="text-white">
                     <li className="py-1 font-semibold text-lg flex items-start">
-                      <span className="w-50">Total Unstaked: </span>
-                      <span className=" pl-4 w-50 break-all">
+                      <span className="w-50 font-medium">Total Unstaked: </span>
+                      <span className=" pl-4 font-medium w-50 break-all">
                         {toCommas(Number(details?.unStackTotalSupply || 0))}
                       </span>
                     </li>
                     <li className="py-1 font-semibold text-lg flex items-start">
-                      <span className="w-50">Total Staked: </span>
-                      <span className="underline pl-4 w-50 break-all">
+                      <span className="w-50 font-medium ">Total Staked: </span>
+                      <span className="underline font-medium pl-4 w-50 break-all">
                         {toCommas(Number(details?.totalSupply || 0))}
                       </span>
                     </li>
                     <li className="py-1 font-semibold text-lg flex items-start">
-                      <span className="w-50">Total Supply: </span>
-                      <span className=" w-50 pl-4 break-all">
+                      <span className="w-50 font-medium">Total Supply: </span>
+                      <span className=" w-50 font-medium pl-4 break-all">
                         {toCommas(Number(details?.tokenTotalSupply || 0))}
                       </span>
                     </li>
@@ -283,24 +293,24 @@ console.log(detail, "<====detail")
             </div>
 
             <TokenStaking
-            
+              styles={styles}
               details={details}
               getDetails={getDetails}
               isBlocked={isBlocked}
             />
-            {/* <Rewards
-            
+            <Rewards
+              styles={styles}
               details={details}
               getDetails={getDetails}
               isBlocked={isBlocked}
               apr={apr}
             />
             <Withdraw
-            
+              styles={styles}
               details={details}
               getDetails={getDetails}
               isBlocked={isBlocked}
-            /> */}
+            />
           </div>
         </div>
       </section>

@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 // image
 import logo from "assets/farmingAssets/Images/logoIcn.png";
 
-
+//css
+import styles from "../staking.module.scss";
 
 //hooks
 import Web3Intraction from "utils/web3Intraction";
@@ -74,7 +75,7 @@ function Staking({ getDetails, isBlocked, details }) {
   return (
     <div className="lg:col-span-4 sm:col-span-6 col-span-12">
       <div
-        className={` cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-column`}
+        className={`${styles?.cardCstm} cardCstm p-4 h-full  rounded-xl flex items-center justify-between flex-col`}
       >
         <div className="top pb-3 text-center lg:mb-3 border-b-2 border-white w-full">
           <h4 className="m-0 text-3xl font-extrabold text-white">UNSTAKED</h4>
@@ -83,9 +84,9 @@ function Staking({ getDetails, isBlocked, details }) {
               {toCommas(Number(details?.unStakedAmount).toFixed(2) || 0)} {details?.stakeSymbol}
               <img
                 src={logo}
-                height={1000}
+                height={100}
                 className="max-w-full flex-shrink-0 object-contain ms-2"
-                width={10000}
+                width={100}
                 style={{ height: 20, width: 20 }}
                 alt=""
               />
@@ -96,7 +97,7 @@ function Staking({ getDetails, isBlocked, details }) {
           <div className="contentBody lg:px-4 w-full">
             <div className="claimInput mt-4 my-2 text-center">
               {/* <div
-                      className={` InputWrp cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
+                      className={`${styles?.InputWrp} InputWrp cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
                     >
                       100
                     </div> */}
@@ -112,7 +113,7 @@ function Staking({ getDetails, isBlocked, details }) {
                   value={toCommas(amount)}
                   onChange={handleChange}
                   placeholder="Enter Amount"
-                  className={` InputWrp text-center bg-transparent text-white cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
+                  className={`${styles?.InputWrp} InputWrp text-center bg-transparent text-white cursor-pointer mx-auto flex py-2 px-3 text-lg items-center justify-center font-bold text-white rounded`}
                   required
                 />
               </div>
@@ -173,6 +174,8 @@ function Staking({ getDetails, isBlocked, details }) {
       </div>
     </div>
   );
+
+
 }
 
 export default Staking;
