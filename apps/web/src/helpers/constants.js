@@ -12,10 +12,7 @@ import Icon6 from "assets/farmingAssets/icons/0xBc2F884680c95A02cea099dA2F524b36
 import Icon7 from "assets/farmingAssets/icons/0xBc9bD8DDe6C5a8e1CBE293356E02f5984693b195.png";
 
 
-
-export const cryptoData =[
-
-
+export const cryptoData = [
     {
       label: "SmartBCH",
       symbol: "SmartBCH",
@@ -45,7 +42,7 @@ export const cryptoData =[
       blockExplorerUrls: ["https://smartbch.org/"],
       nativeCurrency: { name: "Bitcoin Cash", symbol: "BCH", decimals: 18 },
     },
-  ];
+];
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -10,9 +10,9 @@ import styles from "../staking.module.scss";
 import logo from "assets/farmingAssets/Images/logo.png";
 
 //hooks && helpers
-import {useWallet} from "hooks/useWallet";
-import Web3Intraction from "utils/web3Intraction";
 import { toCommas } from "helpers/utils";
+import { useWallet } from "hooks/useWallet";
+import Web3Intraction from "utils/web3Intraction";
 
 function Rewards({ details, getDetails, isBlocked, apr }) {
   const { currentNetwork } = useSelector((state) => state.dashboard);
@@ -45,7 +45,7 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
           <h4 className="m-0 text-3xl font-extrabold text-white">REWARDS</h4>
           <div className="pt-3">
             <h6 className="m-0 font-extrabold py-2 text-lg flex items-center justify-center">
-              {toCommas(Number(details?.earnedAmount || 0).toFixed(4))}
+              {toCommas(Number(details?.earnedAmount || 0).toFixed(4)) + " "}
               {details?.rewardSymbol ? details.rewardSymbol : ""}
               <img
                 src={logo}
@@ -59,8 +59,6 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
           </div>
         </div>
 
-
-        
         <div className="contentBody lg:px-4 w-full">
           <div className="claimInput mt-4 my-2 text-center">
             <h6 className="m-0 font-extrabold py-2 text-lg ">APR: </h6>

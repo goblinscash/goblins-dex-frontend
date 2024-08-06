@@ -27,6 +27,8 @@ import { NavDropdown } from './NavDropdown'
 
 const NETWORK_SELECTOR_CHAINS = [...L1_CHAIN_IDS, ...L2_CHAIN_IDS]
 
+console.log(NETWORK_SELECTOR_CHAINS, "<====NETWORK_SELECTOR_CHAINS")
+
 const ChainSelectorWrapper = styled.div`
   position: relative;
 `
