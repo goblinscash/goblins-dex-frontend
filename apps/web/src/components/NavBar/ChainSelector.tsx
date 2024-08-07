@@ -25,9 +25,8 @@ import { getSupportedChainIdsFromWalletConnectSession } from 'utils/getSupported
 import ChainSelectorRow from './ChainSelectorRow'
 import { NavDropdown } from './NavDropdown'
 
-const NETWORK_SELECTOR_CHAINS = [...L1_CHAIN_IDS, ...L2_CHAIN_IDS]
+const NETWORK_SELECTOR_CHAINS = [...L2_CHAIN_IDS]
 
-console.log(NETWORK_SELECTOR_CHAINS, "<====NETWORK_SELECTOR_CHAINS")
 
 const ChainSelectorWrapper = styled.div`
   position: relative;
@@ -75,6 +74,7 @@ export const ChainSelector = ({ leftAlign }: { leftAlign?: boolean }) => {
   const walletSupportsChain = useWalletSupportedChains()
 
   const [supportedChains, unsupportedChains] = useMemo(() => {
+
     const { supported, unsupported } = NETWORK_SELECTOR_CHAINS.filter((chain: number) => {
       return showTestnets || !TESTNET_CHAIN_IDS.includes(chain)
     })
@@ -118,7 +118,7 @@ export const ChainSelector = ({ leftAlign }: { leftAlign?: boolean }) => {
     return null
   }
 
-  // console.log(supportedChains, "<====supportedChains")
+  // console.log(supportedChains,unsupportedChains, "<====supportedChains")
 
   const isSupported = !!info
 

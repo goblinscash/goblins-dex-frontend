@@ -305,11 +305,17 @@ export default function AuthenticatedHeader({ account, openSettings }: { account
           </HeaderButton>
         )}
         {shouldShowBuyFiatButton && (
+
+          <a href={`https://buy.onramper.com/?enableCountrySelector=true&apiKey=pk_prod_01HETEQF46GSK6BS5JWKDF31BT&supportRecurringPayments=true&mode=buy&wallets=${account}`} target='_blank'>
+
+
           <HeaderButton
             size={ButtonSize.medium}
             emphasis={ButtonEmphasis.highSoft}
-            onClick={handleBuyCryptoClick}
+            // onClick={handleBuyCryptoClick}
+            // onClick={(e)=> e.preventDefault()}
             disabled={disableBuyCryptoButton}
+          
             data-testid="wallet-buy-crypto"
           >
             {error ? (
@@ -325,6 +331,7 @@ export default function AuthenticatedHeader({ account, openSettings }: { account
               </>
             )}
           </HeaderButton>
+          </a>
         )}
         {Boolean(!fiatOnrampAvailable && fiatOnrampAvailabilityChecked) && (
           <FiatOnrampNotAvailableText marginTop="8px">

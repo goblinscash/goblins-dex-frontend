@@ -145,17 +145,18 @@ interface Page {
 
 const Pages: Array<Page> = [
   {
-    title: <Trans>Tokens</Trans>,
-    key: ExploreTab.Tokens,
-    component: TopTokensTable,
-    loggingElementName: InterfaceElementName.EXPLORE_TOKENS_TAB,
-  },
-  {
     title: <Trans>Pools</Trans>,
     key: ExploreTab.Pools,
     component: TopPoolTable,
     loggingElementName: InterfaceElementName.EXPLORE_POOLS_TAB,
   },
+  {
+    title: <Trans>Tokens</Trans>,
+    key: ExploreTab.Tokens,
+    component: TopTokensTable,
+    loggingElementName: InterfaceElementName.EXPLORE_TOKENS_TAB,
+  },
+ 
   {
     title: <Trans>Transactions</Trans>,
     key: ExploreTab.Transactions,
@@ -174,11 +175,14 @@ const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
     if (!key || key === -1) return 0
     return key
   }, [initialTab])
+
+
   const [currentTab, setCurrentTab] = useState(initialKey)
   const isInfoExplorePageEnabled = useInfoExplorePageEnabled()
 
   // to allow backward navigation between tabs
   const { tab, chainName } = useExploreParams()
+
   useEffect(() => {
     const tabIndex = Pages.findIndex((page) => page.key === tab)
     if (tabIndex !== -1) {

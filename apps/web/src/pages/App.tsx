@@ -136,7 +136,7 @@ export default function App() {
 
   const { account } = useWeb3React()
   const statsigUser: StatsigUser = useMemo(
-    () => ({
+    () =>({
       userID: getDeviceId(),
       customIDs: { address: account ?? '' },
     }),
@@ -144,7 +144,7 @@ export default function App() {
   )
 
   // redirect address to landing pages until implemented
-  const shouldRedirectToAppInstall = pathname?.startsWith('/address/')
+  const shouldRedirectToAppInstall = pathname?.startsWith('/address/');
   useLayoutEffect(() => {
     if (shouldRedirectToAppInstall) {
       window.location.href = MICROSITE_LINK

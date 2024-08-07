@@ -227,7 +227,7 @@ export function useTopTokens(chain: Chain): UseTopTokensReturnValue {
     PollingInterval.Fast
   )
 
-  console.log(data, "<===data")
+
 
 
   const unwrappedTokens = useMemo(

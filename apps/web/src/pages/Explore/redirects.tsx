@@ -15,10 +15,10 @@ export function useExploreParams(): {
     return { tab: tab as ExploreTab, chainName: undefined, tokenAddress }
   } else if (tab && !chainName) {
     // /explore/:chainName
-    return { tab: ExploreTab.Tokens, chainName: tab, tokenAddress }
+    return { tab: ExploreTab.Pools, chainName: tab, tokenAddress }
   } else if (!tab && !chainName) {
     // legacy /tokens
-    return { tab: ExploreTab.Tokens, chainName: undefined, tokenAddress: undefined }
+    return { tab: ExploreTab.Pools, chainName: undefined, tokenAddress: undefined }
   } else {
     // /explore/:tab/:chainName
     return { tab: tab as ExploreTab, chainName, tokenAddress }
