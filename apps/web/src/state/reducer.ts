@@ -19,6 +19,8 @@ import transactions from './transactions/reducer'
 import user from './user/reducer'
 import wallets from './wallets/reducer'
 import dashboard from "./dashboard/slice"
+import Incentive from "./incentive/reducer"
+import nft from "./nft/reducer"
 
 const persistedReducers = {
   user,
@@ -37,6 +39,8 @@ const appReducer = combineReducers({
   multicall: multicall.reducer,
   logs,
   dashboard,
+  Incentive,
+  nft,
   [routingApi.reducerPath]: routingApi.reducer,
   [quickRouteApi.reducerPath]: quickRouteApi.reducer,
   ...persistedReducers,

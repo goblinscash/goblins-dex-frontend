@@ -33,6 +33,7 @@ export function Table<Data extends RowData>({
 }: {
   columns: ColumnDef<Data, any>[]
   data: Data[]
+  
   loading?: boolean
   loadMore?: ({ onComplete }: { onComplete?: () => void }) => void
   maxHeight?: number

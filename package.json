@@ -16,6 +16,7 @@
     "i18next": "21.9.1",
     "i18next-parser": "8.6.0",
     "patch-package": "^7.0.0",
+    "react-select": "5.8.0",
     "react-toastify": "10.0.5",
     "sass": "1.77.8",
     "syncpack": "^8.5.14",

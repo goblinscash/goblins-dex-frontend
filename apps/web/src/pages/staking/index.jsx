@@ -16,7 +16,7 @@ import TokenStaking from "./components/Staking";
 import Withdraw from "./components/Withdraw";
 
 //hooks && helpers
-// import useWallet from "@/hooks/wallet";
+// import {useWallet} from "hooks/useWallet";
 import * as request from "helpers/apiRequests";
 import { priceGraphQl } from "helpers/constants";
 import { toCommas } from "helpers/utils";

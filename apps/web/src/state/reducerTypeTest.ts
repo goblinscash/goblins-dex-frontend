@@ -28,6 +28,8 @@ import { UserState } from './user/reducer'
 import { SerializedPair, SerializedToken, SlippageTolerance } from './user/types'
 import { WalletState } from './wallets/reducer'
 import { DashboardState } from './dashboard/slice'
+import { InitialState } from './incentive/slice'
+import { NFTState } from './nft/slice'
 import { Wallet } from './wallets/types'
 
 /**
@@ -56,6 +58,8 @@ type ExpectedAppState = CombinedState<{
   lists: ListsState
   application: ApplicationState
   wallets: WalletState
+  Incentive: InitialState,
+  nft: NFTState
   dashboard: DashboardState
   mint: MintState
   mintV3: MintV3State
