@@ -124,6 +124,8 @@ export default function PoolDetailsPage() {
   const [priceChartType, setPriceChartType] = useState<PriceChartType>(PriceChartType.LINE)
 
   if (poolNotFound) return <NotFound />
+
+
   return (
     <PageWrapper>
       <LeftColumn>

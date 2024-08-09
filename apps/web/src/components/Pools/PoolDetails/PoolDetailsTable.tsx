@@ -11,7 +11,6 @@ import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { ClickableStyle, ThemedText } from 'theme/components'
-
 import { PoolDetailsTransactionsTable } from './PoolDetailsTransactionsTable'
 
 enum PoolDetailsTableTabs {
@@ -76,3 +75,4 @@ export function PoolDetailsTableTab({
     </Column>
   )
 }
+
