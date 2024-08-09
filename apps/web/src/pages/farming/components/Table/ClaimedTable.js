@@ -26,7 +26,7 @@ function ClaimTable({
         <thead>
           <tr className=" text-sm leading-normal transparent">
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{
                 background: "#011b1c",
                 borderTopLeftRadius: 5,
@@ -38,7 +38,7 @@ function ClaimTable({
             </th>
 
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{ background: "#011b1c" }}
             >
               <button className="border-0 p-0 bg-transparent flex items-center">
@@ -149,7 +149,7 @@ function ClaimTable({
                   className="py-3 px-6 text-left border-b border-gray-600 transparent"
                   style={{ background: "#002628" }}
                 >
-                  <p className={` m-0 font-bold capitalize`}>{item.rewardInfo?.reward} </p>
+                  <p className={` m-0  capitalize`}>{item.rewardInfo?.reward} </p>
                 </td>
 
                 <td
@@ -157,7 +157,7 @@ function ClaimTable({
                   className="py-3 px-6 text-center border-b border-gray-600 transparent"
                   style={{ background: "#002628" }}
                 >
-                  <p className={` m-0 font-bold capitalize`}>
+                  <p className={` m-0  capitalize`}>
                     {" "}
                     <button
                       onClick={(e) => handleConfirm(item, false, true)}

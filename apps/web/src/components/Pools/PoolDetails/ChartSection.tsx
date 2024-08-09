@@ -127,7 +127,9 @@ function PriceChart({ currencyA, currencyB, timePeriod, height, priceChartType }
         return (
           <ChartHeader
             value={priceDisplay}
-            additionalFields={<PriceChartDelta startingPrice={mockedPrices[0]} endingPrice={displayValue} />}
+            additionalFields={
+              <PriceChartDelta startingPrice={mockedPrices[0]} endingPrice={displayValue} />
+            }
             valueFormatterType={NumberType.FiatTokenPrice}
             time={crosshairData?.time}
           />

@@ -143,12 +143,12 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
         >
           <div className="top flex items-center justify-between gap-2 pt-2 px-3">
             <div className="left flex items-center gap-2">
-              <p className="m-0 font-bold text-white text-lg">Create Farm</p>
+              <p className="m-0   text-white text-lg">Create Farm</p>
             </div>
 
             <button
               onClick={handleIncentiveForm}
-              className="m-0 border-0 p-0 transparent font-semibold text-gray-400 "
+              className="m-0 border-0 p-0 transparent    text-gray-400 "
               disabled={loading}
             >
               <svg
@@ -185,7 +185,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                 <div className="grid gap-x-5 gap-y-8 grid-cols-12 py-3">
                   {/* <div className=" col-span-12">
                     <div className="flex items-center gap-2">
-                      <label htmlFor="" className="form-label themeClr font-bold m-0 px-2 z-10">
+                      <label htmlFor="" className="form-label themeClr   m-0 px-2 z-10">
                         Advanced
                       </label>
                       <SwitchBtn />{" "}
@@ -195,7 +195,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                     <div className="relative labelInput">
                       <label
                         htmlFor=""
-                        className="form-label font-semibold px-2 z-10 text-white"
+                        className="form-label    px-2 z-10 text-white"
                       >
                         Farm
                       </label>
@@ -214,7 +214,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                     <div className="relative labelInput">
                       <label
                         htmlFor=""
-                        className="form-label font-semibold px-2 z-10 text-white"
+                        className="form-label    px-2 z-10 text-white"
                       >
                         Minimum Width (%)
                       </label>
@@ -242,7 +242,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                   <div className="col-span-12">
                     <label
                       htmlFor=""
-                      className="form-label font-semibold px-2 z-10 text-white"
+                      className="form-label    px-2 z-10 text-white"
                     >
                       Rewards Token and Amount
                     </label>
@@ -279,7 +279,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                     <div className="relative labelInput">
                       <label
                         htmlFor=""
-                        className="form-label font-semibold px-2 z-10 text-white"
+                        className="form-label    px-2 z-10 text-white"
                       >
                         Refundee
                       </label>
@@ -299,7 +299,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                       <div className=" col-span-6">
                         <label
                           htmlFor=""
-                          className="form-label font-semibold px-2 z-10 text-white"
+                          className="form-label    px-2 z-10 text-white"
                         >
                           Start Date
                         </label>
@@ -318,7 +318,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                       <div className=" col-span-6">
                         <label
                           htmlFor=""
-                          className="form-label font-semibold px-2 z-10 text-white"
+                          className="form-label    px-2 z-10 text-white"
                         >
                           End Date
                         </label>
@@ -342,7 +342,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                     <button
                       type="submit"
                       disabled={loading}
-                      className=" commonBtn font-semibold mx-auto flex items-center justify-center btn w-full"
+                      className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                     >
                       {loading ? (
                         <div className="spinner">

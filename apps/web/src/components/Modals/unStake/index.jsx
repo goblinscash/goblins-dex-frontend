@@ -74,12 +74,12 @@ const UnStakePopup = ({ handleConfirm, detail, myFarmload }) => {
         >
           <div className="top flex items-center justify-between gap-2 pt-2 px-3">
             <div className="left flex items-center gap-2">
-              <p className="m-0 font-bold text-white text-lg">{"UnStake"}</p>
+              <p className="m-0   text-white text-lg">{"UnStake"}</p>
             </div>
 
             <button
               onClick={handleConfirm}
-              className="m-0 border-0 p-0 transparent font-semibold text-gray-400 "
+              className="m-0 border-0 p-0 transparent    text-gray-400 "
               disabled={loading}
             >
               <svg
@@ -115,7 +115,7 @@ const UnStakePopup = ({ handleConfirm, detail, myFarmload }) => {
                     type="button"
                     disabled={loading}
                     onClick={handleunStake}
-                    className=" commonBtn font-semibold mx-auto flex items-center justify-center btn w-full"
+                    className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                   >
                     {loading ? (
                       <div className="spinner">

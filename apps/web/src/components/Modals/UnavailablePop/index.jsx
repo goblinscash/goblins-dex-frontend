@@ -19,12 +19,12 @@ const UnavailablePop = ({  handleUnavailable }) => {
         >
           <div className="top flex items-center justify-between gap-2 pt-2 px-3">
             <div className="left flex items-center gap-2">
-              <p className="m-0 font-bold text-white text-lg"></p>
+              <p className="m-0   text-white text-lg"></p>
             </div>
 
             <button
               onClick={handleUnavailable}
-              className="m-0 border-0 p-0 transparent font-semibold text-gray-400 "
+              className="m-0 border-0 p-0 transparent    text-gray-400 "
       
 
             >
@@ -66,7 +66,7 @@ const UnavailablePop = ({  handleUnavailable }) => {
                 </svg>
               </div>
               <div className="content py-2 text-center">
-                <h4 className="m-0 text-white py-2 text-4xl font-bold">
+                <h4 className="m-0 text-white py-2 text-4xl  ">
                   Our Product is unavailable in your location
                 </h4>
                 <p className="m-0 themeClr py-2 ">
@@ -74,7 +74,7 @@ const UnavailablePop = ({  handleUnavailable }) => {
                 </p>
               </div>
               <div className="btnWRpper mt-3">
-                <button className="flex items-center justify-center commonBtn btn w-full font-bold text-lg" onClick={handleUnavailable} type="button">
+                <button className="flex items-center justify-center commonBtn btn w-full   text-lg" onClick={handleUnavailable} type="button">
                   Agree and Continue
                 </button>
               </div>

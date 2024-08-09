@@ -88,13 +88,13 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
         >
           <div className="top flex items-center justify-between gap-2 pt-2 px-3">
             <div className="left flex items-center gap-2">
-              <p className="m-0 font-bold text-white text-lg">{"Withdraw"}</p>
+              <p className="m-0   text-white text-lg">{"Withdraw"}</p>
             </div>
 
             <button
               onClick={handleWithdrawPop}
               disabled={loading || reduxLoading}
-              className="m-0 border-0 p-0 transparent font-semibold text-gray-400 "
+              className="m-0 border-0 p-0 transparent    text-gray-400 "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
                     <div className="relative labelInput">
                       <label
                         htmlFor=""
-                        className="form-label font-semibold px-2 z-10 text-white"
+                        className="form-label    px-2 z-10 text-white"
                       >
                         {reduxLoading && !withdrawNftlist.length
                           ? "NFT Loading..."
@@ -159,7 +159,7 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
                     <button
                       type="submit"
                       disabled={loading || reduxLoading}
-                      className=" commonBtn font-semibold mx-auto flex items-center justify-center btn w-full"
+                      className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                     >
                       {loading ? (
                         <div className="spinner">

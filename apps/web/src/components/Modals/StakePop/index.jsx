@@ -261,7 +261,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
           <button
             onClick={handleStake}
             disabled={loading}
-            className="m-0 border-0 p-0 transparent font-semibold text-gray-400 absolute top-1 right-1"
+            className="m-0 border-0 p-0 transparent    text-gray-400 absolute top-1 right-1"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -289,7 +289,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
               disabled={activeTabNew === 2 && loading}
               className={`${
                 activeTabNew === 1 && "active"
-              } tab-button font-semibold relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
+              } tab-button    relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
             >
               {activeTabNew === 2 && loading ? "Loading..." : " Single Stake"}
             </button>
@@ -300,7 +300,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
               disabled={activeTabNew === 1 && loading}
               className={`${
                 activeTabNew === 2 && "active"
-              } tab-button font-semibold relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
+              } tab-button    relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
             >
               {activeTabNew === 1 && loading ? "Loading..." : "Multi Stake"}
             </button>
@@ -315,7 +315,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
             >
               <div className="top flex items-center justify-between gap-2 pt-2 px-3">
                 <div className="left flex items-center gap-2">
-                  <p className="m-0 font-bold text-white text-lg">
+                  <p className="m-0   text-white text-lg">
                     {"Approve & Stake"}
                   </p>
                 </div>
@@ -328,7 +328,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                         <div className="relative labelInput">
                           <label
                             htmlFor=""
-                            className="form-label font-semibold px-2 z-10 text-white"
+                            className="form-label    px-2 z-10 text-white"
                           >
                             {loading && !tokenIds.length
                               ? "NFT Loading..."
@@ -365,7 +365,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                         <button
                           type="submit"
                           disabled={loading || !tokenIds.length}
-                          className=" commonBtn font-semibold mx-auto flex items-center justify-center btn w-full"
+                          className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                         >
                           {loading ? (
                             <div className="spinner">
@@ -390,7 +390,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
             >
               <div className="top flex items-center justify-between gap-2 pt-2 px-3">
                 <div className="left flex items-center gap-2">
-                  <p className="m-0 font-bold text-white text-lg">
+                  <p className="m-0   text-white text-lg">
                     {"Stake In Multiple Farms"}
                   </p>
                 </div>
@@ -403,7 +403,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                         <div className="relative labelInput">
                           <label
                             htmlFor=""
-                            className="form-label font-semibold px-2 z-10 text-white"
+                            className="form-label    px-2 z-10 text-white"
                           >
                             {loading && !tokenIds.length
                               ? "NFT Loading..."
@@ -447,7 +447,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                         <button
                           type="submit"
                           disabled={loading || !tokenIds.length}
-                          className=" commonBtn font-semibold mx-auto flex items-center justify-center btn w-full"
+                          className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                         >
                           {loading ? (
                             <div className="spinner">

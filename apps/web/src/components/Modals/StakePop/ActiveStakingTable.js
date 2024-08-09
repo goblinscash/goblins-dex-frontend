@@ -12,7 +12,7 @@ function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
         <thead>
           <tr className=" text-sm leading-normal transparent">
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{
                 background: "rgb(1, 27, 28)",
                 borderTopLeftRadius: 5,
@@ -21,7 +21,7 @@ function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
               {/* <input type="checkbox" className="form-check" /> */}
             </th>
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{
                 background: "rgb(1, 27, 28)",
                 borderTopLeftRadius: 5,
@@ -32,7 +32,7 @@ function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
               </button>
             </th>
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{ background: "#011b1c" }}
             >
               <button className="border-0 p-0 bg-transparent flex items-center">
@@ -40,7 +40,7 @@ function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
               </button>
             </th>
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{ background: "rgb(1, 27, 28)" }}
             >
               <button className="border-0 p-0 bg-transparent flex items-center">
@@ -48,7 +48,7 @@ function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
               </button>
             </th>
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{ background: "rgb(1, 27, 28)" }}
             >
               <button className="border-0 p-0 bg-transparent flex items-center">
@@ -159,7 +159,7 @@ function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
                       </span>
                     </div>
                     <div className="content">
-                      <p className="m-0 font-bold">
+                      <p className="m-0  ">
                         {" "}
                         {Number(item.feeTier).toFixed(2)} %
                       </p>
@@ -170,7 +170,7 @@ function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
                   className="py-0 px-6 text-left  border-b border-gray-600 transparent "
                   style={{ background: "#002628" }}
                 >
-                  <p className={` m-0 font-bold capitalize`}>
+                  <p className={` m-0   capitalize`}>
                     {item.nftCount || "0"}{" "}
                   </p>
                 </td>
@@ -178,7 +178,7 @@ function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
                   className="py-0 px-6 text-left  border-b border-gray-600 transparent "
                   style={{ background: "#002628" }}
                 >
-                  <p className={` m-0 font-bold capitalize`}>
+                  <p className={` m-0   capitalize`}>
                     {item.minWidth > 100
                       ? Number(item.minWidth) / 100
                       : item.minWidth}
@@ -189,7 +189,7 @@ function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
                   className="py-3 px-6 text-left border-b border-gray-600 transparent"
                   style={{ background: "#002628" }}
                 >
-                  <p className={` m-0 font-bold capitalize`}>
+                  <p className={` m-0   capitalize`}>
                     {item.reward + " " + item.rewardSymbol}{" "}
                   </p>
                 </td>

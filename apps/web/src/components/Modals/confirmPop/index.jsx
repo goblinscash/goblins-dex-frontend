@@ -144,14 +144,14 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim }) => {
         >
           <div className="top flex items-center justify-between gap-2 pt-2 px-3">
             <div className="left flex items-center gap-2">
-              <p className="m-0 font-bold text-white text-lg">
+              <p className="m-0   text-white text-lg">
                 {isRestake || isClaim ? "Claim" : "Delete Incentive"}
               </p>
             </div>
 
             <button
               onClick={handleConfirm}
-              className="m-0 border-0 p-0 transparent font-semibold text-gray-400 "
+              className="m-0 border-0 p-0 transparent    text-gray-400 "
               disabled={loading}
             >
               <svg
@@ -206,7 +206,7 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim }) => {
                       type="button"
                       disabled={loading}
                       onClick={handleClaim}
-                      className=" commonBtn font-semibold mx-auto flex items-center justify-center btn w-full"
+                      className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                     >
                       {loading ? (
                         <div className="spinner">
@@ -221,7 +221,7 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim }) => {
                       type="button"
                       disabled={loading}
                       onClick={handleRestake}
-                      className=" commonBtn font-semibold mx-auto flex items-center justify-center btn w-full"
+                      className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                     >
                       {loading ? (
                         <div className="spinner">
@@ -236,7 +236,7 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim }) => {
                       type="button"
                       disabled={loading}
                       onClick={handleEndIncentive}
-                      className=" commonBtn font-semibold mx-auto flex items-center justify-center btn w-full"
+                      className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                     >
                       {loading ? (
                         <div className="spinner">

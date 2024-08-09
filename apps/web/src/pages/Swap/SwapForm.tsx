@@ -65,6 +65,8 @@ import { didUserReject } from 'utils/swapErrorToUserReadableMessage'
 import { getIsReviewableQuote } from '.'
 import { OutputTaxTooltipBody } from './TaxTooltipBody'
 
+import "assets/styles/conflict.css"
+
 interface SwapFormProps {
   disableTokenInputs?: boolean
   onCurrencyChange?: (selected: CurrencyState) => void
@@ -537,7 +539,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
           }}
         />
       )}
-      <div style={{ display: 'relative' }}>
+      <div className='swapForm' style={{ display: 'relative' }}>
         <SwapSection style={{ marginBottom: '5px' }}>
           <Trace section={InterfaceSectionName.CURRENCY_INPUT_PANEL}>
             <SwapCurrencyInputPanel
@@ -582,7 +584,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
         </ArrowWrapper>
       </div>
       <AutoColumn gap="xs">
-        <div>
+        <div className='swapForm'>
           <OutputSwapSection>
             <Trace section={InterfaceSectionName.CURRENCY_OUTPUT_PANEL}>
               <SwapCurrencyInputPanel

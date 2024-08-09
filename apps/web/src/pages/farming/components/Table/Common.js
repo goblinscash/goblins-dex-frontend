@@ -30,7 +30,7 @@ function CommonTable({
         <thead>
           <tr className=" text-sm leading-normal transparent">
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{
                 background: "#011b1c",
                 borderTopLeftRadius: 5,
@@ -42,7 +42,7 @@ function CommonTable({
             </th>
             {activeTab == 1 && (
               <th
-                className="py-3 px-6 text-left transparent "
+                className="py-3 px-6 text-left transparent font-light"
                 style={{ background: "#011b1c" }}
               >
                 <button
@@ -63,7 +63,7 @@ function CommonTable({
             )}
 
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{ background: "#011b1c" }}
             >
               <button className="border-0 p-0 bg-transparent flex items-center">
@@ -71,7 +71,7 @@ function CommonTable({
               </button>
             </th>
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{ background: "#011b1c" }}
             >
               <button className="border-0 p-0 bg-transparent flex items-center">
@@ -81,7 +81,7 @@ function CommonTable({
             {activeTab == 1 && (
               <>
                 <th
-                  className="py-3 px-6 text-left transparent d-flex"
+                  className="py-3 px-6 text-left transparent d-flex font-light"
                   style={{ background: "#011b1c" }}
                 >
                   <button
@@ -101,7 +101,7 @@ function CommonTable({
                 </th>
 
                 <th
-                  className="py-3 px-6 text-left transparent "
+                  className="py-3 px-6 text-left transparent font-light"
                   style={{ background: "#011b1c" }}
                 >
                   <button
@@ -122,7 +122,7 @@ function CommonTable({
               </>
             )}
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{ background: "#011b1c" }}
             >
               <button
@@ -142,7 +142,7 @@ function CommonTable({
             </th>
 
             <th
-              className="py-3 px-6 text-left transparent "
+              className="py-3 px-6 text-left transparent font-light"
               style={{ background: "#011b1c" }}
             >
               <button
@@ -271,7 +271,7 @@ function CommonTable({
                           " / " +
                           item?.getPoolDetail?.token1Symbol}
                       </span>
-                      <p className="m-0 font-bold whitespace-nowrap">
+                      <p className="m-0  whitespace-nowrap">
                         {Number(item.feeTier).toFixed(2)} %
                       </p>
                     </div>
@@ -283,7 +283,7 @@ function CommonTable({
                     className="py-0 px-6 text-left  border-b border-gray-600 transparent "
                     style={{ background: "#002628" }}
                   >
-                    <p className={` m-0 font-bold capitalize`}>
+                    <p className={` m-0  capitalize`}>
                       {item.nftCount || "0"}{" "}
                     </p>
                   </td>
@@ -292,7 +292,7 @@ function CommonTable({
                   className="py-0 px-6 text-left  border-b border-gray-600 transparent "
                   style={{ background: "#002628" }}
                 >
-                  <p className={` m-0 font-bold capitalize`}>
+                  <p className={` m-0  capitalize`}>
                     {item.minWidth > 100
                       ? Number(item.minWidth) / 100
                       : item.minWidth}
@@ -303,7 +303,7 @@ function CommonTable({
                   className="py-3 px-6 text-left border-b border-gray-600 transparent"
                   style={{ background: "#002628" }}
                 >
-                  <p className={` m-0 font-bold capitalize`}>
+                  <p className={` m-0  capitalize`}>
                     {item.reward + " " + item.rewardSymbol}{" "}
                   </p>
                 </td>
@@ -313,7 +313,7 @@ function CommonTable({
                       className="py-3 px-6 text-left border-b border-gray-600 transparent"
                       style={{ background: "#002628" }}
                     >
-                      <p className={` m-0 font-bold capitalize`}>
+                      <p className={` m-0  capitalize`}>
                         {item.apr}
                         {"%"}
                       </p>
@@ -322,7 +322,7 @@ function CommonTable({
                       className="py-3 px-6 text-left border-b border-gray-600 transparent"
                       style={{ background: "#002628" }}
                     >
-                      <p className={` m-0 font-bold capitalize`}>
+                      <p className={` m-0  capitalize`}>
                         $ {formatValue(item.tvl)}
                       </p>
                     </td>
@@ -333,7 +333,7 @@ function CommonTable({
                   className="py-3 px-6 text-left border-b border-gray-600 transparent"
                   style={{ background: "#002628" }}
                 >
-                  <p className={` m-0 font-bold capitalize text-white`}>
+                  <p className={` m-0  capitalize text-white`}>
                     {moment
                       .unix(item.key?.startTime)
                       .format("YYYY-MM-DD HH:mm")}
@@ -343,7 +343,7 @@ function CommonTable({
                   className="py-3 px-6 text-left border-b border-gray-600 transparent"
                   style={{ background: "#002628" }}
                 >
-                  <p className={` m-0 font-bold capitalize text-white`}>
+                  <p className={` m-0  capitalize text-white`}>
                     {moment.unix(item.key?.endTime).format("YYYY-MM-DD HH:mm")}
                   </p>
                 </td>
@@ -354,7 +354,7 @@ function CommonTable({
                     className="py-3 px-6 text-left border-b border-gray-600 transparent"
                     style={{ background: "#002628" }}
                   >
-                    <p className={` m-0 font-bold capitalize`}>
+                    <p className={` m-0  capitalize`}>
                       {" "}
                       <button
                         onClick={(e) => handleConfirm(item, false, true)}
@@ -372,7 +372,7 @@ function CommonTable({
                     className="py-3 px-6 text-left border-b border-gray-600 transparent"
                     style={{ background: "#002628" }}
                   >
-                    <p className={` m-0 font-bold capitalize`}>
+                    <p className={` m-0  capitalize`}>
                       {" "}
                       <button
                         onClick={(e) => {
@@ -398,7 +398,7 @@ function CommonTable({
                     className="py-3 px-6 text-left border-b border-gray-600 transparent"
                     style={{ background: "#002628" }}
                   >
-                    <p className={` m-0 font-bold capitalize`}>
+                    <p className={` m-0  capitalize`}>
                       {" "}
                       <button
                         onClick={(e) => handleConfirm(item)}

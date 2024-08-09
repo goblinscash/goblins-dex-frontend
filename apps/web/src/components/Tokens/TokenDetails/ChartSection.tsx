@@ -95,7 +95,8 @@ export default function ChartSection({
           </TimePeriodSelectorContainer>
         ) : (
           <TimePeriodSelector timePeriod={timePeriod} onChangeTimePeriod={onChangeTimePeriod} />
-        )}
+        )
+        }
       </ChartContainer>
     </Suspense>
   )

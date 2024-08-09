@@ -386,7 +386,7 @@ const Dashboard = () => {
                             onClick={() => showTab(item.id)}
                             className={`${
                               activeTab === item.id && "active"
-                            } tab-button font-semibold relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
+                            } tab-button  relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
                           >
                             {item.name}
                           </button>
@@ -490,7 +490,7 @@ const Dashboard = () => {
                     <div className="flex items-center gap-2">
                       <label
                         htmlFor=""
-                        className="form-label m-0 font-bold themeClr"
+                        className="form-label m-0  themeClr"
                       >
                         Claim Rewards
                       </label>

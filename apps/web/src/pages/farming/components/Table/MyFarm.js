@@ -29,7 +29,7 @@ function MyFarm({
           type="button"
           onClick={handleWithdraw}
           disabled={isBlocked}
-          className=" commonBtn font-semibold mx-auto inline-flex items-center justify-end btn"
+          className=" commonBtn  mx-auto inline-flex items-center justify-end btn"
         >
           Withdraw Tokens
         </button>
@@ -42,7 +42,7 @@ function MyFarm({
           <thead>
             <tr className=" text-sm leading-normal transparent">
               <th
-                className="py-3 px-6 text-left transparent "
+                className="py-3 px-6 text-left transparent font-light"
                 style={{
                   background: "#011b1c",
                   borderTopLeftRadius: 5,
@@ -54,7 +54,7 @@ function MyFarm({
               </th>
 
               <th
-                className="py-3 px-6 text-left transparent "
+                className="py-3 px-6 text-left transparent font-light"
                 style={{ background: "#011b1c" }}
               >
                 <button className="border-0 p-0 bg-transparent flex items-center">
@@ -63,7 +63,7 @@ function MyFarm({
               </th>
 
               <th
-                className="py-3 px-6 text-left transparent "
+                className="py-3 px-6 text-left transparent font-light"
                 style={{ background: "#011b1c" }}
               >
                 <button className="border-0 p-0 bg-transparent flex items-center">
@@ -71,7 +71,7 @@ function MyFarm({
                 </button>
               </th>
               <th
-                className="py-3 px-6 text-left transparent "
+                className="py-3 px-6 text-left transparent font-light"
                 style={{ background: "#011b1c" }}
               >
                 <button
@@ -91,7 +91,7 @@ function MyFarm({
               </th>
 
               <th
-                className="py-3 px-6 text-left transparent "
+                className="py-3 px-6 text-left transparent font-light"
                 style={{ background: "#011b1c" }}
               >
                 <button
@@ -111,7 +111,7 @@ function MyFarm({
               </th>
 
               <th
-                className="py-3 px-6 text-left transparent "
+                className="py-3 px-6 text-left transparent font-light"
                 style={{
                   background: "#011b1c",
                   borderTopRightRadius: 5,
@@ -227,7 +227,7 @@ function MyFarm({
                         </span>
                       </div>
                       <div className="content">
-                        <p className="m-0 font-bold">
+                        <p className="m-0 ">
                           {" "}
                           {Number(item.feeTier).toFixed(2)} %
                         </p>
@@ -239,7 +239,7 @@ function MyFarm({
                     className="py-3 px-6 text-left border-b border-gray-600 transparent"
                     style={{ background: "#002628" }}
                   >
-                    <p className={` m-0 font-bold capitalize`}>
+                    <p className={` m-0  capitalize`}>
                       {" "}
                       {item.reward + " " + item.rewardSymbol}{" "}
                     </p>
@@ -248,7 +248,7 @@ function MyFarm({
                     className="py-3 px-6 text-left border-b border-gray-600 transparent"
                     style={{ background: "#002628" }}
                   >
-                    <p className={` m-0 font-bold capitalize`}>
+                    <p className={` m-0  capitalize`}>
                       {item.tokenId}{" "}
                     </p>
                   </td>
@@ -257,7 +257,7 @@ function MyFarm({
                     className="py-3 px-6 text-left border-b border-gray-600 transparent"
                     style={{ background: "#002628" }}
                   >
-                    <p className={` m-0 font-bold capitalize text-white`}>
+                    <p className={` m-0  capitalize text-white`}>
                       {moment
                         .unix(item.key?.startTime)
                         .format("YYYY-MM-DD HH:mm")}
@@ -267,7 +267,7 @@ function MyFarm({
                     className="py-3 px-6 text-left border-b border-gray-600 transparent"
                     style={{ background: "#002628" }}
                   >
-                    <p className={` m-0 font-bold capitalize text-white`}>
+                    <p className={` m-0  capitalize text-white`}>
                       {moment
                         .unix(item.key?.endTime)
                         .format("YYYY-MM-DD HH:mm")}
@@ -281,7 +281,7 @@ function MyFarm({
                   >
                     {
                       <div className="flex items-center">
-                        <p className={`  font-bold capitalize mr-2`}>
+                        <p className={`   capitalize mr-2`}>
                           <button
                             onClick={(e) => handleRestake(item, true)}
                             className="btn flex items-center commonBtn justify-center rounded"
@@ -291,7 +291,7 @@ function MyFarm({
                             {"Claim"}
                           </button>
                         </p>
-                        <p className={`  font-bold capitalize mr-2`}>
+                        <p className={`   capitalize mr-2`}>
                           <button
                             onClick={(e) => handleUnStake(item, true)}
                             className="btn flex items-center commonBtn justify-center rounded"
