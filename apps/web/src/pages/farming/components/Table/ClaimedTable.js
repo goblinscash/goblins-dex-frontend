@@ -124,12 +124,12 @@ function ClaimTable({
                       {/* {item?.getPoolDetail?.token0Symbol} /{" "}
                       {item?.getPoolDetail?.token1Symbol} */}
                       {getSymbols[item?.key?.rewardToken] ? (
-                        <Image
+                        <img
                           src={getSymbols[item?.key?.rewardToken]}
                           alt=""
                           className="rounded-pill max-w-full object-cover shadow-sm"
-                          height={1000}
-                          width={1000}
+                          height={100}
+                          width={100}
                           style={{ height: 30, width: 30 }}
                         />
                       ) : (

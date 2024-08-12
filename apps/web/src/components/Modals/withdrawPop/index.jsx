@@ -18,7 +18,7 @@ const customOption = (props) => (
       height={100}
       width={100}
       style={{ height: 100, width: 100 }}
-      src={props.data?.image}
+      src={props?.data?.image}
       alt={props.data.label}
       className="max-w-full object-contain option-image"
     />
