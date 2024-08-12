@@ -145,6 +145,7 @@ const Staking = () => {
     }
   }, [details, price]);
 
+
   useEffect(() => {
     if (
       wallet.isActive &&
