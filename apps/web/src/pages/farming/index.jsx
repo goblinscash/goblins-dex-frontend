@@ -21,11 +21,12 @@ import MyFarmTable from "./components/Table/MyFarm";
 //hooks
 import { getSortedData } from "helpers/constants";
 import {useWallet} from "hooks/useWallet";
-import useDebounce from "hooks/useDebounceFunction";
+
 
 //action
 import * as Act from "state/action";
 import { createPortal } from "react-dom";
+import useDebounceFunction from "hooks/useDebounceFunction";
 
 const Dashboard = () => {
   const { currentNetwork, isBlocked } = useSelector((state) => state.dashboard);
@@ -141,6 +142,22 @@ const Dashboard = () => {
       })
     );
   };
+
+
+  const myFarmUpdate = useDebounceFunction(async () => {
+    dispatch(
+      Act.updateFarm({
+        chainId: wallet.chainId,
+        walletAddress: wallet.address,
+      })
+    );
+  }, 500);
+
+  useEffect(() => {
+    if (wallet.chainId && wallet.address) {
+      myFarmUpdate();
+    }
+  }, [wallet.chainId, wallet.address]);
 
   const loadEnded = () => {
     dispatch(

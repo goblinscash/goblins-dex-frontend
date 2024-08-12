@@ -30,6 +30,10 @@ import { getCLS, getFCP, getFID, getLCP, Metric } from 'web-vitals'
 import { findRouteByPath, RouteDefinition, routes, useRouterConfig } from './RouteDefinitions'
 import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
+import { updateFarm } from 'state/action'
+import useDebounceFunction from 'hooks/useDebounceFunction'
+import { useDispatch } from 'react-redux'
+import { useWallet } from 'hooks/useWallet'
 
 
 
@@ -95,6 +99,8 @@ const HeaderWrapper = styled.div<{ transparent?: boolean; bannerIsVisible?: bool
 
 export default function App() {
   const isLoaded = useFeatureFlagsIsLoaded()
+  const wallet = useWallet()
+  const dispatch = useDispatch<any>()
   const [, setShouldDisableNFTRoutes] = useAtom(shouldDisableNFTRoutesAtom)
 
   const location = useLocation()
@@ -151,6 +157,23 @@ export default function App() {
     }
   }, [shouldRedirectToAppInstall])
 
+
+  useLayoutEffect(()=>{
+
+    var body = document.body;
+    if( ['/staking','/farming'].includes(pathname)){
+      body.classList.add("newDesign");
+    }
+    else{
+      body.classList.remove("newDesign");
+    }
+
+  },[pathname])
+
+
+
+
+
   if (shouldRedirectToAppInstall) {
     return null
   }
@@ -159,6 +182,9 @@ export default function App() {
   if (shouldBlockPath && pathname !== '/swap') {
     return <Navigate to="/swap" replace />
   }
+
+
+
   return (
     <ErrorBoundary>
       <ToastContainer />

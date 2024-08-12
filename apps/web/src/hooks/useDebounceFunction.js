@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export default function useDebounce (callback, delay) {
+export default function useDebounceFunction (callback, delay) {
   const timeoutRef = useRef(null);
 
   useEffect(() => {
