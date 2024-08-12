@@ -144,14 +144,14 @@ const Dashboard = () => {
   };
 
 
-  const myFarmUpdate = useDebounceFunction(async () => {
+  const myFarmUpdate = async () => {
     dispatch(
-      Act.updateFarm({
+      Act.updateMyFarm({
         chainId: wallet.chainId,
         walletAddress: wallet.address,
       })
     );
-  }, 500);
+  };
 
   useEffect(() => {
     if (wallet.chainId && wallet.address) {
