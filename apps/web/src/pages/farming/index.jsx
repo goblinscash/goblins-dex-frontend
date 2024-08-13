@@ -512,19 +512,18 @@ const Dashboard = () => {
                         Claim Rewards
                       </label>
                       <div
-                        onClick={() => setToggleEnded(!toggleEnded)}
-                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 
-      }`}
-                        style={{
-                          background: toggleEnded ? "#00ff00" : "#001213",
-                        }}
-                      >
-                        <span
-                          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 ${
-                            toggleEnded ? "translate-x-6" : "translate-x-1"
-                          }`}
-                        />
-                      </div>
+  onClick={() => setToggleEnded(!toggleEnded)}
+  className="toggle-container"
+  style={{
+    background: toggleEnded ? "#00ff00" : "#001213",
+  }}
+>
+  <span
+    className={`toggle-indicator ${
+      toggleEnded ? "translate-right" : "translate-left"
+    }`}
+  />
+</div>
                     </div>
                   </div>
                 )}

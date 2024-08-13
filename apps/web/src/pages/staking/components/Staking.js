@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 
 import { useSelector } from "react-redux";
@@ -44,6 +44,28 @@ function Staking({ getDetails, isBlocked, details }) {
       console.log(error, "<====error");
     }
   };
+
+  const handleMigration = async () => {
+    try {
+    
+  
+      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      await web3.getMigrationDetail(wallet.address);
+      setLoading(false);
+   
+    } catch (error) {
+      setLoading(false);
+      toast.error(error);
+
+      console.log(error, "<====error");
+    }
+  };
+
+
+  // useEffect(() => {
+  //   handleMigration()
+  // }, [wallet])
+  
 
   const handleChange = (e) => {
     let { value } = e.target;

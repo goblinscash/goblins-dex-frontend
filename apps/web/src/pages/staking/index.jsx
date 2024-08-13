@@ -25,15 +25,15 @@ import Web3Intraction from "utils/web3Intraction";
 import { useWallet } from "hooks/useWallet";
 
 // css
+import MigrationPop from "components/Modals/MigrationPop";
+import { createPortal } from "react-dom";
 import styles from "./staking.module.scss";
-
-
-let isBlocked = false;
 
 const Staking = () => {
   const { currentNetwork, isBlocked } = useSelector((state) => state.dashboard);
   const wallet = useWallet();
   const [loading, setLoading] = useState(false);
+  const [migration, setMigration] = useState(false);
   const [apr, setApr] = useState(0);
 
   const [price, setPrice] = useState({
@@ -65,6 +65,8 @@ const Staking = () => {
       setLoading(false);
     }
   };
+
+
 
   const getAPR = async (totalSupply, BCHPrice, GOBPrice) => {
     try {
@@ -145,7 +147,6 @@ const Staking = () => {
     }
   }, [details, price]);
 
-
   useEffect(() => {
     if (
       wallet.isActive &&
@@ -163,18 +164,28 @@ const Staking = () => {
 
   return (
     <>
-     {
-       loading &&  <div
-       className="fixed flex items-center justify-center w-full"
-       style={{
-         height: "calc(100vh - 72px)",
-         background: "#00000099",
-         zIndex: 9999,
-       }}
-     >
-       <CommonLoader />
-     </div>
-     }
+      {migration &&
+        createPortal(
+          <MigrationPop
+            migration={migration}
+            setMigration={setMigration}
+            // load={load}
+          />,
+          document.body
+        )}
+
+      {loading && (
+        <div
+          className="fixed flex items-center justify-center w-full loaderCstm"
+          style={{
+            height: "calc(100vh - 72px)",
+            background: "#00000099",
+            zIndex: 9999,
+          }}
+        >
+          <CommonLoader />
+        </div>
+      )}
       <section className={`${styles?.stakingSec} staking relative py-5 w-full`}>
         <div className="container mx-auto">
           <div className="grid gap-3  grid-cols-12">
@@ -243,18 +254,24 @@ const Staking = () => {
                   <p className="m-0 font-extrabold py-2 text-lg">
                     GOB Price: ${price?.GOBInPrice || 0}
                   </p>
-                  <Link
-                    href="https://gobswap.dfd.cash/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
-                    target="_blank"
-                    onClick={(e) => (isBlocked ? e.preventDefault() : false)}
-                  >
-                    <button
-                      className="btn font-bold my-2 inline-flex items-center justify-center commonBtn"
-                      disabled={isBlocked}
+                  <div className="flex items-center justify-center gap-2">
+                    {/* <button
+                      onClick={handleMigration}
+                      className="btn flex items-center justify-center commonBtn"
+                    >Migration</button> */}
+                    <Link
+                      href="https://gobswap.dfd.cash/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
+                      target="_blank"
+                      onClick={(e) => (isBlocked ? e.preventDefault() : false)}
                     >
-                      BUY GOB
-                    </button>
-                  </Link>
+                      <button
+                        className="btn font-bold my-2 inline-flex items-center justify-center commonBtn"
+                        disabled={isBlocked}
+                      >
+                        BUY GOB
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

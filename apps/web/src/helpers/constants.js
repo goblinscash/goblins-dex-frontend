@@ -36,6 +36,8 @@ export const cryptoData = [
       nftManagerContractAddress:
         process.env.REACT_APP_BCH_NFT_MANAGER_CONTRACT,
       stakeContractAddress: process.env.REACT_APP_BCH_TOKEN_STAKING_CONTRACT,
+      migrationAddress: process.env.REACT_APP_BCH_MIGRATION_STAKING_CONTRACT,
+
       explorerLink: "https://smartscout.cash/",
       rpcUrls: ["https://smartbch.greyh.at"],
 

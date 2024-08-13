@@ -206,7 +206,32 @@ body.newDesign .underlineTab .tab-button.active {
 body.newDesign .right-n25 {
   right: -25px;
 }
+.toggle-container {
+  position: relative; /* relative */
+  display: inline-flex; /* inline-flex */
+  height: 1.5rem; /* h-6 */
+  width: 2.75rem; /* w-11 */
+  align-items: center; /* items-center */
+  border-radius: 9999px; /* rounded-full */
+  transition: background-color 300ms; /* transition-colors duration-300 */
+}
 
+.toggle-indicator {
+  display: inline-block; /* inline-block */
+  height: 1rem; /* h-4 */
+  width: 1rem; /* w-4 */
+  background-color: white; /* bg-white */
+  border-radius: 9999px; /* rounded-full */
+  transition: transform 300ms; /* transition-transform duration-300 */
+}
+
+.translate-left {
+  transform: translateX(0.25rem); /* translate-x-1 */
+}
+
+.translate-right {
+  transform: translateX(1.5rem); /* translate-x-6 */
+}
 body.newDesign .font-18 {
   font-size: 18px;
 }

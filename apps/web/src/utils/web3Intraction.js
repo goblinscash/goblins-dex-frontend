@@ -3,6 +3,7 @@ import { Contract, ethers } from "ethers";
 //ABI
 import TokenABI from "./ABI/TokenABI.json";
 import StakeABI from "./ABI/StakeABI.json";
+import MigrationStakingABI from "./ABI/migrationStaking.json";
 import UniswapV3Staker from "./ABI/UniswapV3Staker.json";
 import NFTManager from "./ABI/NonfungiblePositionManager.json";
 import PancakeV3Pool from "./ABI/PancakeV3Pool.json";
@@ -1198,6 +1199,74 @@ class Web3Intraction {
       }
     });
   };
+
+
+  /**
+   * Token Stake
+   *
+   * @param {string} amount amount value
+   *
+   *
+   * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
+   */
+
+  migration = async () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const contract = this.getContract(
+          JSON.stringify(MigrationStakingABI),
+          this.contractDetails.migrationAddress,
+          true
+        );
+console.log(contract, "<=====contract")
+        // resolve(receipt);
+      
+      } catch (error) {
+        console.log(error, "<===error in stake");
+        if (error?.code === -32603) {
+          return reject("insufficient funds for intrinsic transaction cost");
+        }
+
+        reject(error.reason || error.data?.message || error.message || error);
+      }
+    });
+  };
+
+
+    /**
+   * Token Stake
+   *
+   * @param {string} amount amount value
+   *
+   *
+   * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
+   */
+
+     getMigrationDetail = async (address) => {
+      return new Promise(async (resolve, reject) => {
+        try {
+          const contract = this.getContract(
+            JSON.stringify(MigrationStakingABI),
+            this.contractDetails.migrationAddress,
+            true
+          );
+  console.log(contract, "<=====contract")
+
+          // 0x5e46Cc6547Ca2b470b45787Bc0a0b6afcF56eeD3
+          let balance = await contract.warmupInfo(address)
+  console.log(balance, "<=====balance")
+          // resolve(receipt);
+        
+        } catch (error) {
+          console.log(error, "<===error in stake");
+          if (error?.code === -32603) {
+            return reject("insufficient funds for intrinsic transaction cost");
+          }
+  
+          reject(error.reason || error.data?.message || error.message || error);
+        }
+      });
+    };
 }
 
 export default Web3Intraction;

@@ -7,7 +7,6 @@
     "@crowdin/cli": "3.14.0",
     "@ethersproject/keccak256": "5.7.0",
     "@manypkg/cli": "^0.19.2",
-    "@tailwindcss/forms": "0.5.7",
     "danger": "11.2.6",
     "depcheck": "1.4.7",
     "dotenv-cli": "^7.0.0",
@@ -16,14 +15,10 @@
     "i18next": "21.9.1",
     "i18next-parser": "8.6.0",
     "patch-package": "^7.0.0",
-    "postcss": "8.4.41",
-    "postcss-cli": "11.0.0",
-    "postcss-prefix-selector": "1.16.1",
     "react-select": "5.8.0",
     "react-toastify": "10.0.5",
     "sass": "1.77.8",
     "syncpack": "^8.5.14",
-    "tailwindcss": "3.4.7",
     "turbo": "1.10.16"
   },
   "engines": {
