@@ -74,6 +74,8 @@ class Web3Intraction {
    */
   checkAllowance = async (tokenAmount, tokenAddress, approvalAddress) => {
     return new Promise(async (resolve, reject) => {
+
+      console.log(tokenAmount, tokenAddress, approvalAddress, "<===data")
       try {
         let walletAddres = this.SIGNER.getAddress();
 
@@ -925,7 +927,7 @@ class Web3Intraction {
           true
         );
 
-        console.log(contract, "<====contract");
+        
         let tx = await contract.getReward();
         let receipt = await tx.wait();
         resolve(receipt);
@@ -1210,7 +1212,9 @@ class Web3Intraction {
    * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
    */
 
-  migration = async () => {
+  unStakeFromMigration = async (amount) => {
+
+    console.log(amount, "<===amount")
     return new Promise(async (resolve, reject) => {
       try {
         const contract = this.getContract(
@@ -1218,7 +1222,10 @@ class Web3Intraction {
           this.contractDetails.migrationAddress,
           true
         );
-console.log(contract, "<=====contract")
+console.log(contract, "<===contract")
+        let tx = await contract.unstake(amount, true);
+        let receipt = await tx.wait();
+        resolve(receipt);
         // resolve(receipt);
       
       } catch (error) {
@@ -1233,40 +1240,6 @@ console.log(contract, "<=====contract")
   };
 
 
-    /**
-   * Token Stake
-   *
-   * @param {string} amount amount value
-   *
-   *
-   * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
-   */
-
-     getMigrationDetail = async (address) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const contract = this.getContract(
-            JSON.stringify(MigrationStakingABI),
-            this.contractDetails.migrationAddress,
-            true
-          );
-  console.log(contract, "<=====contract")
-
-          // 0x5e46Cc6547Ca2b470b45787Bc0a0b6afcF56eeD3
-          let balance = await contract.warmupInfo(address)
-  console.log(balance, "<=====balance")
-          // resolve(receipt);
-        
-        } catch (error) {
-          console.log(error, "<===error in stake");
-          if (error?.code === -32603) {
-            return reject("insufficient funds for intrinsic transaction cost");
-          }
-  
-          reject(error.reason || error.data?.message || error.message || error);
-        }
-      });
-    };
 }
 
 export default Web3Intraction;

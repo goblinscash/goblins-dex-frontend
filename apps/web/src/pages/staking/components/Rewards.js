@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import styles from "../staking.module.scss";
 
 // image
-import logo from "assets/farmingAssets/Images/logo.png";
+import logo from "assets/farmingAssets/Images/wbchlogo.png";
 
 //hooks && helpers
 import { toCommas } from "helpers/utils";

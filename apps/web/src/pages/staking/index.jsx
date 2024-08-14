@@ -36,6 +36,7 @@ const Staking = () => {
   const [migration, setMigration] = useState(false);
   const [apr, setApr] = useState(0);
 
+
   const [price, setPrice] = useState({
     GOBInPrice: 0,
     WBCHInPrice: 0,
@@ -50,13 +51,15 @@ const Staking = () => {
       setLoading(true);
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       let detail = await web3.getDetailInfo();
-
+      let data = await web3.getTokenBalance("0x47c61F29B1458d234409Ebbe4B6a70F3b16528EF");
+    
       setDetails({
         ...detail,
         unStakedAmountInDollar:
           detail.unStakedAmount * Number(price.GOBInPrice),
         stakedAmountInDollar: detail.stakedAmount * Number(price.GOBInPrice),
         balanceInDollar: detail.balance * Number(price.GOBInPrice),
+        sGob: data.balance
       });
 
       setLoading(false);
@@ -66,6 +69,10 @@ const Staking = () => {
     }
   };
 
+
+  const handleMigrationPopup =()=>{
+    setMigration(!migration)
+  }
 
 
   const getAPR = async (totalSupply, BCHPrice, GOBPrice) => {
@@ -141,6 +148,11 @@ const Staking = () => {
     } catch (error) {}
   };
 
+
+
+
+
+
   useEffect(() => {
     if (details.stakeSymbol && price.GOBInPrice && price.WBCHInPrice) {
       getAPR(details.totalSupply, price.WBCHInPrice, price.GOBInPrice);
@@ -154,6 +166,7 @@ const Staking = () => {
       currentNetwork &&
       price.GOBInPrice
     ) {
+   
       getDetails();
     }
   }, [wallet, currentNetwork, price]);
@@ -169,6 +182,9 @@ const Staking = () => {
           <MigrationPop
             migration={migration}
             setMigration={setMigration}
+            balance={details.sGob || 0}
+            getDetails={getDetails}
+
             // load={load}
           />,
           document.body
@@ -255,10 +271,10 @@ const Staking = () => {
                     GOB Price: ${price?.GOBInPrice || 0}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    {/* <button
-                      onClick={handleMigration}
+                    {details.sGob > 0 && <button
+                      onClick={handleMigrationPopup}
                       className="btn flex items-center justify-center commonBtn"
-                    >Migration</button> */}
+                    >Migration</button>}
                     <Link
                       href="https://gobswap.dfd.cash/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
                       target="_blank"

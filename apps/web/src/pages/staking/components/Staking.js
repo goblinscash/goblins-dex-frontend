@@ -45,26 +45,9 @@ function Staking({ getDetails, isBlocked, details }) {
     }
   };
 
-  const handleMigration = async () => {
-    try {
-    
-  
-      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      await web3.getMigrationDetail(wallet.address);
-      setLoading(false);
-   
-    } catch (error) {
-      setLoading(false);
-      toast.error(error);
-
-      console.log(error, "<====error");
-    }
-  };
 
 
-  // useEffect(() => {
-  //   handleMigration()
-  // }, [wallet])
+
   
 
   const handleChange = (e) => {
@@ -103,7 +86,7 @@ function Staking({ getDetails, isBlocked, details }) {
           <h4 className="m-0 text-3xl font-extrabold text-white">UNSTAKED</h4>
           <div className="pt-3">
             <h6 className="m-0 font-extrabold py-2 text-lg flex items-center justify-center">
-              {toCommas(Number(details?.unStakedAmount).toFixed(2) || 0)} {details?.stakeSymbol}
+              {toCommas(Number(details?.unStakedAmount || 0).toFixed(2) || 0)} {details?.stakeSymbol}
               <img
                 src={logo}
                 height={100}

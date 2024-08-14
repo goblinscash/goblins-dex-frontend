@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -6,141 +6,52 @@ import { toast } from "react-toastify";
 import styles from "./migrationPop.module.scss";
 
 //helpers
-import useDebounce from "hooks/useDebounceFunction";
 import { useWallet } from "hooks/useWallet";
-import { updateFarm } from "state/action";
 import Web3Intraction from "utils/web3Intraction";
 
-const MigrationPop = ({
-  handleConfirm,
-  detail,
-  load,
-  isRestake,
-  isClaim,
-  migration,
-  setMigration,
-}) => {
+const MigrationPop = ({ migration, setMigration, balance, getDetails }) => {
   const wallet = useWallet();
-  const dispatch = useDispatch();
   const { currentNetwork } = useSelector((state) => state.dashboard);
   const [loading, setLoading] = useState(false);
-  const [tokenIds, setTokenIds] = useState(false);
-  const handleMigration = () => {
-    setMigration(!migration);
-  };
-  const handleEndIncentive = async (e) => {
+  const [progressBar, setProgressBar] = useState(0);
+  const [status, setStatus] = useState("Pending");
+
+  const handleMigration = async (e) => {
     try {
       e.preventDefault();
 
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       setLoading(true);
-      await web3.endIncentive(
-        [
-          detail.key.rewardToken,
-          detail.key.pool,
-          detail.key.startTime,
-          detail.key.endTime,
-          detail.key.refundee,
-        ],
-        tokenIds
+
+      if (balance <= 0) return;
+
+      setProgressBar(20)
+      setStatus("Waiting for contract approval!")
+      let amountValue = await web3.checkAllowance(
+        balance,
+        "0x47c61F29B1458d234409Ebbe4B6a70F3b16528EF",
+        web3.contractDetails.migrationAddress
       );
 
-      dispatch(
-        updateFarm({
-          data: {
-            chainId: wallet.chainId,
-            type: "End",
-            walletAddress: wallet.address,
-            incentiveId: detail.incentiveId,
-          },
-        })
-      );
+      setProgressBar(45)
+      setStatus("Fund Transferring to your wallet...")
 
+      await web3.unStakeFromMigration(amountValue, true);
+      setProgressBar(75)
+      setStatus("Staking in new contract...")
+      await web3.tokenStake(balance);
+      setProgressBar(100)
+      toast.success("Amount Staked");
+      getDetails();
+
+      setMigration(false)
       setLoading(false);
-      handleConfirm();
-      load();
     } catch (error) {
       console.log(error, "<====error");
       setLoading(false);
       toast.error(error);
     }
   };
-
-  const handleRestake = async (e) => {
-    try {
-      e.preventDefault();
-      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      setLoading(true);
-      await web3.mutliCallReStake(
-        [
-          detail.key.rewardToken,
-          detail.key.pool,
-          detail.key.startTime,
-          detail.key.endTime,
-          detail.key.refundee,
-        ],
-        detail.tokenId,
-        wallet.address
-      );
-      setLoading(false);
-      handleConfirm();
-      load();
-    } catch (error) {
-      console.log(error, "<====error");
-      setLoading(false);
-      toast.error(error);
-    }
-  };
-
-  const handleClaim = async (e) => {
-    try {
-      e.preventDefault();
-      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      setLoading(true);
-      await web3.claimRewards(detail.key.rewardToken, wallet.address);
-      setLoading(false);
-      handleConfirm();
-      load();
-    } catch (error) {
-      console.log(error, "<====error");
-      setLoading(false);
-      toast.error(error);
-    }
-  };
-
-  const loadTokenIds = useDebounce(async () => {
-    if (isRestake || isClaim) return;
-
-    let tokens = [];
-    setLoading(true);
-    for (let i = 0; i < 10000; i++) {
-      try {
-        const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-        let tokenId = await web3.getTokenId(
-          web3.contractDetails.contractAddress,
-          i
-        );
-        let stakes = await web3.getStakes(tokenId, detail.incentiveId);
-
-        console.log(stakes, tokenId, "<===stakes");
-        if (
-          stakes.liquidity > 0 ||
-          stakes.secondsPerLiquidityInsideInitialX128 > 0
-        ) {
-          tokens.push(tokenId);
-        }
-      } catch (error) {
-        setLoading(false);
-        break;
-      }
-    }
-
-    setTokenIds(tokens);
-  }, 200);
-
-  useEffect(() => {
-    loadTokenIds();
-  }, [isRestake, isClaim]);
 
   return (
     <>
@@ -157,7 +68,8 @@ const MigrationPop = ({
             </div>
 
             <button
-              onClick={handleMigration}
+              onClick={(e) => setMigration(!migration)}
+            type="button"
               className="m-0 border-0 p-0 transparent    text-gray-400 absolute top-2 right-1"
               disabled={loading}
             >
@@ -183,35 +95,49 @@ const MigrationPop = ({
           <div className="modalBody py-2">
             <div className="inner p-3">
               <div className="grid gap-3 grid-cols-12">
-                <div className="col-span-12">
-             
+                <div className="col-span-12 text-center">
+                  <p className="m-0 text-white">
+                    {" "}
+                    <b>Balance: {balance} sGOB</b>
+                  </p>
                 </div>
                 <div className="col-span-12">
                   <div className="flex items-center gap-2">
-                  <div
-                    className={`${styles.progressWrp} w-full progressWrp relative rounded-pill p-2  rounded-pill`}
-                    style={{ background: "#000" }}
-                  >
                     <div
-                      className="absolute h-full w-full rounded-pill top-0 left-0"
-                      style={{ background: "#00FF00", width: "30%" }}
-                    ></div>
-                  </div>
-                  <p className="m-0 text-white">30%</p>
+                      className={`${styles.progressWrp} w-full progressWrp relative rounded-pill p-2  rounded-pill`}
+                      style={{ background: "#000" }}
+                    >
+                      <div
+                        className="absolute h-full w-full rounded-pill top-0 left-0"
+                        style={{
+                          background: "#00FF00",
+                          width: `${progressBar}%`,
+                        }}
+                      ></div>
+                    </div>
+                    <p className="m-0 text-white">{progressBar}%</p>
                   </div>
                   <ul className="list-none pl-0 mb-0 flex items-center justify-end gap-2">
                     <li className="text-white font-semibold">Status: </li>
-                    <li className="themeClr font-semibold"> Approved</li>
+                    <li className="themeClr font-semibold"> {status}</li>
                   </ul>
                 </div>
                 <div className="col-span-12">
                   <div className="btnWrpper mt-4">
-                  <button
-                    type="button"
-                    className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
-                  >
-                    Migrate
-                  </button>
+                    <button
+                      type="button"
+                      onClick={handleMigration}
+                      disabled={loading || !balance}
+                      className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
+                    >
+                      {loading ? (
+                        <div className="spinner">
+                          <span className=""> Please wait...</span>
+                        </div>
+                      ) : (
+                        "Migrate"
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>
