@@ -237,10 +237,15 @@ const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
                     </TabItem>
                   </TraceEvent>
                 )
-              })}
+              }        
+              )
+              }
             </TabBar>
-          )}
-          {isInfoExplorePageEnabled ? (
+          )  
+          }
+          {
+
+          isInfoExplorePageEnabled ? (
             <FiltersContainer isInfoExplorePageEnabled>
               <DropdownFilterContainer isInfoExplorePageEnabled>
                 <NetworkFilter />
@@ -260,7 +265,9 @@ const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
                 <SearchBar />
               </SearchContainer>
             </>
-          )}
+          )
+          
+        }
         </NavWrapper>
         {isInfoExplorePageEnabled ? <Page /> : <OldTokenTable />}
       </ExploreContainer>

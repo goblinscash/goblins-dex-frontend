@@ -22,7 +22,7 @@ const customOption = (props) => (
       alt={props.data.label}
       className="max-w-full object-contain option-image"
     />
-    <span className="text-dark">{props.data.label}</span>
+    <span className="text-dark" style={{color: "#000"}}>{props.data.label}</span>
   </div>
 );
 

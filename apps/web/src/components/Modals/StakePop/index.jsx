@@ -428,6 +428,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                                   menuPortalTarget={document.body}
                                   onChange={handleChange}
 
+                                  
                                 />
                               </div>
                             </>
