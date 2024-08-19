@@ -273,7 +273,7 @@ const Staking = () => {
                   <div className="flex items-center justify-center gap-2">
                     {details.sGob > 0 && <button
                       onClick={handleMigrationPopup}
-                      className="btn flex items-center justify-center commonBtn"
+                      className="btn  flex items-center justify-center commonBtn font-extrabold"
                     >Migration</button>}
                     <Link
                       href="https://gobswap.dfd.cash/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"

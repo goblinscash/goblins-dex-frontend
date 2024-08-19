@@ -80,6 +80,10 @@ function HeaderValueDisplay({
     return <>{value}</>
   }
 
+
+
+  console.log(value, valueFormatterType, "<===value")
+
   return (
     <ThemedText.HeadlineLarge>{formatFiatPrice({ price: value, type: valueFormatterType })}</ThemedText.HeadlineLarge>
   )
@@ -116,7 +120,7 @@ export function ChartHeader({
         {additionalFields}
         <HeaderTimeDisplay time={time} timePlaceholder={timePlaceholder} />
       </ChartHeaderLeftDisplay>
-      <ProtocolLegend protocolData={protocolData} />
+      {/* <ProtocolLegend protocolData={protocolData} /> */}
     </ChartHeaderWrapper>
   )
 }
