@@ -2740,6 +2740,7 @@ export const TokensDocument = gql`
     tokenDayData{
       priceUSD
       open
+      date
       high
     }
   }
