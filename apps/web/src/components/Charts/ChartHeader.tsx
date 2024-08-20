@@ -82,8 +82,6 @@ function HeaderValueDisplay({
 
 
 
-  console.log(value, valueFormatterType, "<===value")
-
   return (
     <ThemedText.HeadlineLarge>{formatFiatPrice({ price: value, type: valueFormatterType })}</ThemedText.HeadlineLarge>
   )

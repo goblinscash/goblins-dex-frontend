@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { TokenQuery } from 'graphql/data/__generated__/types-and-hooks'
+import { TokenQuery } from 'graphql/data/types-and-hooks'
 
 export const getTokenPageTitle = (tokenQuery: TokenQuery, omitSearchDetail?: boolean) => {
   const tokenName = tokenQuery?.token?.name

@@ -70,7 +70,7 @@ export default function TokenDetailsPage() {
   useEffect(() => {
     if (tokenPriceQuery) setCurrentPriceQuery(tokenPriceQuery)
   }, [setCurrentPriceQuery, tokenPriceQuery])
-
+console.log(tokenQuery, "<====tokenQuery")
 
   if (!tokenQuery) return <TokenDetailsPageSkeleton />
 

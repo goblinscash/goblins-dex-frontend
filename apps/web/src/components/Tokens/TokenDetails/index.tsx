@@ -30,7 +30,7 @@ import {
   PortfolioTokenBalancePartsFragment,
   TokenPriceQuery,
   TokenQuery,
-} from 'graphql/data/__generated__/types-and-hooks'
+} from 'graphql/data/types-and-hooks'
 import { TokenQueryData } from 'graphql/data/Token'
 import {
   getTokenDetailsURL,
@@ -122,13 +122,13 @@ function useOnChainToken(address: string | undefined, skip: boolean) {
 function useRelevantToken(
   address: string | undefined,
   pageChainId: number,
-  tokenQueryData: TokenQueryData | undefined
+  tokenQueryData: any | undefined
 ) {
   const { chainId: activeChainId } = useWeb3React()
   const queryToken = useMemo(() => {
     if (!address) return undefined
     if (address === NATIVE_CHAIN_ID) return nativeOnChain(pageChainId)
-    if (tokenQueryData) return gqlToCurrency(tokenQueryData)
+    // if (tokenQueryData) return gqlToCurrency(tokenQueryData)
     return undefined
   }, [pageChainId, address, tokenQueryData])
   // fetches on-chain token if query data is missing and page chain matches global chain (else fetch won't work)
@@ -187,23 +187,25 @@ export default function TokenDetails({
   const tokenQueryData = tokenQuery.token
   const { data: balanceQuery } = useCachedPortfolioBalancesQuery({ account })
 
-  const multiChainMap = useMemo(() => {
+  // const multiChainMap = useMemo(() => {
 
-    if (!balanceQuery) return null
-    const tokenBalances = balanceQuery?.portfolios?.[0].tokenBalances
-    const tokensAcrossChains = tokenQueryData?.project?.tokens
-    if (!tokensAcrossChains) return {}
-    return tokensAcrossChains.reduce((map, current) => {
-      if (current) {
-        if (!map[current.chain]) {
-          map[current.chain] = {}
-        }
-        map[current.chain].address = current.address
-        map[current.chain].balance = tokenBalances?.find((tokenBalance) => tokenBalance.token?.id === current.id)
-      }
-      return map
-    }, {} as MultiChainMap)
-  }, [balanceQuery?.portfolios, tokenQueryData?.project?.tokens])
+  //   if (!balanceQuery) return null
+  //   const tokenBalances = balanceQuery?.portfolios?.[0].tokenBalances
+  //   const tokensAcrossChains = tokenQueryData?.project?.tokens
+  //   if (!tokensAcrossChains) return {}
+  //   return tokensAcrossChains.reduce((map, current) => {
+  //     if (current) {
+  //       if (!map[current.chain]) {
+  //         map[current.chain] = {}
+  //       }
+  //       map[current.chain].address = current.address
+  //       map[current.chain].balance = tokenBalances?.find((tokenBalance) => tokenBalance.token?.id === current.id)
+  //     }
+  //     return map
+  //   }, {} as MultiChainMap)
+  // }, [balanceQuery?.portfolios, tokenQueryData?.project?.tokens])
+
+  // console.log(address, pageChainId, tokenQueryData, "<====data")
 
   const { token: detailedToken, didFetchFromChain } = useRelevantToken(address, pageChainId, tokenQueryData)
 
@@ -379,9 +381,7 @@ export default function TokenDetails({
                 <AboutSection
                   address={address}
                   chainId={pageChainId}
-                  description={tokenQueryData?.project?.description}
-                  homepageUrl={tokenQueryData?.project?.homepageUrl}
-                  twitterName={tokenQueryData?.project?.twitterName}
+              
                 />
                 {!detailedToken.isNative && <AddressSection address={address} />}
               </>

@@ -1569,7 +1569,14 @@ export type TokenQueryVariables = Exact<{
 }>;
 
 
-export type TokenQuery = { readonly __typename?: 'Query', readonly token?: { readonly __typename?: 'Token', readonly id: string, readonly decimals?: number, readonly name?: string, readonly chain: Chain, readonly address?: string, readonly symbol?: string, readonly standard?: TokenStandard, readonly market?: { readonly __typename?: 'TokenMarket', readonly id: string, readonly totalValueLocked?: { readonly __typename?: 'Amount', readonly id: string, readonly value: number, readonly currency?: Currency }, readonly price?: { readonly __typename?: 'Amount', readonly id: string, readonly value: number, readonly currency?: Currency }, readonly volume24H?: { readonly __typename?: 'Amount', readonly id: string, readonly value: number, readonly currency?: Currency }, readonly priceHigh52W?: { readonly __typename?: 'Amount', readonly id: string, readonly value: number }, readonly priceLow52W?: { readonly __typename?: 'Amount', readonly id: string, readonly value: number } }, readonly project?: { readonly __typename?: 'TokenProject', readonly id: string, readonly description?: string, readonly homepageUrl?: string, readonly twitterName?: string, readonly logoUrl?: string, readonly tokens: ReadonlyArray<{ readonly __typename?: 'Token', readonly id: string, readonly chain: Chain, readonly address?: string }>, readonly markets?: ReadonlyArray<{ readonly __typename?: 'TokenProjectMarket', readonly fullyDilutedValuation?: { readonly __typename?: 'Amount', readonly id: string, readonly value: number, readonly currency?: Currency }, readonly marketCap?: { readonly __typename?: 'Amount', readonly id: string, readonly value: number, readonly currency?: Currency } }> } } };
+export type TokenQuery = { readonly __typename?: 'Query', readonly token?: { readonly __typename?: 'Token', readonly id: string, readonly decimals?: number, readonly name?: string, readonly symbol?: string, readonly totalValueLockedUSD?: string, readonly volumeUSD?: string } };
+
+
+
+
+
+
+
 
 export type TokenProjectQueryVariables = Exact<{
   chain: Chain;
@@ -2405,65 +2412,18 @@ export type SearchTokensQueryHookResult = ReturnType<typeof useSearchTokensQuery
 export type SearchTokensLazyQueryHookResult = ReturnType<typeof useSearchTokensLazyQuery>;
 export type SearchTokensQueryResult = Apollo.QueryResult<SearchTokensQuery, SearchTokensQueryVariables>;
 export const TokenDocument = gql`
-    query Token($chain: Chain!, $address: String = null) {
-  token(chain: $chain, address: $address) {
+    query ($address: String = null) {
+  token(id: $address) {
     id
     decimals
     name
-    chain
-    address
+    totalValueLockedUSD,
+    volumeUSD
+   
     symbol
-    standard
-    market(currency: USD) {
-      id
-      totalValueLocked {
-        id
-        value
-        currency
-      }
-      price {
-        id
-        value
-        currency
-      }
-      volume24H: volume(duration: DAY) {
-        id
-        value
-        currency
-      }
-      priceHigh52W: priceHighLow(duration: YEAR, highLow: HIGH) {
-        id
-        value
-      }
-      priceLow52W: priceHighLow(duration: YEAR, highLow: LOW) {
-        id
-        value
-      }
-    }
-    project {
-      id
-      description
-      homepageUrl
-      twitterName
-      logoUrl
-      tokens {
-        id
-        chain
-        address
-      }
-      markets(currencies: [USD]) {
-        fullyDilutedValuation {
-          id
-          value
-          currency
-        }
-        marketCap {
-          id
-          value
-          currency
-        }
-      }
-    }
+
+
+
   }
 }
     `;
@@ -2487,7 +2447,14 @@ export const TokenDocument = gql`
  */
 export function useTokenQuery(baseOptions: Apollo.QueryHookOptions<TokenQuery, TokenQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<TokenQuery, TokenQueryVariables>(TokenDocument, options);
+  try {
+
+    console.log(Apollo.useQuery<TokenQuery, TokenQueryVariables>(TokenDocument, options))
+    return Apollo.useQuery<TokenQuery, TokenQueryVariables>(TokenDocument, options);
+  } catch (error) {
+    console.log(error, "<===error")
+    return Apollo.useQuery<TokenQuery, TokenQueryVariables>(TokenDocument, options);
+  }
 }
 export function useTokenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TokenQuery, TokenQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions }
@@ -2805,9 +2772,9 @@ export function useTopTokens100Query(baseOptions: Apollo.QueryHookOptions<TopTok
 
 export function useTokensListQuery(baseOptions: Apollo.QueryHookOptions<TokensList, TopTokens100QueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions }
-  
-  
-    return Apollo.useQuery<TokensList, TopTokens100QueryVariables>(TokensDocument, options);
+
+
+  return Apollo.useQuery<TokensList, TopTokens100QueryVariables>(TokensDocument, options);
 
 }
 
