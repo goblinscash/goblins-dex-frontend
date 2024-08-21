@@ -249,10 +249,10 @@ const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
             <FiltersContainer isInfoExplorePageEnabled>
               <DropdownFilterContainer isInfoExplorePageEnabled>
                 <NetworkFilter />
-                {currentKey === ExploreTab.Tokens && <TimeSelector />}
+                {/* {currentKey === ExploreTab.Tokens && <TimeSelector />} */}
               </DropdownFilterContainer>
               <SearchContainer isInfoExplorePageEnabled>
-                {currentKey !== ExploreTab.Transactions && <SearchBar tab={currentKey} />}
+                {/* {currentKey !== ExploreTab.Transactions && <SearchBar tab={currentKey} />} */}
               </SearchContainer>
             </FiltersContainer>
           ) : (

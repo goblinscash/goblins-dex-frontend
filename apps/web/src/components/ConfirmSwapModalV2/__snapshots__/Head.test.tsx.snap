@@ -189,7 +189,7 @@ exports[`ConfirmSwapModalV2/Head should render correctly for a Limit order 1`] =
     >
       <a
         class="c7 c8"
-        href="https://support.uniswap.org/hc/en-us"
+        href="https://goblins.cash/docs/"
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -431,7 +431,7 @@ exports[`ConfirmSwapModalV2/Head should render correctly for a classic swap 1`] 
     >
       <a
         class="c7 c8"
-        href="https://support.uniswap.org/hc/en-us"
+        href="https://goblins.cash/docs/"
         rel="noopener noreferrer"
         target="_blank"
       >

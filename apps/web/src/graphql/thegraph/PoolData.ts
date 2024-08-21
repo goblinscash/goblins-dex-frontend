@@ -83,6 +83,7 @@ export interface PoolData {
   tvlToken0: number
   tvlToken1: number
   txCount: string
+  poolDayData: any
 }
 
 export function usePoolData(

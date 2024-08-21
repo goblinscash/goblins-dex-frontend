@@ -149,6 +149,7 @@ export function PoolsTable({
   maxHeight?: number
   hiddenColumns?: PoolTableColumns[]
 }) {
+
   const { formatNumber } = useFormatter()
   const poolTableValues: PoolTableValues[] | undefined = useMemo(
     () =>
@@ -259,7 +260,7 @@ export function PoolsTable({
             header: () => (
               <Cell minWidth={120} grow>
                 <ThemedText.BodySecondary>
-                  <Trans>1 day volume</Trans>
+                  <Trans> Volume</Trans>
                 </ThemedText.BodySecondary>
               </Cell>
             ),
@@ -272,42 +273,42 @@ export function PoolsTable({
             ),
           })
         : null,
-      !hiddenColumns?.includes(PoolTableColumns.VolumeWeek)
-        ? columnHelper.accessor((row) => row.volumeWeek, {
-            id: 'volumeWeek',
-            header: () => (
-              <Cell minWidth={120} grow>
-                <ThemedText.BodySecondary>
-                  <Trans>7 day volume</Trans>
-                </ThemedText.BodySecondary>
-              </Cell>
-            ),
-            cell: (volumeWeek) => (
-              <Cell minWidth={120} loading={loading} grow>
-                <ThemedText.BodySecondary>
-                  {formatNumber({ input: volumeWeek.getValue?.(), type: NumberType.FiatTokenStats })}
-                </ThemedText.BodySecondary>
-              </Cell>
-            ),
-          })
-        : null,
-      !hiddenColumns?.includes(PoolTableColumns.Turnover)
-        ? columnHelper.accessor((row) => row.turnover, {
-            id: 'turnover',
-            header: () => (
-              <Cell minWidth={84} grow>
-                <ThemedText.BodySecondary>
-                  <Trans>Turnover</Trans>
-                </ThemedText.BodySecondary>
-              </Cell>
-            ),
-            cell: (turnover) => (
-              <Cell minWidth={84} loading={loading} grow>
-                <ThemedText.BodySecondary>{formatNumber({ input: turnover.getValue?.() })}</ThemedText.BodySecondary>
-              </Cell>
-            ),
-          })
-        : null,
+      // !hiddenColumns?.includes(PoolTableColumns.VolumeWeek)
+      //   ? columnHelper.accessor((row) => row.volumeWeek, {
+      //       id: 'volumeWeek',
+      //       header: () => (
+      //         <Cell minWidth={120} grow>
+      //           <ThemedText.BodySecondary>
+      //             <Trans>7 day volume</Trans>
+      //           </ThemedText.BodySecondary>
+      //         </Cell>
+      //       ),
+      //       cell: (volumeWeek) => (
+      //         <Cell minWidth={120} loading={loading} grow>
+      //           <ThemedText.BodySecondary>
+      //             {formatNumber({ input: volumeWeek.getValue?.(), type: NumberType.FiatTokenStats })}
+      //           </ThemedText.BodySecondary>
+      //         </Cell>
+      //       ),
+      //     })
+      //   : null,
+      // !hiddenColumns?.includes(PoolTableColumns.Turnover)
+      //   ? columnHelper.accessor((row) => row.turnover, {
+      //       id: 'turnover',
+      //       header: () => (
+      //         <Cell minWidth={84} grow>
+      //           <ThemedText.BodySecondary>
+      //             <Trans>Turnover</Trans>
+      //           </ThemedText.BodySecondary>
+      //         </Cell>
+      //       ),
+      //       cell: (turnover) => (
+      //         <Cell minWidth={84} loading={loading} grow>
+      //           <ThemedText.BodySecondary>{formatNumber({ input: turnover.getValue?.() })}</ThemedText.BodySecondary>
+      //         </Cell>
+      //       ),
+      //     })
+      //   : null,
       // Filter out null values
     ].filter(Boolean) as ColumnDef<PoolTableValues, any>[]
   }, [formatNumber, handleHeaderClick, hiddenColumns, loading, sortState.sortBy, sortState.sortDirection])

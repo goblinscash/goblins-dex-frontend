@@ -5377,7 +5377,7 @@ export type PoolDataQueryVariables = Exact<{
 }>;
 
 
-export type PoolDataQuery = { __typename?: 'Query', pools: Array<{ __typename?: 'Pool', id: string, feeTier: any, liquidity: any, sqrtPrice: any, tick?: any, token0Price: any, token1Price: any, volumeUSD: any, volumeToken0: any, volumeToken1: any, txCount: any, totalValueLockedToken0: any, totalValueLockedToken1: any, totalValueLockedUSD: any, token0: { __typename?: 'Token', id: string, symbol: string, name: string, decimals: any, derivedETH: any }, token1: { __typename?: 'Token', id: string, symbol: string, name: string, decimals: any, derivedETH: any } }>, bundles: Array<{ __typename?: 'Bundle', ethPriceUSD: any }> };
+export type PoolDataQuery = { __typename?: 'Query', pools: Array<{ __typename?: 'Pool', id: string, feeTier: any, liquidity: any, sqrtPrice: any, tick?: any, token0Price: any, token1Price: any, volumeUSD: any, volumeToken0: any, volumeToken1: any, txCount: any, totalValueLockedToken0: any, totalValueLockedToken1: any, totalValueLockedUSD: any, token0: { __typename?: 'Token', id: string, symbol: string, name: string, decimals: any, derivedETH: any }, token1: { __typename?: 'Token', id: string, symbol: string, name: string, decimals: any, derivedETH: any },  poolDayData: any }>, bundles: Array<{ __typename?: 'Bundle', ethPriceUSD: any }> };
 
 export type PoolTransactionsQueryVariables = Exact<{
   address: Scalars['String'];
@@ -5417,7 +5417,7 @@ export type TopPoolsQueryVariables = Exact<{
 }>;
 
 
-export type TopPoolsQuery = { __typename?: 'Query', pools: Array<{ __typename?: 'Pool', id: string, txCount: any, totalValueLockedUSD: any, feeTier: any, token0: { __typename?: 'Token', id: string, symbol: string }, token1: { __typename?: 'Token', id: string, symbol: string } }> };
+export type TopPoolsQuery = { __typename?: 'Query', pools: Array<{ __typename?: 'Pool', id: string, txCount: any, totalValueLockedUSD: any, feeTier: any, token0: { __typename?: 'Token', id: string, symbol: string }, token1: { __typename?: 'Token', id: string, symbol: string }, volumeUSD: string }> };
 
 export type TransactionsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
@@ -5464,13 +5464,13 @@ export const AllV3TicksDocument = gql`
  * });
  */
 export function useAllV3TicksQuery(baseOptions: Apollo.QueryHookOptions<AllV3TicksQuery, AllV3TicksQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllV3TicksQuery, AllV3TicksQueryVariables>(AllV3TicksDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<AllV3TicksQuery, AllV3TicksQueryVariables>(AllV3TicksDocument, options);
+}
 export function useAllV3TicksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllV3TicksQuery, AllV3TicksQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllV3TicksQuery, AllV3TicksQueryVariables>(AllV3TicksDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<AllV3TicksQuery, AllV3TicksQueryVariables>(AllV3TicksDocument, options);
+}
 export type AllV3TicksQueryHookResult = ReturnType<typeof useAllV3TicksQuery>;
 export type AllV3TicksLazyQueryHookResult = ReturnType<typeof useAllV3TicksLazyQuery>;
 export type AllV3TicksQueryResult = Apollo.QueryResult<AllV3TicksQuery, AllV3TicksQueryVariables>;
@@ -5520,13 +5520,13 @@ export const FeeTierDistributionDocument = gql`
  * });
  */
 export function useFeeTierDistributionQuery(baseOptions: Apollo.QueryHookOptions<FeeTierDistributionQuery, FeeTierDistributionQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<FeeTierDistributionQuery, FeeTierDistributionQueryVariables>(FeeTierDistributionDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<FeeTierDistributionQuery, FeeTierDistributionQueryVariables>(FeeTierDistributionDocument, options);
+}
 export function useFeeTierDistributionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FeeTierDistributionQuery, FeeTierDistributionQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<FeeTierDistributionQuery, FeeTierDistributionQueryVariables>(FeeTierDistributionDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<FeeTierDistributionQuery, FeeTierDistributionQueryVariables>(FeeTierDistributionDocument, options);
+}
 export type FeeTierDistributionQueryHookResult = ReturnType<typeof useFeeTierDistributionQuery>;
 export type FeeTierDistributionLazyQueryHookResult = ReturnType<typeof useFeeTierDistributionLazyQuery>;
 export type FeeTierDistributionQueryResult = Apollo.QueryResult<FeeTierDistributionQuery, FeeTierDistributionQueryVariables>;
@@ -5567,10 +5567,20 @@ export const PoolDataDocument = gql`
     totalValueLockedToken0
     totalValueLockedToken1
     totalValueLockedUSD
+    poolDayData(first:1000){
+      high
+      low
+      volumeUSD
+      volumeToken0
+      volumeToken1
+      date
+      feesUSD
+    }
   }
   bundles(where: {id: "1"}) {
     ethPriceUSD
   }
+  
 }
     `;
 
@@ -5592,13 +5602,14 @@ export const PoolDataDocument = gql`
  * });
  */
 export function usePoolDataQuery(baseOptions?: Apollo.QueryHookOptions<PoolDataQuery, PoolDataQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PoolDataQuery, PoolDataQueryVariables>(PoolDataDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useQuery<PoolDataQuery, PoolDataQueryVariables>(PoolDataDocument, options);
+}
 export function usePoolDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PoolDataQuery, PoolDataQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PoolDataQuery, PoolDataQueryVariables>(PoolDataDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<PoolDataQuery, PoolDataQueryVariables>(PoolDataDocument, options);
+}
 export type PoolDataQueryHookResult = ReturnType<typeof usePoolDataQuery>;
 export type PoolDataLazyQueryHookResult = ReturnType<typeof usePoolDataLazyQuery>;
 export type PoolDataQueryResult = Apollo.QueryResult<PoolDataQuery, PoolDataQueryVariables>;
@@ -5712,13 +5723,13 @@ export const PoolTransactionsDocument = gql`
  * });
  */
 export function usePoolTransactionsQuery(baseOptions: Apollo.QueryHookOptions<PoolTransactionsQuery, PoolTransactionsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PoolTransactionsQuery, PoolTransactionsQueryVariables>(PoolTransactionsDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<PoolTransactionsQuery, PoolTransactionsQueryVariables>(PoolTransactionsDocument, options);
+}
 export function usePoolTransactionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PoolTransactionsQuery, PoolTransactionsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PoolTransactionsQuery, PoolTransactionsQueryVariables>(PoolTransactionsDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<PoolTransactionsQuery, PoolTransactionsQueryVariables>(PoolTransactionsDocument, options);
+}
 export type PoolTransactionsQueryHookResult = ReturnType<typeof usePoolTransactionsQuery>;
 export type PoolTransactionsLazyQueryHookResult = ReturnType<typeof usePoolTransactionsLazyQuery>;
 export type PoolTransactionsQueryResult = Apollo.QueryResult<PoolTransactionsQuery, PoolTransactionsQueryVariables>;
@@ -5768,13 +5779,13 @@ export const PoolsFromTokenAddressDocument = gql`
  * });
  */
 export function usePoolsFromTokenAddressQuery(baseOptions: Apollo.QueryHookOptions<PoolsFromTokenAddressQuery, PoolsFromTokenAddressQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PoolsFromTokenAddressQuery, PoolsFromTokenAddressQueryVariables>(PoolsFromTokenAddressDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<PoolsFromTokenAddressQuery, PoolsFromTokenAddressQueryVariables>(PoolsFromTokenAddressDocument, options);
+}
 export function usePoolsFromTokenAddressLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PoolsFromTokenAddressQuery, PoolsFromTokenAddressQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PoolsFromTokenAddressQuery, PoolsFromTokenAddressQueryVariables>(PoolsFromTokenAddressDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<PoolsFromTokenAddressQuery, PoolsFromTokenAddressQueryVariables>(PoolsFromTokenAddressDocument, options);
+}
 export type PoolsFromTokenAddressQueryHookResult = ReturnType<typeof usePoolsFromTokenAddressQuery>;
 export type PoolsFromTokenAddressLazyQueryHookResult = ReturnType<typeof usePoolsFromTokenAddressLazyQuery>;
 export type PoolsFromTokenAddressQueryResult = Apollo.QueryResult<PoolsFromTokenAddressQuery, PoolsFromTokenAddressQueryVariables>;
@@ -5858,13 +5869,13 @@ export const TokenTransactionsDocument = gql`
  * });
  */
 export function useTokenTransactionsQuery(baseOptions: Apollo.QueryHookOptions<TokenTransactionsQuery, TokenTransactionsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TokenTransactionsQuery, TokenTransactionsQueryVariables>(TokenTransactionsDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<TokenTransactionsQuery, TokenTransactionsQueryVariables>(TokenTransactionsDocument, options);
+}
 export function useTokenTransactionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TokenTransactionsQuery, TokenTransactionsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TokenTransactionsQuery, TokenTransactionsQueryVariables>(TokenTransactionsDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<TokenTransactionsQuery, TokenTransactionsQueryVariables>(TokenTransactionsDocument, options);
+}
 export type TokenTransactionsQueryHookResult = ReturnType<typeof useTokenTransactionsQuery>;
 export type TokenTransactionsLazyQueryHookResult = ReturnType<typeof useTokenTransactionsLazyQuery>;
 export type TokenTransactionsQueryResult = Apollo.QueryResult<TokenTransactionsQuery, TokenTransactionsQueryVariables>;
@@ -5881,6 +5892,7 @@ export const TopPoolsDocument = gql`
     txCount
     totalValueLockedUSD
     feeTier
+    volumeUSD
     token0 {
       id
       symbol
@@ -5889,6 +5901,7 @@ export const TopPoolsDocument = gql`
       id
       symbol
     }
+    
   }
 }
     `;
@@ -5911,13 +5924,15 @@ export const TopPoolsDocument = gql`
  * });
  */
 export function useTopPoolsQuery(baseOptions?: Apollo.QueryHookOptions<TopPoolsQuery, TopPoolsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TopPoolsQuery, TopPoolsQueryVariables>(TopPoolsDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+
+
+  return Apollo.useQuery<TopPoolsQuery, TopPoolsQueryVariables>(TopPoolsDocument, options);
+}
 export function useTopPoolsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TopPoolsQuery, TopPoolsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TopPoolsQuery, TopPoolsQueryVariables>(TopPoolsDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<TopPoolsQuery, TopPoolsQueryVariables>(TopPoolsDocument, options);
+}
 export type TopPoolsQueryHookResult = ReturnType<typeof useTopPoolsQuery>;
 export type TopPoolsLazyQueryHookResult = ReturnType<typeof useTopPoolsLazyQuery>;
 export type TopPoolsQueryResult = Apollo.QueryResult<TopPoolsQuery, TopPoolsQueryVariables>;
@@ -6007,13 +6022,13 @@ export const TransactionsDocument = gql`
  * });
  */
 export function useTransactionsQuery(baseOptions?: Apollo.QueryHookOptions<TransactionsQuery, TransactionsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TransactionsQuery, TransactionsQueryVariables>(TransactionsDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<TransactionsQuery, TransactionsQueryVariables>(TransactionsDocument, options);
+}
 export function useTransactionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TransactionsQuery, TransactionsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TransactionsQuery, TransactionsQueryVariables>(TransactionsDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<TransactionsQuery, TransactionsQueryVariables>(TransactionsDocument, options);
+}
 export type TransactionsQueryHookResult = ReturnType<typeof useTransactionsQuery>;
 export type TransactionsLazyQueryHookResult = ReturnType<typeof useTransactionsLazyQuery>;
 export type TransactionsQueryResult = Apollo.QueryResult<TransactionsQuery, TransactionsQueryVariables>;

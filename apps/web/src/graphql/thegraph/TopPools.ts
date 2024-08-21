@@ -68,7 +68,7 @@ export function useTopPools(
           tvl,
           feeTier: parseFloat(topPool.feeTier ?? '0'),
           // TODO(WEB-3236): once GQL BE TopToken query is supported use real value for volume24h, volumeWeek, and turnover
-          volume24h: rand * tvl,
+          volume24h: Number(topPool?.volumeUSD),
           volumeWeek: rand * tvl * 7,
           turnover: rand,
         } as TablePool

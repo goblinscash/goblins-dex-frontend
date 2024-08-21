@@ -118,6 +118,7 @@ export const validPoolDataResponse = {
     tvlUSDChange: -0.3657085465786977,
     tvlToken0: 90930713.7356909,
     tvlToken1: 82526.48678530742,
+    poolDayData: null
   } as PoolData,
   loading: false,
   error: false,

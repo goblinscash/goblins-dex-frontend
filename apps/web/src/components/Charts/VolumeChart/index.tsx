@@ -98,17 +98,21 @@ export function getTimePeriodDisplay(timePeriod: TimePeriod) {
   return t`Past ${toHistoryDuration(timePeriod).toLowerCase()}`
 }
 
-function VolumeChartHeader({
-  crosshairData,
-  timePeriod,
-  feeTier,
-  noFeesData,
-}: {
-  crosshairData?: HistogramData<UTCTimestamp>
-  timePeriod: TimePeriod
-  feeTier?: number
-  noFeesData: boolean
-}) {
+function VolumeChartHeader(
+  {
+    crosshairData,
+    timePeriod,
+    feeTier,
+    noFeesData,
+    defaultValue
+  }: {
+    crosshairData?: HistogramData<UTCTimestamp>
+    timePeriod: TimePeriod
+    feeTier?: number
+    noFeesData: boolean
+    defaultValue: any
+  }
+) {
   const { formatFiatPrice } = useFormatter()
   const headerDateFormatter = useHeaderDateFormatter()
 
@@ -125,7 +129,7 @@ function VolumeChartHeader({
       })
     if (!crosshairData) {
       // TODO: use timePeriod to get cumulative data
-      const mockCumulativeVolume = Math.random() * 1e10
+      const mockCumulativeVolume = defaultValue
       mockDisplay.volume = priceFormatter(mockCumulativeVolume)
       mockDisplay.fees = priceFormatter(mockCumulativeVolume * ((feeTier ?? 0) / BIPS_BASE / 100))
       mockDisplay.time = t`Past ${toHistoryDuration(timePeriod).toLowerCase()}`
@@ -188,6 +192,13 @@ export function VolumeChart({ height, volumes, feeTier, timePeriod, color }: Vol
     }
   }, [data, theme, color, noFeesData])
 
+
+
+
+  const greatestDateObject = useMemo(() => data && data.length ? data.reduce((max: any, obj: any) => obj.time > max.time ? obj : max, data[0]) : 0, [data])
+
+
+
   return (
     <Chart Model={VolumeChartModel} params={params} height={height}>
       {(crosshairData) => (
@@ -195,6 +206,7 @@ export function VolumeChart({ height, volumes, feeTier, timePeriod, color }: Vol
           crosshairData={crosshairData}
           timePeriod={timePeriod}
           feeTier={feeTier}
+          defaultValue={greatestDateObject?.value || 0}
           noFeesData={noFeesData}
         />
       )}

@@ -43,6 +43,7 @@ interface ChartSectionProps {
   priceChartType: PriceChartType
   feeTier?: number
   loading: boolean
+  volume:any
 }
 
 const CHART_TYPE_COMPONENT_MAP: { [key in PoolsDetailsChartType]: React.FC<SelectedChartProps> } = {
@@ -56,10 +57,10 @@ export default function ChartSection(props: ChartSectionProps) {
   const [currencyA, currencyB] = [useCurrency(props.token0?.id), useCurrency(props.token1?.id)]
 
   const mockVolumes = useMemo(
-    () => [...Array(20).keys()].map((i) => ({ value: Math.random() * 10e4 + 500, timestamp: 100123131 + i * 1000 })),
+    () => props.volume?.map((data: any) => ({ value: Number(data.volumeUSD), timestamp: data.date })),
     // Mock data refresh on timePeriod change
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [timePeriod]
+    [props.volume]
   )
 
   if (props.loading || !currencyA || !currencyB) {
@@ -76,12 +77,15 @@ export default function ChartSection(props: ChartSectionProps) {
     volumes: mockVolumes,
   }
 
+
+
+
   return (
     <ChartContainer isInfoTDPEnabled data-testid="pdp-chart-container">
       <SelectedChart {...selectedChartProps} />
-      <TimePeriodSelectorContainer>
+      {/* <TimePeriodSelectorContainer>
         <TimePeriodSelector timePeriod={timePeriod} onChangeTimePeriod={setTimePeriod} />
-      </TimePeriodSelectorContainer>
+      </TimePeriodSelectorContainer> */}
     </ChartContainer>
   )
 }

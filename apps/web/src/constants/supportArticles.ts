@@ -1,5 +1,5 @@
 export enum SupportArticleURL {
-  HOME = 'https://support.uniswap.org/hc/en-us',
+  HOME = 'https://goblins.cash/docs/',
   HOW_TO_SWAP_TOKENS = 'https://support.uniswap.org/hc/en-us/articles/8370549680909-How-to-swap-tokens-',
   WHAT_IS_UNISWAP_X = 'https://support.uniswap.org/hc/en-us/articles/17515415311501',
   UNSUPPORTED_TOKEN_AND_NFT_POLICY = 'https://support.uniswap.org/hc/en-us/articles/18783694078989-Unsupported-Token-Policy',

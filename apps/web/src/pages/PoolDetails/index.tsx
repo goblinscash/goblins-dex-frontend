@@ -126,6 +126,7 @@ export default function PoolDetailsPage() {
   if (poolNotFound) return <NotFound />
 
 
+
   return (
     <PageWrapper>
       <LeftColumn>
@@ -166,6 +167,7 @@ export default function PoolDetailsPage() {
             chartType={chartType}
             priceChartType={priceChartType}
             feeTier={poolData?.feeTier}
+            volume={poolData?.poolDayData || []}
             loading={loading}
           />
         </Column>
