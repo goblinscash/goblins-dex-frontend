@@ -86,7 +86,7 @@ const BadgeText = styled.div`
 // responsive text
 // disable the warning because we don't use the end prop, we just want to filter it out
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Label = styled(({ end, ...props }) => <ThemedText.DeprecatedLabel {...props} />)<{ end?: boolean }>`
+const Label = styled(({ end, ...props }) => <ThemedText.DeprecatedLabel {...props} />) <{ end?: boolean }>`
   display: flex;
   font-size: 16px;
   justify-content: ${({ end }) => (end ? 'flex-end' : 'flex-start')};
@@ -463,10 +463,10 @@ function PositionPageContent() {
   const ratio = useMemo(() => {
     return priceLower && pool && priceUpper
       ? getRatio(
-          inverted ? priceUpper.invert() : priceLower,
-          pool.token0Price,
-          inverted ? priceLower.invert() : priceUpper
-        )
+        inverted ? priceUpper.invert() : priceLower,
+        pool.token0Price,
+        inverted ? priceLower.invert() : priceUpper
+      )
       : undefined
   }, [inverted, pool, priceLower, priceUpper])
 
@@ -640,11 +640,11 @@ function PositionPageContent() {
 
   const showCollectAsWeth = Boolean(
     ownsNFT &&
-      (feeValue0?.greaterThan(0) || feeValue1?.greaterThan(0)) &&
-      currency0 &&
-      currency1 &&
-      (currency0.isNative || currency1.isNative) &&
-      !collectMigrationHash
+    (feeValue0?.greaterThan(0) || feeValue1?.greaterThan(0)) &&
+    currency0 &&
+    currency1 &&
+    (currency0.isNative || currency1.isNative) &&
+    !collectMigrationHash
   )
 
   if (!positionDetails && !loading) {
@@ -713,6 +713,7 @@ function PositionPageContent() {
                 </PositionLabelRow>
                 {ownsNFT && (
                   <ActionButtonResponsiveRow>
+
                     {currency0 && currency1 && feeAmount && tokenId ? (
                       <ButtonGray
                         as={Link}
@@ -859,7 +860,7 @@ function PositionPageContent() {
                           )}
                         </AutoColumn>
                         {ownsNFT &&
-                        (feeValue0?.greaterThan(0) || feeValue1?.greaterThan(0) || !!collectMigrationHash) ? (
+                          (feeValue0?.greaterThan(0) || feeValue1?.greaterThan(0) || !!collectMigrationHash) ? (
                           <ResponsiveButtonConfirmed
                             data-testid="collect-fees-button"
                             disabled={collecting || !!collectMigrationHash}
@@ -889,6 +890,26 @@ function PositionPageContent() {
                             )}
                           </ResponsiveButtonConfirmed>
                         ) : null}
+
+{ownsNFT &&
+                     
+                          <ResponsiveButtonConfirmed
+                            data-testid="collect-fees-button"
+                            disabled={true}
+                            confirmed={!!collectMigrationHash && !isCollectPending}
+                            width="fit-content"
+                            style={{ borderRadius: '12px' }}
+                            padding="4px 8px"
+                            onClick={() => setShowConfirm(true)}
+                          >
+                   
+                                <ThemedText.DeprecatedMain color={theme.white}>
+                                  <Trans>Compound</Trans>
+                                </ThemedText.DeprecatedMain>
+                             
+                            
+                          </ResponsiveButtonConfirmed>
+                        }
                       </RowBetween>
                     </AutoColumn>
                     <LightCard padding="12px 16px">

@@ -28,10 +28,12 @@ export function PoolDetailsTableTab({
   poolAddress,
   token0,
   token1,
+  isReversed
 }: {
   poolAddress: string
   token0?: Token
   token1?: Token
+  isReversed?: Boolean
 }) {
   const [activeTable, setActiveTable] = useState<PoolDetailsTableTabs>(PoolDetailsTableTabs.TRANSACTIONS)
   const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
@@ -68,7 +70,7 @@ export function PoolDetailsTableTab({
         )}
       </Row>
       {activeTable === PoolDetailsTableTabs.TRANSACTIONS ? (
-        <PoolDetailsTransactionsTable poolAddress={poolAddress} token0={token0} token1={token1} />
+        <PoolDetailsTransactionsTable poolAddress={poolAddress} token0={token0} token1={token1} isReversed={isReversed} />
       ) : (
         <PoolDetailsPositionsTable positions={positionsInThisPool} />
       )}

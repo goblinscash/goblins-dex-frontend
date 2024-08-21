@@ -407,7 +407,7 @@ export default function TokenDetails({
               disableTokenInputs={pageChainId !== connectedChainId}
             />
           </div>
-          {tokenWarning && <TokenSafetyMessage tokenAddress={address} warning={tokenWarning} />}
+          {/* {tokenWarning && <TokenSafetyMessage tokenAddress={address} warning={tokenWarning} />} */}
           {/* {detailedToken && <BalanceSummary currency={detailedToken} chain={chain} multiChainMap={multiChainMap} />} */}
           {isInfoTDPEnabled && (
             <TokenDescription

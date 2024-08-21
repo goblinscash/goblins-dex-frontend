@@ -34,10 +34,12 @@ export function PoolDetailsTransactionsTable({
   poolAddress,
   token0,
   token1,
+  isReversed
 }: {
   poolAddress: string
   token0?: Token
   token1?: Token
+  isReversed?: Boolean
 }) {
   const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
   const chainId = supportedChainIdFromGQLChain(chainName)
@@ -67,6 +69,9 @@ export function PoolDetailsTransactionsTable({
     filter
   )
 
+
+  console.log(isReversed, "<====isReversed")
+
   const handleHeaderClick = useCallback(
     (newSortMethod: Transaction_OrderBy) => {
       if (sortState.sortBy === newSortMethod) {
@@ -83,6 +88,7 @@ export function PoolDetailsTransactionsTable({
     },
     [sortState.sortBy, sortState.sortDirection]
   )
+
 
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<PoolTransaction>()
@@ -173,8 +179,10 @@ export function PoolDetailsTransactionsTable({
         ),
       }),
       columnHelper.accessor(
-        (row) => (row.pool.token0.id.toLowerCase() === token0?.id.toLowerCase() ? row.amount0 : row.amount1),
+        (row) => ({ amount0: row.amount0, amount1: row.amount1 }),
         {
+
+
           id: 'input-amount',
           header: () => (
             <Cell loading={loading} minWidth={125} justifyContent="flex-end" grow>
@@ -183,17 +191,21 @@ export function PoolDetailsTransactionsTable({
               </StyledInternalLink>
             </Cell>
           ),
-          cell: (inputTokenAmount) => (
-            <Cell loading={loading} minWidth={125} justifyContent="flex-end" grow>
-              <ThemedText.BodyPrimary>
-                {formatNumber({ input: Math.abs(inputTokenAmount.getValue?.() ?? 0), type: NumberType.TokenTx })}
-              </ThemedText.BodyPrimary>
-            </Cell>
-          ),
+          cell: (inputTokenAmount) => {
+            let amount = inputTokenAmount.getValue?.();
+
+            return (
+              <Cell loading={loading} minWidth={125} justifyContent="flex-end" grow>
+                <ThemedText.BodyPrimary>
+                  {formatNumber({ input: Math.abs(isReversed ? amount?.amount1 || 0 : amount?.amount0 || 0), type: NumberType.TokenTx })}
+                </ThemedText.BodyPrimary>
+              </Cell>
+            )
+          },
         }
       ),
       columnHelper.accessor(
-        (row) => (row.pool.token0.id.toLowerCase() === token0?.id.toLowerCase() ? row.amount1 : row.amount0),
+        (row) => ({ amount0: row.amount0, amount1: row.amount1 }),
         {
           id: 'output-amount',
           header: () => (
@@ -203,13 +215,17 @@ export function PoolDetailsTransactionsTable({
               </StyledInternalLink>
             </Cell>
           ),
-          cell: (outputTokenAmount) => (
-            <Cell loading={loading} minWidth={125} justifyContent="flex-end" grow>
-              <ThemedText.BodyPrimary>
-                {formatNumber({ input: Math.abs(outputTokenAmount.getValue?.() ?? 0), type: NumberType.TokenTx })}
-              </ThemedText.BodyPrimary>
-            </Cell>
-          ),
+          cell: (outputTokenAmount) => {
+            let amount = outputTokenAmount.getValue?.();
+
+            return (
+              <Cell loading={loading} minWidth={125} justifyContent="flex-end" grow>
+                <ThemedText.BodyPrimary>
+                  {formatNumber({ input: Math.abs(isReversed ? amount?.amount0 || 0 : amount?.amount1 || 0), type: NumberType.TokenTx })}
+                </ThemedText.BodyPrimary>
+              </Cell>
+            )
+          },
         }
       ),
       columnHelper.accessor((row) => row.maker, {
@@ -248,6 +264,7 @@ export function PoolDetailsTransactionsTable({
       }),
     ]
   }, [
+    isReversed,
     activeLocalCurrency,
     chainId,
     chainName,
@@ -265,6 +282,7 @@ export function PoolDetailsTransactionsTable({
     token0?.symbol,
     token1?.id,
     token1?.symbol,
+
   ])
 
   if (error) {

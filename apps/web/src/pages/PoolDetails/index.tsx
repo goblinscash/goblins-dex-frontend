@@ -125,6 +125,7 @@ export default function PoolDetailsPage() {
 
   if (poolNotFound) return <NotFound />
 
+console.log(isReversed, "<====isReversed");
 
 
   return (
@@ -161,6 +162,7 @@ export default function PoolDetailsPage() {
               /> */}
             </ChartTypeSelectorContainer>
           </Row>
+          
           <ChartSection
             token0={token0}
             token1={token1}
@@ -172,7 +174,7 @@ export default function PoolDetailsPage() {
           />
         </Column>
         <HR />
-        <PoolDetailsTableTab poolAddress={poolAddress} token0={token0} token1={token1} />
+        <PoolDetailsTableTab poolAddress={poolAddress} token0={token0} token1={token1} isReversed={isReversed} />
       </LeftColumn>
       <RightColumn>
         <PoolDetailsStatsButtons
