@@ -224,7 +224,7 @@ export function ExploreChartsSection() {
   let makeDataForTVL = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
     ? data.uniswapDayDatas.map((data: any) => ({
       time: data.date,
-      values: [Number(data.volumeUSD)],
+      values: [Number(data.tvlUSD)],
     }))
     : []) as unknown as StackedLineData[], [data])
 
