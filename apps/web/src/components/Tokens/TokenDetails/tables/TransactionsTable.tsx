@@ -184,7 +184,7 @@ export function TransactionsTable({ chainId, referenceToken }: { chainId: ChainI
           id: 'reference-amount',
           header: () => (
             <Cell minWidth={150} justifyContent="flex-end">
-              <ThemedText.BodySecondary>${referenceToken.symbol}</ThemedText.BodySecondary>
+              <ThemedText.BodySecondary>{referenceToken.symbol}</ThemedText.BodySecondary>
             </Cell>
           ),
           cell: (inputTokenAmount) => (

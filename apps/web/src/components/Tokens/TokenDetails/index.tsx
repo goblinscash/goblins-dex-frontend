@@ -385,7 +385,8 @@ export default function TokenDetails({
                 />
                 {!detailedToken.isNative && <AddressSection address={address} />}
               </>
-            )}
+            )
+            }
             {isInfoTDPEnabled && (
               <>
                 <DividerLine />

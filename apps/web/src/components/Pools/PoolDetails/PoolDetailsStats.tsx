@@ -31,7 +31,7 @@ const HeaderText = styled(Text)`
   }
 `
 
-const StatsWrapper = styled(Column)<{ loaded?: boolean }>`
+const StatsWrapper = styled(Column) <{ loaded?: boolean }>`
   gap: 24px;
   padding: 20px;
   border-radius: 20px;
@@ -201,7 +201,9 @@ export function PoolDetailsStats({ poolData, isReversed, chainId, loading }: Poo
     }
   }, [color0, color1, currency0, currency1, isReversed, poolData])
 
-  if (loading || !token0 || !token1 || !poolData) {
+  const greatestDateObject = useMemo(() => poolData && poolData.poolDayData && poolData.poolDayData.length ? poolData.poolDayData.reduce((max: any, obj: any) => obj.date > max.date ? obj : max, poolData.poolDayData[0]) : 0, [poolData?.poolDayData])
+
+  if (loading || !token0 || !token1 || !poolData || !greatestDateObject) {
     return (
       <StatsWrapper>
         <HeaderText>
@@ -216,6 +218,10 @@ export function PoolDetailsStats({ poolData, isReversed, chainId, loading }: Poo
       </StatsWrapper>
     )
   }
+
+
+
+
 
   return (
     <StatsWrapper loaded>
@@ -238,8 +244,8 @@ export function PoolDetailsStats({ poolData, isReversed, chainId, loading }: Poo
         )}
       </StatItemColumn>
       <StatItem title={<Trans>TVL</Trans>} value={poolData.tvlUSD} delta={poolData.tvlUSDChange} />
-      <StatItem title={<Trans>24H volume</Trans>} value={poolData.volumeUSD} delta={poolData.volumeUSDChange} />
-      <StatItem title={<Trans>24H fees</Trans>} value={poolData.volumeUSD * (poolData.feeTier / 1000000)} />
+      <StatItem title={<Trans>24H volume</Trans>} value={greatestDateObject.volumeUSD} delta={poolData.volumeUSDChange} />
+      <StatItem title={<Trans>24H fees</Trans>} value={greatestDateObject.feesUSD} />
     </StatsWrapper>
   )
 }

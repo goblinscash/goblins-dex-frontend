@@ -125,7 +125,6 @@ export default function PoolDetailsPage() {
 
   if (poolNotFound) return <NotFound />
 
-console.log(isReversed, "<====isReversed");
 
 
   return (
