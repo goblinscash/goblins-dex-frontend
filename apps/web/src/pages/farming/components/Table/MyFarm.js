@@ -248,7 +248,7 @@ function MyFarm({
                     className="py-3 px-6 text-left border-b border-gray-600 transparent"
                     style={{ background: "#002628" }}
                   >
-                    <a href={`/pools/${item.tokenId}`} target="_blank">
+                    <a href={`/#/pools/${item.tokenId}`} target="_blank">
                     <p className={` m-0  capitalize`}>
                       {item.tokenId}{" "}
                     </p>
