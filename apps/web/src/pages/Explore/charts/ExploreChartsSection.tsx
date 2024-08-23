@@ -1,4 +1,5 @@
 import { Trans } from '@lingui/macro'
+import { ChainId } from '@uniswap/sdk-core'
 import { ChartHeader } from 'components/Charts/ChartHeader'
 import { Chart } from 'components/Charts/ChartModel'
 import { StackedLineData, TVLChartModel } from 'components/Charts/StackedLineChart'
@@ -15,16 +16,19 @@ import Column from 'components/Column'
 import { RowBetween } from 'components/Row'
 import { MAX_WIDTH_MEDIA_BREAKPOINT } from 'components/Tokens/constants'
 import { PriceSource } from 'graphql/data/__generated__/types-and-hooks'
-import { getProtocolColor, TimePeriod } from 'graphql/data/util'
+import { useChartQuery } from 'graphql/data/types-and-hooks'
+import { getProtocolColor, supportedChainIdFromGQLChain, TimePeriod, validateUrlChainParam } from 'graphql/data/util'
+import { chainToApolloClient } from 'graphql/thegraph/apollo'
 import { useScreenSize } from 'hooks/useScreenSize'
 import { HARDCODED_TVL_DATA, HARDCODED_VOLUME_DATA } from 'pages/Explore/charts/mockData'
 import { ReactNode, useMemo, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import styled, { useTheme } from 'styled-components'
 import { ThemedText } from 'theme/components'
 import { NumberType, useFormatter } from 'utils/formatNumbers'
 
 const EXPLORE_CHART_HEIGHT_PX = 368
-const EXPLORE_PRICE_SOURCES = [ PriceSource.SubgraphV3]
+const EXPLORE_PRICE_SOURCES = [PriceSource.SubgraphV3]
 
 const TIME_SELECTOR_OPTIONS = [
   { time: TimePeriod.DAY, display: 'D' },
@@ -73,7 +77,7 @@ const StyledChart = styled(Chart)`
 ` /* cast preserves generic Chart props that the `styled` return type looses: */ as typeof Chart
 
 function VolumeChartSection({ data }: { data: StackedBarsData[] }) {
-  const [timePeriod, setTimePeriod] = useState<TimePeriod>(TimePeriod.DAY)
+  const [timePeriod, setTimePeriod] = useState<TimePeriod>(TimePeriod.WEEK)
 
   const mockDataForTimePeriod = useMemo(() => {
     // note: timePeriod on the Explore Page represents the GRANULARITY, not the timespan of data shown.
@@ -84,10 +88,10 @@ function VolumeChartSection({ data }: { data: StackedBarsData[] }) {
         numDataPoints = 30
         break
       case TimePeriod.WEEK:
-        numDataPoints = 52
+        numDataPoints = 7
         break
       case TimePeriod.MONTH:
-        numDataPoints = 36
+        numDataPoints = 1000
         break
     }
 
@@ -99,7 +103,10 @@ function VolumeChartSection({ data }: { data: StackedBarsData[] }) {
   const params = useMemo<{ data: StackedBarsData[]; colors: [string, string] }>(
     () => ({ data: mockDataForTimePeriod, colors: [theme.accent1, theme.accent3] }),
     [mockDataForTimePeriod, theme]
+
+
   )
+
   const cumulativeVolume = useMemo(() => getCumulativeVolume(mockDataForTimePeriod), [mockDataForTimePeriod])
 
   const isSmallScreen = !useScreenSize()['sm']
@@ -107,7 +114,7 @@ function VolumeChartSection({ data }: { data: StackedBarsData[] }) {
     return (
       <MinimalStatDisplay
         title={<Trans>Goblins volume</Trans>}
-        value={cumulativeVolume}
+        value={Number(Number(cumulativeVolume).toFixed(2))}
         time={<Trans>Past month</Trans>}
       />
     )
@@ -194,10 +201,38 @@ function MinimalStatDisplay({ title, value, time }: { title: ReactNode; value: n
 }
 
 export function ExploreChartsSection() {
+  const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
+  const chainId = supportedChainIdFromGQLChain(chainName)
+
+  const apolloClient = chainToApolloClient[chainId || ChainId.MAINNET]
+  const { loading, error, data } = useChartQuery({
+    client: apolloClient,
+    fetchPolicy: 'no-cache',
+    variables: { address: "" },
+  })
+
+
+
+  let makeDataForVolume = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
+    ? data.uniswapDayDatas.map((data: any) => ({
+      time: data.date,
+      values: { v3: Number(data.volumeUSD) },
+    }))
+    : []) as unknown as StackedBarsData[], [data])
+
+
+  let makeDataForTVL = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
+    ? data.uniswapDayDatas.map((data: any) => ({
+      time: data.date,
+      values: [Number(data.volumeUSD)],
+    }))
+    : []) as unknown as StackedLineData[], [data])
+
+
   return (
     <ChartsContainer>
-      <TVLChartSection data={HARDCODED_TVL_DATA} />
-      <VolumeChartSection data={HARDCODED_VOLUME_DATA} />
+      <TVLChartSection data={makeDataForTVL || HARDCODED_TVL_DATA} />
+      <VolumeChartSection data={makeDataForVolume || HARDCODED_VOLUME_DATA} />
     </ChartsContainer>
   )
 }

@@ -1572,6 +1572,9 @@ export type TokenQueryVariables = Exact<{
 export type TokenQuery = { readonly __typename?: 'Query', readonly token?: { readonly __typename?: 'Token', readonly id: string, readonly decimals?: number, readonly name?: string, readonly symbol?: string, readonly totalValueLockedUSD?: string, readonly volumeUSD?: string } };
 
 
+export type GlobalChartQuery = { readonly __typename?: 'Query', readonly uniswapDayDatas?: { readonly __typename?: 'uniswapDayDatas', readonly id: string, readonly volumeUSD?: number, readonly tvlUSD?: string, readonly date?: string, } };
+
+
 
 
 
@@ -1774,6 +1777,24 @@ export const TransactionPartsFragmentDoc = gql`
   nonce
 }
     `;
+
+export const GlobalChartDocument = gql`
+    query {
+      uniswapDayDatas(
+        first: 1000
+
+        orderBy: date
+        orderDirection: asc
+      ) {
+        id
+        date
+        volumeUSD
+        tvlUSD
+      }
+    }
+  `
+
+
 export const TokenAssetPartsFragmentDoc = gql`
     fragment TokenAssetParts on Token {
   id
@@ -2449,13 +2470,20 @@ export function useTokenQuery(baseOptions: Apollo.QueryHookOptions<TokenQuery, T
   const options = { ...defaultOptions, ...baseOptions }
   try {
 
-    console.log(Apollo.useQuery<TokenQuery, TokenQueryVariables>(TokenDocument, options))
+
     return Apollo.useQuery<TokenQuery, TokenQueryVariables>(TokenDocument, options);
   } catch (error) {
     console.log(error, "<===error")
     return Apollo.useQuery<TokenQuery, TokenQueryVariables>(TokenDocument, options);
   }
 }
+
+
+export function useChartQuery(baseOptions: Apollo.QueryHookOptions<TokenQuery, TokenQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GlobalChartQuery, TokenQueryVariables>(GlobalChartDocument, options);
+}
+
 export function useTokenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TokenQuery, TokenQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<TokenQuery, TokenQueryVariables>(TokenDocument, options);
@@ -2513,7 +2541,7 @@ export function useTokenProjectQuery(baseOptions: Apollo.QueryHookOptions<TokenP
 export function useTokenProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TokenProjectQuery, TokenProjectQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<TokenProjectQuery, TokenProjectQueryVariables>(TokenProjectDocument, options);
-}
+};
 export type TokenProjectQueryHookResult = ReturnType<typeof useTokenProjectQuery>;
 export type TokenProjectLazyQueryHookResult = ReturnType<typeof useTokenProjectLazyQuery>;
 export type TokenProjectQueryResult = Apollo.QueryResult<TokenProjectQuery, TokenProjectQueryVariables>;
@@ -2737,7 +2765,7 @@ export const TokensDocument = gql`
   
     volumeUSD
     totalValueLockedUSD
-    tokenDayData{
+    tokenDayData(orderBy: date, orderDirection: desc){
       priceUSD
       open
       date
