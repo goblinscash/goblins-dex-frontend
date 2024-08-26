@@ -1,34 +1,27 @@
 import { Contract, ethers } from "ethers";
 
 //ABI
-import TokenABI from "./ABI/TokenABI.json";
-import StakeABI from "./ABI/StakeABI.json";
 import MigrationStakingABI from "./ABI/migrationStaking.json";
-import UniswapV3Staker from "./ABI/UniswapV3Staker.json";
 import NFTManager from "./ABI/NonfungiblePositionManager.json";
 import PancakeV3Pool from "./ABI/PancakeV3Pool.json";
+import StakeABI from "./ABI/StakeABI.json";
+import TokenABI from "./ABI/TokenABI.json";
 import UniswapV3Factory from "./ABI/UniswapV3Factory.json";
+import UniswapV3Staker from "./ABI/UniswapV3Staker.json";
 
 import { makeByteData, toFixedCustm } from "../helpers/utils";
 
-
-
 class Web3Intraction {
   constructor(currentNetwork, provider) {
-
-
     if (provider || window.ethereum) {
       this.PROVIDER = provider;
-
       this.SIGNER = this.PROVIDER.getSigner();
     } else if (currentNetwork) {
       this.PROVIDER = new ethers.providers.JsonRpcProvider(
         currentNetwork?.rpcUrl
       );
-
       this.SIGNER = this.PROVIDER;
     }
-
     this.contractDetails = {
       abi: UniswapV3Staker,
       ...currentNetwork,
@@ -47,8 +40,6 @@ class Web3Intraction {
    */
   getContract = (abi, address, isSigner) => {
     try {
-
-
       let contract = new Contract(
         address,
         JSON.parse(abi),
@@ -74,8 +65,7 @@ class Web3Intraction {
    */
   checkAllowance = async (tokenAmount, tokenAddress, approvalAddress) => {
     return new Promise(async (resolve, reject) => {
-
-      console.log(tokenAmount, tokenAddress, approvalAddress, "<===data")
+      console.log(tokenAmount, tokenAddress, approvalAddress, "<===data");
       try {
         let walletAddres = this.SIGNER.getAddress();
 
@@ -156,37 +146,27 @@ class Web3Intraction {
           this.contractDetails?.contractAddress,
           true
         );
-
         let tx;
-
         if (!tokenAddress) {
           return reject("Token Address not found!");
         }
-
-
-
         let rewardTokenAmount = await this.checkAllowance(
           rewards,
           tokenAddress,
           this.contractDetails?.contractAddress
         );
-
-
         tx = await contract.createIncentive(
           keys,
           rewardTokenAmount.toString(),
           minimumWidth
         );
-
         let receipt = await tx.wait();
-
         resolve(receipt);
       } catch (error) {
         console.log(error, "<===error in createIncentive");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
-
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -196,9 +176,7 @@ class Web3Intraction {
    * NFT Stake in Incentive
    *
    * @param {array} keys [reward token, pool address,start time, endTime, refundee address]
-
-   * 
-
+   *
    *
    * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
    */
@@ -927,7 +905,6 @@ class Web3Intraction {
           true
         );
 
-        
         let tx = await contract.getReward();
         let receipt = await tx.wait();
         resolve(receipt);
@@ -1019,8 +996,6 @@ class Web3Intraction {
           true
         );
 
-
-    
         let walletAddress = this.SIGNER.getAddress();
 
         let getStakingContract = await contract.stakingToken();
@@ -1041,10 +1016,8 @@ class Web3Intraction {
 
         resolve({
           balance: parseFloat(stakedAmount) + parseFloat(stakeToken.balance),
-          stakedAmount:
-            parseFloat(stakedAmount),
-          unStakedAmount:
-            parseFloat(stakeToken.balance) ,
+          stakedAmount: parseFloat(stakedAmount),
+          unStakedAmount: parseFloat(stakeToken.balance),
           totalSupply: parseInt(totalSupply),
           earnedAmount: earnedAmount,
           rewardSymbol: rewardToken.symbol,
@@ -1055,7 +1028,6 @@ class Web3Intraction {
         });
       } catch (error) {
 
-        console.log(error, "<===error")
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
@@ -1166,7 +1138,7 @@ class Web3Intraction {
   };
 
   /**
-   * Get NFT 
+   * Get NFT
    *
    * @param {string} tokenId token id
    *
@@ -1202,7 +1174,6 @@ class Web3Intraction {
     });
   };
 
-
   /**
    * Token Stake
    *
@@ -1213,8 +1184,6 @@ class Web3Intraction {
    */
 
   unStakeFromMigration = async (amount) => {
-
-    console.log(amount, "<===amount")
     return new Promise(async (resolve, reject) => {
       try {
         const contract = this.getContract(
@@ -1222,12 +1191,133 @@ class Web3Intraction {
           this.contractDetails.migrationAddress,
           true
         );
-console.log(contract, "<===contract")
         let tx = await contract.unstake(amount, true);
         let receipt = await tx.wait();
         resolve(receipt);
         // resolve(receipt);
-      
+      } catch (error) {
+        if (error?.code === -32603) {
+          return reject("insufficient funds for intrinsic transaction cost");
+        }
+        reject(error.reason || error.data?.message || error.message || error);
+      }
+    });
+  };
+
+  /**
+   * NFT Stake in Incentive
+   *
+   * @param {array} keys [reward token, pool address,start time, endTime, refundee address]
+   *
+   *
+   * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
+   */
+  compoundPool = async (tokenId, walletAddress) => {
+    tokenId = tokenId.toString();
+
+    return new Promise(async (resolve, reject) => {
+      try {
+        const contract = this.getContract(
+          JSON.stringify(NFTManager),
+          this.contractDetails?.nftManagerContractAddress,
+          true
+        );
+
+        let getSafeContract = await this.getContract(
+          JSON.stringify([
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "from",
+                  type: "address",
+                },
+                {
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "tokenId",
+                  type: "uint256",
+                },
+       
+              ],
+              name: "safeTransferFrom",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+          ]),
+          this.contractDetails?.nftManagerContractAddress,
+          true
+        );
+
+
+        // let poolContract = this.getContract(
+        //   JSON.stringify(PancakeV3Pool),
+        //   "0x532e1a0117aC273F448D5AF5aF8AA6336a4374d5",
+        //   true
+        // );
+
+        // let observe =await poolContract.observe([0,60])
+
+
+        // console.log(observe.tickCumulatives[0].toString(),observe.tickCumulatives[1].toString(), (observe.tickCumulatives[0].toString() - observe.tickCumulatives[1].toString()) / 60,"<===observe")
+
+        // return
+        let approveTxn = await contract.approve(
+          this.contractDetails.compoundAddress,
+          tokenId
+        );
+
+        await approveTxn.wait();
+
+        let trxn = await getSafeContract.safeTransferFrom(
+          walletAddress,
+          this.contractDetails.compoundAddress,
+          tokenId
+        );
+
+        let receipt = await trxn.wait();
+
+        resolve(receipt);
+
+        // const approve = await contract.interface.encodeFunctionData("approve", [
+        //   this.contractDetails.compoundAddress,
+        //   tokenId,
+        // ]);
+        // const safeTransferFrom =
+        //   await getSafeContract.interface.encodeFunctionData(
+        //     "safeTransferFrom",
+        //     [
+        //       walletAddress,
+        //       this.contractDetails.compoundAddress,
+        //       tokenId,
+        //       "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000",
+        //     ]
+        //   );
+
+        // const multicallData = contract.interface.encodeFunctionData(
+        //   "multicall",
+        //   [[approve, safeTransferFrom]]
+        // );
+
+        // const tx = {
+        //   to: this.contractDetails?.nftManagerContractAddress,
+        //   data: multicallData,
+        //   value: ethers.utils.parseEther("0"), // Amount of Ether to send with the transaction
+        // };
+
+        // const response = await this.SIGNER.sendTransaction(tx);
+
+        // let receipt = await response.wait(); // Wait for the transaction to be mined
+        // console.log(receipt, "<===receipt");
+
+        // resolve(receipt);
+        // let receipt = await stakeTxn.wait();
+        // resolve(receipt);
       } catch (error) {
         console.log(error, "<===error in stake");
         if (error?.code === -32603) {
@@ -1238,8 +1328,6 @@ console.log(contract, "<===contract")
       }
     });
   };
-
-
 }
 
 export default Web3Intraction;

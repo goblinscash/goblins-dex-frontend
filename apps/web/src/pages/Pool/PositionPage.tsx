@@ -51,6 +51,10 @@ import { TransactionType } from '../../state/transactions/types'
 import { calculateGasMargin } from '../../utils/calculateGasMargin'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
 import { LoadingRows } from './styled'
+import { useWallet } from 'hooks/useWallet'
+import { useSelector } from 'react-redux'
+import Web3Intraction from 'utils/web3Intraction'
+import { fa } from 'make-plural'
 
 const PositionPageButtonPrimary = styled(ButtonPrimary)`
   width: 228px;
@@ -400,6 +404,8 @@ function parseTokenId(tokenId: string | undefined): BigNumber | undefined {
 }
 
 function PositionPageContent() {
+  const { currentNetwork, isBlocked } = useSelector((state: any) => state.dashboard);
+  const wallet = useWallet();
   const { tokenId: tokenIdFromUrl } = useParams<{ tokenId?: string }>()
   const { chainId, account, provider } = useWeb3React()
   const theme = useTheme()
@@ -481,6 +487,12 @@ function PositionPageContent() {
   const [collectMigrationHash, setCollectMigrationHash] = useState<string | null>(null)
   const isCollectPending = useIsTransactionPending(collectMigrationHash ?? undefined)
   const [showConfirm, setShowConfirm] = useState(false)
+
+
+  const [compoundCollecting, setCompoundCollecting] = useState<boolean>(false)
+  const [compoundMigrationHash, setCompoundMigrationHash] = useState<string | null>(null)
+  const isCompoundPending = useIsTransactionPending(collectMigrationHash ?? undefined)
+  const [compoundShowConfirm, setCompoundShowConfirm] = useState(false)
 
   // usdc prices always in terms of tokens
   const price0 = useStablecoinPrice(token0 ?? undefined)
@@ -592,6 +604,29 @@ function PositionPageContent() {
     provider,
   ])
 
+
+  const compound = useCallback(
+    async () => {
+
+      try {
+        setCompoundCollecting(true)
+        const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+        let txn = await web3.compoundPool(tokenId, wallet.address);
+
+
+        setCollectMigrationHash(txn.transactionHash)
+
+        setCompoundCollecting(false)
+        setCompoundShowConfirm(false)
+      } catch (error) {
+        setCompoundCollecting(false)
+
+      }
+
+    },
+    [tokenId, wallet],
+  )
+
   const owner = useSingleCallResult(tokenId ? positionManager : null, 'ownerOf', [tokenId]).result?.[0]
   const ownsNFT = owner === account || positionDetails?.operator === account
 
@@ -633,6 +668,43 @@ function PositionPageContent() {
         </ThemedText.DeprecatedItalic>
         <ButtonPrimary data-testid="modal-collect-fees-button" onClick={collect}>
           <Trans>Collect</Trans>
+        </ButtonPrimary>
+      </AutoColumn>
+    )
+  }
+
+
+  // console.log(pool,positionDetails,positionManager, "<====pool")
+  function modalHeaderCompound() {
+    return (
+      <AutoColumn gap="md" style={{ marginTop: '20px' }}>
+        <LightCard padding="12px 16px">
+          <AutoColumn gap="md">
+            <RowBetween>
+              <RowFixed>
+                <CurrencyLogo currency={feeValueUpper?.currency} size="20px" style={{ marginRight: '0.5rem' }} />
+                <ThemedText.DeprecatedMain>
+                  {feeValueUpper ? formatCurrencyAmount({ amount: feeValueUpper }) : '-'}
+                </ThemedText.DeprecatedMain>
+              </RowFixed>
+              <ThemedText.DeprecatedMain>{feeValueUpper?.currency?.symbol}</ThemedText.DeprecatedMain>
+            </RowBetween>
+            <RowBetween>
+              <RowFixed>
+                <CurrencyLogo currency={feeValueLower?.currency} size="20px" style={{ marginRight: '0.5rem' }} />
+                <ThemedText.DeprecatedMain>
+                  {feeValueLower ? formatCurrencyAmount({ amount: feeValueLower }) : '-'}
+                </ThemedText.DeprecatedMain>
+              </RowFixed>
+              <ThemedText.DeprecatedMain>{feeValueLower?.currency?.symbol}</ThemedText.DeprecatedMain>
+            </RowBetween>
+          </AutoColumn>
+        </LightCard>
+        <ThemedText.DeprecatedItalic>
+          <Trans>Compounding fees will withdraw currently available fees for you.</Trans>
+        </ThemedText.DeprecatedItalic>
+        <ButtonPrimary data-testid="modal-collect-fees-button" onClick={compound}>
+          <Trans>Compound</Trans>
         </ButtonPrimary>
       </AutoColumn>
     )
@@ -686,6 +758,22 @@ function PositionPageContent() {
               />
             )}
             pendingText={<Trans>Collecting fees</Trans>}
+          />
+
+
+          <TransactionConfirmationModal
+            isOpen={compoundShowConfirm}
+            onDismiss={() => setCompoundShowConfirm(false)}
+            attemptingTxn={compoundCollecting}
+            hash={compoundMigrationHash ?? ''}
+            reviewContent={() => (
+              <ConfirmationModalContent
+                title={<Trans>Compound fees</Trans>}
+                onDismiss={() => setCompoundShowConfirm(false)}
+                topContent={modalHeaderCompound}
+              />
+            )}
+            pendingText={<Trans>Compounding fees</Trans>}
           />
           <AutoColumn gap="md">
             <AutoColumn gap="sm">
@@ -891,25 +979,39 @@ function PositionPageContent() {
                           </ResponsiveButtonConfirmed>
                         ) : null}
 
-{ownsNFT &&
-                     
+                        {ownsNFT &&
+                          (feeValue0?.greaterThan(0) || feeValue1?.greaterThan(0) || !!compoundMigrationHash) ? (
                           <ResponsiveButtonConfirmed
                             data-testid="collect-fees-button"
-                            disabled={true}
-                            confirmed={!!collectMigrationHash && !isCollectPending}
+                            disabled={compoundCollecting || !!compoundMigrationHash}
+                            confirmed={!!compoundMigrationHash && !isCompoundPending}
                             width="fit-content"
                             style={{ borderRadius: '12px' }}
                             padding="4px 8px"
-                            onClick={() => setShowConfirm(true)}
+                            onClick={() => setCompoundShowConfirm(true)}
                           >
-                   
+                            {!!compoundMigrationHash && !isCompoundPending ? (
+                              <ThemedText.DeprecatedMain color={theme.neutral1}>
+                                <Trans> Compounded</Trans>
+                              </ThemedText.DeprecatedMain>
+                            ) : isCompoundPending || compoundCollecting ? (
+                              <ThemedText.DeprecatedMain color={theme.neutral1}>
+                                {' '}
+                                <Dots>
+                                  <Trans>Compounding</Trans>
+                                </Dots>
+                              </ThemedText.DeprecatedMain>
+                            ) : (
+                              <>
                                 <ThemedText.DeprecatedMain color={theme.white}>
                                   <Trans>Compound</Trans>
                                 </ThemedText.DeprecatedMain>
-                             
-                            
+                              </>
+                            )}
                           </ResponsiveButtonConfirmed>
-                        }
+                        ) : null}
+
+
                       </RowBetween>
                     </AutoColumn>
                     <LightCard padding="12px 16px">

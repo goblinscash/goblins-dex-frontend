@@ -5,48 +5,44 @@ import computeABI from "utils/ABI/computeABi.json";
 
 import Icon1 from "assets/farmingAssets/icons/0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04.png";
 import Icon2 from "assets/farmingAssets/icons/0x56381cB87C8990971f3e9d948939e1a95eA113a3.png";
-import Icon3 from "assets/farmingAssets/icons/0xbb2A35cc3e3dDb679fe30A82051633bC822e4191.png";
 import Icon4 from "assets/farmingAssets/icons/0xbb10B6D11db70f33417b08e0B87042275C933Bb9.png";
+import Icon3 from "assets/farmingAssets/icons/0xbb2A35cc3e3dDb679fe30A82051633bC822e4191.png";
 import Icon5 from "assets/farmingAssets/icons/0xbbb3700F33fCb64437Dc28A7Beb6b21f5cC76FB9.png";
 import Icon6 from "assets/farmingAssets/icons/0xBc2F884680c95A02cea099dA2F524b366d9028Ba.png";
 import Icon7 from "assets/farmingAssets/icons/0xBc9bD8DDe6C5a8e1CBE293356E02f5984693b195.png";
 
-
 export const cryptoData = [
-    {
-      label: "SmartBCH",
-      symbol: "SmartBCH",
-      name: "SmartBCH",
-      type: "SmartBCH",
-      chainName: "Smart Bitcoin Cash",
-      rpcUrls: [
-        "https://rpc-sbch.goblins.cash/",
-        "https://smartbch.greyh.at",
-        "https://smartbch.greyh.at",
-        "https://smartbch.fountainhead.cash/mainnet",
-        "https://global.uat.cash",
-        "https://rpc.uatvo.com",
-        "https://api.tatum.io/v3/blockchain/node/bch-mainnet ",
-        "https://rpc-mainnet.smartbch.org",
-        "https://smartbch.devops.cash/mainnet",
-      ],
-      chainId: 10000,
-      rpcUrl: "https://rpc-sbch.goblins.cash/",
-      contractAddress: process.env.REACT_APP_BCH_STAKING_CONTRACT,
-      nftManagerContractAddress:
-        process.env.REACT_APP_BCH_NFT_MANAGER_CONTRACT,
-      stakeContractAddress: process.env.REACT_APP_BCH_TOKEN_STAKING_CONTRACT,
-      migrationAddress: process.env.REACT_APP_BCH_MIGRATION_STAKING_CONTRACT,
+  {
+    label: "SmartBCH",
+    symbol: "SmartBCH",
+    name: "SmartBCH",
+    type: "SmartBCH",
+    chainName: "Smart Bitcoin Cash",
+    rpcUrls: [
+      "https://rpc-sbch.goblins.cash/",
+      "https://smartbch.greyh.at",
+      "https://smartbch.greyh.at",
+      "https://smartbch.fountainhead.cash/mainnet",
+      "https://global.uat.cash",
+      "https://rpc.uatvo.com",
+      "https://api.tatum.io/v3/blockchain/node/bch-mainnet ",
+      "https://rpc-mainnet.smartbch.org",
+      "https://smartbch.devops.cash/mainnet",
+    ],
+    chainId: 10000,
+    rpcUrl: "https://rpc-sbch.goblins.cash/",
+    contractAddress: process.env.REACT_APP_BCH_STAKING_CONTRACT,
+    nftManagerContractAddress: process.env.REACT_APP_BCH_NFT_MANAGER_CONTRACT,
+    stakeContractAddress: process.env.REACT_APP_BCH_TOKEN_STAKING_CONTRACT,
+    migrationAddress: process.env.REACT_APP_BCH_MIGRATION_STAKING_CONTRACT,
+    compoundAddress: process.env.REACT_APP_BCH_COMPOUND_CONTRACT,
+    explorerLink: "https://smartscout.cash/",
+    rpcUrls: ["https://smartbch.greyh.at"],
 
-      explorerLink: "https://smartscout.cash/",
-      rpcUrls: ["https://smartbch.greyh.at"],
-
-      blockExplorerUrls: ["https://smartbch.org/"],
-      nativeCurrency: { name: "Bitcoin Cash", symbol: "BCH", decimals: 18 },
-    },
+    blockExplorerUrls: ["https://smartbch.org/"],
+    nativeCurrency: { name: "Bitcoin Cash", symbol: "BCH", decimals: 18 },
+  },
 ];
-
-
 
 export const graphQLUrl = {
   10000: "https://graph.dfd.cash/subgraphs/name/v3stakerminwidths",
@@ -72,8 +68,6 @@ export const getProvider = async () => {
       const provider = await new ethers.getDefaultProvider(
         "https://bsc-testnet-rpc.publicnode.com"
       );
-
-  
 
       resolve(provider);
     } catch (err) {
@@ -125,8 +119,7 @@ export const getSymbols = {
 };
 
 export const getSortedData = (arr, sortKey, sortOrder) => {
-
-  console.log(arr, sortKey, sortOrder, "<====arr, sortKey, sortOrder")
+  console.log(arr, sortKey, sortOrder, "<====arr, sortKey, sortOrder");
   if (!arr || !arr.length) {
     return [];
   } else {
@@ -149,4 +142,3 @@ export const getSortedData = (arr, sortKey, sortOrder) => {
     return sortedArr;
   }
 };
-
