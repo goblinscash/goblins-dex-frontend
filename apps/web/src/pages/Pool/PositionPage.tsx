@@ -618,6 +618,7 @@ function PositionPageContent() {
 
         setCompoundCollecting(false)
         setCompoundShowConfirm(false)
+
       } catch (error) {
         setCompoundCollecting(false)
 
@@ -676,6 +677,7 @@ function PositionPageContent() {
 
   // console.log(pool,positionDetails,positionManager, "<====pool")
   function modalHeaderCompound() {
+    
     return (
       <AutoColumn gap="md" style={{ marginTop: '20px' }}>
         <LightCard padding="12px 16px">

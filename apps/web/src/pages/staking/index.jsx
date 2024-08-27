@@ -148,11 +148,6 @@ const Staking = () => {
     } catch (error) {}
   };
 
-
-
-
-
-
   useEffect(() => {
     if (details.stakeSymbol && price.GOBInPrice && price.WBCHInPrice) {
       getAPR(details.totalSupply, price.WBCHInPrice, price.GOBInPrice);
@@ -166,7 +161,6 @@ const Staking = () => {
       currentNetwork &&
       price.GOBInPrice
     ) {
-   
       getDetails();
     }
   }, [wallet, currentNetwork, price]);

@@ -252,7 +252,7 @@ function Web3StatusInner() {
 export default function Web3Status() {
   const [isDrawerOpen] = useAccountDrawer()
   return (
-    <PrefetchBalancesWrapper shouldFetchOnAccountUpdate={isDrawerOpen}>
+    <PrefetchBalancesWrapper shouldFetchOnAccountUpdate={isDrawerOpen} className='CstmHeader'>
       <Web3StatusInner />
       <Portal>
         <PortfolioDrawer />

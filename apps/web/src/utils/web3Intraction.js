@@ -38,6 +38,7 @@ class Web3Intraction {
    *
    * @returns {object} Contract
    */
+
   getContract = (abi, address, isSigner) => {
     try {
       let contract = new Contract(
@@ -65,7 +66,6 @@ class Web3Intraction {
    */
   checkAllowance = async (tokenAmount, tokenAddress, approvalAddress) => {
     return new Promise(async (resolve, reject) => {
- 
       try {
         let walletAddres = this.SIGNER.getAddress();
 
@@ -108,7 +108,7 @@ class Web3Intraction {
           } else {
             tokenAmountWithDecimal = Number(tokenAmount) * 10 ** tokenDecimal;
           }
-          tokenAmountWithDecimal= parseInt(tokenAmountWithDecimal)
+          tokenAmountWithDecimal = parseInt(tokenAmountWithDecimal);
           if (Number(tokenAmountWithDecimal) > tokenAllowence) {
             const txn = await tokenContract.approve(
               approvalAddress,
@@ -133,8 +133,6 @@ class Web3Intraction {
    * @param {number} rewards reward amount
    * @param {number} minimumWidth Minimum Width value
    * @param {address} tokenAddress Reward token address
-   * 
-
    *
    * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
    */
@@ -816,7 +814,7 @@ class Web3Intraction {
           this.contractDetails.stakeContractAddress
         );
 
-        console.log(stakeAmount, "<====stakeAmount")
+        console.log(stakeAmount, "<====stakeAmount");
 
         let tx = await contract.stake(stakeAmount);
         let receipt = await tx.wait();
@@ -854,7 +852,7 @@ class Web3Intraction {
         let tokenData = await this.getTokenDecimal(getStakingContract);
         let tokenAmountWithDecimal = Number(amount) * 10 ** tokenData.decimal;
 
-        tokenAmountWithDecimal= parseInt(tokenAmountWithDecimal)
+        tokenAmountWithDecimal = parseInt(tokenAmountWithDecimal);
 
         let tx = await contract.withdraw(tokenAmountWithDecimal.toString());
         let receipt = await tx.wait();
@@ -1030,7 +1028,6 @@ class Web3Intraction {
             parseInt(stakeToken.totalSupply) - parseInt(totalSupply),
         });
       } catch (error) {
-
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
@@ -1218,6 +1215,12 @@ class Web3Intraction {
   compoundPool = async (tokenId, walletAddress) => {
     tokenId = tokenId.toString();
 
+    console.log(tokenId, walletAddress, "<====token, wallet");
+    console.log(
+      this.contractDetails?.nftManagerContractAddress,
+      this.contractDetails.compoundAddress,
+      "<====nftManagerContractAddress, compoundAddress"
+    );
     return new Promise(async (resolve, reject) => {
       try {
         const contract = this.getContract(
@@ -1226,50 +1229,6 @@ class Web3Intraction {
           true
         );
 
-        let getSafeContract = await this.getContract(
-          JSON.stringify([
-            {
-              inputs: [
-                {
-                  internalType: "address",
-                  name: "from",
-                  type: "address",
-                },
-                {
-                  internalType: "address",
-                  name: "to",
-                  type: "address",
-                },
-                {
-                  internalType: "uint256",
-                  name: "tokenId",
-                  type: "uint256",
-                },
-       
-              ],
-              name: "safeTransferFrom",
-              outputs: [],
-              stateMutability: "nonpayable",
-              type: "function",
-            },
-          ]),
-          this.contractDetails?.nftManagerContractAddress,
-          true
-        );
-
-
-        // let poolContract = this.getContract(
-        //   JSON.stringify(PancakeV3Pool),
-        //   "0x532e1a0117aC273F448D5AF5aF8AA6336a4374d5",
-        //   true
-        // );
-
-        // let observe =await poolContract.observe([0,60])
-
-
-        // console.log(observe.tickCumulatives[0].toString(),observe.tickCumulatives[1].toString(), (observe.tickCumulatives[0].toString() - observe.tickCumulatives[1].toString()) / 60,"<===observe")
-
-        // return
         let approveTxn = await contract.approve(
           this.contractDetails.compoundAddress,
           tokenId
@@ -1277,10 +1236,11 @@ class Web3Intraction {
 
         await approveTxn.wait();
 
-        let trxn = await getSafeContract.safeTransferFrom(
+        let trxn = await contract.safeTransferFrom(
           walletAddress,
           this.contractDetails.compoundAddress,
-          tokenId
+          tokenId,
+          "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000"
         );
 
         let receipt = await trxn.wait();
