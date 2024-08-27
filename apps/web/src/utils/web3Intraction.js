@@ -108,6 +108,9 @@ class Web3Intraction {
           } else {
             tokenAmountWithDecimal = Number(tokenAmount) * 10 ** tokenDecimal;
           }
+          tokenAmountWithDecimal= parseInt(tokenAmountWithDecimal)
+
+   
 
           if (Number(tokenAmountWithDecimal) > tokenAllowence) {
             const txn = await tokenContract.approve(
@@ -816,6 +819,8 @@ class Web3Intraction {
           this.contractDetails.stakeContractAddress
         );
 
+        console.log(stakeAmount, "<====stakeAmount")
+
         let tx = await contract.stake(stakeAmount);
         let receipt = await tx.wait();
         resolve(receipt);
@@ -852,7 +857,8 @@ class Web3Intraction {
         let tokenData = await this.getTokenDecimal(getStakingContract);
         let tokenAmountWithDecimal = Number(amount) * 10 ** tokenData.decimal;
 
-        // console.log(tokenAmountWithDecimal, "<====tokenAmountWithDecimal")
+        tokenAmountWithDecimal= parseInt(tokenAmountWithDecimal)
+
         let tx = await contract.withdraw(tokenAmountWithDecimal.toString());
         let receipt = await tx.wait();
         resolve(receipt);
