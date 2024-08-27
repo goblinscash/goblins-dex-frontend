@@ -1214,13 +1214,6 @@ class Web3Intraction {
    */
   compoundPool = async (tokenId, walletAddress) => {
     tokenId = tokenId.toString();
-
-    console.log(tokenId, walletAddress, "<====token, wallet");
-    console.log(
-      this.contractDetails?.nftManagerContractAddress,
-      this.contractDetails.compoundAddress,
-      "<====nftManagerContractAddress, compoundAddress"
-    );
     return new Promise(async (resolve, reject) => {
       try {
         const contract = this.getContract(
@@ -1228,61 +1221,39 @@ class Web3Intraction {
           this.contractDetails?.nftManagerContractAddress,
           true
         );
-
-        let approveTxn = await contract.approve(
-          this.contractDetails.compoundAddress,
-          tokenId
-        );
-
-        await approveTxn.wait();
-
-        let trxn = await contract.safeTransferFrom(
-          walletAddress,
+        const approve = await contract.interface.encodeFunctionData("approve", [
           this.contractDetails.compoundAddress,
           tokenId,
-          "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000"
+        ]);
+        const safeTransferFrom = await contract.interface.encodeFunctionData(
+          "safeTransferFrom",
+          [
+            walletAddress,
+            this.contractDetails.compoundAddress,
+            tokenId,
+            "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000",
+          ]
         );
 
-        let receipt = await trxn.wait();
+        const multicallData = contract.interface.encodeFunctionData(
+          "multicall",
+          [[approve, safeTransferFrom]]
+        );
+
+        const tx = {
+          to: this.contractDetails?.nftManagerContractAddress,
+          data: multicallData,
+          value: ethers.utils.parseEther("0"), // Amount of Ether to send with the transaction
+        };
+
+        const response = await this.SIGNER.sendTransaction(tx);
+
+        let receipt = await response.wait(); // Wait for the transaction to be mined
+        console.log(receipt, "<===receipt");
 
         resolve(receipt);
-
-        // const approve = await contract.interface.encodeFunctionData("approve", [
-        //   this.contractDetails.compoundAddress,
-        //   tokenId,
-        // ]);
-        // const safeTransferFrom =
-        //   await getSafeContract.interface.encodeFunctionData(
-        //     "safeTransferFrom",
-        //     [
-        //       walletAddress,
-        //       this.contractDetails.compoundAddress,
-        //       tokenId,
-        //       "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000",
-        //     ]
-        //   );
-
-        // const multicallData = contract.interface.encodeFunctionData(
-        //   "multicall",
-        //   [[approve, safeTransferFrom]]
-        // );
-
-        // const tx = {
-        //   to: this.contractDetails?.nftManagerContractAddress,
-        //   data: multicallData,
-        //   value: ethers.utils.parseEther("0"), // Amount of Ether to send with the transaction
-        // };
-
-        // const response = await this.SIGNER.sendTransaction(tx);
-
-        // let receipt = await response.wait(); // Wait for the transaction to be mined
-        // console.log(receipt, "<===receipt");
-
-        // resolve(receipt);
-        // let receipt = await stakeTxn.wait();
-        // resolve(receipt);
       } catch (error) {
-        console.log(error, "<===error in stake");
+        console.log(error, "<===error in compoundPool");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
