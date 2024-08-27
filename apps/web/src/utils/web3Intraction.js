@@ -65,7 +65,7 @@ class Web3Intraction {
    */
   checkAllowance = async (tokenAmount, tokenAddress, approvalAddress) => {
     return new Promise(async (resolve, reject) => {
-      console.log(tokenAmount, tokenAddress, approvalAddress, "<===data");
+ 
       try {
         let walletAddres = this.SIGNER.getAddress();
 
@@ -109,9 +109,6 @@ class Web3Intraction {
             tokenAmountWithDecimal = Number(tokenAmount) * 10 ** tokenDecimal;
           }
           tokenAmountWithDecimal= parseInt(tokenAmountWithDecimal)
-
-   
-
           if (Number(tokenAmountWithDecimal) > tokenAllowence) {
             const txn = await tokenContract.approve(
               approvalAddress,

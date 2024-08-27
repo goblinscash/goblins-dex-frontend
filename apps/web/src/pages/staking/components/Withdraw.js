@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 //css
 import styles from "../staking.module.scss";
 
-
 // image
-import logo from "assets/farmingAssets/Images/logo.png";
+import logo from "assets/farmingAssets/Images/logoIcn.png";
 
 //hooks && helpers
-import {useWallet} from "hooks/useWallet";
-import Web3Intraction from "utils/web3Intraction";
 import { toCommas } from "helpers/utils";
+import { useWallet } from "hooks/useWallet";
+import Web3Intraction from "utils/web3Intraction";
 
 function Withdraw({ getDetails, details, isBlocked }) {
   const { currentNetwork } = useSelector((state) => state.dashboard);
@@ -48,7 +47,6 @@ function Withdraw({ getDetails, details, isBlocked }) {
     } catch (error) {
       setLoading(false);
       toast.error(error);
-      console.log(error, "<====error");
     }
   };
 
@@ -70,7 +68,6 @@ function Withdraw({ getDetails, details, isBlocked }) {
     } catch (error) {
       setLoading(false);
       toast.error(error);
-      console.log(error, "<====error");
     }
   };
 
@@ -90,7 +87,7 @@ function Withdraw({ getDetails, details, isBlocked }) {
 
   const handleChange = (e) => {
     let { value } = e.target;
-    value = value.replace(/[^\d.]/g, '');
+    value = value.replace(/[^\d.]/g, "");
     if (isNaN(Number(value.replace(/,/g, "")))) {
       return;
     }
@@ -107,7 +104,8 @@ function Withdraw({ getDetails, details, isBlocked }) {
           <h4 className="m-0 text-3xl font-extrabold text-white">STAKED</h4>
           <div className="pt-3">
             <h6 className="m-0 font-extrabold py-2 text-lg flex items-center justify-center">
-              {toCommas(Number(details?.stakedAmount || 0).toFixed(2) || 0)} {details?.stakeSymbol}
+              {toCommas(Number(details?.stakedAmount || 0).toFixed(2) || 0)}{" "}
+              {details?.stakeSymbol}
               <img
                 src={logo}
                 height={100}
