@@ -494,6 +494,9 @@ function PositionPageContent() {
   const isCompoundPending = useIsTransactionPending(collectMigrationHash ?? undefined)
   const [compoundShowConfirm, setCompoundShowConfirm] = useState(false)
 
+  const [changeRange, setChangeRange] = useState(false)
+  const [selectedToken, setSelectedToken] = useState("")
+
   // usdc prices always in terms of tokens
   const price0 = useStablecoinPrice(token0 ?? undefined)
   const price1 = useStablecoinPrice(token1 ?? undefined)
@@ -628,6 +631,32 @@ function PositionPageContent() {
     [tokenId, wallet],
   )
 
+  const changeRangeFunc = useCallback(
+    async () => {
+
+      try {
+        setCompoundCollecting(true)
+        const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+
+
+        let isFirstToken = pool?.token0.address == selectedToken;
+
+        let makeData = [0, selectedToken, 0, 0, 0, 0, "0x", 50000000000000000000000, 0, "0x", "340282366920938463463374607431768211455", "340282366920938463463374607431768211455", 500, 134080, 138540, 989627319600492125863, 0, 0, 1723654782, "0x3F67aB27cf537386fc81Ee47A5358938ebd932f6", "0x3F67aB27cf537386fc81Ee47A5358938ebd932f6", false, "0x", "0x"]
+
+        let transaction = await web3.changeRange(makeData, tokenId, wallet.address)
+
+
+
+
+      } catch (error) {
+        setCompoundCollecting(false)
+
+      }
+
+    },
+    [tokenId, wallet],
+  )
+
   const owner = useSingleCallResult(tokenId ? positionManager : null, 'ownerOf', [tokenId]).result?.[0]
   const ownsNFT = owner === account || positionDetails?.operator === account
 
@@ -639,6 +668,10 @@ function PositionPageContent() {
   const above = pool && typeof tickUpper === 'number' ? pool.tickCurrent >= tickUpper : undefined
   const inRange: boolean = typeof below === 'boolean' && typeof above === 'boolean' ? !below && !above : false
 
+
+
+
+  console.log(pool, positionDetails, "<====positionDetails")
   function modalHeader() {
     return (
       <AutoColumn gap="md" style={{ marginTop: '20px' }}>
@@ -677,7 +710,8 @@ function PositionPageContent() {
 
   // console.log(pool,positionDetails,positionManager, "<====pool")
   function modalHeaderCompound() {
-    
+    let getUpperValue = feeValueUpper ? formatCurrencyAmount({ amount: feeValueUpper }) : 0;
+    let getLowerValue = feeValueLower ? formatCurrencyAmount({ amount: feeValueLower }) : 0;
     return (
       <AutoColumn gap="md" style={{ marginTop: '20px' }}>
         <LightCard padding="12px 16px">
@@ -686,7 +720,7 @@ function PositionPageContent() {
               <RowFixed>
                 <CurrencyLogo currency={feeValueUpper?.currency} size="20px" style={{ marginRight: '0.5rem' }} />
                 <ThemedText.DeprecatedMain>
-                  {feeValueUpper ? formatCurrencyAmount({ amount: feeValueUpper }) : '-'}
+                  {getUpperValue ? getUpperValue : '-'}
                 </ThemedText.DeprecatedMain>
               </RowFixed>
               <ThemedText.DeprecatedMain>{feeValueUpper?.currency?.symbol}</ThemedText.DeprecatedMain>
@@ -695,7 +729,7 @@ function PositionPageContent() {
               <RowFixed>
                 <CurrencyLogo currency={feeValueLower?.currency} size="20px" style={{ marginRight: '0.5rem' }} />
                 <ThemedText.DeprecatedMain>
-                  {feeValueLower ? formatCurrencyAmount({ amount: feeValueLower }) : '-'}
+                  {getLowerValue ? getLowerValue : '-'}
                 </ThemedText.DeprecatedMain>
               </RowFixed>
               <ThemedText.DeprecatedMain>{feeValueLower?.currency?.symbol}</ThemedText.DeprecatedMain>
@@ -705,8 +739,32 @@ function PositionPageContent() {
         <ThemedText.DeprecatedItalic>
           <Trans>Compounding fees will withdraw currently available fees for you.</Trans>
         </ThemedText.DeprecatedItalic>
-        <ButtonPrimary data-testid="modal-collect-fees-button" onClick={compound}>
+        <ButtonPrimary disabled={Number(getUpperValue) <= 0 || Number(getLowerValue) <= 0} data-testid="modal-collect-fees-button" onClick={compound}>
           <Trans>Compound</Trans>
+        </ButtonPrimary>
+      </AutoColumn>
+    )
+  }
+
+
+  function changeRangeHeader() {
+
+    return (
+      <AutoColumn gap="md" style={{ marginTop: '20px' }}>
+        <LightCard padding="12px 16px">
+          <AutoColumn gap="md">
+            {pool && pool?.token0 && <select value={selectedToken} onChange={(e: any) => setSelectedToken(e.target.value)} >
+              <option value={""}>{"Select Tokens"}</option>
+              <option value={pool.token0.address}>{pool.token0.symbol}</option>
+              <option value={pool.token1.address}>{pool.token1.symbol}</option>
+            </select>}
+          </AutoColumn>
+        </LightCard>
+        <ThemedText.DeprecatedItalic>
+          <Trans>Compounding fees will withdraw currently available fees for you.</Trans>
+        </ThemedText.DeprecatedItalic>
+        <ButtonPrimary data-testid="modal-collect-fees-button" onClick={changeRangeFunc}>
+          <Trans>Change Range</Trans>
         </ButtonPrimary>
       </AutoColumn>
     )
@@ -777,6 +835,24 @@ function PositionPageContent() {
             )}
             pendingText={<Trans>Compounding fees</Trans>}
           />
+
+          <TransactionConfirmationModal
+            isOpen={changeRange}
+            onDismiss={() => setChangeRange(false)}
+            attemptingTxn={false}
+            hash={''}
+            reviewContent={() => (
+              <ConfirmationModalContent
+                title={<Trans>Change Range</Trans>}
+                onDismiss={() => setChangeRange(false)}
+                topContent={changeRangeHeader}
+              />
+            )}
+            pendingText={<Trans>Changing Range</Trans>}
+          />
+
+
+
           <AutoColumn gap="md">
             <AutoColumn gap="sm">
               <Link
@@ -801,34 +877,58 @@ function PositionPageContent() {
                   </Badge>
                   <RangeBadge removed={removed} inRange={inRange} />
                 </PositionLabelRow>
-                {ownsNFT && (
-                  <ActionButtonResponsiveRow>
+                {ownsNFT &&
+                  (
+                    <ActionButtonResponsiveRow>
 
-                    {currency0 && currency1 && feeAmount && tokenId ? (
-                      <ButtonGray
-                        as={Link}
-                        to={`/add/${currencyId(currency0)}/${currencyId(currency1)}/${feeAmount}/${tokenId}`}
-                        padding="6px 8px"
-                        width="fit-content"
-                        $borderRadius="12px"
-                        style={{ marginRight: '8px' }}
-                      >
-                        <Trans>Increase liquidity</Trans>
-                      </ButtonGray>
-                    ) : null}
-                    {tokenId && !removed ? (
-                      <SmallButtonPrimary
-                        as={Link}
-                        to={`/remove/${tokenId}`}
-                        padding="6px 8px"
-                        width="fit-content"
-                        $borderRadius="12px"
-                      >
-                        <Trans>Remove liquidity</Trans>
-                      </SmallButtonPrimary>
-                    ) : null}
-                  </ActionButtonResponsiveRow>
-                )}
+                      {/* {currency0 && currency1 && feeAmount && tokenId ?
+                        (
+                          <ResponsiveButtonConfirmed
+                            data-testid="collect-fees-button"
+                            disabled={compoundCollecting || !!compoundMigrationHash}
+                            confirmed={!!compoundMigrationHash && !isCompoundPending}
+                            width="fit-content"
+                            style={{ borderRadius: '12px' }}
+                            padding="4px 8px"
+                            onClick={() => setChangeRange(true)}
+                          >
+
+                            <ThemedText.DeprecatedMain color={theme.white}>
+                              <Trans>Change Range</Trans>
+                            </ThemedText.DeprecatedMain>
+
+
+                          </ResponsiveButtonConfirmed>
+                        )
+                        :
+                        null
+                      } */}
+
+                      {currency0 && currency1 && feeAmount && tokenId ? (
+                        <ButtonGray
+                          as={Link}
+                          to={`/add/${currencyId(currency0)}/${currencyId(currency1)}/${feeAmount}/${tokenId}`}
+                          padding="6px 8px"
+                          width="fit-content"
+                          $borderRadius="12px"
+                          style={{ marginRight: '8px' }}
+                        >
+                          <Trans>Increase liquidity</Trans>
+                        </ButtonGray>
+                      ) : null}
+                      {tokenId && !removed ? (
+                        <SmallButtonPrimary
+                          as={Link}
+                          to={`/remove/${tokenId}`}
+                          padding="6px 8px"
+                          width="fit-content"
+                          $borderRadius="12px"
+                        >
+                          <Trans>Remove liquidity</Trans>
+                        </SmallButtonPrimary>
+                      ) : null}
+                    </ActionButtonResponsiveRow>
+                  )}
               </ResponsiveRow>
             </AutoColumn>
             <ResponsiveRow align="flex-start">

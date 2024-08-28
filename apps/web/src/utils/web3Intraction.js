@@ -9,7 +9,7 @@ import TokenABI from "./ABI/TokenABI.json";
 import UniswapV3Factory from "./ABI/UniswapV3Factory.json";
 import UniswapV3Staker from "./ABI/UniswapV3Staker.json";
 
-import { makeByteData, toFixedCustm } from "../helpers/utils";
+import { makeByteData,makeByteDataForV3, toFixedCustm } from "../helpers/utils";
 
 class Web3Intraction {
   constructor(currentNetwork, provider) {
@@ -1254,6 +1254,44 @@ class Web3Intraction {
         resolve(receipt);
       } catch (error) {
         console.log(error, "<===error in compoundPool");
+        if (error?.code === -32603) {
+          return reject("insufficient funds for intrinsic transaction cost");
+        }
+
+        reject(error.reason || error.data?.message || error.message || error);
+      }
+    });
+  };
+
+
+
+
+  changeRange = async (data, tokenId, walletAddress) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const contract = this.getContract(
+          JSON.stringify(NFTManager),
+          this.contractDetails?.nftManagerContractAddress,
+          true
+        );
+        let getByteData = makeByteDataForV3(data);
+
+        
+
+        const response = await contract.safeTransferFrom(
+          walletAddress,
+          this.contractDetails.contractAddress,
+          tokenId,
+          getByteData
+        );
+
+        let receipt = await response.wait();
+
+        resolve(receipt);
+        // let receipt = await stakeTxn.wait();
+        // resolve(receipt);
+      } catch (error) {
+        console.log(error, "<===error in changeRange");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }

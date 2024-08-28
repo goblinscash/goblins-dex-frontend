@@ -179,6 +179,15 @@ export const makeByteData = (data) => {
 };
 
 
+export const makeByteDataForV3 = (data) => {
+
+  const incentiveKeyAbi =
+    "tuple(uint256 whatToDo,address targetToken,uint256 amountRemoveMin0,uint256 amountRemoveMin1,uint256 amountIn0,uint256 amountOut0Min,bytes swapData0, uint256 amountIn1,uint256 amountOut1Min,bytes swapData1,uint128 feeAmount0,uint128 feeAmount1,uint24 fee,int24 tickLower,int24 tickUpper,uint128 liquidity,uint256 amountAddMin0,uint256 amountAddMin1,uint256 deadline,address recipient,address recipientNFT,bool unwrap,bytes returnData,bytes swapAndMintReturnData)";
+    let byteData = ethers.utils.defaultAbiCoder.encode([incentiveKeyAbi], [data])
+    return byteData
+};
+
+
 export function toCommas(value) {
   let parts = value.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
