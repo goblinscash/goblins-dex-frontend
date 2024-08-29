@@ -228,10 +228,10 @@ export function usePoolData(
             volumeUSDChange,
             volumeUSDWeek,
             volumeUSD24H,
-            tvlUSD,
+            tvlUSD: parseFloat(current.totalValueLockedUSD),
             tvlUSDChange,
-            tvlToken0,
-            tvlToken1,
+            tvlToken0: parseFloat(current.totalValueLockedToken0),
+            tvlToken1:parseFloat(current.totalValueLockedToken1),
             tick: parseFloat(current.tick),
           }
         : undefined,

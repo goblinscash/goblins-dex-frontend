@@ -5891,15 +5891,18 @@ export const TopPoolsDocument = gql`
     id
     txCount
     totalValueLockedUSD
+    
     feeTier
     volumeUSD
     token0 {
       id
       symbol
+    
     }
     token1 {
       id
       symbol
+     
     }
     
   }

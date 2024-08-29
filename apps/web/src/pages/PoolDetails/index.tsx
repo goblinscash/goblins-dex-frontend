@@ -125,7 +125,7 @@ export default function PoolDetailsPage() {
 
   if (poolNotFound) return <NotFound />
 
-
+console.log(poolData, "<====poolData")
 
   return (
     <PageWrapper>
