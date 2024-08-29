@@ -12,6 +12,7 @@ export const UK_BANNER_HEIGHT_SM = 137
 const BannerWrapper = styled.div`
   position: relative;
   display: flex;
+  justify-content: center;
   background-color: ${({ theme }) => theme.surface1};
   padding: 20px;
   border-bottom: 1px solid ${({ theme }) => theme.surface3};
@@ -70,8 +71,8 @@ export function UkBanner() {
   const openDisclaimer = useOpenModal(ApplicationModal.UK_DISCLAIMER)
 
   return (
-    <BannerWrapper>
-      <BannerTextWrapper lineHeight="24px">{t`UK disclaimer:` + ' ' + bannerText}</BannerTextWrapper>
+    <BannerWrapper className='notifyClass'>
+      <BannerTextWrapper lineHeight="24px">{"Sorry, our DEX is unavailable in your location."}</BannerTextWrapper>
       <ReadMoreWrapper>
         <ThemedText.BodySecondary lineHeight="24px" color="accent1" onClick={openDisclaimer}>
           <Trans>Read more</Trans>

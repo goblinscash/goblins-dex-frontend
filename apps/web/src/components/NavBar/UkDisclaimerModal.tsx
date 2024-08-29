@@ -12,6 +12,7 @@ import { bannerText } from './UkBanner'
 
 const Wrapper = styled(Column)`
   padding: 8px;
+  
 `
 
 const ButtonContainer = styled(Column)`
@@ -31,11 +32,14 @@ const CloseIconWrapper = styled(ButtonText)`
 
 const StyledThemeButton = styled(ThemeButton)`
   width: 100%;
+  background: #0f0!important;
+  color: #000;
 `
 
 export function UkDisclaimerModal() {
   const isOpen = useModalIsOpen(ApplicationModal.UK_DISCLAIMER)
   const closeModal = useCloseModal()
+
 
   return (
     <Modal isOpen={isOpen} onDismiss={closeModal}>
@@ -45,15 +49,18 @@ export function UkDisclaimerModal() {
         </CloseIconWrapper>
         <Column gap="sm">
           <ThemedText.HeadlineLarge padding="0px 8px" fontSize="24px" lineHeight="32px">
-            <Trans>Disclaimer for UK residents</Trans>
+            <Trans>Our Product is unavailable in your location</Trans>
           </ThemedText.HeadlineLarge>
           <ThemedText.BodyPrimary padding="8px 8px 12px" lineHeight="24px">
-            {bannerText}
+          
+                <p className="m-0 themeClr py-2 ">
+                  Sorry, our product are unavailable in your location
+                </p>
           </ThemedText.BodyPrimary>
         </Column>
         <ButtonContainer gap="md">
-          <StyledThemeButton size={ButtonSize.large} emphasis={ButtonEmphasis.medium} onClick={() => closeModal()}>
-            <Trans>Dismiss</Trans>
+          <StyledThemeButton size={ButtonSize.large} emphasis={ButtonEmphasis.medium} className='commonBtn' onClick={() => closeModal()}>
+          Agree and Continue
           </StyledThemeButton>
         </ButtonContainer>
       </Wrapper>

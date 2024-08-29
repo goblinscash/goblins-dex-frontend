@@ -31,6 +31,8 @@ export async function get(url, config = {}) {
   return await axiosIcoApi
     .get(url, { ...config })
     .then((response) => {
+
+
       if (response.data.status === "success") {
         return response.data;
       } else {

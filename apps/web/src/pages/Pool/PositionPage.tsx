@@ -404,7 +404,7 @@ function parseTokenId(tokenId: string | undefined): BigNumber | undefined {
 }
 
 function PositionPageContent() {
-  const { currentNetwork, isBlocked } = useSelector((state: any) => state.dashboard);
+  const { currentNetwork } = useSelector((state: any) => state.dashboard);
   const wallet = useWallet();
   const { tokenId: tokenIdFromUrl } = useParams<{ tokenId?: string }>()
   const { chainId, account, provider } = useWeb3React()

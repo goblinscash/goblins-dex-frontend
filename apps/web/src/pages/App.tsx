@@ -32,8 +32,11 @@ import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 import { updateFarm } from 'state/action'
 import useDebounceFunction from 'hooks/useDebounceFunction'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useWallet } from 'hooks/useWallet'
+import { detactCountryIp } from 'state/dashboard/actions'
+
+import AnnouncementBar from 'components/announcementBar'
 
 
 
@@ -84,7 +87,7 @@ const HeaderWrapper = styled.div<{ transparent?: boolean; bannerIsVisible?: bool
   border-bottom: ${({ theme, transparent }) => !transparent && `1px solid ${theme.surface3}`};
   width: 100%;
   justify-content: space-between;
-  position: fixed;
+  position: sticky;
   top: ${({ bannerIsVisible }) => (bannerIsVisible ? Math.max(UK_BANNER_HEIGHT - scrollY, 0) : 0)}px;
   z-index: ${Z_INDEX.dropdown};
 
@@ -102,6 +105,7 @@ export default function App() {
   const wallet = useWallet()
   const dispatch = useDispatch<any>()
   const [, setShouldDisableNFTRoutes] = useAtom(shouldDisableNFTRoutesAtom)
+  const { isBlocked } = useAppSelector((state:any) => state.dashboard);
 
   const location = useLocation()
   const { pathname } = location
@@ -114,6 +118,7 @@ export default function App() {
 
   const originCountry = useAppSelector((state: AppState) => state.user.originCountry)
   const renderUkBannner = Boolean(originCountry) && originCountry === 'GB'
+
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -172,6 +177,12 @@ export default function App() {
 
 
 
+  useEffect(() => {
+    dispatch(detactCountryIp());
+  }, []);
+
+
+
 
 
   if (shouldRedirectToAppInstall) {
@@ -182,7 +193,6 @@ export default function App() {
   if (shouldBlockPath && pathname !== '/swap') {
     return <Navigate to="/swap" replace />
   }
-
 
 
   return (
@@ -209,7 +219,10 @@ export default function App() {
           }}
         >
           <UserPropertyUpdater />
-          {renderUkBannner && <UkBanner />}
+        {/* {true && <AnnouncementBar />} */}
+
+          
+          {isBlocked && <UkBanner />}
           <HeaderWrapper transparent={isHeaderTransparent} bannerIsVisible={renderUkBannner} scrollY={scrollY}>
             <NavBar blur={isHeaderTransparent} />
           </HeaderWrapper>
