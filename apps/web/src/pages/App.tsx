@@ -36,7 +36,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useWallet } from 'hooks/useWallet'
 import { detactCountryIp } from 'state/dashboard/actions'
 
-import AnnouncementBar from 'components/announcementBar'
 
 
 
@@ -47,7 +46,7 @@ const BodyWrapper = styled.div<{ bannerIsVisible?: boolean }>`
   flex-direction: column;
   width: 100%;
   min-height: calc(100vh - ${({ bannerIsVisible }) => (bannerIsVisible ? UK_BANNER_HEIGHT : 0)}px);
-  padding: ${({ theme }) => theme.navHeight}px 0px 5rem 0px;
+  padding: 0px 0px 5rem 0px;
   align-items: center;
   flex: 1;
 

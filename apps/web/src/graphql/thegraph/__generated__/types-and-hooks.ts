@@ -5882,11 +5882,11 @@ export type TokenTransactionsQueryResult = Apollo.QueryResult<TokenTransactionsQ
 export const TopPoolsDocument = gql`
     query TopPools($orderBy: Pool_orderBy, $orderDirection: OrderDirection) {
   pools(
-    first: 100
+    first: 1000
     orderBy: $orderBy
     orderDirection: $orderDirection
     subgraphError: allow
-    where: {txCount_gte: 100}
+   
   ) {
     id
     txCount
