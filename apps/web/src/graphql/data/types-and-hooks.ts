@@ -2754,7 +2754,7 @@ export const TopTokens100Document = gql`
 
 export const TokensDocument = gql`
     query {
-  tokens(first:1000) {
+  tokens(first:1000, where: { totalValueLockedUSD_gt: 100 }) {
     decimals
     id
     name

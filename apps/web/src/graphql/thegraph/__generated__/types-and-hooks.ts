@@ -5886,23 +5886,20 @@ export const TopPoolsDocument = gql`
     orderBy: $orderBy
     orderDirection: $orderDirection
     subgraphError: allow
-   
+    where: { totalValueLockedUSD_gt: 100 }
   ) {
     id
     txCount
     totalValueLockedUSD
-    
     feeTier
     volumeUSD
     token0 {
       id
       symbol
-    
     }
     token1 {
       id
       symbol
-     
     }
     
   }
