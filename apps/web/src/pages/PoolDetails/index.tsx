@@ -148,9 +148,9 @@ export default function PoolDetailsPage() {
               loading={loading}
             />
             <ChartTypeSelectorContainer>
-              {chartType === ChartType.VOLUME && (
+              {/* {chartType === ChartType.VOLUME && (
                 <AdvancedPriceChartToggle currentChartType={priceChartType} onChartTypeChange={setPriceChartType} />
-              )}
+              )} */}
               {/* <ChartTypeSelector
                 options={PDP_CHART_SELECTOR_OPTIONS}
                 currentChartType={chartType}

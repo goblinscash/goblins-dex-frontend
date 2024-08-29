@@ -670,8 +670,6 @@ function PositionPageContent() {
 
 
 
-
-  console.log(pool, positionDetails, "<====positionDetails")
   function modalHeader() {
     return (
       <AutoColumn gap="md" style={{ marginTop: '20px' }}>
