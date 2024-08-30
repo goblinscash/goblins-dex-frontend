@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+
 
 // css
 import "assets/styles/main.css";
@@ -270,8 +270,8 @@ const Staking = () => {
                       onClick={handleMigrationPopup}
                       className="btn  flex items-center justify-center commonBtn font-extrabold"
                     >Migration</button>}
-                    <Link
-                      href="https://gobswap.dfd.cash/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
+                    <a
+                      href="/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
                       target="_blank"
                       onClick={(e) => (isBlocked ? e.preventDefault() : false)}
                     >
@@ -281,7 +281,7 @@ const Staking = () => {
                       >
                         BUY GOB
                       </button>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>

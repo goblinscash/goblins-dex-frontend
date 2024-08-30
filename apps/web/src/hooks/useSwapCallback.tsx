@@ -45,7 +45,6 @@ export function useSwapCallback(
   permitSignature: PermitSignature | undefined
 ) {
 
-  console.log("useSwapCallback call")
   const deadline = useTransactionDeadline()
 
   const addTransaction = useTransactionAdder()

@@ -735,7 +735,7 @@ function PositionPageContent() {
           </AutoColumn>
         </LightCard>
         <ThemedText.DeprecatedItalic>
-          <Trans>Compounding fees will withdraw currently available fees for you.</Trans><b>Platform charge 1% fee</b>
+          <Trans>Compounding fees will withdraw currently available fees for you.</Trans><b>Goblins Protocol charges 1% fee on compound.</b>
         </ThemedText.DeprecatedItalic>
         <ButtonPrimary disabled={Number(getUpperValue) <= 0 || Number(getLowerValue) <= 0} data-testid="modal-collect-fees-button" onClick={compound}>
           <Trans>Compound</Trans>
