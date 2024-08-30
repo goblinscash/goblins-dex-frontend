@@ -93,6 +93,8 @@ export function Swap({
   initialInputCurrency?: Currency
   initialOutputCurrency?: Currency
 }) {
+
+
   const isDark = useIsDarkMode()
 
   return (
@@ -106,7 +108,7 @@ export function Swap({
         {({ currentTab }) => (
           <SwapContextProvider>
 
-        
+
             <SwapWrapper isDark={isDark} className={className} id="swap-page">
               <SwapHeader />
               {currentTab === SwapTab.Swap && (

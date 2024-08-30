@@ -343,11 +343,11 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
   }, [trade])
 
   const clearSwapState = useCallback(() => {
-    setSwapFormState((currentState) => ({
-      ...currentState,
-      swapError: undefined,
-      swapResult: undefined,
-    }))
+    // setSwapFormState((currentState) => ({
+    //   ...currentState,
+    //   swapError: undefined,
+    //   swapResult: undefined,
+    // }))
   }, [])
 
   const handleSwap = useCallback(() => {
@@ -401,6 +401,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
     }
   }, [currencies, onUserInput, onWrap, wrapType])
 
+
   // warnings on the greater of fiat value price impact and execution price impact
   const { priceImpactSeverity, largerPriceImpact } = useMemo(() => {
     if (!isClassicTrade(trade)) {
@@ -426,6 +427,8 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
 
   const handleInputSelect = useCallback(
     (inputCurrency: Currency) => {
+console.log(inputCurrency, "<====inputCurrency")
+
       onCurrencySelection(Field.INPUT, inputCurrency)
       onCurrencyChange?.({
         inputCurrency,

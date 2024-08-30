@@ -88,6 +88,7 @@ const Staking = () => {
   const getUsdPrice = async () => {
     try {
       const getUSDPrice = request.getUSDPrice(priceGraphQl);
+      
       const priceData = await getUSDPrice(
         `query {
           pool(id:"0x532e1a0117ac273f448d5af5af8aa6336a4374d5"){

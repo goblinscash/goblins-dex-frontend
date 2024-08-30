@@ -93,7 +93,10 @@ export function useConfirmModalState({
 
   const performStep = useCallback(
     async (step: ConfirmModalState) => {
+
       switch (step) {
+
+
         case ConfirmModalState.WRAPPING:
           setConfirmModalState(ConfirmModalState.WRAPPING)
           onWrap?.()
@@ -154,6 +157,8 @@ export function useConfirmModalState({
   )
 
   const startSwapFlow = useCallback(() => {
+
+    console.log("startSwapFlow call")
     const steps = generateRequiredSteps()
     setPendingModalSteps(steps)
     performStep(steps[0])

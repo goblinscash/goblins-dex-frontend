@@ -46,16 +46,16 @@ function buildCurrencyDescriptor(
 ) {
   const formattedA = currencyA
     ? formatNumber({
-        input: parseFloat(CurrencyAmount.fromRawAmount(currencyA, amtA).toSignificant()),
-        type: NumberType.TokenNonTx,
-      })
+      input: parseFloat(CurrencyAmount.fromRawAmount(currencyA, amtA).toSignificant()),
+      type: NumberType.TokenNonTx,
+    })
     : t`Unknown`
   const symbolA = currencyA?.symbol ?? ''
   const formattedB = currencyB
     ? formatNumber({
-        input: parseFloat(CurrencyAmount.fromRawAmount(currencyB, amtB).toSignificant()),
-        type: NumberType.TokenNonTx,
-      })
+      input: parseFloat(CurrencyAmount.fromRawAmount(currencyB, amtB).toSignificant()),
+      type: NumberType.TokenNonTx,
+    })
     : t`Unknown`
   const symbolB = currencyB?.symbol ?? ''
   return [formattedA, symbolA, delimiter, formattedB, symbolB].filter(Boolean).join(' ')
@@ -67,13 +67,18 @@ function parseSwap(
   tokens: ChainTokenMap,
   formatNumber: FormatNumberFunctionType
 ): Partial<Activity> {
+
+  console.log("parseSwap call")
+
   const tokenIn = getCurrency(swap.inputCurrencyId, chainId, tokens)
   const tokenOut = getCurrency(swap.outputCurrencyId, chainId, tokens)
   const [inputRaw, outputRaw] =
     swap.tradeType === TradeType.EXACT_INPUT
       ? [swap.inputCurrencyAmountRaw, swap.settledOutputCurrencyAmountRaw ?? swap.expectedOutputCurrencyAmountRaw]
       : [swap.expectedInputCurrencyAmountRaw, swap.outputCurrencyAmountRaw]
-
+  console.log(tokenIn, inputRaw, tokenOut, outputRaw, "<====buildCurrencyDescriptor")
+  console.log([tokenIn, tokenOut], "<====[tokenIn, tokenOut]")
+  console.log(swap.isUniswapXOrder ? UniswapXBolt : undefined, "<====swap.isUniswapXOrder ? UniswapXBolt : undefined")
   return {
     descriptor: buildCurrencyDescriptor(tokenIn, inputRaw, tokenOut, outputRaw, formatNumber, undefined),
     currencies: [tokenIn, tokenOut],
@@ -186,9 +191,9 @@ function parseSend(
   const currency = getCurrency(currencyId, chainId, tokens)
   const formattedAmount = currency
     ? formatNumber({
-        input: parseFloat(CurrencyAmount.fromRawAmount(currency, amount).toSignificant()),
-        type: NumberType.TokenNonTx,
-      })
+      input: parseFloat(CurrencyAmount.fromRawAmount(currency, amount).toSignificant()),
+      type: NumberType.TokenNonTx,
+    })
     : t`Unknown`
 
   return {
@@ -202,8 +207,8 @@ export function getTransactionStatus(details: TransactionDetails): TransactionSt
   return !details.receipt
     ? TransactionStatus.Pending
     : details.receipt.status === 1 || details.receipt?.status === undefined
-    ? TransactionStatus.Confirmed
-    : TransactionStatus.Failed
+      ? TransactionStatus.Confirmed
+      : TransactionStatus.Failed
 }
 
 export function transactionToActivity(
@@ -213,7 +218,10 @@ export function transactionToActivity(
   formatNumber: FormatNumberFunctionType
 ): Activity | undefined {
   try {
+    
     const status = getTransactionStatus(details)
+
+    console.log(details, "<===details")
 
     const defaultFields = {
       hash: details.hash,
@@ -229,6 +237,7 @@ export function transactionToActivity(
     let additionalFields: Partial<Activity> = {}
     const info = details.info
     if (info.type === TransactionType.SWAP) {
+      console.log("transactionToActivity")
       additionalFields = parseSwap(info, chainId, tokens, formatNumber)
     } else if (info.type === TransactionType.APPROVAL) {
       additionalFields = parseApproval(info, chainId, tokens, status)
@@ -249,7 +258,7 @@ export function transactionToActivity(
     }
 
     const activity = { ...defaultFields, ...additionalFields }
-
+    console.log(activity, "<===activity")
     if (details.cancelled) {
       activity.title = CancelledTransactionTitleTable[details.info.type]
       activity.status = TransactionStatus.Confirmed

@@ -37,7 +37,7 @@ const PoolButton = styled.button<{ open?: boolean }>`
   border-radius: 900px;
   width: ${({ open }) => (open ? '100px' : '50%')};
   gap: 8px;
-  color: ${({ theme, open }) => (open ? theme.neutral1 : theme.accent1)};
+  color: ${({ theme, open }) => (open ? "#1b1b1b" : theme.accent1)};
   background-color: ${({ theme, open }) => !open && opacify(12, theme.accent1)};
   justify-content: center;
   transition: ${({ theme }) => `width ${theme.transition.duration.medium} ${theme.transition.timing.inOut}`};

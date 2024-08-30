@@ -44,6 +44,8 @@ export function useSwapCallback(
   allowedSlippage: Percent, // in bips
   permitSignature: PermitSignature | undefined
 ) {
+
+  console.log("useSwapCallback call")
   const deadline = useTransactionDeadline()
 
   const addTransaction = useTransactionAdder()

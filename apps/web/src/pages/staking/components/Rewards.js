@@ -8,6 +8,7 @@ import styles from "../staking.module.scss";
 
 // image
 import logo from "assets/farmingAssets/Images/wbchlogo.png";
+// import logo from "components/Logo/ChainSymbols/sbch.svg";
 
 //hooks && helpers
 import { toCommas } from "helpers/utils";

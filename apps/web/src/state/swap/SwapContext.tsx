@@ -111,6 +111,8 @@ export function SwapAndLimitContextProvider({
   const [currentTab, setCurrentTab] = useState<SwapTab>(SwapTab.Swap)
 
   const getInitialCurrencyState = useCallback(() => {
+
+    console.log("getInitialCurrencyState call")
     return {
       inputCurrency: initialInputCurrency,
       outputCurrency: initialOutputCurrency,

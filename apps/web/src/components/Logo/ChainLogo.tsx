@@ -122,7 +122,7 @@ export function ChainLogo({
     <svg width={size} height={size} className={className} style={style} aria-labelledby="titleID" data-testid={testId}>
       <title id="titleID">{`${label} logo`}</title>
       <rect rx={borderRadius} fill={surface2} width={size} height={size} />
-      <rect rx={borderRadius} fill={bgColor} width={size} height={size} />
+      <rect rx={borderRadius} fill={"#fff"} width={size} height={size} />
       <Symbol width={size} height={size} />
     </svg>
   )

@@ -179,6 +179,7 @@ export default function ConfirmSwapModalV2({
     unsuppressPopups()
   }, [confirmModalState, doesTradeDiffer, onCancel, onDismiss, priceUpdate, unsuppressPopups, trade])
 
+
   return (
     <SwapModal confirmModalState={confirmModalState} onDismiss={onModalDismiss}>
       {/* Head section displays title, help button, close icon */}

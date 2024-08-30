@@ -217,6 +217,8 @@ export function parseSwapAmounts(
 }
 
 function parseSwap(changes: TransactionChanges, formatNumberOrString: FormatNumberOrStringFunctionType) {
+ 
+ console.log("parseSwap calll")
   if (changes.NftTransfer.length > 0 && changes.TokenTransfer.length === 1) {
     const collectionCounts = getCollectionCounts(changes.NftTransfer)
 

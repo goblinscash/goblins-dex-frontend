@@ -735,7 +735,7 @@ function PositionPageContent() {
           </AutoColumn>
         </LightCard>
         <ThemedText.DeprecatedItalic>
-          <Trans>Compounding fees will withdraw currently available fees for you.</Trans>
+          <Trans>Compounding fees will withdraw currently available fees for you.</Trans><b>Platform charge 1% fee</b>
         </ThemedText.DeprecatedItalic>
         <ButtonPrimary disabled={Number(getUpperValue) <= 0 || Number(getLowerValue) <= 0} data-testid="modal-collect-fees-button" onClick={compound}>
           <Trans>Compound</Trans>
@@ -903,7 +903,7 @@ function PositionPageContent() {
                       } */}
 
                       {currency0 && currency1 && feeAmount && tokenId ? (
-                        <ButtonGray
+                        <SmallButtonPrimary
                           as={Link}
                           to={`/add/${currencyId(currency0)}/${currencyId(currency1)}/${feeAmount}/${tokenId}`}
                           padding="6px 8px"
@@ -912,7 +912,7 @@ function PositionPageContent() {
                           style={{ marginRight: '8px' }}
                         >
                           <Trans>Increase liquidity</Trans>
-                        </ButtonGray>
+                        </SmallButtonPrimary>
                       ) : null}
                       {tokenId && !removed ? (
                         <SmallButtonPrimary
