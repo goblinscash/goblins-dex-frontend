@@ -13,7 +13,7 @@ const StyledExternalLink = styled(ExternalLink)`
   font-weight: 485;
   line-height: 20px;
   background: ${({ theme }) => theme.surface2};
-  color: ${({ theme }) => theme.neutral2};
+  color: ${({ theme }) => theme.promotionalGradient};
   :hover {
     background: ${({ theme }) => theme.surface3};
     color: ${({ theme }) => theme.neutral1};

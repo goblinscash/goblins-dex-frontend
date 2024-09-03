@@ -56,7 +56,7 @@ export function PoolDetailsBreadcrumb({ chainId, poolAddress, token0, token1, lo
   return (
     <BreadcrumbNavContainer isInfoPDPEnabled aria-label="breadcrumb-nav">
       <BreadcrumbNavLink to={exploreOrigin}>
-        <Trans>Explore</Trans> <ChevronRight size={14} />
+        <Trans>Home</Trans> <ChevronRight size={14} />
       </BreadcrumbNavLink>
       <BreadcrumbNavLink to={poolsOrigin}>
         <Trans>Pools</Trans> <ChevronRight size={14} />

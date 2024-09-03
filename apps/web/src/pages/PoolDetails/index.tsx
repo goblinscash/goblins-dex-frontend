@@ -11,6 +11,7 @@ import { PoolDetailsStats } from 'components/Pools/PoolDetails/PoolDetailsStats'
 import { PoolDetailsStatsButtons } from 'components/Pools/PoolDetails/PoolDetailsStatsButtons'
 import { PoolDetailsTableTab } from 'components/Pools/PoolDetails/PoolDetailsTable'
 import Row from 'components/Row'
+import { MAX_WIDTH_MEDIA_BREAKPOINT } from 'components/Tokens/constants'
 import { AdvancedPriceChartToggle } from 'components/Tokens/TokenDetails/ChartTypeSelectors/AdvancedPriceChartToggle'
 import ChartTypeSelector from 'components/Tokens/TokenDetails/ChartTypeSelectors/ChartTypeSelector'
 import { getValidUrlChainName, supportedChainIdFromGQLChain } from 'graphql/data/util'
@@ -28,6 +29,7 @@ const PageWrapper = styled(Row)`
   width: 100%;
   align-items: flex-start;
   gap: 60px;
+  max-width: ${MAX_WIDTH_MEDIA_BREAKPOINT};
 
   @media (max-width: ${BREAKPOINTS.lg - 1}px) {
     flex-direction: column;

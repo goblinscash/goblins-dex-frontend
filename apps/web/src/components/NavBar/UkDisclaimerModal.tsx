@@ -49,13 +49,14 @@ export function UkDisclaimerModal() {
         </CloseIconWrapper>
         <Column gap="sm">
           <ThemedText.HeadlineLarge padding="0px 8px" fontSize="24px" lineHeight="32px">
-            Our Product is unavailable in your location
+          Goblins Swap is unavailable in your location
           </ThemedText.HeadlineLarge>
           <ThemedText.BodyPrimary padding="8px 8px 12px" lineHeight="24px">
           
                 <p className="m-0 themeClr py-2 ">
                   Sorry, our product are unavailable in your location
                 </p>
+                <a href='https://goblins.cash/docs/' target='_blankz' >  Please see our terms of service</a>
           </ThemedText.BodyPrimary>
         </Column>
         <ButtonContainer gap="md">

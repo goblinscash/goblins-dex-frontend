@@ -312,7 +312,7 @@ export default function TokenDetails({
             {isInfoTDPEnabled ? (
               <BreadcrumbNavContainer isInfoTDPEnabled aria-label="breadcrumb-nav">
                 <BreadcrumbNavLink to={`/explore/${chain.toLowerCase()}`}>
-                  <Trans>Explore</Trans> <ChevronRight size={14} />
+                  <Trans>Home</Trans> <ChevronRight size={14} />
                 </BreadcrumbNavLink>
                 <BreadcrumbNavLink to={`/explore/tokens/${chain.toLowerCase()}`}>
                   <Trans>Tokens</Trans> <ChevronRight size={14} />

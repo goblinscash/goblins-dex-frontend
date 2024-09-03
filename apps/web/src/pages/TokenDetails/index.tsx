@@ -28,7 +28,7 @@ export default function TokenDetailsPage() {
   const isNative = tokenAddress === NATIVE_CHAIN_ID
 
 
-  console.log(chain, "<===chain")
+
 
   const apolloClient = chainToApolloClient[ChainId.SMARTBCH]
 
@@ -70,7 +70,7 @@ export default function TokenDetailsPage() {
   useEffect(() => {
     if (tokenPriceQuery) setCurrentPriceQuery(tokenPriceQuery)
   }, [setCurrentPriceQuery, tokenPriceQuery])
-console.log(tokenQuery, "<====tokenQuery")
+
 
   if (!tokenQuery) return <TokenDetailsPageSkeleton />
 

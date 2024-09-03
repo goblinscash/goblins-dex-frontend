@@ -72,7 +72,7 @@ export const ButtonPrimary = styled(BaseButton)`
   font-size: 20px;
   font-weight: 535;
   padding: 16px;
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.surface2};
   &:focus {
     box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.accent1)};
     background-color: ${({ theme }) => darken(0.05, theme.accent1)};

@@ -303,7 +303,7 @@ function CommonTable({
                   className="py-3 px-6 text-left border-b border-gray-600 transparent"
                   style={{ background: "#002628" }}
                 >
-                  <p className={` m-0  capitalize`}>
+                  <p className={` m-0  capitalize`} style={{whiteSpace: "nowrap"}}>
                     {item.reward + " " + item.rewardSymbol}{" "}
                   </p>
                 </td>

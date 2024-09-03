@@ -84,18 +84,18 @@ export function formatValue(value) {
   if (!value) return 0;
   value = Number(value);
   if (value < 1000) {
-    return Number(value).toFixed(2);
+    return Number(value).toFixed(0);
   }
   if (value >= 1000 && value < 100000) {
-    return ` ${(value / 1000).toFixed(2)}K`;
+    return ` ${(value / 1000).toFixed(0)}K`;
   } else if (value >= 100000 && value < 1000000) {
-    return ` ${(value / 1000).toFixed(2)}K`;
+    return ` ${(value / 1000).toFixed(0)}K`;
   } else if (value >= 1000000 && value <= 1000000000) {
-    return ` ${(value / 1000000).toFixed(2)}M`;
+    return ` ${(value / 1000000).toFixed(0)}M`;
   } else if (value >= 1000000000 && value < 1000000000000) {
-    return ` ${(value / 1000000000).toFixed(2)}B`;
+    return ` ${(value / 1000000000).toFixed(0)}B`;
   } else {
-    return Number(value).toFixed(2);
+    return Number(value).toFixed(0);
   }
 }
 
