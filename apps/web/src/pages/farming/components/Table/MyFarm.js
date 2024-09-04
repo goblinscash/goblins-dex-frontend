@@ -16,7 +16,7 @@ function MyFarm({
   loading,
   incentiveIds,
   handleUnStake,
-  handleClaim,
+  handleStaked,
   handleWithdraw,
   isBlocked,
   handleRestake,
@@ -32,6 +32,16 @@ function MyFarm({
           className=" commonBtn  mx-auto inline-flex items-center justify-end btn"
         >
           Withdraw Tokens
+        </button>
+      </div>
+      <div className="py-4 text-right">
+        <button
+          type="button"
+          onClick={handleStaked}
+          disabled={isBlocked}
+          className=" commonBtn  mx-auto inline-flex items-center justify-end btn"
+        >
+          Unstake All
         </button>
       </div>
       <div className="overflow-x-auto">

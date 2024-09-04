@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 ///css
+import "assets/styles/main.css";
 import styles from "./Dashboard.module.scss";
-import  "assets/styles/main.css";
 
 // //component
 import CreateIncentivePop from "components/Modals/CreateIncentivePop";
@@ -20,13 +20,12 @@ import MyFarmTable from "./components/Table/MyFarm";
 
 //hooks
 import { getSortedData } from "helpers/constants";
-import {useWallet} from "hooks/useWallet";
-
+import { useWallet } from "hooks/useWallet";
 
 //action
-import * as Act from "state/action";
+import StakedPop from "components/Modals/StakedPop";
 import { createPortal } from "react-dom";
-import useDebounceFunction from "hooks/useDebounceFunction";
+import * as Act from "state/action";
 
 const Dashboard = () => {
   const { currentNetwork, isBlocked } = useSelector((state) => state.dashboard);
@@ -77,6 +76,8 @@ const Dashboard = () => {
     isOpen: false,
     detail: null,
   });
+
+  const [staked, setStaked] = useState(false);
   const [activeTab, setActiveTab] = useState(1);
   const [toggleEnded, setToggleEnded] = useState(false);
 
@@ -134,6 +135,13 @@ const Dashboard = () => {
     }));
   };
 
+  const handleStaked = (item) => {
+    if (isBlocked)
+      return toast.error(" Our Product is unavailable in your location");
+
+    setStaked(!staked);
+  };
+
   const load = () => {
     dispatch(
       Act.farmList({
@@ -142,7 +150,6 @@ const Dashboard = () => {
       })
     );
   };
-
 
   const myFarmUpdate = async () => {
     dispatch(
@@ -277,6 +284,14 @@ const Dashboard = () => {
           withdrawNft: true,
         })
       );
+
+      dispatch(
+        Act.nftList({
+          chainId: wallet.chainId,
+          walletAddress: wallet.address,
+          stakedNft: true,
+        })
+      );
     }
   }, [wallet.chainId, wallet.address]);
 
@@ -373,16 +388,23 @@ const Dashboard = () => {
           setActiveTab={setActiveTab}
           isUnstake={stake.isUnstake}
           myFarmload={myFarmload}
-          activeFarm={incentiveIds.filter((data) => !data.isEnded && getCurrentUnix > data.key?.startTime)}
+          activeFarm={incentiveIds.filter(
+            (data) => !data.isEnded && getCurrentUnix > data.key?.startTime
+          )}
         />
       )}
 
-      {withdraw.isOpen && 
-      (
+      {withdraw.isOpen && (
         <WithdrawPop handleWithdrawPop={handleWithdraw} detail={stake.detail} />
-      )
+      )}
 
-      }
+      {staked && (
+        <StakedPop handleStaked={handleStaked} myFarm={myFarm} 
+        
+        setActiveTab={setActiveTab}
+        
+        />
+      )}
       <section className={`${styles.Dashboard} Dashboard py-3 relative w-full`}>
         <div className="container mx-auto">
           <div className="grid gap-3 grid-cols-12">
@@ -397,9 +419,7 @@ const Dashboard = () => {
                       className={`${styles.nav} flex nav pillsTab rounded flex-nowrap overflow-x-scroll p-1`}
                       style={{ background: "#011b1c", scrollbarWidth: "none" }}
                     >
-                      {
-
-                      tabs &&
+                      {tabs &&
                         tabs.length > 0 &&
                         tabs.map((item, key) => (
                           <button
@@ -412,10 +432,7 @@ const Dashboard = () => {
                           >
                             {item.name}
                           </button>
-                        )
-                        )
-
-                        }
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -513,25 +530,22 @@ const Dashboard = () => {
                 {activeTab === 3 && (
                   <div className="topHead p-3 flex items-center justify-end">
                     <div className="flex items-center gap-2">
-                      <label
-                        htmlFor=""
-                        className="form-label m-0  themeClr"
-                      >
+                      <label htmlFor="" className="form-label m-0  themeClr">
                         Claim Rewards
                       </label>
                       <div
-  onClick={() => setToggleEnded(!toggleEnded)}
-  className="toggle-container"
-  style={{
-    background: toggleEnded ? "#00ff00" : "#001213",
-  }}
->
-  <span
-    className={`toggle-indicator ${
-      toggleEnded ? "translate-right" : "translate-left"
-    }`}
-  />
-</div>
+                        onClick={() => setToggleEnded(!toggleEnded)}
+                        className="toggle-container"
+                        style={{
+                          background: toggleEnded ? "#00ff00" : "#001213",
+                        }}
+                      >
+                        <span
+                          className={`toggle-indicator ${
+                            toggleEnded ? "translate-right" : "translate-left"
+                          }`}
+                        />
+                      </div>
                     </div>
                   </div>
                 )}
@@ -571,12 +585,12 @@ const Dashboard = () => {
                       handleClaim={handleStake}
                       activeTab={activeTab}
                       handleWithdraw={handleWithdraw}
+                      handleStaked={handleStaked}
                       handleRestake={handleConfirm}
                       isBlocked={isBlocked}
                       handleSort={handleSort}
                     />
                   )}
-            
                 </div>
               </div>
             </div>

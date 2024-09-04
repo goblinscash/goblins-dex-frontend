@@ -1,0 +1,19 @@
+.StakePop {
+  .modalDialog {
+    max-width: 770px;
+    // height: 500px;
+    input[type="checkbox"] {
+      accent-color: #00ff00;
+      border-color: #00ff00;
+      // background: unset;
+    }
+    input {
+      background-color: #011b1c;
+      border-color: #011b1c;
+      color: #fff;
+      &::placeholder {
+        color: #999;
+      }
+    }
+  }
+}

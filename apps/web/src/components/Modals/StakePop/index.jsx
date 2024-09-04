@@ -126,6 +126,11 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
           withdrawNft: true,
         })
       );
+      Act.nftList({
+        chainId: wallet.chainId,
+        walletAddress: wallet.address,
+        stakedNft: true,
+      })
 
       toast.success(
         "Deposit successfully, some time it will take some seconds for reflect in list!"
@@ -169,6 +174,14 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
             isMutliStake: true,
             incentiveId: selectedFarm.map((data) => data.incentiveId),
           },
+        })
+      );
+
+      dispatch(
+        nftList({
+          chainId: wallet.chainId,
+          walletAddress: wallet.address,
+          withdrawNft: true,
         })
       );
       toast.success(

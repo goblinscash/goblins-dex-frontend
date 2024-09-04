@@ -7,6 +7,7 @@ export interface NFTState {
   contractNftlist: any,
   withdrawNftlist: any,
   ownerNftlist: any,
+  stakedNftlist: any,
 };
 
 const initialState: NFTState = {
@@ -14,6 +15,7 @@ const initialState: NFTState = {
   contractNftlist: [],
   withdrawNftlist: [],
   ownerNftlist: [],
+  stakedNftlist:[]
 };
 
 const slice = createSlice({
@@ -29,6 +31,7 @@ const slice = createSlice({
       ...state,
       loading: false,
       ownerNftlist: payload.ownerNft ? payload.data : state.ownerNftlist,
+      stakedNftlist: payload.stakedNft ? payload.data : state.stakedNftlist,
       withdrawNftlist: payload.withdrawNft ? payload.data : state.withdrawNftlist,
       contractNftlist: payload.ownerNft === false ? payload.data : state.contractNftlist,
     }));

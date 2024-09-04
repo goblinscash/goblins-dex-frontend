@@ -8,7 +8,8 @@ export const nftList = createAsyncThunk("nftList", async (payload, Thunk) => {
     return {
       ...response,
       ownerNft: payload.ownerNft,
-      withdrawNft: payload.withdrawNft
+      withdrawNft: payload.withdrawNft,
+      stakedNft: payload.stakedNft,
     };
   } catch (error) {
     callback && callback(error);
