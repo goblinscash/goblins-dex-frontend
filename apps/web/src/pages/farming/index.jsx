@@ -377,9 +377,12 @@ const Dashboard = () => {
         />
       )}
 
-      {withdraw.isOpen && (
+      {withdraw.isOpen && 
+      (
         <WithdrawPop handleWithdrawPop={handleWithdraw} detail={stake.detail} />
-      )}
+      )
+
+      }
       <section className={`${styles.Dashboard} Dashboard py-3 relative w-full`}>
         <div className="container mx-auto">
           <div className="grid gap-3 grid-cols-12">
@@ -394,7 +397,9 @@ const Dashboard = () => {
                       className={`${styles.nav} flex nav pillsTab rounded flex-nowrap overflow-x-scroll p-1`}
                       style={{ background: "#011b1c", scrollbarWidth: "none" }}
                     >
-                      {tabs &&
+                      {
+
+                      tabs &&
                         tabs.length > 0 &&
                         tabs.map((item, key) => (
                           <button
@@ -407,7 +412,10 @@ const Dashboard = () => {
                           >
                             {item.name}
                           </button>
-                        ))}
+                        )
+                        )
+
+                        }
                     </div>
                   </div>
                 </div>

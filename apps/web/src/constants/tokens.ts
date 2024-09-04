@@ -314,6 +314,14 @@ export const BB_ETH = new Token(
   'bbETH'
 )
 
+export const BB_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0xbb7b43eb950C0fDBb645D7d05a27395Ed8D944fA',
+  18,
+  'bbBCH',
+  'bbBCH'
+)
+
 export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } = {
   ...(WETH9 as Record<ChainId, Token>),
   [ChainId.OPTIMISM]: new Token(

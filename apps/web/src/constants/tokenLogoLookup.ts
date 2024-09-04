@@ -14,6 +14,8 @@ class TokenLogoLookupTable {
       if (!listData) {
         return
       }
+
+      console.log(listData.current?.tokens, "<====listData.current?.tokens")
       listData.current?.tokens.forEach((token) => {
         if (token.logoURI) {
           const lowercaseAddress = token.address.toLowerCase()
@@ -31,11 +33,9 @@ class TokenLogoLookupTable {
   }
   getIcons(address?: string | null, chainId: number | null = 1) {
     if (!address) return undefined
-
     if (!this.initialized) {
       this.initialize()
     }
-
     return this.dict[address.toLowerCase() + ':' + chainId]
   }
 }

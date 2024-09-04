@@ -231,6 +231,9 @@ export function CurrencySearch({
     return () => clearTimeout(tokenLoaderTimer)
   }, [])
 
+
+  console.log(searchToken, "<=====searchToken")
+
   return (
     <ContentWrapper>
       <Trace

@@ -427,7 +427,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
 
   const handleInputSelect = useCallback(
     (inputCurrency: Currency) => {
-console.log(inputCurrency, "<====inputCurrency")
+
 
       onCurrencySelection(Field.INPUT, inputCurrency)
       onCurrencyChange?.({
@@ -481,7 +481,7 @@ console.log(inputCurrency, "<====inputCurrency")
 
 
 
-
+console.log(currencies, "<====currencies")
 
 
   return (

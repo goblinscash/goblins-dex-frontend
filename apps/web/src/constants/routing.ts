@@ -4,6 +4,7 @@ import { ChainId, Currency, Token, WETH9 } from '@uniswap/sdk-core'
 import {
   ARB,
   BB_ETH,
+  BB_BCH,
   BB_USDC,
   BB_USDT,
   BC_BCH,
@@ -137,7 +138,7 @@ export const COMMON_BASES: ChainCurrencyList = {
     USDT_AVALANCHE,
     WETH_AVALANCHE,
   ],
-  [ChainId.SMARTBCH]: [nativeOnChain(ChainId.SMARTBCH), WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, USDT_SBCH, BC_BCH, GOB, BB_USDC, BB_USDT, BB_ETH],
+  [ChainId.SMARTBCH]: [nativeOnChain(ChainId.SMARTBCH), WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, USDT_SBCH, BC_BCH, GOB, BB_USDC, BB_USDT, BB_ETH, BB_BCH],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
