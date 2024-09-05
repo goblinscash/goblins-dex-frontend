@@ -63,6 +63,7 @@ body.newDesign .commonBtn {
   border-color: #00ff00 !important;
   border-radius: 4px;
   padding: 0 15px;
+  margin: 0;
 }
 
 body.newDesign .tabcontainer .nav::-webkit-scrollbar {

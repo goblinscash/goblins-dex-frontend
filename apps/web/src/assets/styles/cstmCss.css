@@ -316,7 +316,12 @@ body.newDesign .py-2 {
 body.newDesign .flex {
   display: flex;
 }
-
+body.newDesign .flex-wrap {
+  flex-wrap: wrap;
+}
+body.newDesign .gap-10 {
+  gap: 10px;
+}
 body.newDesign .inline-flex {
   display: inline-flex;
 }

@@ -11,6 +11,16 @@
     }
 }
 
+@media (max-width: 992px){
+    .Dashboard {
+        table {
+            .flexWrp {
+                flex-wrap: wrap;
+            }
+        }
+    }
+}
+
 @media (max-width: 575px){
     .Dashboard {
         .dashbaordHead{

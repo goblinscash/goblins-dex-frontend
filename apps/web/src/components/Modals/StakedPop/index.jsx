@@ -74,8 +74,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab }) => {
       e.preventDefault();
       if (validateSubmit()) return;
 
-  let getTokenFarms = myFarm.filter((farm)=> farm.tokenId === tokenId);
-
+      let getTokenFarms = myFarm.filter((farm) => farm.tokenId === tokenId);
 
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       setLoading(true);
@@ -87,30 +86,31 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab }) => {
         data.key.refundee,
       ]);
 
-  
       await web3.mutliCallUnstakeAll(makeKeys, tokenId, wallet.address);
 
-  
-      toast.success(
-        `#${tokenId} unstaked from all farms`
-      );
+      toast.success(`#${tokenId} unstaked from all farms`);
+    
 
       setLoading(false);
       handleStaked();
-      setActiveTab(1)
+      setActiveTab(1);
+
+      
+
+      dispatch(
+        updateMyFarm({
+          chainId: wallet.chainId,
+          walletAddress: wallet.address,
+        })
+      );
 
       dispatch(
         nftList({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
-          withdrawNft: true,
+          stakednft: true,
         })
       );
-
-      updateMyFarm({
-        chainId: wallet.chainId,
-        walletAddress: wallet.address,
-      })
     } catch (error) {
       setLoading(false);
 
@@ -169,9 +169,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab }) => {
             >
               <div className="top flex items-center justify-between gap-2 pt-2 px-3">
                 <div className="left flex items-center gap-2">
-                  <p className="m-0   text-white text-lg">
-                    {"UnStake"}
-                  </p>
+                  <p className="m-0   text-white text-lg">{"UnStake"}</p>
                 </div>
               </div>
               <div className="modalBody py-2">

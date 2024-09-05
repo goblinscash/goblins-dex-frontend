@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -10,11 +10,11 @@ import Select from "react-select";
 import styles from "./StakePop.module.scss";
 
 //helpers
-import {useWallet} from "hooks/useWallet";
+import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 
-import ActiveStakingTable from "./ActiveStakingTable";
 import { nftList, updateFarm } from "state/action";
+import ActiveStakingTable from "./ActiveStakingTable";
 
 const customOption = (props) => (
   <div className="custom-option flex items-center py-2" {...props.innerProps}>
@@ -26,7 +26,9 @@ const customOption = (props) => (
       alt={props.data.label}
       className="max-w-full object-contain option-image"
     />
-    <span className="text-dark" style={{color: "#000"}}>{props.data.label}</span>
+    <span className="text-dark" style={{ color: "#000" }}>
+      {props.data.label}
+    </span>
   </div>
 );
 
@@ -81,7 +83,6 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       setLoading(true);
       let getPool = await web3.getNftPoolAddress(tokenId);
 
-
       if (getPool.toLowerCase() !== detail.key.pool) {
         setLoading(false);
         return toast.error(
@@ -126,12 +127,13 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
           withdrawNft: true,
         })
       );
-      Act.nftList({
-        chainId: wallet.chainId,
-        walletAddress: wallet.address,
-        stakedNft: true,
-      })
-
+      dispatch(
+        nftList({
+          chainId: wallet.chainId,
+          walletAddress: wallet.address,
+          stakedNft: true,
+        })
+      );
       toast.success(
         "Deposit successfully, some time it will take some seconds for reflect in list!"
       );
@@ -182,6 +184,14 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
+        })
+      );
+
+      dispatch(
+        nftList({
+          chainId: wallet.chainId,
+          walletAddress: wallet.address,
+          stakedNft: true,
         })
       );
       toast.success(
@@ -259,8 +269,6 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
     if (loading) return;
     setActiveTabNew(tab);
   };
-
-
 
   return (
     <>
@@ -440,8 +448,6 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                                   components={{ Option: customOption }}
                                   menuPortalTarget={document.body}
                                   onChange={handleChange}
-
-                                  
                                 />
                               </div>
                             </>

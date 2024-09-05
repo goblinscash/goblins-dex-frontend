@@ -5,6 +5,9 @@ import moment from "moment";
 import loader from "assets/farmingAssets/Images/loading.gif";
 import sortIcon from "assets/farmingAssets/Images/sort.svg";
 
+// css
+import styles from "../../Dashboard.module.scss"
+
 import { getSymbols } from "helpers/constants";
 import { formatValue } from "helpers/utils";
 
@@ -234,7 +237,7 @@ function CommonTable({
                   className="py-3 px-6 text-left border-b border-gray-600 transparent"
                   style={{ background: "#002628" }}
                 >
-                  <div className="flex items-center gap-2 flex-wrap">
+                  <div className={`${styles.flexWrp} flex items-center gap-2`}>
                     <div className="imgWrp flex-shrink-0 flex items-center">
                       {/* {item?.getPoolDetail?.token0Symbol} /{" "}
                       {item?.getPoolDetail?.token1Symbol} */}
@@ -381,7 +384,7 @@ function CommonTable({
                             : handleStake(item);
                         }}
                         className="btn flex items-center commonBtn justify-center rounded"
-                        style={{ background: "#00ff00" }}
+                        style={{ background: "#00ff00", minWidth: 120 }}
                         disabled={
                           isBlocked || item.key?.startTime > getCurrentUnix
                         }

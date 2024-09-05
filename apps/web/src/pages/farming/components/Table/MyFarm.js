@@ -1,14 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
 import moment from "moment";
 
 // img
-import user from "assets/farmingAssets/Images/authBg.jpg";
 import loader from "assets/farmingAssets/Images/loading.gif";
 import sortIcon from "assets/farmingAssets/Images/sort.svg";
 
-
-import { truncateWalletAddress } from "helpers/utils";
 import { getSymbols } from "helpers/constants";
 
 function MyFarm({
@@ -25,24 +20,26 @@ function MyFarm({
   return (
     <>
       <div className="py-4 text-right">
-        <button
-          type="button"
-          onClick={handleWithdraw}
-          disabled={isBlocked}
-          className=" commonBtn  mx-auto inline-flex items-center justify-end btn"
-        >
-          Withdraw Tokens
-        </button>
-      </div>
-      <div className="py-4 text-right">
-        <button
-          type="button"
-          onClick={handleStaked}
-          disabled={isBlocked}
-          className=" commonBtn  mx-auto inline-flex items-center justify-end btn"
-        >
-          Unstake All
-        </button>
+        <div className="flex items-center justify-end gap-10">
+          <button
+            type="button"
+            onClick={handleWithdraw}
+            disabled={isBlocked}
+            className=" commonBtn  mx-auto inline-flex items-center justify-end btn m-0"
+          >
+            Withdraw Tokens
+          </button>
+          {incentiveIds.length > 0 && (
+            <button
+              type="button"
+              onClick={handleStaked}
+              disabled={isBlocked}
+              className=" commonBtn  mx-auto inline-flex items-center justify-end btn m-0"
+            >
+              Unstake All
+            </button>
+          )}
+        </div>
       </div>
       <div className="overflow-x-auto">
         <table
@@ -259,9 +256,7 @@ function MyFarm({
                     style={{ background: "#002628" }}
                   >
                     <a href={`/#/pools/${item.tokenId}`} target="_blank">
-                    <p className={` m-0  capitalize`}>
-                      {item.tokenId}{" "}
-                    </p>
+                      <p className={` m-0  capitalize`}>{item.tokenId} </p>
                     </a>
                   </td>
 
