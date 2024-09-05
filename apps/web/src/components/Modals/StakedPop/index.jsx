@@ -108,7 +108,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab }) => {
         nftList({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
-          stakednft: true,
+          stakedNft: true,
         })
       );
     } catch (error) {

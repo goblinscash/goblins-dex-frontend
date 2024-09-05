@@ -28,6 +28,8 @@ export const useWallet = () => {
   useEffect(() => {
     setIsActive(wallet?.isActive);
     setaddress(account || "");
+    // setaddress("0x64Da84B4e73a9189521198c6ABCa617E30644FCf");
+
   }, [account, wallet?.isActive]);
 
   useEffect(() => {
