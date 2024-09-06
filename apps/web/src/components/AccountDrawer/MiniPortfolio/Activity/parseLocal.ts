@@ -236,10 +236,12 @@ export function transactionToActivity(
 
     let additionalFields: Partial<Activity> = {}
     const info = details.info
-    if (info.type === TransactionType.SWAP) {
-      console.log("transactionToActivity")
-      additionalFields = parseSwap(info, chainId, tokens, formatNumber)
-    } else if (info.type === TransactionType.APPROVAL) {
+
+    // if (info.type === TransactionType.SWAP) {
+    //   console.log("transactionToActivity")
+    //   additionalFields = parseSwap(info, chainId, tokens, formatNumber)
+    // }  
+  if (info.type === TransactionType.APPROVAL) {
       additionalFields = parseApproval(info, chainId, tokens, status)
     } else if (info.type === TransactionType.WRAP) {
       additionalFields = parseWrap(info, chainId, status, formatNumber)

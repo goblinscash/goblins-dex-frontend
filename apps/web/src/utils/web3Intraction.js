@@ -507,6 +507,76 @@ class Web3Intraction {
     });
   };
 
+
+    /**
+   * Mutli Call Function call for claim all  
+   * @param {array} keys [reward token, pool address,start time, endTime, refundee address]
+   * @param {string} tokenId token id
+   *
+   * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
+   */
+     mutliCallClaimAll = async (keys, tokenId, walletAddress) => {
+      return new Promise(async (resolve, reject) => {
+        try {
+          let contract = this.getContract(
+            JSON.stringify(this.contractDetails?.abi),
+            this.contractDetails?.contractAddress,
+            true
+          );
+  
+
+          let claimAllData = [];
+
+          for (let i = 0; i < keys.length; i++) {
+            const unStakeToken = await contract.interface.encodeFunctionData(
+              "unstakeToken",
+              [keys[i], tokenId]
+            );
+            claimAllData.push(unStakeToken);
+
+            const stakeToken = await contract.interface.encodeFunctionData(
+              "stakeToken",
+              [keys[i], tokenId]
+            );
+            claimAllData.push(stakeToken);
+
+    
+            const claimReward = await contract.interface.encodeFunctionData(
+              "claimReward",
+              [keys[i][0], walletAddress, 0]
+            );
+            claimAllData.push(claimReward);
+
+          }
+          // Encode the function calls
+         
+  
+          const multicallData = contract.interface.encodeFunctionData(
+            "multicall",
+            [claimAllData]
+          );
+  
+          const tx = {
+            to: this.contractDetails?.contractAddress,
+            data: multicallData,
+            value: ethers.utils.parseEther("0"), // Amount of Ether to send with the transaction
+          };
+  
+          const response = await this.SIGNER.sendTransaction(tx);
+  
+          let receipt = await response.wait(); // Wait for the transaction to be mined
+  
+          resolve(receipt);
+        } catch (error) {
+          // console.log(error, "<===error in buy");
+          if (error?.code === -32603) {
+            return reject("insufficient funds for intrinsic transaction cost");
+          }
+          reject(error.reason || error.data?.message || error.message || error);
+        }
+      });
+    };
+
   /**
    * Mutli Call Function call for unstake and claim
    * @param {array} keys [reward token, pool address,start time, endTime, refundee address]

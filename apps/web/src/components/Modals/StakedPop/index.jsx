@@ -31,7 +31,7 @@ const customOption = (props) => (
   </div>
 );
 
-const StakedPop = ({ handleStaked, myFarm, setActiveTab }) => {
+const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
   const wallet = useWallet();
   const dispatch = useDispatch();
 
@@ -86,16 +86,19 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab }) => {
         data.key.refundee,
       ]);
 
+    if(isClaimAll){
+      await web3.mutliCallClaimAll(makeKeys, tokenId, wallet.address);
+
+      toast.success(`Successfully Claim All.`);
+    }else{
       await web3.mutliCallUnstakeAll(makeKeys, tokenId, wallet.address);
 
       toast.success(`#${tokenId} unstaked from all farms`);
-    
+    }
 
       setLoading(false);
       handleStaked();
       setActiveTab(1);
-
-      
 
       dispatch(
         updateMyFarm({
@@ -109,6 +112,14 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           stakedNft: true,
+        })
+      );
+
+      dispatch(
+        nftList({
+          chainId: wallet.chainId,
+          walletAddress: wallet.address,
+          withdrawNft: true,
         })
       );
     } catch (error) {
@@ -169,7 +180,9 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab }) => {
             >
               <div className="top flex items-center justify-between gap-2 pt-2 px-3">
                 <div className="left flex items-center gap-2">
-                  <p className="m-0   text-white text-lg">{"UnStake"}</p>
+                  <p className="m-0   text-white text-lg">
+                    {isClaimAll ? "Claim All" : "UnStake All"}
+                  </p>
                 </div>
               </div>
               <div className="modalBody py-2">
@@ -224,8 +237,9 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab }) => {
                               <span className=""> Please wait...</span>
                             </div>
                           ) : (
-                            "UnStake"
-                          )}
+                            isClaimAll ? "Claim" :"UnStake" 
+                          )
+                          }
                         </button>
                       </div>
                     </div>

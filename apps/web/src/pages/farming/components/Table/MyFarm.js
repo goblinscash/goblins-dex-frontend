@@ -30,14 +30,25 @@ function MyFarm({
             Withdraw Tokens
           </button>
           {incentiveIds.length > 0 && (
-            <button
-              type="button"
-              onClick={handleStaked}
-              disabled={isBlocked}
-              className=" commonBtn  mx-auto inline-flex items-center justify-end btn m-0"
-            >
-              Unstake All
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={(e) => handleStaked(null)}
+                disabled={isBlocked}
+                className=" commonBtn  mx-auto inline-flex items-center justify-end btn m-0"
+              >
+                Unstake All
+              </button>
+
+              <button
+                type="button"
+                onClick={(e) => handleStaked(true)}
+                disabled={isBlocked}
+                className=" commonBtn  mx-auto inline-flex items-center justify-end btn m-0"
+              >
+                Claim All
+              </button>
+            </>
           )}
         </div>
       </div>
@@ -264,7 +275,7 @@ function MyFarm({
                     className="py-3 px-6 text-left border-b border-gray-600 transparent"
                     style={{ background: "#002628" }}
                   >
-                    <p className={` m-0  capitalize text-white`}>
+                    <p className={`m-0 capitalize text-white`}>
                       {moment
                         .unix(item.key?.startTime)
                         .format("YYYY-MM-DD HH:mm")}
@@ -293,7 +304,7 @@ function MyFarm({
                             onClick={(e) => handleRestake(item, true)}
                             className="btn flex items-center commonBtn justify-center rounded"
                             style={{ background: "#00ff00" }}
-                            disabled={isBlocked || item.isUnstaked}
+                            disabled={isBlocked || item.rewardInfo?.reward <= 0}
                           >
                             {"Claim"}
                           </button>
@@ -305,7 +316,7 @@ function MyFarm({
                             style={{ background: "#00ff00" }}
                             disabled={isBlocked || item.isUnstaked}
                           >
-                            {item.isUnstaked ? "Already Unstaked" : "UnStake"}
+                            {"UnStake"}
                           </button>
                         </p>
                       </div>

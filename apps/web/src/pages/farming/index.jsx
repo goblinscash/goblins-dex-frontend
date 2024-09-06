@@ -77,7 +77,10 @@ const Dashboard = () => {
     detail: null,
   });
 
-  const [staked, setStaked] = useState(false);
+  const [staked, setStaked] = useState({
+    isOpen: false,
+    isClaimAll: false,
+  });
   const [activeTab, setActiveTab] = useState(1);
   const [toggleEnded, setToggleEnded] = useState(false);
 
@@ -135,11 +138,14 @@ const Dashboard = () => {
     }));
   };
 
-  const handleStaked = (item) => {
+  const handleStaked = (isClaimAll) => {
     if (isBlocked)
       return toast.error(" Our Product is unavailable in your location");
 
-    setStaked(!staked);
+    setStaked({
+      isOpen: !staked.isOpen,
+      isClaimAll: isClaimAll || false,
+    });
   };
 
   const load = () => {
@@ -398,11 +404,12 @@ const Dashboard = () => {
         <WithdrawPop handleWithdrawPop={handleWithdraw} detail={stake.detail} />
       )}
 
-      {staked && (
-        <StakedPop handleStaked={handleStaked} myFarm={myFarm} 
-        
-        setActiveTab={setActiveTab}
-        
+      {staked.isOpen && (
+        <StakedPop
+          handleStaked={handleStaked}
+          myFarm={myFarm}
+          isClaimAll={staked.isClaimAll || false}
+          setActiveTab={setActiveTab}
         />
       )}
       <section className={`${styles.Dashboard} Dashboard py-3 relative w-full`}>
