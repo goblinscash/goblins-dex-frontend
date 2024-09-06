@@ -253,8 +253,16 @@ body.newDesign .whitespace-nowrap {
   white-space: nowrap !important;
 }
 
+
+table.stipped button.btn[disabled] {
+  opacity: .5;
+  background: #0f0!important;
+  color: #002628!important;
+}
+
 @media (max-width: 480px) {
   body.newDesign .nav.pillsTab .tab-button {
     font-size: 12px;
   }
 }
+
