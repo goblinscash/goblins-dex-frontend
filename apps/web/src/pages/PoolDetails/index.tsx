@@ -29,7 +29,7 @@ const PageWrapper = styled(Row)`
   width: 100%;
   align-items: flex-start;
   gap: 60px;
-  max-width: ${MAX_WIDTH_MEDIA_BREAKPOINT};
+  max-width: 1400px;
 
   @media (max-width: ${BREAKPOINTS.lg - 1}px) {
     flex-direction: column;
