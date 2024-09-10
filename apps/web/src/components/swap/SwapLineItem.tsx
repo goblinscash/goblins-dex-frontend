@@ -62,10 +62,10 @@ export function FOTTooltipContent() {
   return (
     <>
       <Trans>
-        Some tokens take a fee when they are bought or sold, which is set by the token issuer. Uniswap does not receive
+        Some tokens take a fee when they are bought or sold, which is set by the token issuer. Gobswap does not receive
         any of these fees.
       </Trans>{' '}
-      <ExternalLink href="https://support.uniswap.org/hc/en-us/articles/18673568523789-What-is-a-token-fee-">
+      <ExternalLink href="https://goblins.cash/faq-items/what-is-the-interface-fee/">
         Learn more
       </ExternalLink>
     </>
@@ -75,19 +75,19 @@ export function FOTTooltipContent() {
 function SwapFeeTooltipContent({ hasFee }: { hasFee: boolean }) {
   const message = hasFee ? (
     <Trans>
-      This fee is applied on select token pairs to ensure the best experience with Uniswap. It is paid in the output
+      This fee is applied on select token pairs to ensure the best experience with Gobswap. It is paid in the output
       token and has already been factored into the quote.
     </Trans>
   ) : (
     <Trans>
-      This fee is applied on select token pairs to ensure the best experience with Uniswap. There is no fee associated
+      This fee is applied on select token pairs to ensure the best experience with Gobswap. There is no fee associated
       with this swap.
     </Trans>
   )
   return (
     <>
       {message}{' '}
-      <ExternalLink href="https://support.uniswap.org/hc/en-us/articles/20131678274957">
+      <ExternalLink href="https://goblins.cash/faq-items/what-is-the-interface-fee/">
         <Trans>Learn more</Trans>
       </ExternalLink>
     </>

@@ -49,7 +49,7 @@ export function UkDisclaimerModal() {
         </CloseIconWrapper>
         <Column gap="sm">
           <ThemedText.HeadlineLarge padding="0px 8px" fontSize="24px" lineHeight="32px">
-          Goblins Swap is unavailable in your location
+          Our DEX is unavailable in your location.
           </ThemedText.HeadlineLarge>
           <ThemedText.BodyPrimary padding="8px 8px 12px" lineHeight="24px">
           
