@@ -20,8 +20,12 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import { ThemedText } from 'theme/components'
 
+
+
 import { useExploreParams } from './redirects'
 import RecentTransactions from './tables/RecentTransactions'
+import { getStakingtransaction } from 'state/action'
+import { useAppDispatch } from 'state/hooks'
 
 const ExploreContainer = styled.div<{ isInfoExplorePageEnabled?: boolean }>`
   width: 100%;
@@ -84,7 +88,7 @@ const TabBar = styled(AutoRow)`
     gap: 16px;
   }
 `
-const TabItem = styled(ThemedText.HeadlineMedium)<{ active?: boolean }>`
+const TabItem = styled(ThemedText.HeadlineMedium) <{ active?: boolean }>`
   align-items: center;
   color: ${({ theme, active }) => (active ? theme.neutral1 : theme.neutral2)};
   cursor: pointer;
@@ -103,7 +107,7 @@ const FiltersContainer = styled.div<{ isInfoExplorePageEnabled: boolean }>`
     ${({ isInfoExplorePageEnabled }) => isInfoExplorePageEnabled && 'justify-content: space-between;'}
   }
 `
-const DropdownFilterContainer = styled(FiltersContainer)<{ isInfoExplorePageEnabled: boolean }>`
+const DropdownFilterContainer = styled(FiltersContainer) <{ isInfoExplorePageEnabled: boolean }>`
   ${({ isInfoExplorePageEnabled }) =>
     isInfoExplorePageEnabled
       ? css`
@@ -117,7 +121,7 @@ const DropdownFilterContainer = styled(FiltersContainer)<{ isInfoExplorePageEnab
           }
         `};
 `
-const SearchContainer = styled(FiltersContainer)<{ isInfoExplorePageEnabled: boolean }>`
+const SearchContainer = styled(FiltersContainer) <{ isInfoExplorePageEnabled: boolean }>`
   ${({ isInfoExplorePageEnabled }) => !isInfoExplorePageEnabled && 'margin-left: 8px;'}
   width: 100%;
 
@@ -156,7 +160,7 @@ const Pages: Array<Page> = [
     component: TopTokensTable,
     loggingElementName: InterfaceElementName.EXPLORE_TOKENS_TAB,
   },
- 
+
   {
     title: <Trans>Transactions</Trans>,
     key: ExploreTab.Transactions,
@@ -166,6 +170,7 @@ const Pages: Array<Page> = [
 ]
 
 const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
+  const dispatch = useAppDispatch()
   const resetFilterString = useResetAtom(filterStringAtom)
   const location = useLocation()
   const navigate = useNavigate()
@@ -194,6 +199,13 @@ const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
     resetFilterString()
   }, [location, resetFilterString])
 
+  useEffect(() => {
+    dispatch(getStakingtransaction())
+
+
+  }, [])
+
+
   const { component: Page, key: currentKey } = Pages[currentTab]
 
   return (
@@ -201,7 +213,7 @@ const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
       page={isInfoExplorePageEnabled ? InterfacePageName.EXPLORE_PAGE : InterfacePageName.TOKENS_PAGE}
       shouldLogImpression
     >
-      
+
       <ExploreContainer isInfoExplorePageEnabled={isInfoExplorePageEnabled}>
         {isInfoExplorePageEnabled ? (
           <ExploreChartsSection />
@@ -237,37 +249,37 @@ const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
                     </TabItem>
                   </TraceEvent>
                 )
-              }        
+              }
               )
               }
             </TabBar>
-          )  
+          )
           }
           {
 
-          isInfoExplorePageEnabled ? (
-            <FiltersContainer isInfoExplorePageEnabled>
-              <DropdownFilterContainer isInfoExplorePageEnabled>
-                <NetworkFilter />
-                {/* {currentKey === ExploreTab.Tokens && <TimeSelector />} */}
-              </DropdownFilterContainer>
-              <SearchContainer isInfoExplorePageEnabled>
-                {/* {currentKey !== ExploreTab.Transactions && <SearchBar tab={currentKey} />} */}
-              </SearchContainer>
-            </FiltersContainer>
-          ) : (
-            <>
-              <FiltersContainer isInfoExplorePageEnabled={false}>
-                <NetworkFilter />
-                <TimeSelector />
+            isInfoExplorePageEnabled ? (
+              <FiltersContainer isInfoExplorePageEnabled>
+                <DropdownFilterContainer isInfoExplorePageEnabled>
+                  <NetworkFilter />
+                  {/* {currentKey === ExploreTab.Tokens && <TimeSelector />} */}
+                </DropdownFilterContainer>
+                <SearchContainer isInfoExplorePageEnabled>
+                  {/* {currentKey !== ExploreTab.Transactions && <SearchBar tab={currentKey} />} */}
+                </SearchContainer>
               </FiltersContainer>
-              <SearchContainer isInfoExplorePageEnabled={false}>
-                <SearchBar />
-              </SearchContainer>
-            </>
-          )
-          
-        }
+            ) : (
+              <>
+                <FiltersContainer isInfoExplorePageEnabled={false}>
+                  <NetworkFilter />
+                  <TimeSelector />
+                </FiltersContainer>
+                <SearchContainer isInfoExplorePageEnabled={false}>
+                  <SearchBar />
+                </SearchContainer>
+              </>
+            )
+
+          }
         </NavWrapper>
         {isInfoExplorePageEnabled ? <Page /> : <OldTokenTable />}
       </ExploreContainer>

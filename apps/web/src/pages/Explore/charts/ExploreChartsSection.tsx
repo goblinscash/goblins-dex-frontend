@@ -21,11 +21,14 @@ import { getProtocolColor, supportedChainIdFromGQLChain, TimePeriod, validateUrl
 import { chainToApolloClient } from 'graphql/thegraph/apollo'
 import { useScreenSize } from 'hooks/useScreenSize'
 import { HARDCODED_TVL_DATA, HARDCODED_VOLUME_DATA } from 'pages/Explore/charts/mockData'
-import { ReactNode, useMemo, useState } from 'react'
+import { ReactNode, useMemo, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import styled, { useTheme } from 'styled-components'
 import { ThemedText } from 'theme/components'
 import { NumberType, useFormatter } from 'utils/formatNumbers'
+import { useAppSelector } from 'state/hooks'
+import * as request from "helpers/apiRequests";
+import { priceGraphQl } from 'helpers/constants'
 
 const EXPLORE_CHART_HEIGHT_PX = 368
 const EXPLORE_PRICE_SOURCES = [PriceSource.SubgraphV3]
@@ -201,6 +204,8 @@ function MinimalStatDisplay({ title, value, time }: { title: ReactNode; value: n
 }
 
 export function ExploreChartsSection() {
+  const [usdPrice, setUsdPrice] = useState<any>(0)
+  const { stakingTransactions } = useAppSelector((state) => state.Incentive)
   const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
   const chainId = supportedChainIdFromGQLChain(chainName)
 
@@ -211,6 +216,52 @@ export function ExploreChartsSection() {
     variables: { address: "" },
   })
 
+  const getUsdPrice = async () => {
+    try {
+      const getUSDPrice = request.getUSDPrice(priceGraphQl);
+
+      const priceData = await getUSDPrice(
+        `query {
+          pool(id:"0x532e1a0117ac273f448d5af5af8aa6336a4374d5"){
+            id
+            sqrtPrice
+            id
+            liquidity
+            token0 {
+              id
+              decimals
+              name
+              symbol
+            }
+            token1 {
+              id
+              decimals
+              name
+              symbol
+            }
+            token0Price
+            token1Price
+            volumeUSD
+          }  
+       }`,
+        {}
+      );
+
+      setUsdPrice(Number(priceData?.pool?.token1Price || 0).toFixed(2))
+
+
+    } catch (error) { }
+  };
+
+
+  useEffect(() => {
+    getUsdPrice()
+  }, [])
+
+
+
+
+
 
 
   let makeDataForVolume = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
@@ -220,13 +271,30 @@ export function ExploreChartsSection() {
     }))
     : []) as unknown as StackedBarsData[], [data])
 
+  let previousAmount = 0;
+  let makeDataForTVL = useMemo(() => (usdPrice && stakingTransactions && Array.isArray(stakingTransactions) && stakingTransactions.length > 0
+    ? stakingTransactions.map((data: any, index: number) => {
 
-  let makeDataForTVL = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
-    ? data.uniswapDayDatas.map((data: any) => ({
-      time: data.date,
-      values: [Number(data.tvlUSD)],
-    }))
-    : []) as unknown as StackedLineData[], [data])
+
+
+      let amount = parseFloat(data.amount) / 10 ** 9;
+
+      const newAmount = previousAmount + amount;
+
+      previousAmount = newAmount;
+
+      let usdAmount = newAmount * usdPrice;
+    
+
+      return {
+        time: data.timestamp,
+        values: [Number(usdAmount)],
+      }
+
+    })
+    : []) as unknown as StackedLineData[], [stakingTransactions, usdPrice])
+
+
 
 
   return (

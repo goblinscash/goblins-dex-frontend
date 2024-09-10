@@ -72,3 +72,22 @@ export const updateFarm = createAsyncThunk(
     }
   }
 );
+
+
+export const getStakingtransaction = createAsyncThunk(
+  "getStakingtransaction",
+  async (payload, Thunk) => {
+    try {
+      let response = await post(URL.GET_STAKING_TRANSACTION_LIST, {
+        chainId: 10000
+      });
+
+   
+      return response.data;
+    } catch (error) {
+   
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);

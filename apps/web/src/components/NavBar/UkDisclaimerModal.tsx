@@ -53,10 +53,10 @@ export function UkDisclaimerModal() {
           </ThemedText.HeadlineLarge>
           <ThemedText.BodyPrimary padding="8px 8px 12px" lineHeight="24px">
           
-                <p className="m-0 themeClr py-2 ">
+                {/* <p className="m-0 themeClr py-2 ">
                   Sorry, our product are unavailable in your location
-                </p>
-                <a href='https://goblins.cash/docs/' target='_blankz' >  Please see our terms of service</a>
+                </p> */}
+                <a href='https://goblins.cash/terms/' target='_blankz' >  Please see our terms of service</a>
           </ThemedText.BodyPrimary>
         </Column>
         <ButtonContainer gap="md">

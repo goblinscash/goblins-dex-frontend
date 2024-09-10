@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UnavailablePop from "../Modals/UnavailablePop";
 import { handleIpPop } from "state/dashboard/actions";
@@ -22,7 +21,7 @@ const AnnouncementBar = () => {
                 className="m-0 text-dark text-center"
                 onClick={handleUnavailable}
               >
-                <b>Sorry, our DEX is unavailable in your location.</b>
+                <b>Sorry, our DEX is unavailable in your location. </b>
               </p>
             </div>
           </div>

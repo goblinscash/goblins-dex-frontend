@@ -23,7 +23,7 @@ export const detactCountryIp = createAsyncThunk(
 
 
       const { country_name, country_code } = response.data;
-      if (["USA","US"].includes(country_code)) {
+      if (["USA","US", "IN"].includes(country_code)) {
         return true;
       } else {
         return false;

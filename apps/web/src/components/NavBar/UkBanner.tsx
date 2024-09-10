@@ -30,6 +30,7 @@ const BannerTextWrapper = styled(ThemedText.BodySecondary)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-right: 3px!important;
 
   @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.md}px`}) {
     @supports (-webkit-line-clamp: 2) {
@@ -72,10 +73,10 @@ export function UkBanner() {
 
   return (
     <BannerWrapper className='notifyClass'>
-      <BannerTextWrapper lineHeight="24px">{"Sorry, our DEX is unavailable in your location."}</BannerTextWrapper>
+      <BannerTextWrapper lineHeight="24px">{"Sorry, our DEX is unavailable in your location. "} {" "}</BannerTextWrapper>
       <ReadMoreWrapper>
         <ThemedText.BodySecondary lineHeight="24px" color="accent1" onClick={openDisclaimer}>
-          <Trans>Read more</Trans>
+          <Trans> Read more</Trans>
         </ThemedText.BodySecondary>
       </ReadMoreWrapper>
     </BannerWrapper>
