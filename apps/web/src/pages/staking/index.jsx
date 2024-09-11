@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
 
-
 // css
 import "assets/styles/main.css";
 
@@ -36,7 +35,6 @@ const Staking = () => {
   const [migration, setMigration] = useState(false);
   const [apr, setApr] = useState(0);
 
-
   const [price, setPrice] = useState({
     GOBInPrice: 0,
     WBCHInPrice: 0,
@@ -51,15 +49,17 @@ const Staking = () => {
       setLoading(true);
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       let detail = await web3.getDetailInfo();
-      let data = await web3.getTokenBalance("0x47c61F29B1458d234409Ebbe4B6a70F3b16528EF");
-    
+      let data = await web3.getTokenBalance(
+        "0x47c61F29B1458d234409Ebbe4B6a70F3b16528EF"
+      );
+
       setDetails({
         ...detail,
         unStakedAmountInDollar:
           detail.unStakedAmount * Number(price.GOBInPrice),
         stakedAmountInDollar: detail.stakedAmount * Number(price.GOBInPrice),
         balanceInDollar: detail.balance * Number(price.GOBInPrice),
-        sGob: data.balance
+        sGob: data.balance,
       });
 
       setLoading(false);
@@ -69,11 +69,9 @@ const Staking = () => {
     }
   };
 
-
-  const handleMigrationPopup =()=>{
-    setMigration(!migration)
-  }
-
+  const handleMigrationPopup = () => {
+    setMigration(!migration);
+  };
 
   const getAPR = async (totalSupply, BCHPrice, GOBPrice) => {
     try {
@@ -88,10 +86,36 @@ const Staking = () => {
   const getUsdPrice = async () => {
     try {
       const getUSDPrice = request.getUSDPrice(priceGraphQl);
-      
-      const priceData = await getUSDPrice(
+
+      const GobAndWbchPair = await getUSDPrice(
         `query {
-          pool(id:"0x532e1a0117ac273f448d5af5af8aa6336a4374d5"){
+          pool(id:"0x2f19229617f37abfc990c8f6952bee5c8d4c1797"){
+            id
+            sqrtPrice
+            id
+            liquidity
+            token0 {
+              id
+              decimals
+              name
+              symbol
+            }
+            token1 {
+              id
+              decimals
+              name
+              symbol
+            }
+            token0Price
+            token1Price
+            volumeUSD
+          }  
+       }`,
+        {}
+      );
+      const WbchAndbcUsdtPair = await getUSDPrice(
+        `query {
+          pool(id:"0x934f434a226ed5b6c4f7fc9a2dc5dc0467bddee7"){
             id
             sqrtPrice
             id
@@ -142,8 +166,12 @@ const Staking = () => {
         {}
       );
 
+      let getGobPrice =
+        parseFloat(WbchAndbcUsdtPair.pool.token1Price) *
+        parseFloat(GobAndWbchPair.pool.token0Price);
+
       setPrice({
-        GOBInPrice: Number(priceData?.pool?.token1Price || 0).toFixed(2),
+        GOBInPrice: Number(getGobPrice || 0).toFixed(2),
         WBCHInPrice: Number(priceData1?.pool?.token1Price || 0).toFixed(2),
       });
     } catch (error) {}
@@ -266,10 +294,14 @@ const Staking = () => {
                     GOB Price: ${price?.GOBInPrice || 0}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    {details.sGob > 0 && <button
-                      onClick={handleMigrationPopup}
-                      className="btn  flex items-center justify-center commonBtn font-extrabold"
-                    >Migration</button>}
+                    {details.sGob > 0 && (
+                      <button
+                        onClick={handleMigrationPopup}
+                        className="btn  flex items-center justify-center commonBtn font-extrabold"
+                      >
+                        Migration
+                      </button>
+                    )}
                     <a
                       href="/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
                       target="_blank"
