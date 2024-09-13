@@ -242,6 +242,8 @@ export class ClassicTrade extends Trade<Currency, Currency, TradeType> {
       outputAmount: CurrencyAmount<Currency>
     }[]
   }) {
+
+
     super(routes)
     this.blockNumber = blockNumber
     this.gasUseEstimateUSD = gasUseEstimateUSD
@@ -250,7 +252,11 @@ export class ClassicTrade extends Trade<Currency, Currency, TradeType> {
     this.approveInfo = approveInfo
     this.swapFee = swapFee
     this.gasUseEstimate = gasUseEstimate
+
+
+
   }
+
 
   public get executionPrice(): Price<Currency, Currency> {
     if (this.tradeType === TradeType.EXACT_INPUT || !this.swapFee) return super.executionPrice
@@ -605,37 +611,37 @@ export enum QuoteState {
 
 export type QuoteResult =
   | {
-      state: QuoteState.NOT_FOUND
-      data?: undefined
-    }
+    state: QuoteState.NOT_FOUND
+    data?: undefined
+  }
   | {
-      state: QuoteState.SUCCESS
-      data: URAQuoteResponse
-    }
+    state: QuoteState.SUCCESS
+    data: URAQuoteResponse
+  }
 
 export type TradeResult =
   | {
-      state: QuoteState.NOT_FOUND
-      trade?: undefined
-      latencyMs?: number
-    }
+    state: QuoteState.NOT_FOUND
+    trade?: undefined
+    latencyMs?: number
+  }
   | {
-      state: QuoteState.SUCCESS
-      trade: SubmittableTrade
-      latencyMs?: number
-    }
+    state: QuoteState.SUCCESS
+    trade: SubmittableTrade
+    latencyMs?: number
+  }
 
 export type PreviewTradeResult =
   | {
-      state: QuoteState.NOT_FOUND
-      trade?: undefined
-      latencyMs?: number
-    }
+    state: QuoteState.NOT_FOUND
+    trade?: undefined
+    latencyMs?: number
+  }
   | {
-      state: QuoteState.SUCCESS
-      trade: PreviewTrade
-      latencyMs?: number
-    }
+    state: QuoteState.SUCCESS
+    trade: PreviewTrade
+    latencyMs?: number
+  }
 
 export enum PoolType {
   V2Pool = 'v2-pool',

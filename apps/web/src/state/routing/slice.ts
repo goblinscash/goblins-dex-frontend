@@ -19,6 +19,7 @@ import {
   URAQuoteType,
 } from './types'
 import { isExactInput, transformQuoteToTrade } from './utils'
+import { SET_INTERFACE_FEE_FOR_PAIRS } from 'constants/routing'
 
 const UNISWAP_API_URL = process.env.REACT_APP_UNISWAP_API_URL
 const UNISWAP_GATEWAY_DNS_URL = process.env.REACT_APP_UNISWAP_GATEWAY_DNS
@@ -43,6 +44,14 @@ function getQuoteLatencyMeasure(mark: PerformanceMark): PerformanceMeasure {
   performance.mark('quote-fetch-end')
   return performance.measure('quote-fetch-latency', mark.name, 'quote-fetch-end')
 }
+
+const findPair = (tokenA: string, tokenB: string, pairs: any) => {
+  return pairs.find(
+    (pair: any) =>
+      (pair.tokenA.toLowerCase() === tokenA.toLowerCase() && pair.tokenB.toLowerCase() === tokenB.toLowerCase()) ||
+      (pair.tokenA.toLowerCase() === tokenB.toLowerCase() && pair.tokenB.toLowerCase() === tokenA.toLowerCase())
+  );
+};
 
 function getRoutingAPIConfig(args: GetQuoteArgs): RoutingConfig {
   const { account, tokenInChainId, uniswapXForceSyntheticQuotes, routerPreference } = args
@@ -182,9 +191,20 @@ export const routingApi = createApi({
         try {
           const { getRouter, getClientSideQuote } = await import('lib/hooks/routing/clientSideSmartOrderRouter')
           const router = getRouter(args.tokenInChainId)
-          const quoteResult = await getClientSideQuote(args, router, CLIENT_PARAMS)
+          let quoteResult = await getClientSideQuote(args, router, CLIENT_PARAMS)
+
+
+          let matchedPair = SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId] ? findPair(args.tokenInAddress, args.tokenOutAddress, SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId]) : 0
+
+          if (quoteResult.data) {
+
+            quoteResult.data.quote["portionBips"] = matchedPair ? matchedPair.fee : 5
+          }
+
           if (quoteResult.state === QuoteState.SUCCESS) {
-            const trade = await transformQuoteToTrade(args, quoteResult.data, QuoteMethod.CLIENT_SIDE_FALLBACK)
+
+            const trade = await transformQuoteToTrade(args, quoteResult.data, QuoteMethod.CLIENT_SIDE_FALLBACK);
+
             return {
               data: { ...trade, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration },
             }

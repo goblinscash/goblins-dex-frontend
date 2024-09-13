@@ -141,23 +141,23 @@ function getTradeCurrencies(
   const currencyIn = tokenInIsNative
     ? nativeOnChain(tokenInChainId)
     : parseToken({
-        address: tokenInAddress,
-        chainId: tokenInChainId,
-        decimals: tokenInDecimals,
-        symbol: tokenInSymbol,
-        buyFeeBps: serializedTokenIn?.buyFeeBps,
-        sellFeeBps: serializedTokenIn?.sellFeeBps,
-      })
+      address: tokenInAddress,
+      chainId: tokenInChainId,
+      decimals: tokenInDecimals,
+      symbol: tokenInSymbol,
+      buyFeeBps: serializedTokenIn?.buyFeeBps,
+      sellFeeBps: serializedTokenIn?.sellFeeBps,
+    })
   const currencyOut = tokenOutIsNative
     ? nativeOnChain(tokenOutChainId)
     : parseToken({
-        address: tokenOutAddress,
-        chainId: tokenOutChainId,
-        decimals: tokenOutDecimals,
-        symbol: tokenOutSymbol,
-        buyFeeBps: serializedTokenOut?.buyFeeBps,
-        sellFeeBps: serializedTokenOut?.sellFeeBps,
-      })
+      address: tokenOutAddress,
+      chainId: tokenOutChainId,
+      decimals: tokenOutDecimals,
+      symbol: tokenOutSymbol,
+      buyFeeBps: serializedTokenOut?.buyFeeBps,
+      sellFeeBps: serializedTokenOut?.sellFeeBps,
+    })
 
   if (!isUniswapXTrade) {
     return [currencyIn, currencyOut]
@@ -169,8 +169,9 @@ function getTradeCurrencies(
 function getSwapFee(data: ClassicQuoteData | URADutchOrderQuoteData): SwapFeeInfo | undefined {
   const { portionAmount, portionBips, portionRecipient } = data
 
-  if (!portionAmount || !portionBips || !portionRecipient) return undefined
 
+  if (!portionAmount || !portionBips || !portionRecipient) return undefined
+  // console.log( new Percent(5, BIPS_BASE), "<=====portionBips, BIPS_BASE")
   return {
     recipient: portionRecipient,
     percent: new Percent(portionBips, BIPS_BASE),
@@ -188,8 +189,12 @@ function getClassicTradeDetails(
   routes?: RouteResult[]
   swapFee?: SwapFeeInfo
 } {
+
+
   const classicQuote =
     data.routing === URAQuoteType.CLASSIC ? data.quote : data.allQuotes.find(isClassicQuoteResponse)?.quote
+
+
 
   if (!classicQuote) {
     return {}
@@ -223,10 +228,12 @@ export async function transformQuoteToTrade(
   const { tradeType, needsWrapIfUniswapX, routerPreference, account, amount } = args
 
   const showUniswapXTrade = data.routing === URAQuoteType.DUTCH_LIMIT && routerPreference === RouterPreference.X
-
   const [currencyIn, currencyOut] = getTradeCurrencies(args, showUniswapXTrade)
 
-  const { gasUseEstimateUSD, blockNumber, routes, gasUseEstimate, swapFee } = getClassicTradeDetails(args, data)
+
+  const { gasUseEstimateUSD, blockNumber, routes, gasUseEstimate, swapFee } = getClassicTradeDetails(args, data);
+
+
 
   // Some sus javascript float math but it's ok because its just an estimate for display purposes
   const usdCostPerGas = gasUseEstimateUSD && gasUseEstimate ? gasUseEstimateUSD / gasUseEstimate : undefined
@@ -269,6 +276,7 @@ export async function transformQuoteToTrade(
     swapFee,
   })
 
+
   // If the top-level URA quote type is DUTCH_LIMIT, then UniswapX is better for the user
   const isUniswapXBetter = data.routing === URAQuoteType.DUTCH_LIMIT
   if (isUniswapXBetter) {
@@ -293,11 +301,16 @@ export async function transformQuoteToTrade(
       swapFee,
     })
 
+
+
     return {
       state: QuoteState.SUCCESS,
       trade: uniswapXTrade,
     }
   }
+
+  console.log(classicTrade, "<====classicTrade")
+
 
   return { state: QuoteState.SUCCESS, trade: classicTrade }
 }

@@ -15,7 +15,7 @@ const ETH = nativeOnChain(ChainId.MAINNET)
 const WETH_IN_ROUTE = toTokenInRoute(ETH.wrapped)
 
 // helper function to make amounts more readable
-const amount = (raw: TemplateStringsArray) => (parseInt(raw[0]) * 1e6).toString()
+const amount = (raw: TemplateStringsArray) => (parseInt(raw[0]) * 1e6).toString();
 
 const BASE_ARGS = {
   amount: '100',

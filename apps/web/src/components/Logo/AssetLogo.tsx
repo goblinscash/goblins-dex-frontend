@@ -70,7 +70,7 @@ export default function AssetLogo({
     img.src = src ?? ''
     return src ? img.complete : false
   })
-console.log(src, "<=====src")
+
   return (
     <LogoContainer style={{ height: size, width: size, ...style }}>
       {src ? (

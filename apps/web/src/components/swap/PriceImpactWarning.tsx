@@ -8,6 +8,7 @@ import { useFormatter } from 'utils/formatNumbers'
 
 import { AutoColumn } from '../Column'
 import { RowBetween, RowFixed } from '../Row'
+
 import { MouseoverTooltip } from '../Tooltip'
 
 const StyledCard = styled(OutlineCard)`

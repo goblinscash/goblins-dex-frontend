@@ -70,7 +70,6 @@ export default function CommonBases({
   const portfolioBalanceUsd = data?.portfolios?.[0].tokensTotalDenominatedValue?.value
 
 
-  console.log(bases, "<====bases")
   return bases.length > 0 ? (
     <AutoRow gap="4px">
       {bases.map((currency: Currency) => {

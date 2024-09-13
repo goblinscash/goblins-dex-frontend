@@ -12,6 +12,7 @@ interface WrapperProps {
   setCurrentTab?: Dispatch<SetStateAction<SwapTab>>
   setCurrencyState?: Dispatch<SetStateAction<CurrencyState>>
   chainId?: ChainId
+  
 }
 
 function Wrapper(props: PropsWithChildren<WrapperProps>) {

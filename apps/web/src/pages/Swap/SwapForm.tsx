@@ -481,7 +481,6 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
 
 
 
-console.log(currencies, "<====currencies")
 
 
   return (
