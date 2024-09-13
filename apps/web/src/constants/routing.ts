@@ -184,19 +184,20 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
     {
       tokenA: "0xbc2f884680c95a02cea099da2f524b366d9028ba", ///bcUSDT
       tokenB: "0xbbb3700F33fCb64437Dc28A7Beb6b21f5cC76FB9", ///bbUSDT
-      fee: 5,
+      fee: 0,
     },
     {
       tokenA: "0xbb2A35cc3e3dDb679fe30A82051633bC822e4191", ///bcUSDC
       tokenB: "0xbbb3700F33fCb64437Dc28A7Beb6b21f5cC76FB9", ///bbUSDT
-      fee: 5,
+      fee: 0,
     },
 
     {
       tokenA: "0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04", ///WBCH
       tokenB: "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195", ///bcBCH
-      fee: 30,
-    },
+      fee: 0,
+    }
 
-  ]
+  ],
+
 }

@@ -232,7 +232,7 @@ export function CurrencySearch({
   }, [])
 
 
-  console.log(searchToken, "<=====searchToken")
+
 
   return (
     <ContentWrapper>

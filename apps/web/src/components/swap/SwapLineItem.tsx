@@ -115,7 +115,7 @@ function FeeAmountRow({ amount, fee }: { amount: any | undefined, fee?: any | un
   const formattedAmount = (fee * amount.toSignificant()) / 100
 
   // const formattedAmount = "";
-  return <>{`${formattedAmount} ${amount.currency.symbol}`}</>
+  return <>{`${formattedAmount || 0} ${amount.currency.symbol}`}</>
 }
 
 function FeeRow({ trade: { swapFee, outputAmount } }: { trade: SubmittableTrade }) {

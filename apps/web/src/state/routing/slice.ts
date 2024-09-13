@@ -198,7 +198,8 @@ export const routingApi = createApi({
 
           if (quoteResult.data) {
 
-            quoteResult.data.quote["portionBips"] = matchedPair ? matchedPair.fee : 5
+            quoteResult.data.quote["portionBips"] = matchedPair ? matchedPair.fee : quoteResult.data.quote["portionBips"];
+            // quoteResult.data.quote["portionBips"] = 25
           }
 
           if (quoteResult.state === QuoteState.SUCCESS) {

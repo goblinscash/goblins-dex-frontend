@@ -24,6 +24,7 @@ export function transformSwapRouteToGetQuoteResult(
   }: SwapRoute
 ): QuoteResult {
   const routeResponse: Array<(V3PoolInRoute | V2PoolInRoute)[]> = []
+  let getPoolFee: any = null;
 
   for (const subRoute of route) {
     const { amount, quote, tokenPath } = subRoute
@@ -31,7 +32,6 @@ export function transformSwapRouteToGetQuoteResult(
     const pools = subRoute.protocol === Protocol.V2 ? subRoute.route.pairs : subRoute.route.pools;
 
 
-    console.log(pools, "<====pools")
     const curRoute: (V3PoolInRoute | V2PoolInRoute)[] = []
     for (let i = 0; i < pools.length; i++) {
       const nextPool = pools[i]
@@ -70,6 +70,11 @@ export function transformSwapRouteToGetQuoteResult(
           amountIn: edgeAmountIn,
           amountOut: edgeAmountOut,
         })
+
+        getPoolFee = nextPool.fee.toString();
+
+
+
       } else {
         const reserve0 = nextPool.reserve0
         const reserve1 = nextPool.reserve1
@@ -112,8 +117,15 @@ export function transformSwapRouteToGetQuoteResult(
       }
     }
 
+
+
     routeResponse.push(curRoute)
   }
+
+  // console.log(getPoolFee / 100, "<===interface issue")
+
+
+  // let custm = routeResponse[0] && routeResponse[0][0] && routeResponse[0][0]?.fee ? 
 
   const result: ClassicQuoteData = {
     methodParameters,
@@ -134,7 +146,7 @@ export function transformSwapRouteToGetQuoteResult(
     portionBips: 25,
     portionRecipient: '0x2deaEc93d899B9f7fA060b79078DEc170494ff24',
     portionAmount: quote.multiply(new Percent(25, 10_000)).quotient.toString(),
-    
+
   }
 
   return { state: QuoteState.SUCCESS, data: { routing: URAQuoteType.CLASSIC, quote: result, allQuotes: [] } }
