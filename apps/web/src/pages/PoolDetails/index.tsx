@@ -4,7 +4,7 @@ import Column from 'components/Column'
 import ChartSection, {
   PDP_CHART_SELECTOR_OPTIONS,
   PoolsDetailsChartType,
-} from 'components/Pools/PoolDetails/ChartSection'
+} from 'components/Pools/PoolDetails/ChartSection';
 import { PoolDetailsBreadcrumb, PoolDetailsHeader } from 'components/Pools/PoolDetails/PoolDetailsHeader'
 import { PoolDetailsLink } from 'components/Pools/PoolDetails/PoolDetailsLink'
 import { PoolDetailsStats } from 'components/Pools/PoolDetails/PoolDetailsStats'
@@ -149,17 +149,22 @@ export default function PoolDetailsPage() {
               loading={loading}
             />
             <ChartTypeSelectorContainer>
-              {/* {chartType === ChartType.VOLUME && (
+              {/* 
+              {chartType === ChartType.VOLUME && (
                 <AdvancedPriceChartToggle currentChartType={priceChartType} onChartTypeChange={setPriceChartType} />
-              )} */}
-              {/* <ChartTypeSelector
+              )}
+              */}
+
+              {/*
+              <ChartTypeSelector
                 options={PDP_CHART_SELECTOR_OPTIONS}
                 currentChartType={chartType}
                 onChartTypeChange={(c) => {
                   setChartType(c)
                   if (c === ChartType.PRICE) setPriceChartType(PriceChartType.LINE)
                 }}
-              /> */}
+              /> 
+              */}
             </ChartTypeSelectorContainer>
           </Row>
           

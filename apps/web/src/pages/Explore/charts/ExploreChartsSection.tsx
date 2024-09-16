@@ -29,6 +29,9 @@ import { NumberType, useFormatter } from 'utils/formatNumbers'
 import { useAppSelector } from 'state/hooks'
 import * as request from "helpers/apiRequests";
 import { priceGraphQl } from 'helpers/constants'
+import { ButtonPrimary } from 'components/Button'
+
+import "assets/styles/globalCustom.css"
 
 const EXPLORE_CHART_HEIGHT_PX = 368
 const EXPLORE_PRICE_SOURCES = [PriceSource.SubgraphV3]
@@ -52,6 +55,26 @@ const ChartsContainer = styled(RowBetween)`
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 56px;
+`
+
+const TabNav = styled(RowBetween)`
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  
+`
+
+
+
+const ResponsiveButtonPrimary = styled(ButtonPrimary)`
+  border-radius: 12px;
+  font-size: 16px;
+  padding: 6px 8px;
+  width: fit-content;
+  @media (max-width: ${({ theme }) => `${theme.breakpoint.sm}px`}) {
+    flex: 1 1 auto;
+    width: 50%;
+  }
 `
 // a 6% gap is achieved using two 47% width containers, as a parent gap causes an autosizing error with side-by-side lightweight-charts
 const SectionContainer = styled(Column)`
@@ -204,6 +227,7 @@ function MinimalStatDisplay({ title, value, time }: { title: ReactNode; value: n
 }
 
 export function ExploreChartsSection() {
+  const [tab, setTab] = useState(1)
   const [usdPrice, setUsdPrice] = useState<any>(0)
   const { stakingTransactions } = useAppSelector((state) => state.Incentive)
   const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
@@ -295,12 +319,41 @@ export function ExploreChartsSection() {
     : []) as unknown as StackedLineData[], [stakingTransactions, usdPrice])
 
 
+    let makeDataForPoolTVL = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
+    ? data.uniswapDayDatas.map((data: any) => ({
+      time: data.date,
+      values: [Number(data.tvlUSD)],
+    }))
+    : []) as unknown as StackedLineData[], [data])
 
+
+  const handleTab = (key : number) => {
+    setTab(key)
+  }
 
   return (
+    <>
+     <ChartsContainer>
+       <div className='tabContainer'>
+         <div className='tabNav'>
+
+         
+            <button onClick={() => handleTab(1)} className={`${tab == 1 && "active"}`}>
+              Pool
+            </button>
+            <button onClick={()=> handleTab(2)} className={`${tab == 2 && "active"}`}>
+             Staking
+            </button>
+         </div>
+         {/* <div className="tabContent">
+           {tab == 1 ? <>TAb 1 Content</> : tab == 2 ? <>Tab 2 Content</> : <></>}
+         </div> */}
+       </div>
+     </ChartsContainer>
     <ChartsContainer>
-      <TVLChartSection data={makeDataForTVL || HARDCODED_TVL_DATA} />
+      <TVLChartSection data={tab == 1 ? makeDataForPoolTVL || HARDCODED_TVL_DATA : makeDataForTVL || HARDCODED_TVL_DATA} />
       <VolumeChartSection data={makeDataForVolume || HARDCODED_VOLUME_DATA} />
     </ChartsContainer>
+    </>
   )
 }

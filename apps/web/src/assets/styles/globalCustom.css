@@ -1,0 +1,35 @@
+.tabContainer .tabNav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tabContainer .tabNav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #001b1c;
+  font-size: 14px;
+  color: #fff;
+}
+
+.tabContainer .tabNav button.active {
+  background: #00ff4e;
+  color: #001b1c ;
+}
+.tabContainer .tabNav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #001b1c;
+  font-size: 14px;
+  color: #fff;
+  border: 1px solid #001b1c;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: 500;
+  min-width: 120px;
+}
+.tabContainer .tabContent {
+    padding-top: 20px;
+}
