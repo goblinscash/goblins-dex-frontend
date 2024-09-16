@@ -196,6 +196,11 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       tokenA: "0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04", ///WBCH
       tokenB: "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195", ///bcBCH
       fee: 0,
+    },
+    {
+      tokenA: "ETH", ///WBCH
+      tokenB: "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195", ///bcBCH
+      fee: 0,
     }
 
   ],

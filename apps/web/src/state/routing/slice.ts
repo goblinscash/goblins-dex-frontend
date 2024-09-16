@@ -192,7 +192,7 @@ export const routingApi = createApi({
           const { getRouter, getClientSideQuote } = await import('lib/hooks/routing/clientSideSmartOrderRouter')
           const router = getRouter(args.tokenInChainId)
           let quoteResult = await getClientSideQuote(args, router, CLIENT_PARAMS)
-
+console.log(args, "<=====args")
 
           let matchedPair = SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId] ? findPair(args.tokenInAddress, args.tokenOutAddress, SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId]) : 0
 
