@@ -229,7 +229,7 @@ function MinimalStatDisplay({ title, value, time }: { title: ReactNode; value: n
 export function ExploreChartsSection() {
   const [tab, setTab] = useState(1)
   const [usdPrice, setUsdPrice] = useState<any>(0)
-  const { stakingTransactions } = useAppSelector((state) => state.Incentive)
+  const { transactions } = useAppSelector((state) => state.Incentive)
   const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
   const chainId = supportedChainIdFromGQLChain(chainName)
 
@@ -295,31 +295,44 @@ export function ExploreChartsSection() {
     }))
     : []) as unknown as StackedBarsData[], [data])
 
-  let previousAmount = 0;
-  let makeDataForTVL = useMemo(() => (usdPrice && stakingTransactions && Array.isArray(stakingTransactions) && stakingTransactions.length > 0
-    ? stakingTransactions.map((data: any, index: number) => {
 
 
+  let makeDataForTVL = useMemo(() => {
+    // console.log(transactions, "<====transactions")
+    if (!usdPrice || !transactions.stakeTransaction || !transactions.unStakeTransaction) return [];
+    const allTransactions = [
+      ...transactions.stakeTransaction.map((tx: any) => ({ ...tx, type: 'stake' })),
+      ...transactions.unStakeTransaction.map((tx: any) => ({ ...tx, type: 'unstake' })),
+    ];
 
+    // console.log(allTransactions, "<===allTransactions")
+    // Sort transactions by timestamp
+    allTransactions.sort((a, b) => a.timestamp - b.timestamp);
+
+    let previousAmount = 0;
+
+    return allTransactions.map((data) => {
       let amount = parseFloat(data.amount) / 10 ** 9;
 
-      const newAmount = previousAmount + amount;
+      // Update the cumulative amount
+      if (data.type === 'stake') {
+        previousAmount += amount;
+      } else if (data.type === 'unstake') {
+        previousAmount -= amount;
+      }
 
-      previousAmount = newAmount;
-
-      let usdAmount = newAmount * usdPrice;
-    
+      let usdAmount = previousAmount * usdPrice;
 
       return {
         time: data.timestamp,
         values: [Number(usdAmount)],
-      }
+      };
+    });
+  }, [transactions, usdPrice]);
 
-    })
-    : []) as unknown as StackedLineData[], [stakingTransactions, usdPrice])
 
 
-    let makeDataForPoolTVL = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
+  let makeDataForPoolTVL = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
     ? data.uniswapDayDatas.map((data: any) => ({
       time: data.date,
       values: [Number(data.tvlUSD)],
@@ -327,33 +340,35 @@ export function ExploreChartsSection() {
     : []) as unknown as StackedLineData[], [data])
 
 
-  const handleTab = (key : number) => {
+  const handleTab = (key: number) => {
     setTab(key)
   }
 
+
+  console.log(makeDataForTVL,"<====makeDataForTVL")
   return (
     <>
-     <ChartsContainer>
-       <div className='tabContainer'>
-         <div className='tabNav'>
+      <ChartsContainer>
+        <div className='tabContainer'>
+          <div className='tabNav'>
 
-         
+
             <button onClick={() => handleTab(1)} className={`${tab == 1 && "active"}`}>
               Pool
             </button>
-            <button onClick={()=> handleTab(2)} className={`${tab == 2 && "active"}`}>
-             Staking
+            <button onClick={() => handleTab(2)} className={`${tab == 2 && "active"}`}>
+              Staking
             </button>
-         </div>
-         {/* <div className="tabContent">
+          </div>
+          {/* <div className="tabContent">
            {tab == 1 ? <>TAb 1 Content</> : tab == 2 ? <>Tab 2 Content</> : <></>}
          </div> */}
-       </div>
-     </ChartsContainer>
-    <ChartsContainer>
-      <TVLChartSection data={tab == 1 ? makeDataForPoolTVL || HARDCODED_TVL_DATA : makeDataForTVL || HARDCODED_TVL_DATA} />
-      <VolumeChartSection data={makeDataForVolume || HARDCODED_VOLUME_DATA} />
-    </ChartsContainer>
+        </div>
+      </ChartsContainer>
+      <ChartsContainer>
+        <TVLChartSection data={tab == 1 ? makeDataForPoolTVL || HARDCODED_TVL_DATA : makeDataForTVL || HARDCODED_TVL_DATA} />
+        <VolumeChartSection data={makeDataForVolume || HARDCODED_VOLUME_DATA} />
+      </ChartsContainer>
     </>
   )
 }

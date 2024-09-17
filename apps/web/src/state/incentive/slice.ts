@@ -10,7 +10,7 @@ export interface InitialState {
   deletedFarmLoading: boolean,
   deletedFarmList: any,
   updateLoading: boolean,
-  stakingTransactions: any
+  transactions: any
 };
 
 const initialState: InitialState = {
@@ -21,7 +21,10 @@ const initialState: InitialState = {
   deletedFarmLoading: false,
   deletedFarmList: [],
   updateLoading: false,
-  stakingTransactions: []
+  transactions: {
+    stakeTransaction:[],
+    unStakeTransaction:[]
+  }
 };
 
 const slice = createSlice({
@@ -103,7 +106,7 @@ const slice = createSlice({
 
     builder.addCase(Act.getStakingtransaction.fulfilled, (state, { payload }) => ({
       ...state,
-      stakingTransactions: payload,
+      transactions: payload,
     }));
 
   },
