@@ -344,8 +344,6 @@ export function ExploreChartsSection() {
     setTab(key)
   }
 
-
-  console.log(makeDataForTVL,"<====makeDataForTVL")
   return (
     <>
       <ChartsContainer>

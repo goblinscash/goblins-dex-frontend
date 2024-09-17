@@ -309,7 +309,7 @@ export async function transformQuoteToTrade(
     }
   }
 
-  console.log(classicTrade, "<====classicTrade")
+ 
 
 
   return { state: QuoteState.SUCCESS, trade: classicTrade }
