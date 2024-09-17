@@ -283,7 +283,6 @@ export async function transformQuoteToTrade(
     const orderInfo = toDutchOrderInfo(data.quote.orderInfo)
     const swapFee = getSwapFee(data.quote)
     const wrapInfo = await getWrapInfo(needsWrapIfUniswapX, account, currencyIn.chainId, amount, usdCostPerGas)
-
     const uniswapXTrade = new DutchOrderTrade({
       currencyIn,
       currenciesOut: [currencyOut],
@@ -300,18 +299,11 @@ export async function transformQuoteToTrade(
       slippageTolerance: toSlippagePercent(data.quote.slippageTolerance),
       swapFee,
     })
-
-
-
     return {
       state: QuoteState.SUCCESS,
       trade: uniswapXTrade,
     }
   }
-
- 
-
-
   return { state: QuoteState.SUCCESS, trade: classicTrade }
 }
 
