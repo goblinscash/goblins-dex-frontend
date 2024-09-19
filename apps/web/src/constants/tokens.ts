@@ -292,6 +292,15 @@ export const BB_USDC = new Token(
   'bbUSDC',
   'bbUSDC'
 )
+
+export const BB_BTC = new Token(
+  ChainId.SMARTBCH,
+  '0xbbeF77270d6425E113e1E37f008cf141a9FC215A',
+  18,
+  'bbBTC',
+  'bbBTC'
+)
+
 export const BB_USDT = new Token(
   ChainId.SMARTBCH,
   '0xbbb3700F33fCb64437Dc28A7Beb6b21f5cC76FB9',
