@@ -234,7 +234,14 @@ function MyFarm({
                             style={{ height: 30, width: 30, marginLeft: -10 }}
                           />
                         ) : (
-                          item?.getPoolDetail?.token1Symbol
+
+                       <>
+                       
+                       <p>{item?.getPoolDetail?.token1Symbol}</p>
+          
+
+
+                       </>
                         )}
 
                         <span className="ml-2">

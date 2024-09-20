@@ -119,7 +119,7 @@ export const getSymbols = {
   "0xbbb3700f33fcb64437dc28a7beb6b21f5cc76fb9": Icon5,
   "0xbc2f884680c95a02cea099da2f524b366d9028ba": Icon6,
   "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195": Icon7,
-  "0x8ff795a6f4d97e7887c79bea79aba5cc76444adf": Icon8
+  "0xbbef77270d6425e113e1e37f008cf141a9fc215a": Icon8
 };
 
 export const getSortedData = (arr, sortKey, sortOrder) => {
