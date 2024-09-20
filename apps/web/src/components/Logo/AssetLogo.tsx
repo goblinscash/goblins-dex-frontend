@@ -64,6 +64,8 @@ export default function AssetLogo({
   size = '24px',
   style,
 }: AssetLogoProps) {
+
+  console.log(isNative, backupImg, "<=====isNative, backupImg")
   const [src, nextSrc] = useTokenLogoSource(address, chainId, isNative, backupImg)
   const [imgLoaded, setImgLoaded] = useState(() => {
     const img = document.createElement('img')

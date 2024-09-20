@@ -10,6 +10,9 @@ import Icon3 from "assets/farmingAssets/icons/0xbb2A35cc3e3dDb679fe30A82051633bC
 import Icon5 from "assets/farmingAssets/icons/0xbbb3700F33fCb64437Dc28A7Beb6b21f5cC76FB9.png";
 import Icon6 from "assets/farmingAssets/icons/0xBc2F884680c95A02cea099dA2F524b366d9028Ba.png";
 import Icon7 from "assets/farmingAssets/icons/0xBc9bD8DDe6C5a8e1CBE293356E02f5984693b195.png";
+import Icon8 from "assets/farmingAssets/icons/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf.png"
+
+
 
 export const cryptoData = [
   {
@@ -116,6 +119,7 @@ export const getSymbols = {
   "0xbbb3700f33fcb64437dc28a7beb6b21f5cc76fb9": Icon5,
   "0xbc2f884680c95a02cea099da2f524b366d9028ba": Icon6,
   "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195": Icon7,
+  "0x8ff795a6f4d97e7887c79bea79aba5cc76444adf": Icon8
 };
 
 export const getSortedData = (arr, sortKey, sortOrder) => {
