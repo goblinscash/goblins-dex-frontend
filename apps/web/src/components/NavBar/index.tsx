@@ -40,8 +40,9 @@ interface MenuItemProps {
   id?: NavLinkProps['id']
   isActive?: boolean
   children: ReactNode
-  dataTestId?: string
-  
+  dataTestId?: string,
+
+
 }
 
 const MenuItem = ({ href, dataTestId, id, isActive, children }: MenuItemProps) => {
@@ -72,32 +73,37 @@ export const PageTabs = () => {
 
   return (
     <>
-        <MenuItem href="/explore" isActive={pathname.startsWith('/explore')}>
-          <Trans>Home</Trans>
-        </MenuItem>
+      <MenuItem href="/explore" isActive={pathname.startsWith('/explore')}>
+        <Trans>Home</Trans>
+      </MenuItem>
       <MenuItem href="/swap" isActive={pathname.startsWith('/swap')}>
         <Trans>Swap</Trans>
       </MenuItem>
-   
 
-     
- 
+
+
+
       {!shouldDisableNFTRoutes && (
         <MenuItem dataTestId="nft-nav" href="/nfts" isActive={isNftPage}>
           <Trans>NFTs</Trans>
         </MenuItem>
       )}
-         <MenuItem href="/staking" >
-          <Trans>Staking</Trans>
-        </MenuItem>
+      {connectedChainId == 1000 && <>  <MenuItem href="/staking" >
+        <Trans>Staking</Trans>
+      </MenuItem>
         <MenuItem href="/farming">
           <Trans>Farming</Trans>
         </MenuItem>
+      </>}
       <Box display={{ sm: 'flex', lg: 'none', xxl: 'flex' }} width="full">
         <MenuItem href="/pools" dataTestId="pool-nav-link" isActive={isPoolActive}>
           <Trans>Pools</Trans>
         </MenuItem>
       </Box>
+
+      <MenuItem href="https://goblins.cash/docs/">
+        Docs
+      </MenuItem>
       {isNewLandingPageEnabled ? (
         <More />
       ) : (
@@ -105,6 +111,8 @@ export const PageTabs = () => {
           {/* <MenuDropdown /> */}
         </Box>
       )}
+
+
     </>
   )
 }
