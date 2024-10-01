@@ -41,11 +41,10 @@ interface MenuItemProps {
   isActive?: boolean
   children: ReactNode
   dataTestId?: string,
-
-
+  target?: string,
 }
 
-const MenuItem = ({ href, dataTestId, id, isActive, children }: MenuItemProps) => {
+const MenuItem = ({ href, dataTestId, id, isActive, children, target }: MenuItemProps) => {
   return (
     <NavLink
       to={href}
@@ -53,6 +52,7 @@ const MenuItem = ({ href, dataTestId, id, isActive, children }: MenuItemProps) =
       id={id}
       style={{ textDecoration: 'none' }}
       data-testid={dataTestId}
+      target={target || ""}
     >
       {children}
     </NavLink>
@@ -101,7 +101,7 @@ export const PageTabs = () => {
         </MenuItem>
       </Box>
 
-      <MenuItem href="https://goblins.cash/docs/">
+      <MenuItem href="https://goblins.cash/docs/" target="_blank">
         Docs
       </MenuItem>
       {isNewLandingPageEnabled ? (
