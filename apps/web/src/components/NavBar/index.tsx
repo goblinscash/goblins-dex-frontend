@@ -88,13 +88,17 @@ export const PageTabs = () => {
           <Trans>NFTs</Trans>
         </MenuItem>
       )}
-    <>  <MenuItem href="/staking" >
-        <Trans>Staking</Trans>
-      </MenuItem>
-        <MenuItem href="/farming">
-          <Trans>Farming</Trans>
+      {
+        connectedChainId === 10000
+        &&
+
+        <>  <MenuItem href="/staking" >
+          <Trans>Staking</Trans>
         </MenuItem>
-      </>
+          <MenuItem href="/farming">
+            <Trans>Farming</Trans>
+          </MenuItem>
+        </>}
       <Box display={{ sm: 'flex', lg: 'none', xxl: 'flex' }} width="full">
         <MenuItem href="/pools" dataTestId="pool-nav-link" isActive={isPoolActive}>
           <Trans>Pools</Trans>

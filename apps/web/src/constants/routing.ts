@@ -52,7 +52,11 @@ import {
   WETH_POLYGON,
   WETH_POLYGON_MUMBAI,
   WRAPPED_NATIVE_CURRENCY,
-  BB_BTC
+  BB_BTC,
+  BCH_BSC,
+  DOGE_BSC,
+  FLOKI_BSC,
+  PEPE_BSC
 } from './tokens'
 
 type ChainTokenList = {
@@ -134,7 +138,7 @@ export const COMMON_BASES: ChainCurrencyList = {
   [ChainId.CELO]: [nativeOnChain(ChainId.CELO), CEUR_CELO, CUSD_CELO, PORTAL_ETH_CELO, PORTAL_USDC_CELO, WBTC_CELO],
   [ChainId.CELO_ALFAJORES]: [nativeOnChain(ChainId.CELO_ALFAJORES), CUSD_CELO_ALFAJORES, CEUR_CELO_ALFAJORES],
 
-  [ChainId.BNB]: [nativeOnChain(ChainId.BNB), DAI_BSC, USDC_BSC, USDT_BSC, ETH_BSC, BTC_BSC, BUSD_BSC],
+  [ChainId.BNB]: [nativeOnChain(ChainId.BNB), DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC,FLOKI_BSC, PEPE_BSC],
 
   [ChainId.AVALANCHE]: [
     nativeOnChain(ChainId.AVALANCHE),
@@ -221,8 +225,56 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       fee: 0,
     }
 
-
+   
     
   ],
+  [ChainId.BNB]: [
+      {
+        tokenA: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
+        tokenB: "0x55d398326f99059fF775485246999027B3197955", // USDT
+        fee: 0,
+      },
+      {
+        tokenA: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
+        tokenB: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB
+        fee: 0,
+      },
+      {
+        tokenA: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
+        tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
+        fee: 0,
+      },
+      {
+        tokenA: "0x55d398326f99059fF775485246999027B3197955", // USDT
+        tokenB: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB
+        fee: 0,
+      },
+      {
+        tokenA: "0x55d398326f99059fF775485246999027B3197955", // USDT
+        tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
+        fee: 0,
+      },
+      {
+        tokenA: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB
+        tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
+        fee: 0,
+      },
+  
+      {
+        tokenA: "BNB", // WBNB
+        tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
+        fee: 0,
+      },
+      {
+        tokenA: "BNB", // WBNB
+        tokenB: "0x55d398326f99059fF775485246999027B3197955", // USDT
+        fee: 0,
+      },
+      {
+        tokenA: "BNB", // WBNB
+        tokenB: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
+        fee: 0,
+      },
+    ]
 
 }

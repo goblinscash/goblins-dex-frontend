@@ -9,7 +9,7 @@ const CHAIN_SUBGRAPH_URL: Record<number, string> = {
   [ChainId.OPTIMISM]: 'https://api.thegraph.com/subgraphs/name/ianlapham/optimism-post-regenesis?source=uniswap',
   [ChainId.POLYGON]: 'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v3-polygon?source=uniswap',
   [ChainId.CELO]: 'https://api.thegraph.com/subgraphs/name/jesse-sawa/uniswap-celo?source=uniswap',
-  [ChainId.BNB]: 'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v3-bsc?source=uniswap',
+  [ChainId.BNB]: 'https://graph-bsc.goblins.cash/subgraphs/name/goblins/bsc-subgraph-v3',
   [ChainId.AVALANCHE]: 'https://api.thegraph.com/subgraphs/name/lynnshaoyu/uniswap-v3-avax?source=uniswap',
   [ChainId.BASE]: 'https://api.studio.thegraph.com/query/48211/uniswap-v3-base/version/latest?source=uniswap',
   [ChainId.SMARTBCH]: 'https://graph.dfd.cash/subgraphs/name/goblins/subgraph-v3',
@@ -21,7 +21,7 @@ const CHAIN_BLOCK_SUBGRAPH_URL: Record<number, string> = {
   [ChainId.OPTIMISM]: 'https://api.thegraph.com/subgraphs/name/ianlapham/uni-testing-subgraph?source=uniswap',
   [ChainId.POLYGON]: 'https://api.thegraph.com/subgraphs/name/ianlapham/polygon-blocks?source=uniswap',
   [ChainId.CELO]: 'https://api.thegraph.com/subgraphs/name/jesse-sawa/celo-blocks?source=uniswap',
-  [ChainId.BNB]: 'https://api.thegraph.com/subgraphs/name/wombat-exchange/bnb-chain-block?source=uniswap',
+  [ChainId.BNB]: 'https://graph-bsc.goblins.cash/subgraphs/name/goblins/bsc-subgraph-v3',
   [ChainId.AVALANCHE]: 'https://api.thegraph.com/subgraphs/name/lynnshaoyu/avalanche-blocks?source=uniswap',
   [ChainId.BASE]: 'https://api.studio.thegraph.com/query/48211/base-blocks/version/latest?source=uniswap',
 }

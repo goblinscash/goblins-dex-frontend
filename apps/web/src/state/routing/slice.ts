@@ -192,10 +192,12 @@ export const routingApi = createApi({
           const { getRouter, getClientSideQuote } = await import('lib/hooks/routing/clientSideSmartOrderRouter')
           const router = getRouter(args.tokenInChainId)
           let quoteResult = await getClientSideQuote(args, router, CLIENT_PARAMS)
+
+
+
           let matchedPair = SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId] ? findPair(args.tokenInAddress, args.tokenOutAddress, SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId]) : 0
           if (quoteResult.data) {
             quoteResult.data.quote["portionBips"] = matchedPair ? matchedPair.fee : quoteResult.data.quote["portionBips"];
-         
           }
           if (quoteResult.state === QuoteState.SUCCESS) {
             const trade = await transformQuoteToTrade(args, quoteResult.data, QuoteMethod.CLIENT_SIDE_FALLBACK);

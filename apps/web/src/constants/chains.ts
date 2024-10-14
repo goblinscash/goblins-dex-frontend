@@ -51,7 +51,7 @@ export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [
   // ChainId.CELO,
   // ChainId.OPTIMISM,
   // ChainId.ARBITRUM_ONE,
-  // ChainId.BNB,
+  ChainId.BNB,
   // ChainId.AVALANCHE,
   // ChainId.BASE,
   ChainId.SMARTBCH,
@@ -82,7 +82,7 @@ export const L1_CHAIN_IDS = [
   // ChainId.POLYGON_MUMBAI,
   // ChainId.CELO,
   // ChainId.CELO_ALFAJORES,
-  // ChainId.BNB,
+  ChainId.BNB,
   // ChainId.AVALANCHE,
 ] as const
 
@@ -98,6 +98,7 @@ export const L2_CHAIN_IDS = [
   // ChainId.OPTIMISM,
   // ChainId.OPTIMISM_GOERLI,
   ChainId.SMARTBCH,
+  ChainId.BNB,
   // ChainId.BASE,
 ] as const
 
