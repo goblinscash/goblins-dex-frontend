@@ -12,7 +12,7 @@ const QUICKNODE_ARBITRUM_RPC_URL = process.env.REACT_APP_QUICKNODE_ARBITRUM_RPC_
 if (typeof QUICKNODE_ARBITRUM_RPC_URL === 'undefined') {
   throw new Error(`REACT_APP_QUICKNODE_ARBITRUM_RPC_URL must be a defined environment variable`)
 }
-const QUICKNODE_BNB_RPC_URL = "https://rough-sleek-hill.bsc.quiknode.pro/413cc98cbc776cda8fdf1d0f47003583ff73d9bf"
+const QUICKNODE_BNB_RPC_URL = "https://bsc-dataseed.binance.org"
 if (typeof QUICKNODE_BNB_RPC_URL === 'undefined') {
   throw new Error(`REACT_APP_BNB_RPC_URL must be a defined environment variable`)
 }
