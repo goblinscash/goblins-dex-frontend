@@ -349,7 +349,8 @@ const Dashboard = () => {
 
   return (
     <>
-      {incentiveForm &&
+      {
+        incentiveForm &&
         createPortal(
           <CreateIncentivePop
             incentiveForm={incentiveForm}
@@ -357,7 +358,8 @@ const Dashboard = () => {
             load={load}
           />,
           document.body
-        )}
+        )
+      }
 
       {confirm.isOpen &&
         createPortal(
