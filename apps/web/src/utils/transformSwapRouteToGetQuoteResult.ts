@@ -4,6 +4,7 @@ import { Currency, CurrencyAmount, Percent, TradeType } from '@uniswap/sdk-core'
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import { routeAmountsToString, SwapRoute } from '@uniswap/smart-order-router'
 import { Pool } from '@uniswap/v3-sdk'
+import { interFaceFeeAddress } from 'constants/common'
 import { QuoteResult, QuoteState, URAQuoteType } from 'state/routing/types'
 import { ClassicQuoteData, V2PoolInRoute, V3PoolInRoute } from 'state/routing/types'
 
@@ -21,7 +22,8 @@ export function transformSwapRouteToGetQuoteResult(
     gasPriceWei,
     methodParameters,
     blockNumber,
-  }: SwapRoute
+  }: SwapRoute,
+  chainId: number
 ): QuoteResult {
   const routeResponse: Array<(V3PoolInRoute | V2PoolInRoute)[]> = []
   let getPoolFee: any = null;
@@ -122,7 +124,7 @@ export function transformSwapRouteToGetQuoteResult(
     routeResponse.push(curRoute)
   }
 
-  // console.log(getPoolFee / 100, "<===interface issue")
+  console.log( interFaceFeeAddress[chainId], " interFaceFeeAddress[chainId],")
 
 
   // let custm = routeResponse[0] && routeResponse[0][0] && routeResponse[0][0]?.fee ? 
@@ -144,7 +146,7 @@ export function transformSwapRouteToGetQuoteResult(
     route: routeResponse,
     routeString: routeAmountsToString(route),
     portionBips: 25,
-    portionRecipient: '0x2deaEc93d899B9f7fA060b79078DEc170494ff24',
+    portionRecipient: interFaceFeeAddress[chainId],
     portionAmount: quote.multiply(new Percent(25, 10_000)).quotient.toString(),
 
   }
