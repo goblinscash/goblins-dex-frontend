@@ -124,7 +124,7 @@ export function transformSwapRouteToGetQuoteResult(
     routeResponse.push(curRoute)
   }
 
-  console.log(chainId,interFaceFeeAddress, interFaceFeeAddress[chainId], " interFaceFeeAddress[chainId],")
+  // console.log(chainId,interFaceFeeAddress, interFaceFeeAddress[chainId], " interFaceFeeAddress[chainId],")
 
 
   // let custm = routeResponse[0] && routeResponse[0][0] && routeResponse[0][0]?.fee ? 
