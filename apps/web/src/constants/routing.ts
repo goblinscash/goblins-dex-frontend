@@ -52,7 +52,8 @@ import {
   WETH_POLYGON,
   WETH_POLYGON_MUMBAI,
   WRAPPED_NATIVE_CURRENCY,
-  BB_BTC
+  BB_BTC,
+  WDOGE_BCH
 } from './tokens'
 
 type ChainTokenList = {
@@ -143,7 +144,7 @@ export const COMMON_BASES: ChainCurrencyList = {
     USDT_AVALANCHE,
     WETH_AVALANCHE,
   ],
-  [ChainId.SMARTBCH]: [nativeOnChain(ChainId.SMARTBCH), WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, USDT_SBCH, BC_BCH, GOB, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC ],
+  [ChainId.SMARTBCH]: [nativeOnChain(ChainId.SMARTBCH), WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, USDT_SBCH, BC_BCH, GOB, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC, WDOGE_BCH ],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
