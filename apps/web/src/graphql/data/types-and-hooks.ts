@@ -1785,6 +1785,7 @@ export const GlobalChartDocument = gql`
 
         orderBy: date
         orderDirection: asc
+        where: { date_not_in:[1728000000,1728172800,1728086400  ]}
       ) {
         id
         date

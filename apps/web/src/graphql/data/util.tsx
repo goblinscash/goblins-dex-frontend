@@ -212,6 +212,7 @@ export function logSentryErrorForUnsupportedChain({
 export const BACKEND_SUPPORTED_CHAINS = [
   // Chain.Ethereum,
   Chain.Smartbch,
+  Chain.Bnb,
 ] as const
 export const BACKEND_NOT_YET_SUPPORTED_CHAIN_IDS = [ChainId.AVALANCHE] as const
 

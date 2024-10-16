@@ -5,6 +5,7 @@ import loader from "assets/farmingAssets/Images/loading.gif";
 import sortIcon from "assets/farmingAssets/Images/sort.svg";
 
 import { getSymbols } from "helpers/constants";
+import { toFixedCustm } from "helpers/utils";
 
 function MyFarm({
   wallet,
@@ -266,7 +267,7 @@ function MyFarm({
                   >
                     <p className={` m-0  capitalize`}>
                       {" "}
-                      {item.reward + " " + item.rewardSymbol}{" "}
+                      {toFixedCustm(item?.rewardInfo?.reward) + " " + item.rewardSymbol}{" "}
                     </p>
                   </td>
                   <td

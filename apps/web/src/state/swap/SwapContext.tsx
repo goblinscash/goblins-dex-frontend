@@ -112,7 +112,6 @@ export function SwapAndLimitContextProvider({
 
   const getInitialCurrencyState = useCallback(() => {
 
-    console.log("getInitialCurrencyState call")
     return {
       inputCurrency: initialInputCurrency,
       outputCurrency: initialOutputCurrency,
