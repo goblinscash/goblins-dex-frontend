@@ -79,17 +79,13 @@ export const PageTabs = () => {
       <MenuItem href="/swap" isActive={pathname.startsWith('/swap')}>
         <Trans>Swap</Trans>
       </MenuItem>
-
-
-
-
       {!shouldDisableNFTRoutes && (
         <MenuItem dataTestId="nft-nav" href="/nfts" isActive={isNftPage}>
           <Trans>NFTs</Trans>
         </MenuItem>
       )}
       {
-        connectedChainId === 10000
+        (connectedChainId === 10000 || connectedChainId === 56)
         &&
 
         <>  <MenuItem href="/staking" >
@@ -100,8 +96,6 @@ export const PageTabs = () => {
           </MenuItem>
         </>}
 
-
-        
       <Box display={{ sm: 'flex', lg: 'none', xxl: 'flex' }} width="full">
         <MenuItem href="/pools" dataTestId="pool-nav-link" isActive={isPoolActive}>
           <Trans>Pools</Trans>

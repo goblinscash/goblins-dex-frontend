@@ -24,6 +24,12 @@ function CommonTable({
 }) {
   let getCurrentUnix = moment().unix();
 
+
+  // filtering the data which have same pool and rewardtoken address
+ const newData = incentiveIds.filter(item => item.key.rewardToken !== item.key.pool);
+
+  // console.log(newData, "1111111",)
+
   return (
     <div className="overflow-x-auto">
       <table
@@ -207,7 +213,7 @@ function CommonTable({
                 </div>
               </td>
             </tr>
-          ) : !incentiveIds.length ? (
+          ) : !newData.length ? (
             <tr>
               <td
                 className="py-3 px-6 text-left border-b border-gray-600 transparent"
@@ -225,9 +231,9 @@ function CommonTable({
               </td>
             </tr>
           ) : (
-            incentiveIds &&
-            incentiveIds?.length > 0 &&
-            incentiveIds.map((item, key) => (
+            newData &&
+            newData?.length > 0 &&
+            newData.map((item, key) => (
               <tr
                 key={key}
                 className="border-b border-gray-200 hover:bg-gray-100 cursor-pointer"

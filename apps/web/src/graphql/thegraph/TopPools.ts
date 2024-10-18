@@ -47,6 +47,9 @@ export function useTopPools(
   orderBy: Pool_OrderBy = Pool_OrderBy.TotalValueLockedUsd,
   orderDirection: OrderDirection = OrderDirection.Desc
 ) {
+
+
+  console.log(chainId, orderBy,orderDirection, "<======props")
   const apolloClient = chainToApolloClient[chainId || ChainId.MAINNET]
   const { loading, error, data } = useTopPoolsQuery({
     client: apolloClient,

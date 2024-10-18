@@ -120,13 +120,14 @@ body.newDesign textarea.form-control {
   height: auto;
 }
 
-body.newDesign .iconWithText .icn.absolute {
+ .iconWithText .icn.absolute {
   top: 50%;
   transform: translateY(-50%);
+  position: absolute;
 }
 
 body.newDesign .cstmModal {
-  z-index: 999;
+  z-index: 9999;
 }
 
 body.newDesign .cstmModal .modalDialog {

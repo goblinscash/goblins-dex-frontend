@@ -350,17 +350,17 @@ export function ExploreChartsSection() {
         <div className='tabContainer'>
           {
             chainId === 10000
-&&
-<div className='tabNav'>
+            &&
+            <div className='tabNav'>
 
 
-<button onClick={() => handleTab(1)} className={`${tab == 1 && "active"}`}>
-  Pool
-</button>
-<button onClick={() => handleTab(2)} className={`${tab == 2 && "active"}`}>
-  Staking
-</button>
-</div>
+              <button onClick={() => handleTab(1)} className={`${tab == 1 && "active"}`}>
+                Pool
+              </button>
+              <button onClick={() => handleTab(2)} className={`${tab == 2 && "active"}`}>
+                Staking
+              </button>
+            </div>
           }
           {/* <div className="tabContent">
            {tab == 1 ? <>TAb 1 Content</> : tab == 2 ? <>Tab 2 Content</> : <></>}

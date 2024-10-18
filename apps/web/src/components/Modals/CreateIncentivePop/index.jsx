@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -10,10 +10,12 @@ import styles from "./CreateIncentivePop.module.scss";
 import logo from "assets/farmingAssets/Images/logo.png";
 
 // Hooks and Utils
-import {useWallet} from "hooks/useWallet";
+import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 import { getCheckSumAddress } from "helpers/utils";
 import { updateFarm } from "state/action";
+import { TablePool, useTopPools } from 'graphql/thegraph/TopPools'
+
 
 const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
   const wallet = useWallet();
@@ -29,6 +31,44 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
     startDate: "",
     endDate: "",
   });
+  const [showSelect, setShowSelect] = useState(false);
+  // const { topPools, error } = useTopPools();
+
+  const { topPools, loading: subgraphLoading, error } = useTopPools(wallet.chainId, "totalValueLockedUSD", "desc")
+
+  console.log(topPools, "console.log(topPools)");
+
+
+  const addresses = [
+    '0x2f19229617f37abfc990c8f6952bee5c8d4c1797',
+    '0x544e355b3deb9f4ae47589095c969ffd36f0cfa5',
+    '0x79fee2ad196e0e11aa7391e92ff157315edef2a2',
+    '0x05a85e5323163eadfcc76bec139ea370aaab031d',
+    '0xa75201028fa4252cafbd52745d9bc5995f3f91e3',
+    '0xc8ef2c0d978c81e16372209d424b10aa53ecae01',
+    '0x0df01f541257c4f77a2899ed9e04ce1478cecce5'
+  ];
+
+  // const address = useMemo(() => {
+  //   return topPools.map((pool) => ({
+  //     address: pool.hash,
+  //     token0: pool.token0.symbol,
+  //     token1: pool.token1.symbol,
+  //   }));
+  // }, [topPools]);
+
+  const handleSelectChange = (e) => {
+    const value = e.target.value;
+    setFields((prev) => ({
+      ...prev,
+      rewardAddress: value,
+    }));
+    setShowSelect(false);
+  };
+
+  const toggleDropdown = () => {
+    setShowSelect((prev) => !prev);
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -137,7 +177,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
       <div
         className={`${styles.CreateIncentivePop} fixed inset-0 flex items-center justify-center cstmModal`}
       >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 opacity-50" style={{ background: "#000", opacity: .5 }}></div>
         <div
           className={`${styles.modalDialog} modalDialog p-2 mx-auto rounded-lg z-10`}
         >
@@ -199,6 +239,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                       >
                         Farm
                       </label>
+                      {/* ------------------------------------------------------------ */}
                       <input
                         type="text"
                         placeholder="Farm Address"
@@ -208,6 +249,26 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                         onChange={handleChange}
                         required
                       />
+                      <button
+                        type="button"
+                        className="absolute icn right-2 top-1/2 transform -translate-y-1/2 text-gray-500" // Positioned inside input
+                        style={{ right: 5, zIndex: 999, top: "50%" }}
+                        onClick={toggleDropdown}
+                      >
+                        ▼
+                      </button>
+                      {showSelect && (
+                        <select
+                          className="absolute left-0 mt-2 form-control rounded w-full"
+                          onChange={handleSelectChange}
+                          value={fields.incentiveAddress}
+                        >
+                          <option value="">Select Address</option>
+                          {addresses.map((address) => (
+                            <option key={address} value={address}>{address}</option>
+                          ))}
+                        </select>
+                      )}
                     </div>
                   </div>
                   <div className=" col-span-12">
@@ -246,9 +307,10 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                     >
                       Rewards Token and Amount
                     </label>
+
                     <div className="grid gap-3 grid-cols-12">
-                      <div className=" col-span-8">
-                        <div className="relative labelInput">
+                      <div className="col-span-8">
+                        <div className="relative labelInput iconWithText">
                           <input
                             type="text"
                             placeholder="Address"
@@ -260,7 +322,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                           />
                         </div>
                       </div>
-                      <div className=" col-span-4">
+                      <div className="col-span-4">
                         <div className="relative labelInput">
                           <input
                             type="number"
@@ -274,6 +336,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                         </div>
                       </div>
                     </div>
+
                   </div>
                   <div className=" col-span-12">
                     <div className="relative labelInput">

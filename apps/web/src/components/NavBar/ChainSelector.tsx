@@ -63,8 +63,8 @@ function useWalletSupportedChains(): ChainId[] {
 
 export const ChainSelector = ({ leftAlign }: { leftAlign?: boolean }) => {
   const { chainId } = useWeb3React()
-  // const chainId = 10001
 
+  // const chainId = connectedChainId === 1 ? 10000 : connectedChainId
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const isMobile = useIsMobile()
 
