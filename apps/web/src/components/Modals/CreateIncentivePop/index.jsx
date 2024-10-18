@@ -32,39 +32,46 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
     endDate: "",
   });
   const [showSelect, setShowSelect] = useState(false);
-  // const { topPools, error } = useTopPools();
 
   const { topPools, loading: subgraphLoading, error } = useTopPools(wallet.chainId, "totalValueLockedUSD", "desc")
 
-  console.log(topPools, "console.log(topPools)");
+  const top7Pools = Array.isArray(topPools) ? topPools.slice(0, 7) : [];
 
+  const extractedData = top7Pools.map(pool => ({
+    hash: pool?.hash,
+    token0Symbol: pool?.token0?.symbol,
+    token1Symbol: pool?.token1?.symbol,
+    feeTier: pool?.feeTier
+  }));
 
-  const addresses = [
-    '0x2f19229617f37abfc990c8f6952bee5c8d4c1797',
-    '0x544e355b3deb9f4ae47589095c969ffd36f0cfa5',
-    '0x79fee2ad196e0e11aa7391e92ff157315edef2a2',
-    '0x05a85e5323163eadfcc76bec139ea370aaab031d',
-    '0xa75201028fa4252cafbd52745d9bc5995f3f91e3',
-    '0xc8ef2c0d978c81e16372209d424b10aa53ecae01',
-    '0x0df01f541257c4f77a2899ed9e04ce1478cecce5'
-  ];
+  console.log(extractedData, "***********");
 
-  // const address = useMemo(() => {
-  //   return topPools.map((pool) => ({
-  //     address: pool.hash,
-  //     token0: pool.token0.symbol,
-  //     token1: pool.token1.symbol,
-  //   }));
-  // }, [topPools]);
+  const addresses = extractedData.map(pool => ({
+    hash: pool.hash,
+    name: `${pool.token0Symbol} / ${pool.token1Symbol}`,
+    feeTier: (pool.feeTier / 10000) + '%'
+  }));
 
   const handleSelectChange = (e) => {
-    const value = e.target.value;
-    setFields((prev) => ({
-      ...prev,
-      rewardAddress: value,
-    }));
+    const selectedHash = e.target.value;
+
+    // Finding the selected pool by hash
+    const selectedPool = addresses.find(address => address.hash === selectedHash);
+
+    if (selectedPool) {
+        setFields((prev) => ({
+            ...prev,
+            incentiveAddress: `${selectedPool.name} (Address: ${selectedPool.hash}, Fee Tier: ${selectedPool.feeTier})`, // Update to show name, hash, and fee tier
+            // rewardAddress: selectedHash,
+        }));
+    } else {
+        console.log("Hash not found in addresses."); // If address is not found
+    }
+
     setShowSelect(false);
-  };
+};
+
+
 
   const toggleDropdown = () => {
     setShowSelect((prev) => !prev);
@@ -114,63 +121,61 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
     const momentDate = moment(date).unix();
     return momentDate;
   };
-
+ 
   const handleSubmit = async (e) => {
     try {
-      e.preventDefault();
-      if (validateSubmit()) return;
-      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      setLoading(true);
+        e.preventDefault();
+        if (validateSubmit()) return;
 
-      let startTimeStamp = convertToTimestamp(fields.startDate);
-      let endTimeStamp = convertToTimestamp(fields.endDate);
+        const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+        setLoading(true);
 
-      await web3.createIncentive(
-        [
-          fields.rewardAddress,
-          fields.incentiveAddress,
-          startTimeStamp,
-          endTimeStamp,
-          fields.refundeeAddress,
-        ],
-        fields.rewardAmount,
-        Number(fields.minimumWidth) * 100,
-        fields.rewardAddress
-      );
+        let startTimeStamp = convertToTimestamp(fields.startDate);
+        let endTimeStamp = convertToTimestamp(fields.endDate);
 
-      dispatch(
-        updateFarm({
-          data: {
-            chainId: wallet.chainId,
-            type: "Create", //enum
-            createdData: {
-              rewardToken: fields.rewardAddress,
-              pool: fields.incentiveAddress,
-              startTime: startTimeStamp,
+        await web3.createIncentive(
+            [
+                fields.rewardAddress,
+                startTimeStamp,
+                endTimeStamp,
+                fields.refundeeAddress,
+            ],
+            fields.rewardAmount,
+            Number(fields.minimumWidth) * 100,
+            fields.rewardAddress
+        );
 
-              endTime: endTimeStamp,
-              refundee: fields.refundeeAddress,
-              minWidth: Number(fields.minimumWidth) * 100,
-              reward: fields.rewardAmount,
-            },
-          },
-        })
-      );
+        // Dispatch the update for the farm
+        dispatch(
+            updateFarm({
+                data: {
+                    chainId: wallet.chainId,
+                    type: "Create",
+                    createdData: {
+                        rewardToken: fields.rewardAddress,
+                        pool: fields.incentiveAddress,
+                        startTime: startTimeStamp,
+                        endTime: endTimeStamp,
+                        refundee: fields.refundeeAddress,
+                        minWidth: Number(fields.minimumWidth) * 100,
+                        reward: fields.rewardAmount,
+                    },
+                },
+            })
+        );
 
-      load();
-      setLoading(false);
-
-      handleIncentiveForm();
-      toast.success(
-        "Farm created successfully, some time it will take some seconds for reflect in list!"
-      );
+        load();
+        setLoading(false);
+        handleIncentiveForm();
+        toast.success("Farm created successfully, some time it will take some seconds for reflect in list!");
     } catch (error) {
-      setLoading(false);
-
-      toast.error(error);
-      console.log(error, "<<==err");
+        setLoading(false);
+        toast.error(error);
+        console.log(error, "<<==err");
     }
-  };
+};
+
+
 
   return (
     <>
@@ -249,6 +254,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                         onChange={handleChange}
                         required
                       />
+
                       <button
                         type="button"
                         className="absolute icn right-2 top-1/2 transform -translate-y-1/2 text-gray-500" // Positioned inside input
@@ -264,10 +270,13 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                           value={fields.incentiveAddress}
                         >
                           <option value="">Select Address</option>
-                          {addresses.map((address) => (
-                            <option key={address} value={address}>{address}</option>
+                          {addresses.map(({ hash, name, feeTier }) => (
+                            <option key={hash} value={hash}>
+                              {`${name} (Fee Tier: ${feeTier})`} {/* Display token names and feeTier */}
+                            </option>
                           ))}
                         </select>
+
                       )}
                     </div>
                   </div>

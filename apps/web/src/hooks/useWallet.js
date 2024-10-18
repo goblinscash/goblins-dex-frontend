@@ -52,9 +52,9 @@ export const useWallet = () => {
           dispatch(setCurrentNetwork(findChain));
         } else {
           dispatch(setCurrentNetwork(null));
-          toast.error(
-            "This platform support only BNB, SmartBCH Please switch to that chain!"
-          );
+          // toast.error(
+          //   "This platform support only BNB, SmartBCH Please switch to that chain!"
+          // );
         }
       }
     } catch (error) {}

@@ -85,16 +85,18 @@ export const PageTabs = () => {
         </MenuItem>
       )}
       {
-        (connectedChainId === 10000 || connectedChainId === 56)
-        &&
 
-        <>  <MenuItem href="/staking" >
-          <Trans>Staking</Trans>
-        </MenuItem>
-          <MenuItem href="/farming">
-            <Trans>Farming</Trans>
+        !connectedChainId || (connectedChainId === 10000 || connectedChainId === 56)
+          ?
+
+          <>  <MenuItem href="/staking" >
+            <Trans>Staking</Trans>
           </MenuItem>
-        </>}
+            <MenuItem href="/farming">
+              <Trans>Farming</Trans>
+            </MenuItem>
+          </> : ""}
+
 
       <Box display={{ sm: 'flex', lg: 'none', xxl: 'flex' }} width="full">
         <MenuItem href="/pools" dataTestId="pool-nav-link" isActive={isPoolActive}>

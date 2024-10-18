@@ -19,9 +19,6 @@ import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import { ThemedText } from 'theme/components'
-
-
-
 import { useExploreParams } from './redirects'
 import RecentTransactions from './tables/RecentTransactions'
 import { getStakingtransaction } from 'state/action'
@@ -83,14 +80,21 @@ const NavWrapper = styled.div<{ isInfoExplorePageEnabled: boolean }>`
     `};
 `
 const TabBar = styled(AutoRow)`
-  gap: 24px;
+  gap: 10px;
+  
   @media screen and (max-width: ${({ theme }) => theme.breakpoint.md}px) {
     gap: 16px;
   }
 `
 const TabItem = styled(ThemedText.HeadlineMedium) <{ active?: boolean }>`
   align-items: center;
-  color: ${({ theme, active }) => (active ? "green" : theme.neutral2)};
+  background: rgb(1, 27, 28);
+  font-size: 14px !important;
+  padding: 10px 15px;
+  min-width: 150px;
+  border-radius: 5px;
+  background: ${({ theme, active }) => (active ? "#00ff4e" : "#001b1c")};
+  color: ${({ theme, active }) => (active ? "#001b1c" : "#fff")};
   cursor: pointer;
   transition: ${({ theme }) => `${theme.transition.duration.medium} ${theme.transition.timing.ease} color`};
 `

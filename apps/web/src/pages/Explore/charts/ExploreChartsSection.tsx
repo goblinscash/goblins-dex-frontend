@@ -66,11 +66,6 @@ const TabNav = styled(RowBetween)`
 
 
 
-
-
-
-
-
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
   border-radius: 12px;
   font-size: 16px;
@@ -179,7 +174,7 @@ function VolumeChartSection({ data }: { data: StackedBarsData[] }) {
   )
 }
 
-function TVLChartSection({ data }: { data: StackedLineData[] }) {
+function TVLChartSection({ data, totalTvl, title }: { data: StackedLineData[], totalTvl: any, title:string }) {
   const theme = useTheme()
   const params = useMemo(
     () => ({
@@ -193,13 +188,16 @@ function TVLChartSection({ data }: { data: StackedLineData[] }) {
   const isSmallScreen = !useScreenSize()['sm']
   if (isSmallScreen) {
     const currentTVL = lastEntry?.values.reduce((acc, curr) => acc + curr, 0)
-    return <MinimalStatDisplay title={<Trans>Goblins TVL</Trans>} value={currentTVL} time={<Trans>All time</Trans>} />
+    return <MinimalStatDisplay title={<>Goblins TVL</>} value={currentTVL} time={<Trans>All time</Trans>} />
   }
 
   return (
     <SectionContainer>
+
+      {totalTvl ?
+        <MinimalStatDisplay title={<>Goblins TVL</>} value={totalTvl} time={<Trans>All time</Trans>} />:""}
       <SectionTitle>
-        <Trans>Goblins TVL</Trans>
+        {title}
       </SectionTitle>
       <StyledChart Model={TVLChartModel} params={params}>
         {(crosshairData) => (
@@ -217,7 +215,7 @@ function TVLChartSection({ data }: { data: StackedLineData[] }) {
   )
 }
 
-function MinimalStatDisplay({ title, value, time }: { title: ReactNode; value: number; time: ReactNode }) {
+function MinimalStatDisplay({ title, value, time }: { title: ReactNode; value: number; time?: ReactNode }) {
   const { formatFiatPrice } = useFormatter()
 
   return (
@@ -342,12 +340,37 @@ export function ExploreChartsSection() {
       time: data.date,
       values: [Number(data.tvlUSD)],
     }))
-    : []) as unknown as StackedLineData[], [data])
+    : []) as unknown as StackedLineData[], [data]);
+
+
+
+  const getMaxTimestampObject = (arr: any) => {
+    return arr.reduce((max: any, obj: any) => (obj.time > max.time ? obj : max));
+  };
+
+
+  let getTotalTVL = useMemo(() => {
+    if (makeDataForPoolTVL && Array.isArray(makeDataForPoolTVL) && makeDataForPoolTVL.length > 0 && makeDataForTVL && Array.isArray(makeDataForTVL) && makeDataForTVL.length > 0) {
+
+      const highestFromArray1 = getMaxTimestampObject(makeDataForPoolTVL);
+      const highestFromArray2 = getMaxTimestampObject(makeDataForTVL);
+
+      return Number(highestFromArray1.values[0]) + Number(highestFromArray2.values[0]);
+    }
+
+  }, [makeDataForPoolTVL, makeDataForTVL])
+
+
+  console.log(getTotalTVL, "<====getTotalTVL")
+
+
 
 
   const handleTab = (key: number) => {
     setTab(key)
   }
+
+  console.log(makeDataForTVL, makeDataForPoolTVL, "<====makeDataForPoolTVL")
 
   return (
     <>
@@ -373,7 +396,7 @@ export function ExploreChartsSection() {
         </div>
       </ChartsContainer>
       <ChartsContainer>
-        <TVLChartSection data={tab == 1 ? makeDataForPoolTVL || HARDCODED_TVL_DATA : makeDataForTVL || HARDCODED_TVL_DATA} />
+        <TVLChartSection data={tab == 1 ? makeDataForPoolTVL || HARDCODED_TVL_DATA : makeDataForTVL || HARDCODED_TVL_DATA} totalTvl={chainId == 10000 ? getTotalTVL : 0} title={tab == 1 ? "Pool TVL" : "Staking TVL"} />
         <VolumeChartSection data={makeDataForVolume || HARDCODED_VOLUME_DATA} />
       </ChartsContainer>
     </>

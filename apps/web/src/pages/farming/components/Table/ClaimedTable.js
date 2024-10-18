@@ -15,7 +15,6 @@ function ClaimTable({
  
 }) {
 
-// console.log(incentiveIds, "2222222222")
   return (
     <div className="overflow-x-auto">
       <table

@@ -10,7 +10,10 @@ import Icon3 from "assets/farmingAssets/icons/0xbb2A35cc3e3dDb679fe30A82051633bC
 import Icon5 from "assets/farmingAssets/icons/0xbbb3700F33fCb64437Dc28A7Beb6b21f5cC76FB9.png";
 import Icon6 from "assets/farmingAssets/icons/0xBc2F884680c95A02cea099dA2F524b366d9028Ba.png";
 import Icon7 from "assets/farmingAssets/icons/0xBc9bD8DDe6C5a8e1CBE293356E02f5984693b195.png";
-import Icon8 from "assets/farmingAssets/icons/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf.png"
+import Icon8 from "assets/farmingAssets/icons/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf.png";
+import Icon9 from "assets/farmingAssets/icons/0x55d398326f99059fF775485246999027B3197955.png";
+import Icon10 from "assets/farmingAssets/icons/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c.png";
+
 
 
 
@@ -45,8 +48,29 @@ export const cryptoData = [
     blockExplorerUrls: ["https://smartbch.org/"],
     nativeCurrency: { name: "Bitcoin Cash", symbol: "BCH", decimals: 18 },
   },
+  {
+    label: "BNB Chain",
+    symbol: "BNB",
+    name: "BNB Chain",
+    type: "BNB",
+    chainName: "Binance Smart Chain",
+    rpcUrls: [
+      "https://bsc-dataseed.binance.org/",
+      "https://bsc-dataseed1.defibit.io/",
+      "https://bsc-dataseed1.ninicoin.io/"
+    ],
+    chainId: 56,
+    rpcUrl: "https://bsc-dataseed.binance.org/",
+    contractAddress: process.env.REACT_APP_BNB_STAKING_CONTRACT,
+    nftManagerContractAddress: process.env.REACT_APP_BNB_NFT_MANAGER_CONTRACT,
+    stakeContractAddress: process.env.REACT_APP_BNB_TOKEN_STAKING_CONTRACT,
+    migrationAddress: process.env.REACT_APP_BNB_MIGRATION_STAKING_CONTRACT,
+    compoundAddress: process.env.REACT_APP_BNB_COMPOUND_CONTRACT,
+    explorerLink: "https://bscscan.com/",
+    blockExplorerUrls: ["https://bscscan.com/"],
+    nativeCurrency: { name: "Binance Coin", symbol: "BNB", decimals: 18 },
+  }  
 ];
-
 export const graphQLUrl = {
   10000: "https://graph.dfd.cash/subgraphs/name/v3stakerminwidths",
   56: "https://api.studio.thegraph.com/query/78445/v3stakerminwidths/0.0.5",

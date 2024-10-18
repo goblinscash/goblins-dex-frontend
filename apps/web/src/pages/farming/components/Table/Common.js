@@ -28,7 +28,6 @@ function CommonTable({
   // filtering the data which have same pool and rewardtoken address
  const newData = incentiveIds.filter(item => item.key.rewardToken !== item.key.pool);
 
-  // console.log(newData, "1111111",)
 
   return (
     <div className="overflow-x-auto">
@@ -177,7 +176,7 @@ function CommonTable({
               <td
                 className="py-3 px-6 text-left border-b border-gray-600 transparent"
                 style={{ background: "#002628" }}
-                colSpan={6}
+                colSpan={8}
               >
                 <div
                   className="text-center flex items-center justify-center"

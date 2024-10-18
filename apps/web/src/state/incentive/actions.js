@@ -5,8 +5,10 @@ import { post } from "helpers/api_helper";
 
 
 export const farmList = createAsyncThunk("farmList", async (payload, Thunk) => {
+  console.log(payload.chainId, "payload")
   try {
     let response = await post(URL.FARM_LIST, payload);
+    console.log(response, "+++++++++++++++++++++++")
     return response.data;
   } catch (error) {
     callback && callback(error);

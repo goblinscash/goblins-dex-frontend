@@ -145,7 +145,6 @@ export function Table<Data extends RowData>({
                     </DataRow>
                   ))
                 : table.getRowModel().rows.map((row) => {
-                  console.log('Row data:', row.original);
                     const cells = row
                       .getVisibleCells()
                       .map((cell) => (
