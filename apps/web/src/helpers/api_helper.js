@@ -6,6 +6,10 @@ const axiosIcoApi = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL
 });
 
+
+
+
+
 axiosIcoApi.interceptors.response.use(
   (response) => response,
   (error) => Promise.reject(error)
