@@ -66,6 +66,11 @@ const TabNav = styled(RowBetween)`
 
 
 
+
+
+
+
+
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
   border-radius: 12px;
   font-size: 16px;
