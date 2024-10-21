@@ -128,6 +128,7 @@ body.newDesign textarea.form-control {
 
 body.newDesign .cstmModal {
   z-index: 9999;
+  /* z-index: 9; */
 }
 
 body.newDesign .cstmModal .modalDialog {
@@ -247,7 +248,8 @@ body.newDesign .active_nav {
 }
 
 body.newDesign .goblin__menu-portal {
-  z-index: 999 !important;
+  /* z-index: 999 !important; */
+  z-index: 9999 !important;
 }
 
 body.newDesign .whitespace-nowrap {
