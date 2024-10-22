@@ -144,6 +144,8 @@ class Web3Intraction {
           this.contractDetails?.contractAddress,
           true
         );
+
+        console.log(this.contractDetails, "<====contract")
         let tx;
         if (!tokenAddress) {
           return reject("Token Address not found!");

@@ -258,9 +258,9 @@ function CommonTable({
                           style={{ height: 30, width: 30 }}
                         />
                       ) : (
-                        item?.getPoolDetail?.token0Symbol + " / "
+                        item?.getPoolDetail?.token0Symbol + "/ "
                       )}
-
+                      {/* {console.log(item?.getPoolDetail?.token1Address, "***")} */}
                       {getSymbols[item?.getPoolDetail?.token1Address] ? (
                         <img
                           src={getSymbols[item?.getPoolDetail?.token1Address]}

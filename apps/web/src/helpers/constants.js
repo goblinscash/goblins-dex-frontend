@@ -13,6 +13,9 @@ import Icon7 from "assets/farmingAssets/icons/0xBc9bD8DDe6C5a8e1CBE293356E02f598
 import Icon8 from "assets/farmingAssets/icons/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf.png";
 import Icon9 from "assets/farmingAssets/icons/0x55d398326f99059fF775485246999027B3197955.png";
 import Icon_1 from "assets/farmingAssets/icons/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c.png";
+import Icon10 from "assets/farmingAssets/icons/0xfb5b838b6cfeedc2873ab27866079ac55363d37e.png";
+
+
 
 export const cryptoData = [
   {
@@ -141,8 +144,10 @@ export const getSymbols = {
   "0xbc2f884680c95a02cea099da2f524b366d9028ba": Icon6,
   "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195": Icon7,
   "0xbbef77270d6425e113e1e37f008cf141a9fc215a": Icon8,
-  // "0x55d398326f99059fF775485246999027B3197955": Icon9,
-  // "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c": Icon_1
+  "0x8ff795a6f4d97e7887c79bea79aba5cc76444adf": Icon9,
+  "0xfb5b838b6cfeedc2873ab27866079ac55363d37e": Icon10,
+  "0x55d398326f99059ff775485246999027b3197955": Icon9,
+  "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c": Icon_1
   
 };
 
