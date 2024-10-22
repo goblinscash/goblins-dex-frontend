@@ -36,15 +36,12 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
   const { topPools, loading: subgraphLoading, error } = useTopPools(wallet.chainId, "totalValueLockedUSD", "desc")
 
   const top7Pools = Array.isArray(topPools) ? topPools.slice(0, 7) : [];
-
   const extractedData = top7Pools.map(pool => ({
     hash: pool?.hash,
     token0Symbol: pool?.token0?.symbol,
     token1Symbol: pool?.token1?.symbol,
     feeTier: pool?.feeTier
   }));
-
-  console.log(extractedData, "***********");
 
   const addresses = extractedData.map(pool => ({
     hash: pool.hash,
@@ -57,21 +54,21 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
 
     // Finding the selected pool by hash
     const selectedPool = addresses.find(address => address.hash === selectedHash);
+    console.log(selectedPool, "selectedPool")
 
     if (selectedPool) {
-        setFields((prev) => ({
-            ...prev,
-            incentiveAddress: `${selectedPool.name} (Address: ${selectedPool.hash}, Fee Tier: ${selectedPool.feeTier})`, // Update to show name, hash, and fee tier
-            // rewardAddress: selectedHash,
-        }));
+      setFields((prev) => ({
+        ...prev,
+        incentiveAddress: selectedPool.hash,
+        // incentiveAddress: `${selectedPool.name} (Address: ${selectedPool.hash}, Fee Tier: ${selectedPool.feeTier})`,
+        // rewardAddress: selectedHash,
+      }));
     } else {
-        console.log("Hash not found in addresses."); // If address is not found
+      console.log("Hash not found in addresses.");
     }
 
     setShowSelect(false);
-};
-
-
+  };
 
   const toggleDropdown = () => {
     setShowSelect((prev) => !prev);
@@ -121,60 +118,60 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
     const momentDate = moment(date).unix();
     return momentDate;
   };
- 
+
   const handleSubmit = async (e) => {
     try {
-        e.preventDefault();
-        if (validateSubmit()) return;
+      e.preventDefault();
+      if (validateSubmit()) return;
 
-        const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-        setLoading(true);
+      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      setLoading(true);
 
-        let startTimeStamp = convertToTimestamp(fields.startDate);
-        let endTimeStamp = convertToTimestamp(fields.endDate);
+      let startTimeStamp = convertToTimestamp(fields.startDate);
+      let endTimeStamp = convertToTimestamp(fields.endDate);
 
-        await web3.createIncentive(
-            [
-                fields.rewardAddress,
-                startTimeStamp,
-                endTimeStamp,
-                fields.refundeeAddress,
-            ],
-            fields.rewardAmount,
-            Number(fields.minimumWidth) * 100,
-            fields.rewardAddress
-        );
+      await web3.createIncentive(
+        [
+          fields.rewardAddress,
+          fields.incentiveAddress,
+          startTimeStamp,
+          endTimeStamp,
+          fields.refundeeAddress,
+        ],
+        fields.rewardAmount,
+        Number(fields.minimumWidth) * 100,
+        fields.rewardAddress
+      );
 
-        // Dispatch the update for the farm
-        dispatch(
-            updateFarm({
-                data: {
-                    chainId: wallet.chainId,
-                    type: "Create",
-                    createdData: {
-                        rewardToken: fields.rewardAddress,
-                        pool: fields.incentiveAddress,
-                        startTime: startTimeStamp,
-                        endTime: endTimeStamp,
-                        refundee: fields.refundeeAddress,
-                        minWidth: Number(fields.minimumWidth) * 100,
-                        reward: fields.rewardAmount,
-                    },
-                },
-            })
-        );
+      // Dispatch the update for the farm
+      dispatch(
+        updateFarm({
+          data: {
+            chainId: wallet.chainId,
+            type: "Create",
+            createdData: {
+              rewardToken: fields.rewardAddress,
+              pool: fields.incentiveAddress,
+              startTime: startTimeStamp,
+              endTime: endTimeStamp,
+              refundee: fields.refundeeAddress,
+              minWidth: Number(fields.minimumWidth) * 100,
+              reward: fields.rewardAmount,
+            },
+          },
+        })
+      );
 
-        load();
-        setLoading(false);
-        handleIncentiveForm();
-        toast.success("Farm created successfully, some time it will take some seconds for reflect in list!");
+      load();
+      setLoading(false);
+      handleIncentiveForm();
+      toast.success("Farm created successfully, some time it will take some seconds for reflect in list!");
     } catch (error) {
-        setLoading(false);
-        toast.error(error);
-        console.log(error, "<<==err");
+      setLoading(false);
+      toast.error(error);
+      console.log(error, "<<==err");
     }
-};
-
+  };
 
 
   return (
@@ -272,7 +269,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                           <option value="">Select Address</option>
                           {addresses.map(({ hash, name, feeTier }) => (
                             <option key={hash} value={hash}>
-                              {`${name} (Fee Tier: ${feeTier})`} {/* Display token names and feeTier */}
+                              {`${name} (Fee Tier: ${feeTier})`}
                             </option>
                           ))}
                         </select>
