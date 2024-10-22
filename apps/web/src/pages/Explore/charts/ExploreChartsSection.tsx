@@ -370,7 +370,7 @@ export function ExploreChartsSection() {
     setTab(key)
   }
 
-  console.log(makeDataForTVL, makeDataForPoolTVL, "<====makeDataForPoolTVL")
+
 
   return (
     <>

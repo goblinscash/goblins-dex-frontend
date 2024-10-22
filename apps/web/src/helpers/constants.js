@@ -68,14 +68,14 @@ export const cryptoData = [
     nativeCurrency: { name: "Binance Coin", symbol: "BNB", decimals: 18 },
   }  
 ];
+
 export const graphQLUrl = {
   10000: "https://graph.dfd.cash/subgraphs/name/v3stakerminwidths",
   56: "https://api.studio.thegraph.com/query/78445/v3stakerminwidths/0.0.5",
   97: "https://api.studio.thegraph.com/query/78445/v3stakerminwidths/0.0.5",
 };
 
-export const priceGraphQl =
-  "https://graph.dfd.cash/subgraphs/name/goblins/subgraph-v3";
+export const priceGraphQl = "https://graph.dfd.cash/subgraphs/name/goblins/subgraph-v3";
 
 export const supportedChainIds = [56, 97, 10000];
 
