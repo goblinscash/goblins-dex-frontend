@@ -84,8 +84,9 @@ export const PageTabs = () => {
           <Trans>NFTs</Trans>
         </MenuItem>
       )}
-      {
+     
 
+      {
         !connectedChainId || (connectedChainId === 10000 || connectedChainId === 56)
           ?
 
@@ -103,6 +104,13 @@ export const PageTabs = () => {
           <Trans>Pools</Trans>
         </MenuItem>
       </Box>
+
+      <MenuItem 
+      href="https://bridge.goblins.cash/"
+      target='_blank'
+      >
+        <Trans>Bridge</Trans>
+      </MenuItem>
 
       <MenuItem href="https://goblins.cash/docs/" target="_blank">
         Docs

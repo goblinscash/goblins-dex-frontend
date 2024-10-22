@@ -106,6 +106,8 @@ const Dashboard = () => {
     }));
   };
 
+
+  // old one
   const handleConfirm = (item, isRestake, isClaim) => {
     if (isBlocked)
       return toast.error("Our Product is unavailable in your location");
@@ -117,6 +119,7 @@ const Dashboard = () => {
       isClaim: isClaim || false,
     }));
   };
+
 
   const handleUnStake = (item) => {
     if (isBlocked)

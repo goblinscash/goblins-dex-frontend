@@ -1,23 +1,77 @@
 import moment from "moment";
-
 // img
 import loader from "assets/farmingAssets/Images/loading.gif";
 import sortIcon from "assets/farmingAssets/Images/sort.svg";
-
 import { getSymbols } from "helpers/constants";
 import { toFixedCustm } from "helpers/utils";
+import Web3Intraction from "utils/web3Intraction";
+import { useSelector } from "react-redux";
+import { nftList, updateFarm } from "state/action";
+import { toast } from "react-toastify";
 
 function MyFarm({
   wallet,
   loading,
   incentiveIds,
-  handleUnStake,
+  // handleUnStake,
   handleStaked,
   handleWithdraw,
   isBlocked,
-  handleRestake,
+  // handleRestake,
   handleSort,
 }) {
+  const { currentNetwork } = useSelector((state) => state.dashboard);
+
+  // adding funtion to skip confirmation modal
+  const handleClaim = async (e, detail) => {
+    try {
+      e.preventDefault();
+      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      await web3.claimRewards(detail.key.rewardToken, wallet.address);
+    } catch (error) {
+      console.log(error, "<====error");
+      toast.error(error);
+    }
+  };
+
+  const handleunStake = async (e, detail) => {
+    try {
+      e.preventDefault();
+      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      await web3.mutliCallUnstake(
+        [
+          detail.key.rewardToken, detail.key.pool, detail.key.startTime, detail.key.endTime, detail.key.refundee,
+        ],
+        detail.tokenId,
+        wallet.address
+      );
+
+      dispatch(
+        updateFarm({
+          data: {
+            chainId: wallet.chainId,
+            type: "Unstake",
+            walletAddress: wallet.address,
+            incentiveId: detail.incentiveId,
+          },
+        })
+      );
+
+      dispatch(
+        nftList({
+          chainId: wallet.chainId,
+          walletAddress: wallet.address,
+          withdrawNft: true,
+        })
+      );
+      myFarmload();
+    } catch (error) {
+      console.log(error, "<====error");
+      toast.error(error);
+    }
+  };
+
+
   return (
     <>
       <div className="py-4 text-right">
@@ -236,13 +290,10 @@ function MyFarm({
                           />
                         ) : (
 
-                       <>
-                       
-                       <p>{item?.getPoolDetail?.token1Symbol}</p>
-          
+                          <>
 
-
-                       </>
+                            <p>{item?.getPoolDetail?.token1Symbol}</p>
+                          </>
                         )}
 
                         <span className="ml-2">
@@ -300,6 +351,7 @@ function MyFarm({
                     </p>
                   </td>
 
+                  {/* ----------Removing confirmation modal---------- */}
                   <td
                     colSpan={6}
                     className="py-3 px-6 text-left border-b border-gray-600 transparent"
@@ -309,7 +361,8 @@ function MyFarm({
                       <div className="flex items-center">
                         <p className={`   capitalize mr-2`}>
                           <button
-                            onClick={(e) => handleRestake(item, true)}
+                            // onClick={(e) => handleRestake(item, true)} previous---
+                            onClick={(e) => handleClaim(e, item)}
                             className="btn flex items-center commonBtn justify-center rounded"
                             style={{ background: "#00ff00" }}
                             disabled={isBlocked || item.rewardInfo?.reward <= 0}
@@ -319,7 +372,8 @@ function MyFarm({
                         </p>
                         <p className={`   capitalize mr-2`}>
                           <button
-                            onClick={(e) => handleUnStake(item, true)}
+                            // onClick={(e) => handleUnStake(item, true)} previous---
+                            onClick={(e) => handleunStake(e, item)}
                             className="btn flex items-center commonBtn justify-center rounded"
                             style={{ background: "#00ff00" }}
                             disabled={isBlocked || item.isUnstaked}

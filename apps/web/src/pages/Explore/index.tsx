@@ -93,8 +93,11 @@ const TabItem = styled(ThemedText.HeadlineMedium) <{ active?: boolean }>`
   padding: 10px 15px;
   min-width: 150px;
   border-radius: 5px;
-  background: ${({ theme, active }) => (active ? "#00ff4e" : "#001b1c")};
-  color: ${({ theme, active }) => (active ? "#001b1c" : "#fff")};
+  // background: ${({ theme, active }) => (active ? "#00ff4e" : "#001b1c")};
+  // color: ${({ theme, active }) => (active ? "#001b1c" : "#fff")};
+
+  background: ${({ theme, active }) => (active ? "#001b1c" : "#00ff4e")};
+  color: ${({ theme, active }) => (active ? "#fff" : "#001b1c")};
   cursor: pointer;
   transition: ${({ theme }) => `${theme.transition.duration.medium} ${theme.transition.timing.ease} color`};
 `

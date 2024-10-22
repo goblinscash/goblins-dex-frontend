@@ -63,9 +63,6 @@ const TabNav = styled(RowBetween)`
   gap: 15px;
   
 `
-
-
-
 const ResponsiveButtonPrimary = styled(ButtonPrimary)`
   border-radius: 12px;
   font-size: 16px;
@@ -221,7 +218,7 @@ function MinimalStatDisplay({ title, value, time }: { title: ReactNode; value: n
   return (
     <SectionContainer>
       <SectionTitle color="neutral2">{title}</SectionTitle>
-      <ThemedText.HeadlineSmall fontSize="24px" lineHeight="32px">
+      <ThemedText.HeadlineSmall fontSize="35px" lineHeight="40px">
         {formatFiatPrice({ price: value, type: NumberType.FiatTokenStatChartHeader })}
       </ThemedText.HeadlineSmall>
       <ThemedText.Caption color="neutral2">{time}</ThemedText.Caption>
@@ -382,10 +379,10 @@ export function ExploreChartsSection() {
             <div className='tabNav'>
 
 
-              <button onClick={() => handleTab(1)} className={`${tab == 1 && "active"}`}>
+              <button onClick={() => handleTab(2)} className={`${tab == 2 && "active"}`}>
                 Pool
               </button>
-              <button onClick={() => handleTab(2)} className={`${tab == 2 && "active"}`}>
+              <button onClick={() => handleTab(1)} className={`${tab == 1 && "active"}`}>
                 Staking
               </button>
             </div>
