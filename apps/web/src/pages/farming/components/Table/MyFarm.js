@@ -13,11 +13,11 @@ function MyFarm({
   wallet,
   loading,
   incentiveIds,
-  // handleUnStake,
+  handleUnStake,  //used before with confirmation pop up
   handleStaked,
   handleWithdraw,
   isBlocked,
-  // handleRestake,
+  handleRestake,
   handleSort,
 }) {
   const { currentNetwork } = useSelector((state) => state.dashboard);
@@ -27,7 +27,19 @@ function MyFarm({
     try {
       e.preventDefault();
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      await web3.claimRewards(detail.key.rewardToken, wallet.address);
+      // console.log(web3, "webbbbbbbbbbbbb")
+      // await web3.claimRewards(detail.key.rewardToken, wallet.address);
+      await web3.mutliCallReStake(
+        [
+          detail.key.rewardToken,
+          detail.key.pool,
+          detail.key.startTime,
+          detail.key.endTime,
+          detail.key.refundee,
+        ],
+        detail.tokenId,
+        wallet.address
+      );
     } catch (error) {
       console.log(error, "<====error");
       toast.error(error);
@@ -38,9 +50,14 @@ function MyFarm({
     try {
       e.preventDefault();
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      // setLoading(true);
       await web3.mutliCallUnstake(
         [
-          detail.key.rewardToken, detail.key.pool, detail.key.startTime, detail.key.endTime, detail.key.refundee,
+          detail.key.rewardToken,
+          detail.key.pool,
+          detail.key.startTime,
+          detail.key.endTime,
+          detail.key.refundee,
         ],
         detail.tokenId,
         wallet.address
@@ -64,12 +81,16 @@ function MyFarm({
           withdrawNft: true,
         })
       );
+      // setLoading(false);
+      handleConfirm();
       myFarmload();
     } catch (error) {
       console.log(error, "<====error");
+      // setLoading(false);
       toast.error(error);
     }
   };
+
 
 
   return (
@@ -361,7 +382,7 @@ function MyFarm({
                       <div className="flex items-center">
                         <p className={`   capitalize mr-2`}>
                           <button
-                            // onClick={(e) => handleRestake(item, true)} previous---
+                            // onClick={(e) => handleRestake(item, true)}  //previous---
                             onClick={(e) => handleClaim(e, item)}
                             className="btn flex items-center commonBtn justify-center rounded"
                             style={{ background: "#00ff00" }}
@@ -372,7 +393,7 @@ function MyFarm({
                         </p>
                         <p className={`   capitalize mr-2`}>
                           <button
-                            // onClick={(e) => handleUnStake(item, true)} previous---
+                            // onClick={(e) => handleUnStake(item, true)} //previous---
                             onClick={(e) => handleunStake(e, item)}
                             className="btn flex items-center commonBtn justify-center rounded"
                             style={{ background: "#00ff00" }}
