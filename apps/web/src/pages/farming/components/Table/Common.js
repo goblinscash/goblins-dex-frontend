@@ -303,7 +303,7 @@ function CommonTable({
                   style={{ background: "#002628" }}
                 >
                   <p className={` m-0  capitalize`}>
-                    {item.minWidth > 100
+                    {item.minWidth >= 100
                       ? Number(item.minWidth) / 100
                       : item.minWidth}
                     {"%"}
