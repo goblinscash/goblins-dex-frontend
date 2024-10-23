@@ -90,6 +90,7 @@ export function TopPoolTable() {
   })
   const { topPools, loading, error } = useTopPools(chainId, sortState.sortBy, sortState.sortDirection)
 
+console.log(topPools, "^^^^^^^^^^^^^", chainId)
   const handleHeaderClick = useCallback(
     (newSortMethod: Pool_OrderBy) => {
       if (sortState.sortBy === newSortMethod) {
@@ -129,6 +130,7 @@ export function TopPoolTable() {
     </TableWrapper>
   )
 }
+
 
 export function PoolsTable({
   pools,

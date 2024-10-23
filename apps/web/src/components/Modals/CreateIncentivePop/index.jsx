@@ -34,7 +34,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
   const [showSelect, setShowSelect] = useState(false);
   const [showSelect2, setShowSelect2] = useState(false);
 
-
+// console.log(process.env.REACT_APP_BCH_STAKING_CONTRACT, "process.env.REACT_APP_BNB_STAKING_CONTRACT", process.env.REACT_APP_BCH_STAKING_CONTRACT)
   const { topPools, loading: subgraphLoading, error } = useTopPools(wallet.chainId, "totalValueLockedUSD", "desc")
 
   const top7Pools = Array.isArray(topPools) ? topPools.slice(0, 7) : [];
@@ -155,7 +155,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
       if (validateSubmit()) return;
 
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      console.log(web3, "************************")
+      console.log(currentNetwork, "currentNetwork")
       setLoading(true);
 
       let startTimeStamp = convertToTimestamp(fields.startDate);

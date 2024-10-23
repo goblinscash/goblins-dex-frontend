@@ -14,8 +14,9 @@ import Icon8 from "assets/farmingAssets/icons/0x8fF795a6F4D97E7887C79beA79aba5cc
 import Icon9 from "assets/farmingAssets/icons/0x55d398326f99059fF775485246999027B3197955.png";
 import Icon_1 from "assets/farmingAssets/icons/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c.png";
 import Icon10 from "assets/farmingAssets/icons/0xfb5b838b6cfeedc2873ab27866079ac55363d37e.png";
-
-
+import IconDoge from "assets/farmingAssets/icons/0xba2ae424d960c26247dd6c32edc70b295c744c43.png";
+import IconUSDC from "assets/farmingAssets/icons/0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d.png"
+import IconBONK from "assets/farmingAssets/icons/0xa697e272a73744b343528c3bc4702f2565b2f422.png"
 
 export const cryptoData = [
   {
@@ -71,6 +72,7 @@ export const cryptoData = [
     nativeCurrency: { name: "Binance Coin", symbol: "BNB", decimals: 18 },
   }  
 ];
+
 export const graphQLUrl = {
   10000: "https://graph.dfd.cash/subgraphs/name/v3stakerminwidths",
   56: "https://api.studio.thegraph.com/query/78445/v3stakerminwidths/0.0.5",
@@ -136,7 +138,7 @@ export const makeComputeData = async (key) => {
 };
 
 export const getSymbols = {
-  "0x3743ec0673453e5009310c727ba4eaf7b3a1cc04": Icon1,
+  "0x3743ec0673453e5009310c727ba4eaf7b3a1cc04": Icon1, //BCH
   "0x56381cb87c8990971f3e9d948939e1a95ea113a3": Icon2,
   "0xbb2a35cc3e3ddb679fe30a82051633bc822e4191": Icon3,
   "0xbb10b6d11db70f33417b08e0b87042275c933bb9": Icon4,
@@ -144,11 +146,17 @@ export const getSymbols = {
   "0xbc2f884680c95a02cea099da2f524b366d9028ba": Icon6,
   "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195": Icon7,
   "0xbbef77270d6425e113e1e37f008cf141a9fc215a": Icon8,
-  "0x8ff795a6f4d97e7887c79bea79aba5cc76444adf": Icon9,
+  
+  "0x8ff795a6f4d97e7887c79bea79aba5cc76444adf": Icon1, //BCH-bsc
   "0xfb5b838b6cfeedc2873ab27866079ac55363d37e": Icon10,
   "0x55d398326f99059ff775485246999027b3197955": Icon9,
-  "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c": Icon_1
+  "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c": Icon_1,
+  "0xba2ae424d960c26247dd6c32edc70b295c744c43": IconDoge,
+  "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d": IconUSDC, // for bsc
+  "0xa697e272a73744b343528c3bc4702f2565b2f422": IconBONK
   
+
+  // 0x55d398326f99059ff775485246999027b3197955
 };
 
 export const getSortedData = (arr, sortKey, sortOrder) => {

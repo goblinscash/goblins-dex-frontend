@@ -61,6 +61,7 @@ export function PoolDetailsTransactionsTable({
     sortBy: Transaction_OrderBy.Timestamp,
     sortDirection: OrderDirection.Desc,
   })
+
   const { transactions, loading, loadMore, error } = usePoolTransactions(
     poolAddress,
     chainId,
@@ -68,6 +69,7 @@ export function PoolDetailsTransactionsTable({
     sortState.sortDirection,
     filter
   )
+  console.log(chainId, "chainId", transactions)
 
 
   console.log(isReversed, "<====isReversed")
