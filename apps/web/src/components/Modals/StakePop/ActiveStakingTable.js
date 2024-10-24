@@ -3,6 +3,8 @@ import { getSymbols } from "helpers/constants";
 import loader from "assets/farmingAssets/Images/loading.gif";
 
 function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
+
+  console.log(list, "11111111111111")
   return (
     <div className="overflow-x-auto">
       <table
@@ -179,7 +181,8 @@ function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
                   style={{ background: "#002628" }}
                 >
                   <p className={` m-0   capitalize`}>
-                    {item.minWidth > 100
+                    {console.log(item.minWidth, "item.minWidthitem.minWidth")}
+                    {item.minWidth >= 100
                       ? Number(item.minWidth) / 100
                       : item.minWidth}
                     {"%"}
