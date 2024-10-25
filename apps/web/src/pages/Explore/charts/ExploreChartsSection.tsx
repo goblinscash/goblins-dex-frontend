@@ -230,8 +230,17 @@ export function ExploreChartsSection() {
   const [tab, setTab] = useState(1)
   const [usdPrice, setUsdPrice] = useState<any>(0)
   const { transactions } = useAppSelector((state) => state.Incentive)
-  const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
-  const chainId = supportedChainIdFromGQLChain(chainName)
+  // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
+  // const chainId = supportedChainIdFromGQLChain(chainName)
+
+  const [chainId, setChainId] = useState<number>(10000);
+  const [chainName, setChainName] = useState<string>("SMARTBCH");
+
+
+const ChainInfo: Record<number, string> = {
+  56: "BNB",
+  10000: "SMARTBCH",
+};
 
   const apolloClient = chainToApolloClient[chainId || ChainId.MAINNET]
   const { loading, error, data } = useChartQuery({
@@ -277,16 +286,39 @@ export function ExploreChartsSection() {
     } catch (error) { }
   };
 
-
   useEffect(() => {
     getUsdPrice()
   }, [])
-
-
-
-
-
-
+// adding for one switcher-----------------
+  useEffect(() => {
+    if (window?.ethereum) {
+      // Listen for chain changes
+      // @ts-ignore
+      window.ethereum.on('chainChanged', (newChainId: string) => {
+        const parsedChainId = parseInt(newChainId, 16);
+        setChainId(parsedChainId);
+        setChainName(ChainInfo[parsedChainId] || "Unknown Chain");
+      });
+  
+      // Set initial chainId and chainName
+      window.ethereum
+      // @ts-ignore
+        .request({ method: 'eth_chainId' })
+        .then((initialChainId: string) => {
+          const parsedChainId = parseInt(initialChainId, 16);
+          setChainId(parsedChainId);
+          setChainName(ChainInfo[parsedChainId] || "Unknown Chain");
+        })
+        .catch(console.error);
+    }
+  
+    return () => {
+      // @ts-ignore
+      window?.ethereum?.removeListener('chainChanged', setChainId);
+    };
+  }, []);
+  
+  console.log(chainId, "chainId", chainName);
 
   let makeDataForVolume = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
     ? data.uniswapDayDatas.map((data: any) => ({
@@ -294,8 +326,6 @@ export function ExploreChartsSection() {
       values: { v3: Number(data.volumeUSD) },
     }))
     : []) as unknown as StackedBarsData[], [data])
-
-
 
   let makeDataForTVL = useMemo(() => {
     // console.log(transactions, "<====transactions")
@@ -308,9 +338,7 @@ export function ExploreChartsSection() {
     // console.log(allTransactions, "<===allTransactions")
     // Sort transactions by timestamp
     allTransactions.sort((a, b) => a.timestamp - b.timestamp);
-
     let previousAmount = 0;
-
     return allTransactions.map((data) => {
       let amount = parseFloat(data.amount) / 10 ** 9;
 
@@ -330,8 +358,6 @@ export function ExploreChartsSection() {
     });
   }, [transactions, usdPrice]);
 
-
-
   let makeDataForPoolTVL = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
     ? data.uniswapDayDatas.map((data: any) => ({
       time: data.date,
@@ -339,12 +365,9 @@ export function ExploreChartsSection() {
     }))
     : []) as unknown as StackedLineData[], [data]);
 
-
-
   const getMaxTimestampObject = (arr: any) => {
     return arr.reduce((max: any, obj: any) => (obj.time > max.time ? obj : max));
   };
-
 
   let getTotalTVL = useMemo(() => {
     if (makeDataForPoolTVL && Array.isArray(makeDataForPoolTVL) && makeDataForPoolTVL.length > 0 && makeDataForTVL && Array.isArray(makeDataForTVL) && makeDataForTVL.length > 0) {
@@ -357,36 +380,24 @@ export function ExploreChartsSection() {
 
   }, [makeDataForPoolTVL, makeDataForTVL])
 
-
-  console.log(getTotalTVL, "<====getTotalTVL")
-
-
-
-
   const handleTab = (key: number) => {
     setTab(key)
   }
-
-  console.log(makeDataForTVL, makeDataForPoolTVL, "<====makeDataForPoolTVL")
-
   return (
     <>
       <ChartsContainer>
         <div className='tabContainer'>
-          {
-            chainId === 10000
-            &&
-            <div className='tabNav'>
-
-
-              <button onClick={() => handleTab(2)} className={`${tab == 2 && "active"}`}>
-                Pool
-              </button>
-              <button onClick={() => handleTab(1)} className={`${tab == 1 && "active"}`}>
-                Staking
-              </button>
-            </div>
-          }
+        {
+    (chainId === 10000 || chainId === 56) &&
+    <div className='tabNav'>
+      <button onClick={() => handleTab(2)} className={`${tab === 2 ? "active" : ""}`}>
+        Pool
+      </button>
+      <button onClick={() => handleTab(1)} className={`${tab === 1 ? "active" : ""}`}>
+        Staking
+      </button>
+    </div>
+  }
           {/* <div className="tabContent">
            {tab == 1 ? <>TAb 1 Content</> : tab == 2 ? <>Tab 2 Content</> : <></>}
          </div> */}
