@@ -13,7 +13,7 @@ import {
   supportedChainIdFromGQLChain,
   validateUrlChainParam,
 } from 'graphql/data/util'
-import { ReactElement, useMemo } from 'react'
+import { ReactElement, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { EllipsisStyle, ThemedText } from 'theme/components'
@@ -21,6 +21,7 @@ import { NumberType, useFormatter } from 'utils/formatNumbers'
 
 import { DeltaArrow, DeltaText } from '../TokenDetails/Delta'
 import QueryTokenLogo from 'components/Logo/QueryTokenLogo'
+import { useWeb3React } from '@web3-react/core'
 
 const TableWrapper = styled.div`
   margin: 0 auto;
@@ -66,12 +67,42 @@ function TokenDescription({ token }: { token: TokenList }) {
   )
 }
 
+// for removing network filter
 export function TopTokensTable() {
-  const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
-  const chainId = supportedChainIdFromGQLChain(chainName)
+  const ChinInfo:any = {
+    56 : "BNB",
+    10000: "SMARTBCH"
+  }
+  // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
+  // const chainId = supportedChainIdFromGQLChain(chainName)
+  const [chainId, setChainId] = useState(10000);
+  const [chainName, setChainName] = useState(chainId && ChinInfo[chainId] as String); 
 
+  
+  // console.log(chainId, "chainId+", chainName)
 
+  useEffect(() => {
+    if (window?.ethereum) {
+      // @ts-ignore
+      window?.ethereum?.on('chainChanged', (chainId) => {
+        setChainId(parseInt(chainId, 16))
+        setChainName(ChinInfo[parseInt(chainId, 16)])
+      });
+
+    // @ts-ignore
+    window?.ethereum.request({ method: 'eth_chainId' })
+    // @ts-ignore
+    .then((chainId) => {
+      setChainId(parseInt(chainId, 16))
+      setChainName(ChinInfo[parseInt(chainId, 16)])
+    })    
+    } 
+  },[])
+
+//@ts-ignore
   const { tokens, tokenSortRank, loadingTokens, error } = useTopTokens(chainName)
+
+
   if (error) {
     return (
       <TableWrapper>
@@ -92,6 +123,7 @@ export function TopTokensTable() {
         tokenSortRank={tokenSortRank}
         // sparklines={sparklines}
         loading={loadingTokens}
+        //@ts-ignore
         chainId={chainId}
       />
     </TableWrapper>

@@ -267,7 +267,8 @@ const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
             isInfoExplorePageEnabled ? (
               <FiltersContainer isInfoExplorePageEnabled>
                 <DropdownFilterContainer isInfoExplorePageEnabled>
-                  <NetworkFilter />
+                  {/* Open <NetworkFilter /> if need both */}
+                  {/* <NetworkFilter /> */}
                   {/* {currentKey === ExploreTab.Tokens && <TimeSelector />} */}
                 </DropdownFilterContainer>
                 <SearchContainer isInfoExplorePageEnabled>
@@ -277,7 +278,7 @@ const Explore = ({ initialTab }: { initialTab?: ExploreTab }) => {
             ) : (
               <>
                 <FiltersContainer isInfoExplorePageEnabled={false}>
-                  <NetworkFilter />
+                  {/* <NetworkFilter /> */}
                   <TimeSelector />
                 </FiltersContainer>
                 <SearchContainer isInfoExplorePageEnabled={false}>

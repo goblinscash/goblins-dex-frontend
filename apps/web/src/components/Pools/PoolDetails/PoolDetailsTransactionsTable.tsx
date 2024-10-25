@@ -69,7 +69,6 @@ export function PoolDetailsTransactionsTable({
     sortState.sortDirection,
     filter
   )
-  console.log(chainId, "chainId", transactions)
 
 
   console.log(isReversed, "<====isReversed")

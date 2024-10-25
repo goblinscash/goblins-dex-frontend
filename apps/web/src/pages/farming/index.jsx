@@ -57,6 +57,8 @@ const Dashboard = () => {
     sortKey: "startTime",
     sortOrder: "asc",
   });
+
+  // console.log(search, "###############################")
   const [stake, setStake] = useState({
     isOpen: false,
     detail: null,
@@ -209,12 +211,11 @@ const Dashboard = () => {
 
     let filteredData = data.filter(
       (item) =>
-        item.getPoolDetail.token0Symbol
-          .toLowerCase()
-          .includes(search.toLowerCase()) ||
+        item.getPoolDetail.token0Symbol?.toLowerCase()
+          .includes(search?.toLowerCase()) ||
         item.getPoolDetail.token1Symbol
           .toLowerCase()
-          .includes(search.toLowerCase())
+          .includes(search?.toLowerCase())
     );
 
     activeTab == 2
