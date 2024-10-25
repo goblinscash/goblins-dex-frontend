@@ -118,8 +118,6 @@ export const ChainSelector = ({ leftAlign }: { leftAlign?: boolean }) => {
     return null
   }
 
-  console.log(supportedChains,unsupportedChains, "<====supportedChains")
-
   const isSupported = !!info
 
   const dropdown = (

@@ -77,7 +77,9 @@ function NetworkCostDescription({ native }: { native: Currency }) {
       <Trans>
         Network cost is paid in {native.symbol} on the {chainName} network in order to transact.
       </Trans>{' '}
-      <ExternalLink href="https://support.uniswap.org/hc/en-us/articles/8370337377805-What-is-a-network-fee-">
+
+      {/* network fee url goes here */}
+      <ExternalLink href="https://goblins.cash/faq-items/what-is-the-interface-fee/">
         <Trans>Learn more</Trans>
       </ExternalLink>
     </ThemedText.LabelMicro>

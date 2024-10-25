@@ -105,12 +105,12 @@ export const PageTabs = () => {
         </MenuItem>
       </Box>
 
-      {/* <MenuItem 
+      <MenuItem 
       href="https://bridge.goblins.cash/"
       target='_blank'
       >
         Bridge
-      </MenuItem> */}
+      </MenuItem>
 
       <MenuItem href="https://goblins.cash/docs/" target="_blank">
         Docs

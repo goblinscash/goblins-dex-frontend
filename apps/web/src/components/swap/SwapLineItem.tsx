@@ -177,7 +177,7 @@ function useLineItem(props: SwapLineItemProps): LineItemData | undefined {
       }
     case SwapLineItemType.MAX_SLIPPAGE:
       return {
-        Label: () => <Trans>Max. slippage</Trans>,
+        Label: () => <Trans>Max. slippage......</Trans>,
         TooltipBody: () => <MaxSlippageTooltip trade={trade} allowedSlippage={allowedSlippage ?? new Percent(0)} />,
         Value: () => (
           <Row gap="8px">

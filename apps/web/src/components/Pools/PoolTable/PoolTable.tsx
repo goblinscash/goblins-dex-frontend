@@ -73,9 +73,6 @@ function PoolDescription({
   )
 }
 
-
-
-
 export type PoolTableSortState = {
   sortBy: Pool_OrderBy
   sortDirection: OrderDirection

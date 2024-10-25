@@ -64,7 +64,7 @@ export default function SwapPage({ className }: { className?: string }) {
           initialInputCurrency={initialInputCurrency}
           initialOutputCurrency={initialOutputCurrency}
         />
-        <NetworkAlert />
+        {/* <NetworkAlert /> open if need bridge alert */}
       </PageWrapper>
       {location.pathname === '/swap' && <SwitchLocaleLink />}
     </Trace>
