@@ -1,3 +1,4 @@
+import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react'
 import { Trans } from '@lingui/macro'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { ChainId } from '@uniswap/sdk-core'
@@ -11,7 +12,6 @@ import { chainIdToBackendName, supportedChainIdFromGQLChain, validateUrlChainPar
 import { OrderDirection, Pool_OrderBy, Token } from 'graphql/thegraph/__generated__/types-and-hooks'
 import { TablePool, useTopPools } from 'graphql/thegraph/TopPools'
 import { useCurrency } from 'hooks/Tokens'
-import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { ThemedText } from 'theme/components'
@@ -80,16 +80,16 @@ export type PoolTableSortState = {
   sortBy: Pool_OrderBy
   sortDirection: OrderDirection
 }
-  const [sortState, setSortMethod] = useState<PoolTableSortState>({
-    sortBy: Pool_OrderBy.TotalValueLockedUsd,
-    sortDirection: OrderDirection.Desc,
-  })
 
 
   // for removing network filter
   export function TopPoolTable() {
 
     const [chainId, setChainId] = useState(10000);
+    const [sortState, setSortMethod] = useState<PoolTableSortState>({
+      sortBy: Pool_OrderBy.TotalValueLockedUsd,
+      sortDirection: OrderDirection.Desc,
+    })
   
     // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
     // const chainId = supportedChainIdFromGQLChain(chainName)
