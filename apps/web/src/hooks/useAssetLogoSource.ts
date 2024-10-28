@@ -57,9 +57,10 @@ function getInitialUrl(
   // console.log(chainId, "|" , networkName, "|", checksummedAddress)
 
   if (checksummedAddress) {
-    if (chainId == 10000) {
+    if (chainId == 10000 || 56) {
       return `https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
     } else {
+      console.log(`https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`, "******")
       return `https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
     }
   } else {

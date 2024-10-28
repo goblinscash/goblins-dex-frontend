@@ -96,6 +96,8 @@ export default function StatsSection(props: StatsSectionProps) {
   const { label, infoLink } = getChainInfo(chainId)
   const isInfoTDPEnabled = useInfoTDPEnabled()
 
+  console.log(infoLink, "++++++++++++++++++++++")
+
   const tokenMarketInfo = tokenQueryData?.market
   const tokenProjectMarketInfo = tokenQueryData?.project?.markets?.[0] // aggregated market price from CoinGecko
 
@@ -189,16 +191,16 @@ export default function StatsSection(props: StatsSectionProps) {
   } else {
     return UNSUPPORTED_METADATA_CHAINS.includes(chainId) ? (
       <>
-        <Header isInfoTDPEnabled={isInfoTDPEnabled}>
+        {/* <Header isInfoTDPEnabled={isInfoTDPEnabled}>
           <Trans>Stats</Trans>
-        </Header>
+        </Header> */}
         <ThemedText.BodySecondary paddingTop="12px">
-          <Trans>
+          {/* <Trans>
             Token stats and charts for {label} are available on{' '}
             <ExternalLink color="currentColor" href={`${infoLink}tokens/${address}`}>
-              info.uniswap.org
+              goblins.cash
             </ExternalLink>
-          </Trans>
+          </Trans> */}
         </ThemedText.BodySecondary>
       </>
     ) : (

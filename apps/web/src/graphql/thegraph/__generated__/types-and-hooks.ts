@@ -5567,7 +5567,7 @@ export const PoolDataDocument = gql`
     totalValueLockedToken0
     totalValueLockedToken1
     totalValueLockedUSD
-    poolDayData(first:1000){
+    poolDayData(first:1000, where:{date_not_in:[1728000000,1728172800 ]}){
       high
       low
       volumeUSD

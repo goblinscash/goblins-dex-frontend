@@ -280,17 +280,17 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
 
     // Adding Shib
     // {
-    //   tokenA: "0xb1547683da678f2e1f003a780143ec10af8a832b", // SHIB
+    //   tokenA: "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D", // SHIB
     //   tokenB: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
     //   fee: 0,
     // },
     // {
     //   tokenA: "BNB", // WBNB
-    //   tokenB: "0xb1547683da678f2e1f003a780143ec10af8a832b", // SHIB
+    //   tokenB: "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D", // SHIB
     //   fee: 0,
     // },
     // {
-    //   tokenA: "0xb1547683da678f2e1f003a780143ec10af8a832b", // SHIB
+    //   tokenA: "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D", // SHIB
     //   tokenB: "0x55d398326f99059fF775485246999027B3197955", // USDT
     //   fee: 0,
     // },
