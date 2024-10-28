@@ -155,7 +155,6 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
       if (validateSubmit()) return;
 
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      console.log(currentNetwork, "currentNetwork")
       setLoading(true);
 
       let startTimeStamp = convertToTimestamp(fields.startDate);

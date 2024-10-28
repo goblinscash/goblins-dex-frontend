@@ -108,7 +108,8 @@ class Web3Intraction {
           } else {
             tokenAmountWithDecimal = Number(tokenAmount) * 10 ** tokenDecimal;
           }
-          tokenAmountWithDecimal = parseInt(tokenAmountWithDecimal);
+          tokenAmountWithDecimal = toFixedCustm(parseInt(tokenAmountWithDecimal));
+
           if (Number(tokenAmountWithDecimal) > tokenAllowence) {
             const txn = await tokenContract.approve(
               approvalAddress,
@@ -145,7 +146,6 @@ class Web3Intraction {
           true
         );
 
-        console.log(this.contractDetails, "<====contract")
         let tx;
         if (!tokenAddress) {
           return reject("Token Address not found!");
@@ -155,6 +155,7 @@ class Web3Intraction {
           tokenAddress,
           this.contractDetails?.contractAddress
         );
+
         tx = await contract.createIncentive(
           keys,
           rewardTokenAmount.toString(),
