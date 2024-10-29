@@ -1134,14 +1134,19 @@ class Web3Intraction {
           true
         );
 
+        console.log(this.contractDetails.stakeContractAddress, "ch1")
         let walletAddress = this.SIGNER.getAddress();
 
         let getStakingContract = await contract.stakingToken();
+        console.log(getStakingContract, "ch2")
+
         let getRewardsContract = await contract.rewardsToken();
         let stakeToken = await this.getTokenBalance(getStakingContract);
         let rewardToken = await this.getTokenSymbolAndDecimal(
           getRewardsContract
         );
+
+        console.log(rewardToken, "ch3")
 
         let stakedAmount = await contract.balanceOf(walletAddress);
         stakedAmount = stakedAmount.toString() / 10 ** stakeToken.tokenDecimal;

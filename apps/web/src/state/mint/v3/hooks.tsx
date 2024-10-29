@@ -34,6 +34,7 @@ import {
   typeStartPriceInput,
 } from './actions'
 import { tryParseTick } from './utils'
+import { toFixedCustm } from 'helpers/utils'
 
 export function useV3MintState(): AppState['mintV3'] {
   return useAppSelector((state) => state.mintV3)
@@ -66,6 +67,9 @@ export function useV3MintActionHandlers(noLiquidity: boolean | undefined): {
 
   const onLeftRangeInput = useCallback(
     (typedValue: string) => {
+      // console.log(typedValue, "typedValue+", toFixedCustm(parseFloat(typedValue)))
+      //@ts-ignore
+      typedValue = toFixedCustm(parseFloat(typedValue))
       dispatch(typeLeftRangeInput({ typedValue }))
       const paramMinPrice = searchParams.get('minPrice')
       if (!paramMinPrice || (paramMinPrice && paramMinPrice !== typedValue)) {

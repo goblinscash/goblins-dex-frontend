@@ -222,14 +222,12 @@ export const BTC_BSC = new Token(ChainId.BNB, '0x7130d2A12B9BCbFAe4f2634d864A1Ee
 export const BUSD_BSC = new Token(ChainId.BNB, '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', 18, 'BUSD', 'BUSD')
 export const DAI_BSC = new Token(ChainId.BNB, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'DAI')
 export const BCH_BSC = new Token(ChainId.BNB, '0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf', 18, 'BCH', 'BCH')
-
 export const DOGE_BSC = new Token(ChainId.BNB, '0xbA2aE424d960c26247Dd6c32edC70B295c744C43', 8, 'DOGE', 'DOGE')
 export const FLOKI_BSC = new Token(ChainId.BNB, '0xfb5B838b6cfEEdC2873aB27866079AC55363D37E', 9, 'FLOKI', 'FLOKI')
 export const PEPE_BSC = new Token(ChainId.BNB, '0x25d887Ce7a35172C62FeBFD67a1856F20FaEbB00', 18, 'PEPE', 'PEPE')
-// Adding Shib
 export const SHIB_BSC = new Token(ChainId.BNB, '0x2859e4544C4bB03966803b044A93563Bd2D0DD4D', 18, 'SHIB', 'SHIB')
 export const BONK_BSC = new Token(ChainId.BNB, '0xA697e272a73744b343528C3Bc4702F2565b2F422', 5, 'BONK', 'BONK')
-
+export const GOB_BSC = new Token(ChainId.BNB, '0x701ACA29AE0F5d24555f1E8A6Cf007541291d110', 9, 'GOB', 'GOB')
 
 export const USDC_AVALANCHE = new Token(
   ChainId.AVALANCHE,

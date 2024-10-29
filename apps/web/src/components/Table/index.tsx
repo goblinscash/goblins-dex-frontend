@@ -33,7 +33,7 @@ export function Table<Data extends RowData>({
 }: {
   columns: ColumnDef<Data, any>[]
   data: Data[]
-  
+
   loading?: boolean
   loadMore?: ({ onComplete }: { onComplete?: () => void }) => void
   maxHeight?: number
@@ -136,31 +136,39 @@ export function Table<Data extends RowData>({
             <TableBody>
               {loading || !table.getRowModel()?.rows
                 ? Array.from({ length: 25 }, (_, rowIndex) => (
-                    <DataRow key={`skeleton-row-${rowIndex}`}>
-                      {table.getAllColumns().map((column, columnIndex) => (
-                        <CellContainer key={`skeleton-row-${rowIndex}-column-${columnIndex}`}>
-                          {flexRender(column.columnDef.cell, {} as CellContext<Data, any>)}
-                        </CellContainer>
-                      ))}
-                    </DataRow>
-                  ))
-                : table.getRowModel().rows.map((row) => {
-                    const cells = row
-                      .getVisibleCells()
-                      .map((cell) => (
-                        <CellContainer key={cell.id}>
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </CellContainer>
-                      ))
-                    const rowOriginal = row.original as any
-                    return 'link' in rowOriginal && typeof rowOriginal.link === 'string' ? (
-                      <TableRowLink to={rowOriginal.link} key={row.id}>
-                        <DataRow>{cells}</DataRow>
-                      </TableRowLink>
+                  <DataRow key={`skeleton-row-${rowIndex}`}>
+                    {table.getAllColumns().map((column, columnIndex) => (
+                      <CellContainer key={`skeleton-row-${rowIndex}-column-${columnIndex}`}>
+                        {flexRender(column.columnDef.cell, {} as CellContext<Data, any>)}
+                      </CellContainer>
+                    ))}
+                  </DataRow>
+                ))
+                :table?.getRowModel().rows.map((row) => {
+                  const cells = row.getVisibleCells().map((cell) => (
+                    <CellContainer key={cell.id}>
+                    {cell.column.id === 'price' && cell.getValue() !== undefined ? (
+                            parseFloat(
+                              // @ts-ignore
+                              cell?.getValue()
+                              ).toFixed(6)
+                              // flexRender(cell.column.columnDef.cell, cell.getContext())
                     ) : (
-                      <DataRow key={row.id}>{cells}</DataRow>
-                    )
-                  })}
+                      flexRender(cell.column.columnDef.cell, cell.getContext())
+                    )}
+                  </CellContainer>
+                  ));
+
+              
+                  const rowOriginal = row.original as any
+                  return 'link' in rowOriginal && typeof rowOriginal.link === 'string' ? (
+                    <TableRowLink to={rowOriginal.link} key={row.id}>
+                      <DataRow>{cells}</DataRow>
+                    </TableRowLink>
+                  ) : (
+                    <DataRow key={row.id}>{cells}</DataRow>
+                  )
+                })}
             </TableBody>
           </ScrollSyncPane>
           <LoadingIndicatorContainer show={loadingMore}>

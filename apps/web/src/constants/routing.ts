@@ -60,6 +60,7 @@ import {
   WDOGE_BCH,
   SHIB_BSC, //SHIB adding
   BONK_BSC, //Bonk
+  GOB_BSC
 } from './tokens'
 
 type ChainTokenList = {
@@ -140,7 +141,7 @@ export const COMMON_BASES: ChainCurrencyList = {
   [ChainId.CELO]: [nativeOnChain(ChainId.CELO), CEUR_CELO, CUSD_CELO, PORTAL_ETH_CELO, PORTAL_USDC_CELO, WBTC_CELO],
   [ChainId.CELO_ALFAJORES]: [nativeOnChain(ChainId.CELO_ALFAJORES), CUSD_CELO_ALFAJORES, CEUR_CELO_ALFAJORES],
 
-  [ChainId.BNB]: [nativeOnChain(ChainId.BNB), DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC, FLOKI_BSC, PEPE_BSC, SHIB_BSC, BONK_BSC],
+  [ChainId.BNB]: [nativeOnChain(ChainId.BNB), DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC, FLOKI_BSC, PEPE_BSC, SHIB_BSC, BONK_BSC, GOB_BSC],
 
   [ChainId.AVALANCHE]: [
     nativeOnChain(ChainId.AVALANCHE),

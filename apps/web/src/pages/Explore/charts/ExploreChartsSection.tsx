@@ -318,8 +318,6 @@ const ChainInfo: Record<number, string> = {
     };
   }, []);
   
-  console.log(chainId, "chainId", chainName);
-
   let makeDataForVolume = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
     ? data.uniswapDayDatas.map((data: any) => ({
       time: data.date,

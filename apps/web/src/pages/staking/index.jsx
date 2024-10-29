@@ -48,10 +48,14 @@ const Staking = () => {
     try {
       setLoading(true);
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      console.log(web3, "web3")
       let detail = await web3.getDetailInfo();
+      console.log(details, "detail", currentNetwork)
       let data = await web3.getTokenBalance(
+        currentNetwork?.chainId == 56 ? "0x701ACA29AE0F5d24555f1E8A6Cf007541291d110" : 
         "0x47c61F29B1458d234409Ebbe4B6a70F3b16528EF"
       );
+      
 
       setDetails({
         ...detail,
