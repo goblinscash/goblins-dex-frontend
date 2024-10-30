@@ -202,7 +202,6 @@ const Staking = () => {
     getUsdPrice();
   }, []);
 
-  console.log(details, "@@@@@@@", currentNetwork.chainId)
 
   return (
     <>
