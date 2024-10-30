@@ -52,10 +52,10 @@ const Staking = () => {
       let detail = await web3.getDetailInfo();
       console.log(details, "detail", currentNetwork)
       let data = await web3.getTokenBalance(
-        currentNetwork?.chainId == 56 ? "0x701ACA29AE0F5d24555f1E8A6Cf007541291d110" : 
-        "0x47c61F29B1458d234409Ebbe4B6a70F3b16528EF"
+        currentNetwork?.chainId == 56 ? "0x701ACA29AE0F5d24555f1E8A6Cf007541291d110" :
+          "0x47c61F29B1458d234409Ebbe4B6a70F3b16528EF"
       );
-      
+
 
       setDetails({
         ...detail,
@@ -178,7 +178,7 @@ const Staking = () => {
         GOBInPrice: Number(getGobPrice || 0).toFixed(2),
         WBCHInPrice: Number(priceData1?.pool?.token1Price || 0).toFixed(2),
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -202,6 +202,8 @@ const Staking = () => {
     getUsdPrice();
   }, []);
 
+  console.log(details, "@@@@@@@", currentNetwork.chainId)
+
   return (
     <>
       {migration &&
@@ -212,7 +214,7 @@ const Staking = () => {
             balance={details.sGob || 0}
             getDetails={getDetails}
 
-            // load={load}
+          // load={load}
           />,
           document.body
         )}
@@ -298,10 +300,10 @@ const Staking = () => {
                     GOB Price: ${price?.GOBInPrice || 0}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    {details.sGob > 0 && (
+                    {details.sGob > 0 && currentNetwork?.chainId !== 56 && (
                       <button
                         onClick={handleMigrationPopup}
-                        className="btn  flex items-center justify-center commonBtn font-extrabold"
+                        className="btn flex items-center justify-center commonBtn font-extrabold"
                       >
                         Migration
                       </button>
