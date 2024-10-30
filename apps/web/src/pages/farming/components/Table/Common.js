@@ -32,7 +32,7 @@ function CommonTable({
 //  console.log(getSymbols[item?.getPoolDetail?.token0Address], "Ashuuuuuuuuuuuuuu")
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto" style={{overflow: "auto"}}>
       <table
         className="min-w-full transparent stipped"
         style={{ borderCollapse: "separate", borderSpacing: "0" }}
