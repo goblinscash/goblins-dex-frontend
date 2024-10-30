@@ -148,11 +148,11 @@ export function Table<Data extends RowData>({
                   const cells = row.getVisibleCells().map((cell) => (
                     <CellContainer key={cell.id}>
                     {cell.column.id === 'price' && cell.getValue() !== undefined ? (
-                            parseFloat(
-                              // @ts-ignore
-                              cell?.getValue()
-                              ).toFixed(6)
-                              // flexRender(cell.column.columnDef.cell, cell.getContext())
+                            // parseFloat(
+                            //   // @ts-ignore
+                            //   cell?.getValue()
+                            //   ).toFixed(6)
+                              flexRender(cell.column.columnDef.cell, cell.getContext())
                     ) : (
                       flexRender(cell.column.columnDef.cell, cell.getContext())
                     )}

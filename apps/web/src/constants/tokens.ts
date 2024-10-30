@@ -323,6 +323,45 @@ export const GOB = new Token(
   'GOB'
 )
 
+export const BONK = new Token(
+  ChainId.SMARTBCH,
+  '0x799351F408a51A0Ca5fdB4CD9E93157D8703b70A',
+  5,
+  'Bonk',
+  'Bonk'
+)
+
+export const SHIB = new Token(
+  ChainId.SMARTBCH,
+  '0x21BA72Ff5b25AdD1Dc3d42Cab987f1c4e0466814',
+  18,
+  'SHIB',
+  'SHIB'
+)
+
+
+export const PEPE = new Token(
+  ChainId.SMARTBCH,
+  '0x8CF81850Aa9D5a4E3Df180AFBaF0d2093A3F3379',
+  18,
+  'PEPE',
+  'PEPE'
+)
+export const DOGE = new Token(
+  ChainId.SMARTBCH,
+  '0x9Ca6F10D19CBDa52bBd615f7E1F1821386Abe3D1',
+  18,
+  'DOGE',
+  'DOGE'
+)
+export const FLOKI = new Token(
+  ChainId.SMARTBCH,
+  '0x6c6b3E0F1a7B3513c55E1f288C99d53441990613',
+  9,
+  'FLOKI',
+  'FLOKI'
+)
+
 export const BB_ETH = new Token(
   ChainId.SMARTBCH,
   '0xbb10B6D11db70f33417b08e0B87042275C933Bb9',

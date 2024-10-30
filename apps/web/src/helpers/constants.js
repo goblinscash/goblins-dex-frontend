@@ -18,6 +18,8 @@ import IconDoge from "assets/farmingAssets/icons/0xba2ae424d960c26247dd6c32edc70
 import IconUSDC from "assets/farmingAssets/icons/0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d.png";
 import IconBONK from "assets/farmingAssets/icons/0xa697e272a73744b343528c3bc4702f2565b2f422.png";
 import IconPEPE from "assets/farmingAssets/icons/0x25d887ce7a35172c62febfd67a1856f20faebb00.png";
+import IconPEPEBCH from "assets/farmingAssets/icons/0x8CF81850Aa9D5a4E3Df180AFBaF0d2093A3F3379.png";
+import IconBonkBCH from "assets/farmingAssets/icons/0x799351F408a51A0Ca5fdB4CD9E93157D8703b70A.png"
 
 export const cryptoData = [
   {
@@ -147,7 +149,11 @@ export const getSymbols = {
   "0xbc2f884680c95a02cea099da2f524b366d9028ba": Icon6,
   "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195": Icon7,
   "0xbbef77270d6425e113e1e37f008cf141a9fc215a": Icon8,
-  
+  "0x6c6b3E0F1a7B3513c55E1f288C99d53441990613": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x6c6b3E0F1a7B3513c55E1f288C99d53441990613/logo.png",
+  "0x9Ca6F10D19CBDa52bBd615f7E1F1821386Abe3D1": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x9Ca6F10D19CBDa52bBd615f7E1F1821386Abe3D1/logo.png",
+  "0x21BA72Ff5b25AdD1Dc3d42Cab987f1c4e0466814": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x21BA72Ff5b25AdD1Dc3d42Cab987f1c4e0466814/logo.png",
+  "0x799351f408a51a0ca5fdb4cd9e93157d8703b70a": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x799351F408a51A0Ca5fdB4CD9E93157D8703b70A/logo.png",
+  "0x8cf81850aa9d5a4e3df180afbaf0d2093a3f3379": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x8CF81850Aa9D5a4E3Df180AFBaF0d2093A3F3379/logo.png",
   "0x8ff795a6f4d97e7887c79bea79aba5cc76444adf": Icon7, //BCH-bsc
   "0xfb5b838b6cfeedc2873ab27866079ac55363d37e": Icon10,
   "0x55d398326f99059ff775485246999027b3197955": Icon9,
@@ -155,9 +161,7 @@ export const getSymbols = {
   "0xba2ae424d960c26247dd6c32edc70b295c744c43": IconDoge,
   "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d": IconUSDC, // for bsc
   "0xa697e272a73744b343528c3bc4702f2565b2f422": IconBONK,
-  "0x25d887ce7a35172c62febfd67a1856f20faebb00": IconPEPE
-  
-
+  "0x25d887ce7a35172c62febfd67a1856f20faebb00": IconPEPE,
   // 0x55d398326f99059ff775485246999027b3197955
 };
 

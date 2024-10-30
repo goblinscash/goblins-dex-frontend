@@ -22,6 +22,8 @@ import {
   DAI_POLYGON,
   ETH_BSC,
   GOB,
+  FLOKI,
+  BONK, SHIB, PEPE,DOGE,
   nativeOnChain,
   OP,
   PORTAL_ETH_CELO,
@@ -60,7 +62,7 @@ import {
   WDOGE_BCH,
   SHIB_BSC, //SHIB adding
   BONK_BSC, //Bonk
-  GOB_BSC
+  GOB_BSC,
 } from './tokens'
 
 type ChainTokenList = {
@@ -150,7 +152,10 @@ export const COMMON_BASES: ChainCurrencyList = {
     USDT_AVALANCHE,
     WETH_AVALANCHE,
   ],
-  [ChainId.SMARTBCH]: [nativeOnChain(ChainId.SMARTBCH), WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, USDT_SBCH, BC_BCH, GOB, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC, WDOGE_BCH],
+  [ChainId.SMARTBCH]: [
+    nativeOnChain(ChainId.SMARTBCH),
+     WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, 
+     USDT_SBCH, BC_BCH, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC, WDOGE_BCH, GOB, BONK,SHIB,PEPE,DOGE,FLOKI],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
