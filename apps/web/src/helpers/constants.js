@@ -146,8 +146,8 @@ export const getSymbols = {
   "0xbb2a35cc3e3ddb679fe30a82051633bc822e4191": Icon3,
   "0xbb10b6d11db70f33417b08e0b87042275c933bb9": Icon4,
   "0xbbb3700f33fcb64437dc28a7beb6b21f5cc76fb9": Icon5,
-  "0xbc2f884680c95a02cea099da2f524b366d9028ba": Icon6,
-  "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195": Icon7,
+  "0xbc2f884680c95a02cea099da2f524b366d9028ba": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0xBc2F884680c95A02cea099dA2F524b366d9028Ba/logo.png",
+  "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0xBc9bD8DDe6C5a8e1CBE293356E02f5984693b195/logo.png",
   "0xbbef77270d6425e113e1e37f008cf141a9fc215a": Icon8,
   
   "0x6c6b3e0f1a7b3513c55e1f288c99d53441990613": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x6c6b3E0F1a7B3513c55E1f288C99d53441990613/logo.png",

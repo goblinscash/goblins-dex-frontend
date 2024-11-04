@@ -5886,7 +5886,7 @@ export const TopPoolsDocument = gql`
     orderBy: $orderBy
     orderDirection: $orderDirection
     subgraphError: allow
-    where: { totalValueLockedUSD_gt: 100 }
+    where: { totalValueLockedUSD_gt: 100, totalValueLockedUSD_lt: 35069.55867600215622552345057170693 }
   ) {
     id
     txCount
