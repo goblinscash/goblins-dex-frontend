@@ -350,7 +350,7 @@ export const PEPE = new Token(
 export const DOGE = new Token(
   ChainId.SMARTBCH,
   '0x9Ca6F10D19CBDa52bBd615f7E1F1821386Abe3D1',
-  18,
+  8,
   'DOGE',
   'DOGE'
 )
