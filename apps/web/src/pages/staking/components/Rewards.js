@@ -38,7 +38,6 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
     }
   };
 
-  console.log(apr, "apr")
   return (
     <div className="lg:col-span-4 sm:col-span-6 col-span-12">
       <div

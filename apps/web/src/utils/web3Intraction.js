@@ -9,7 +9,7 @@ import TokenABI from "./ABI/TokenABI.json";
 import UniswapV3Factory from "./ABI/UniswapV3Factory.json";
 import UniswapV3Staker from "./ABI/UniswapV3Staker.json";
 
-import { makeByteData,makeByteDataForV3, toFixedCustm } from "../helpers/utils";
+import { makeByteData, makeByteDataForV3, toFixedCustm } from "../helpers/utils";
 
 class Web3Intraction {
   constructor(currentNetwork, provider) {
@@ -66,9 +66,9 @@ class Web3Intraction {
    */
   checkAllowance = async (tokenAmount, tokenAddress, approvalAddress) => {
     return new Promise(async (resolve, reject) => {
+      let tokenAmountWithDecimal = 0;
       try {
         let walletAddres = this.SIGNER.getAddress();
-
         if (tokenAddress && approvalAddress) {
           let tokenContract = this.getContract(
             JSON.stringify(TokenABI),
@@ -98,7 +98,6 @@ class Web3Intraction {
 
           // tokenAmount = parseInt(tokenAmount);
           tokenAllowence = tokenAllowence.toString();
-          let tokenAmountWithDecimal = 0;
 
           if (tokenDecimal == 18) {
             tokenAmountWithDecimal = ethers.utils.parseUnits(
@@ -115,12 +114,19 @@ class Web3Intraction {
               approvalAddress,
               tokenAmountWithDecimal.toString()
             );
-
             await txn.wait();
           }
-          resolve(tokenAmountWithDecimal);
+          setTimeout(()=>{
+            resolve(tokenAmountWithDecimal);
+          },5000)
         }
       } catch (error) {
+        if (error?.code === -32000) {
+          setTimeout(()=>{
+             resolve(tokenAmountWithDecimal);
+          },5000)
+          return
+        }
         console.log(error, "<====err in allowance");
         reject(error.reason || error.data?.message || error.message || error);
       }
@@ -511,74 +517,74 @@ class Web3Intraction {
   };
 
 
-    /**
-   * Mutli Call Function call for claim all  
-   * @param {array} keys [reward token, pool address,start time, endTime, refundee address]
-   * @param {string} tokenId token id
-   *
-   * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
-   */
-     mutliCallClaimAll = async (keys, tokenId, walletAddress) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          let contract = this.getContract(
-            JSON.stringify(this.contractDetails?.abi),
-            this.contractDetails?.contractAddress,
-            true
+  /**
+ * Mutli Call Function call for claim all  
+ * @param {array} keys [reward token, pool address,start time, endTime, refundee address]
+ * @param {string} tokenId token id
+ *
+ * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
+ */
+  mutliCallClaimAll = async (keys, tokenId, walletAddress) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let contract = this.getContract(
+          JSON.stringify(this.contractDetails?.abi),
+          this.contractDetails?.contractAddress,
+          true
+        );
+
+
+        let claimAllData = [];
+
+        for (let i = 0; i < keys.length; i++) {
+          const unStakeToken = await contract.interface.encodeFunctionData(
+            "unstakeToken",
+            [keys[i], tokenId]
           );
-  
+          claimAllData.push(unStakeToken);
 
-          let claimAllData = [];
-
-          for (let i = 0; i < keys.length; i++) {
-            const unStakeToken = await contract.interface.encodeFunctionData(
-              "unstakeToken",
-              [keys[i], tokenId]
-            );
-            claimAllData.push(unStakeToken);
-
-            const stakeToken = await contract.interface.encodeFunctionData(
-              "stakeToken",
-              [keys[i], tokenId]
-            );
-            claimAllData.push(stakeToken);
-
-    
-            const claimReward = await contract.interface.encodeFunctionData(
-              "claimReward",
-              [keys[i][0], walletAddress, 0]
-            );
-            claimAllData.push(claimReward);
-
-          }
-          // Encode the function calls
-         
-  
-          const multicallData = contract.interface.encodeFunctionData(
-            "multicall",
-            [claimAllData]
+          const stakeToken = await contract.interface.encodeFunctionData(
+            "stakeToken",
+            [keys[i], tokenId]
           );
-  
-          const tx = {
-            to: this.contractDetails?.contractAddress,
-            data: multicallData,
-            value: ethers.utils.parseEther("0"), // Amount of Ether to send with the transaction
-          };
-  
-          const response = await this.SIGNER.sendTransaction(tx);
-  
-          let receipt = await response.wait(); // Wait for the transaction to be mined
-  
-          resolve(receipt);
-        } catch (error) {
-          // console.log(error, "<===error in buy");
-          if (error?.code === -32603) {
-            return reject("insufficient funds for intrinsic transaction cost");
-          }
-          reject(error.reason || error.data?.message || error.message || error);
+          claimAllData.push(stakeToken);
+
+
+          const claimReward = await contract.interface.encodeFunctionData(
+            "claimReward",
+            [keys[i][0], walletAddress, 0]
+          );
+          claimAllData.push(claimReward);
+
         }
-      });
-    };
+        // Encode the function calls
+
+
+        const multicallData = contract.interface.encodeFunctionData(
+          "multicall",
+          [claimAllData]
+        );
+
+        const tx = {
+          to: this.contractDetails?.contractAddress,
+          data: multicallData,
+          value: ethers.utils.parseEther("0"), // Amount of Ether to send with the transaction
+        };
+
+        const response = await this.SIGNER.sendTransaction(tx);
+
+        let receipt = await response.wait(); // Wait for the transaction to be mined
+
+        resolve(receipt);
+      } catch (error) {
+        // console.log(error, "<===error in buy");
+        if (error?.code === -32603) {
+          return reject("insufficient funds for intrinsic transaction cost");
+        }
+        reject(error.reason || error.data?.message || error.message || error);
+      }
+    });
+  };
 
   /**
    * Mutli Call Function call for unstake and claim
@@ -634,68 +640,68 @@ class Web3Intraction {
   };
 
 
-   /**
-   * Mutli Call Function call for all unstake and claim 
-   * @param {array} keys [reward token, pool address,start time, endTime, refundee address]
-   * @param {string} tokenId token id
-   *
-   * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
-   */
-    mutliCallUnstakeAll = async (keys, tokenId, walletAddress) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          let contract = this.getContract(
-            JSON.stringify(this.contractDetails?.abi),
-            this.contractDetails?.contractAddress,
-            true
+  /**
+  * Mutli Call Function call for all unstake and claim 
+  * @param {array} keys [reward token, pool address,start time, endTime, refundee address]
+  * @param {string} tokenId token id
+  *
+  * @returns {Promise} Object (Transaction Hash, Contract Address) in Success or Error in Fail
+  */
+  mutliCallUnstakeAll = async (keys, tokenId, walletAddress) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let contract = this.getContract(
+          JSON.stringify(this.contractDetails?.abi),
+          this.contractDetails?.contractAddress,
+          true
+        );
+
+
+        let unStakeData = [];
+
+        for (let i = 0; i < keys.length; i++) {
+          const unStakeToken = await contract.interface.encodeFunctionData(
+            "unstakeToken",
+            [keys[i], tokenId]
           );
-  
+          unStakeData.push(unStakeToken);
 
-          let unStakeData = [];
 
-          for (let i = 0; i < keys.length; i++) {
-            const unStakeToken = await contract.interface.encodeFunctionData(
-              "unstakeToken",
-              [keys[i], tokenId]
-            );
-            unStakeData.push(unStakeToken);
-
-    
-            const claimReward = await contract.interface.encodeFunctionData(
-              "claimReward",
-              [keys[i][0], walletAddress, 0]
-            );
-            unStakeData.push(claimReward);
-
-          }
-          // Encode the function calls
-         
-  
-          const multicallData = contract.interface.encodeFunctionData(
-            "multicall",
-            [unStakeData]
+          const claimReward = await contract.interface.encodeFunctionData(
+            "claimReward",
+            [keys[i][0], walletAddress, 0]
           );
-  
-          const tx = {
-            to: this.contractDetails?.contractAddress,
-            data: multicallData,
-            value: ethers.utils.parseEther("0"), // Amount of Ether to send with the transaction
-          };
-  
-          const response = await this.SIGNER.sendTransaction(tx);
-  
-          let receipt = await response.wait(); // Wait for the transaction to be mined
-  
-          resolve(receipt);
-        } catch (error) {
-          // console.log(error, "<===error in buy");
-          if (error?.code === -32603) {
-            return reject("insufficient funds for intrinsic transaction cost");
-          }
-          reject(error.reason || error.data?.message || error.message || error);
+          unStakeData.push(claimReward);
+
         }
-      });
-    };
+        // Encode the function calls
+
+
+        const multicallData = contract.interface.encodeFunctionData(
+          "multicall",
+          [unStakeData]
+        );
+
+        const tx = {
+          to: this.contractDetails?.contractAddress,
+          data: multicallData,
+          value: ethers.utils.parseEther("0"), // Amount of Ether to send with the transaction
+        };
+
+        const response = await this.SIGNER.sendTransaction(tx);
+
+        let receipt = await response.wait(); // Wait for the transaction to be mined
+
+        resolve(receipt);
+      } catch (error) {
+        // console.log(error, "<===error in buy");
+        if (error?.code === -32603) {
+          return reject("insufficient funds for intrinsic transaction cost");
+        }
+        reject(error.reason || error.data?.message || error.message || error);
+      }
+    });
+  };
 
   ///unstake
 
@@ -942,16 +948,12 @@ class Web3Intraction {
           this.contractDetails.stakeContractAddress,
           true
         );
-
         let getStakingContract = await contract.stakingToken();
-
         let stakeAmount = await this.checkAllowance(
           amount,
           getStakingContract,
           this.contractDetails.stakeContractAddress
         );
-
-        console.log(stakeAmount, "<====stakeAmount");
 
         let tx = await contract.stake(stakeAmount);
         let receipt = await tx.wait();
@@ -963,7 +965,9 @@ class Web3Intraction {
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
-
+        if (error?.code === -32000) {
+          return resolve("success");
+        }
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -1418,7 +1422,7 @@ class Web3Intraction {
         );
         let getByteData = makeByteDataForV3(data);
 
-        
+
 
         const response = await contract.safeTransferFrom(
           walletAddress,
