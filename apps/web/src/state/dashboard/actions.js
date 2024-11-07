@@ -4,6 +4,7 @@ import axios from "axios";
 export const setCurrentNetwork = createAsyncThunk(
   "setCurrentNetwork",
   async (payload, Thunk) => {
+    console.log(payload, "payload<================")
     try {
       typeof window !== "undefined" &&
         localStorage.setItem("currentNetwork", JSON.stringify(payload));

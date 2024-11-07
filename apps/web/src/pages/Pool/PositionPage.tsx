@@ -616,7 +616,6 @@ function PositionPageContent() {
         const web3 = new Web3Intraction(currentNetwork, wallet.provider);
         let txn = await web3.compoundPool(tokenId, wallet.address);
 
-
         setCollectMigrationHash(txn.transactionHash)
 
         setCompoundCollecting(false)
