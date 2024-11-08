@@ -192,7 +192,7 @@ export const routingApi = createApi({
           const { getRouter, getClientSideQuote } = await import('lib/hooks/routing/clientSideSmartOrderRouter')
           const router = getRouter(args.tokenInChainId)
 
-          // console.log(args, router, CLIENT_PARAMS, "<=====args, router, CLIENT_PARAMS")
+          console.log(args, router, CLIENT_PARAMS, "<=====args, router, CLIENT_PARAMS")
           let quoteResult = await getClientSideQuote(args, router, CLIENT_PARAMS)
 
 console.log(quoteResult, "<====quoteResult")

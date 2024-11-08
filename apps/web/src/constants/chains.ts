@@ -53,7 +53,7 @@ export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [
   // ChainId.ARBITRUM_ONE,
   ChainId.BNB,
   // ChainId.AVALANCHE,
-  // ChainId.BASE,
+  ChainId.BASE,
   ChainId.SMARTBCH,
 ] as const
 
@@ -99,7 +99,7 @@ export const L2_CHAIN_IDS = [
   // ChainId.OPTIMISM_GOERLI,
   ChainId.SMARTBCH,
   ChainId.BNB,
-  // ChainId.BASE,
+  ChainId.BASE,
 ] as const
 
 export type SupportedL2ChainId = (typeof L2_CHAIN_IDS)[number]

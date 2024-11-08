@@ -350,7 +350,7 @@ export const PEPE = new Token(
 export const DOGE = new Token(
   ChainId.SMARTBCH,
   '0x9Ca6F10D19CBDa52bBd615f7E1F1821386Abe3D1',
-  18,
+  8,
   'DOGE',
   'DOGE'
 )
@@ -402,7 +402,10 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } =
     'WETH',
     'Wrapped Ether'
   ),
-  [ChainId.BASE]: new Token(ChainId.BASE, '0x4200000000000000000000000000000000000006', 18, 'WETH', 'Wrapped Ether'),
+  [ChainId.BASE]: new Token(ChainId.BASE, '0x4200000000000000000000000000000000000006',
+     18, 
+     'WETH', 
+     'Wrapped Ether'),
   [ChainId.ARBITRUM_ONE]: new Token(
     ChainId.ARBITRUM_ONE,
     '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
