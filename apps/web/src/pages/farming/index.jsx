@@ -278,7 +278,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (wallet.chainId && wallet.address) {
       dispatch(
-        Act.nftList({
+        Act.ownerNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: true,
@@ -286,7 +286,7 @@ const Dashboard = () => {
       );
 
       dispatch(
-        Act.nftList({
+        Act.contractNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: false,
@@ -294,7 +294,7 @@ const Dashboard = () => {
       );
 
       dispatch(
-        Act.nftList({
+        Act.withdrawNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
@@ -302,7 +302,7 @@ const Dashboard = () => {
       );
 
       dispatch(
-        Act.nftList({
+        Act.stakedNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           stakedNft: true,
@@ -610,6 +610,7 @@ const Dashboard = () => {
                       handleRestake={handleConfirm}
                       isBlocked={isBlocked}
                       handleSort={handleSort}
+                      myFarmload={myFarmload}
                     />
                   )}
                 </div>

@@ -116,15 +116,15 @@ class Web3Intraction {
             );
             await txn.wait();
           }
-          setTimeout(()=>{
+          setTimeout(() => {
             resolve(tokenAmountWithDecimal);
-          },5000)
+          }, 5000)
         }
       } catch (error) {
         if (error?.code === -32000) {
-          setTimeout(()=>{
-             resolve(tokenAmountWithDecimal);
-          },5000)
+          setTimeout(() => {
+            resolve(tokenAmountWithDecimal);
+          }, 5000)
           return
         }
         console.log(error, "<====err in allowance");
@@ -173,6 +173,15 @@ class Web3Intraction {
         console.log(error, "<===error in createIncentive");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
+        }
+
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
         }
         reject(error.reason || error.data?.message || error.message || error);
       }
@@ -236,12 +245,6 @@ class Web3Intraction {
           return;
         }
 
-        // let stakeTxn = await getSafeContract.safeTransferFrom(
-        //   walletAddress,
-        //   this.contractDetails.contractAddress,
-        //   tokenId,
-        //   getByteData
-        // );
 
         // Encode the function calls
         const approve = await contract.interface.encodeFunctionData("approve", [
@@ -282,6 +285,14 @@ class Web3Intraction {
         console.log(error, "<===error in stake");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
+        }
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
         }
 
         reject(error.reason || error.data?.message || error.message || error);
@@ -338,6 +349,14 @@ class Web3Intraction {
         // console.log(error, "<===error in buy");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
+        }
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
         }
         reject(error.reason || error.data?.message || error.message || error);
       }
@@ -511,6 +530,14 @@ class Web3Intraction {
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
+        }
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -581,6 +608,15 @@ class Web3Intraction {
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
+        }
+
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -634,6 +670,17 @@ class Web3Intraction {
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
+        }
+
+
+
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -698,6 +745,14 @@ class Web3Intraction {
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
+        }
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -725,6 +780,8 @@ class Web3Intraction {
           return reject("insufficient funds for intrinsic transaction cost");
         }
 
+
+
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -749,6 +806,14 @@ class Web3Intraction {
         // console.log(error, "<===error in buy");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
+        }
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
         }
 
         reject(error.reason || error.data?.message || error.message || error);
@@ -776,6 +841,14 @@ class Web3Intraction {
         // console.log(error, "<===error in buy");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
+        }
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
         }
 
         reject(error.reason || error.data?.message || error.message || error);
@@ -901,6 +974,14 @@ class Web3Intraction {
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
+        }
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -966,7 +1047,11 @@ class Web3Intraction {
           return reject("insufficient funds for intrinsic transaction cost");
         }
         if (error?.code === -32000) {
-          return resolve("success");
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
         }
         reject(error.reason || error.data?.message || error.message || error);
       }
@@ -1003,6 +1088,14 @@ class Web3Intraction {
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
+        }
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -1027,6 +1120,14 @@ class Web3Intraction {
       } catch (error) {
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
+        }
+
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
         }
         reject(error.reason || error.data?.message || error.message || error);
       }
@@ -1055,6 +1156,13 @@ class Web3Intraction {
           return reject("insufficient funds for intrinsic transaction cost");
         }
 
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
+        }
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -1142,15 +1250,13 @@ class Web3Intraction {
         let walletAddress = this.SIGNER.getAddress();
 
         let getStakingContract = await contract.stakingToken();
-        console.log(getStakingContract, "ch2")
+
 
         let getRewardsContract = await contract.rewardsToken();
         let stakeToken = await this.getTokenBalance(getStakingContract);
         let rewardToken = await this.getTokenSymbolAndDecimal(
           getRewardsContract
         );
-
-        console.log(rewardToken, "ch3")
 
         let stakedAmount = await contract.balanceOf(walletAddress);
         stakedAmount = stakedAmount.toString() / 10 ** stakeToken.tokenDecimal;
@@ -1345,6 +1451,13 @@ class Web3Intraction {
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
+        }
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -1404,6 +1517,13 @@ class Web3Intraction {
           return reject("insufficient funds for intrinsic transaction cost");
         }
 
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
+        }
         reject(error.reason || error.data?.message || error.message || error);
       }
     });
@@ -1442,6 +1562,13 @@ class Web3Intraction {
           return reject("insufficient funds for intrinsic transaction cost");
         }
 
+        if (error?.code === -32000) {
+
+          setTimeout(() => {
+            resolve(true)
+          }, 5000)
+          return;
+        }
         reject(error.reason || error.data?.message || error.message || error);
       }
     });

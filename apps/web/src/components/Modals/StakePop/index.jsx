@@ -13,7 +13,7 @@ import styles from "./StakePop.module.scss";
 import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 
-import { nftList, updateFarm } from "state/action";
+import { contractNft,  ownerNft, stakedNft, updateFarm, withdrawNft } from "state/action";
 import ActiveStakingTable from "./ActiveStakingTable";
 
 const customOption = (props) => (
@@ -105,7 +105,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       );
 
       dispatch(
-        nftList({
+        ownerNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: true,
@@ -113,7 +113,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       );
 
       dispatch(
-        nftList({
+        contractNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: false,
@@ -121,14 +121,14 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       );
 
       dispatch(
-        nftList({
+        withdrawNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
         })
       );
       dispatch(
-        nftList({
+        stakedNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           stakedNft: true,
@@ -180,7 +180,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       );
 
       dispatch(
-        nftList({
+        withdrawNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
@@ -188,7 +188,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       );
 
       dispatch(
-        nftList({
+        stakedNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           stakedNft: true,

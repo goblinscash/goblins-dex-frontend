@@ -202,9 +202,6 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
     }
   };
 
-
-  console.log(currentNetwork, "current----<")
-
   return (
     <>
       <div

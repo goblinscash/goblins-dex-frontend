@@ -5,8 +5,8 @@ import sortIcon from "assets/farmingAssets/Images/sort.svg";
 import { getSymbols } from "helpers/constants";
 import { toFixedCustm } from "helpers/utils";
 import Web3Intraction from "utils/web3Intraction";
-import { useSelector } from "react-redux";
-import { nftList, updateFarm } from "state/action";
+import { useDispatch, useSelector } from "react-redux";
+import {  updateFarm, withdrawNft } from "state/action";
 import { toast } from "react-toastify";
 
 function MyFarm({
@@ -17,9 +17,10 @@ function MyFarm({
   handleStaked,
   handleWithdraw,
   isBlocked,
-  handleRestake,
+  myFarmload,
   handleSort,
 }) {
+  const dispatch= useDispatch()
   const { currentNetwork } = useSelector((state) => state.dashboard);
 
   // adding funtion to skip confirmation modal
@@ -75,14 +76,14 @@ function MyFarm({
       );
 
       dispatch(
-        nftList({
+        withdrawNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
         })
       );
       // setLoading(false);
-      handleConfirm();
+      // handleConfirm();
       myFarmload();
     } catch (error) {
       console.log(error, "<====error");
