@@ -87,9 +87,10 @@ export const cryptoData = [
       "https://base.blockpi.network/v1/rpc/public"
     ],
     chainId: 8453,
-    rpcUrl: "https://base-rpc.publicnode.com",
+    rpcUrl: "https://1rpc.io/base",
     contractAddress: process.env.REACT_APP_BASE_STAKING_CONTRACT,
-    nftManagerContractAddress: process.env.REACT_APP_BASE_NFT_MANAGER_CONTRACT,
+    // nftManagerContractAddress: process.env.REACT_APP_BASE_NFT_MANAGER_CONTRACT,
+    nftManagerContractAddress: "0x3f11feF6633f9aF950426fEe3eaE6e68943E28A0",
     stakeContractAddress: "",
     migrationAddress: "",
     compoundAddress: process.env.REACT_APP_BASE_COMPOUND_CONTRACT,
