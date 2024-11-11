@@ -433,43 +433,49 @@ function AddLiquidity() {
 
   const handleSetFullRange = useCallback(() => {
     getSetFullRange()
-
     const minPrice = pricesAtLimit[Bound.LOWER]
+
     if (minPrice) searchParams.set('minPrice', minPrice.toSignificant(5))
     const maxPrice = pricesAtLimit[Bound.UPPER]
     if (maxPrice) searchParams.set('maxPrice', maxPrice.toSignificant(5))
+
     setSearchParams(searchParams)
   }, [getSetFullRange, pricesAtLimit, searchParams])
 
   // START: sync values with query string
   const oldSearchParams = usePrevious(searchParams)
   // use query string as an input to onInput handlers
-  // useEffect(() => {
-  //   const minPrice = searchParams.get('minPrice')
-  //   const oldMinPrice = oldSearchParams?.get('minPrice')
-  //   if (
-  //     minPrice &&
-  //     typeof minPrice === 'string' &&
-  //     !isNaN(minPrice as any) &&
-  //     (!oldMinPrice || oldMinPrice !== minPrice)
-  //   ) {
-  //     onLeftRangeInput(minPrice)
-  //   }
+  useEffect(() => {
+    const minPrice = searchParams.get('minPrice')
+    const oldMinPrice = oldSearchParams?.get('minPrice')
+    if (
+      minPrice &&
+      typeof minPrice === 'string' &&
+      !isNaN(minPrice as any) &&
+      (!oldMinPrice || oldMinPrice !== minPrice)
+    ) {
+      onLeftRangeInput(minPrice)
+    }
+    // disable eslint rule because this hook only cares about the url->input state data flow
+    // input state -> url updates are handled in the input handlers
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams])
 
-  // }, [searchParams])
-  // useEffect(() => {
-  //   const maxPrice = searchParams.get('maxPrice')
-  //   const oldMaxPrice = oldSearchParams?.get('maxPrice')
-  //   if (
-  //     maxPrice &&
-  //     typeof maxPrice === 'string' &&
-  //     !isNaN(maxPrice as any) &&
-  //     (!oldMaxPrice || oldMaxPrice !== maxPrice)
-  //   ) {
-  //     onRightRangeInput(maxPrice)
-  //   }
-
-  // }, [searchParams])
+  useEffect(() => {
+    const maxPrice = searchParams.get('maxPrice')
+    const oldMaxPrice = oldSearchParams?.get('maxPrice')
+    if (
+      maxPrice &&
+      typeof maxPrice === 'string' &&
+      !isNaN(maxPrice as any) &&
+      (!oldMaxPrice || oldMaxPrice !== maxPrice)
+    ) {
+      onRightRangeInput(maxPrice)
+    }
+    // disable eslint rule because this hook only cares about the url->input state data flow
+    // input state -> url updates are handled in the input handlers
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams])
   // END: sync values with query string
 
   const Buttons = () =>

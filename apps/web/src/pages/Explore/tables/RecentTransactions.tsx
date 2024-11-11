@@ -19,7 +19,7 @@ import { Transaction, TransactionType, useRecentTransactions } from 'graphql/the
 import { useActiveLocalCurrency } from 'hooks/useActiveLocalCurrency'
 import { useActiveLocale } from 'hooks/useActiveLocale'
 import { useOnClickOutside } from 'hooks/useOnClickOutside'
-import { useCallback, useMemo, useReducer, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import { ExternalLink as ExternalLinkIcon } from 'react-feather'
 import { useParams } from 'react-router-dom'
 import { useTheme } from 'styled-components'
@@ -47,9 +47,35 @@ export default function RecentTransactions() {
     TransactionType.MINT,
   ])
 
-  const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
-  const chainId = supportedChainIdFromGQLChain(chainName) 
-  // const chainId = 10000/
+
+  // for removing network filter
+  // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
+  // const chainId = supportedChainIdFromGQLChain(chainName) 
+  const [chainId, setChainId] = useState(10000);
+  const [chainName, setChainName] = useState("SMARTBCH" as String); 
+
+  const ChinInfo:any = {
+    56 : "BNB",
+    10000: "SMARTBCH"
+  }
+  console.log(chainId, "chainId", chainName)
+
+  useEffect(() => {
+    if (window?.ethereum) {
+      // @ts-ignore
+      window?.ethereum?.on('chainChanged', (chainId) => {
+        setChainId(parseInt(chainId, 16))
+        setChainName(ChinInfo[parseInt(chainId, 16)])
+      });
+      // @ts-ignore
+    window?.ethereum.request({ method: 'eth_chainId' })
+    // @ts-ignore
+    .then((chainId) => {
+      setChainId(parseInt(chainId, 16))
+      setChainName(ChinInfo[parseInt(chainId, 16)])
+    })    
+    }    
+  },[])
 
   const [sortState, setSortMethod] = useState<ExploreTxTableSortState>({
     sortBy: Transaction_OrderBy.Timestamp,

@@ -69,7 +69,6 @@ export default function CommonBases({
   const { data } = useCachedPortfolioBalancesQuery({ account })
   const portfolioBalanceUsd = data?.portfolios?.[0].tokensTotalDenominatedValue?.value
 
-
   return bases.length > 0 ? (
     <AutoRow gap="4px">
       {bases.map((currency: Currency) => {

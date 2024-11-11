@@ -48,10 +48,14 @@ const Staking = () => {
     try {
       setLoading(true);
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      console.log(web3, "web3")
       let detail = await web3.getDetailInfo();
+      console.log(details, "detail", currentNetwork)
       let data = await web3.getTokenBalance(
-        "0x47c61F29B1458d234409Ebbe4B6a70F3b16528EF"
+        currentNetwork?.chainId == 56 ? "0x701ACA29AE0F5d24555f1E8A6Cf007541291d110" :
+          "0x47c61F29B1458d234409Ebbe4B6a70F3b16528EF"
       );
+
 
       setDetails({
         ...detail,
@@ -174,7 +178,7 @@ const Staking = () => {
         GOBInPrice: Number(getGobPrice || 0).toFixed(2),
         WBCHInPrice: Number(priceData1?.pool?.token1Price || 0).toFixed(2),
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -198,6 +202,7 @@ const Staking = () => {
     getUsdPrice();
   }, []);
 
+
   return (
     <>
       {migration &&
@@ -208,7 +213,7 @@ const Staking = () => {
             balance={details.sGob || 0}
             getDetails={getDetails}
 
-            // load={load}
+          // load={load}
           />,
           document.body
         )}
@@ -294,16 +299,20 @@ const Staking = () => {
                     GOB Price: ${price?.GOBInPrice || 0}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    {details.sGob > 0 && (
+                    {details.sGob > 0 && currentNetwork?.chainId !== 56 && (
                       <button
                         onClick={handleMigrationPopup}
-                        className="btn  flex items-center justify-center commonBtn font-extrabold"
+                        className="btn flex items-center justify-center commonBtn font-extrabold"
                       >
                         Migration
                       </button>
                     )}
                     <a
-                      href="/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
+                      // href="/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
+                      href={
+                        currentNetwork?.chainId == 56 ? "/#/swap?inputCurrency=0x8ff795a6f4d97e7887c79bea79aba5cc76444adf&outputCurrency=0x701aca29ae0f5d24555f1e8a6cf007541291d110&chain=bsc"
+                        : "/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
+                      }
                       target="_blank"
                       onClick={(e) => (isBlocked ? e.preventDefault() : false)}
                     >

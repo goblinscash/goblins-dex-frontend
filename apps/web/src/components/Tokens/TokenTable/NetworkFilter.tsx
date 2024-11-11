@@ -61,6 +61,7 @@ export default function NetworkFilter() {
   const currentChainName = validateUrlChainParam(useParams().chainName)
   const chainId = supportedChainIdFromGQLChain(currentChainName)
 
+  console.log(currentChainName, "currentChainName+")
   const chainInfo = getChainInfo(chainId)
 
   return (

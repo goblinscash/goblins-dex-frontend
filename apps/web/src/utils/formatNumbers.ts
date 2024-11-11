@@ -56,7 +56,7 @@ const THREE_DECIMALS_NO_TRAILING_ZEROS: NumberFormatOptions = {
 
 const THREE_DECIMALS: NumberFormatOptions = {
   notation: 'standard',
-  maximumFractionDigits: 3,
+  maximumFractionDigits: 6,
   minimumFractionDigits: 3,
 }
 

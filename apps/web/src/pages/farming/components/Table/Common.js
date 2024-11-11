@@ -27,10 +27,8 @@ function CommonTable({
 
   // filtering the data which have same pool and rewardtoken address
  const newData = incentiveIds.filter(item => item.key.rewardToken !== item.key.pool);
-
-
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto" style={{overflow: "auto"}}>
       <table
         className="min-w-full transparent stipped"
         style={{ borderCollapse: "separate", borderSpacing: "0" }}
@@ -256,9 +254,9 @@ function CommonTable({
                           style={{ height: 30, width: 30 }}
                         />
                       ) : (
-                        item?.getPoolDetail?.token0Symbol + " / "
+                        item?.getPoolDetail?.token0Symbol + "/ "
                       )}
-
+                      {/* {console.log(item?.getPoolDetail?.token1Address, "***")} */}
                       {getSymbols[item?.getPoolDetail?.token1Address] ? (
                         <img
                           src={getSymbols[item?.getPoolDetail?.token1Address]}
@@ -301,7 +299,7 @@ function CommonTable({
                   style={{ background: "#002628" }}
                 >
                   <p className={` m-0  capitalize`}>
-                    {item.minWidth > 100
+                    {item.minWidth >= 100
                       ? Number(item.minWidth) / 100
                       : item.minWidth}
                     {"%"}

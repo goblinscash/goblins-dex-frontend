@@ -230,10 +230,11 @@ function L2Content({
         {!inline && (
           <RowBetween mb="16px">
             <StyledL2Badge>
-              <RowFixed gap="sm">
+              {/* todo check chain id then make it dynamic */}
+              {/* <RowFixed gap="sm">
                 <ChainLogo chainId={chainId} />
                 <ThemedText.SubHeaderSmall>{info.label}</ThemedText.SubHeaderSmall>
-              </RowFixed>
+              </RowFixed> */}
             </StyledL2Badge>
             <CloseIcon onClick={onDismiss} />
           </RowBetween>
