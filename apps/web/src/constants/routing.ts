@@ -123,7 +123,6 @@ export const COMMON_BASES: ChainCurrencyList = {
   ],
   [ChainId.OPTIMISM_GOERLI]: [nativeOnChain(ChainId.OPTIMISM_GOERLI), USDC_OPTIMISM_GOERLI],
 
-  [ChainId.BASE]: [nativeOnChain(ChainId.BASE), WRAPPED_NATIVE_CURRENCY[ChainId.BASE] as Token, USDC_BASE],
 
   [ChainId.POLYGON]: [
     nativeOnChain(ChainId.POLYGON),
@@ -144,6 +143,9 @@ export const COMMON_BASES: ChainCurrencyList = {
   [ChainId.CELO_ALFAJORES]: [nativeOnChain(ChainId.CELO_ALFAJORES), CUSD_CELO_ALFAJORES, CEUR_CELO_ALFAJORES],
 
   [ChainId.BNB]: [nativeOnChain(ChainId.BNB), DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC, FLOKI_BSC, PEPE_BSC, SHIB_BSC, BONK_BSC, GOB_BSC],
+
+  // Base chain
+  [ChainId.BASE]: [nativeOnChain(ChainId.BASE), WRAPPED_NATIVE_CURRENCY[ChainId.BASE] as Token, USDC_BASE],
 
   [ChainId.AVALANCHE]: [
     nativeOnChain(ChainId.AVALANCHE),
@@ -284,38 +286,6 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       fee: 0,
     },
 
-    // Adding Shib
-    // {
-    //   tokenA: "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D", // SHIB
-    //   tokenB: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
-    //   fee: 0,
-    // },
-    // {
-    //   tokenA: "BNB", // WBNB
-    //   tokenB: "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D", // SHIB
-    //   fee: 0,
-    // },
-    // {
-    //   tokenA: "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D", // SHIB
-    //   tokenB: "0x55d398326f99059fF775485246999027B3197955", // USDT
-    //   fee: 0,
-    // },
-    // Adding BONK
-    // {
-    //   tokenA: "0xA697e272a73744b343528C3Bc4702F2565b2F422", // BONK
-    //   tokenB: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
-    //   fee: 0,
-    // },
-    // {
-    //   tokenA: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB
-    //   tokenB: "0xA697e272a73744b343528C3Bc4702F2565b2F422", // BONK
-    //   fee: 0,
-    // },
-    // {
-    //   tokenA: "0xA697e272a73744b343528C3Bc4702F2565b2F422", // BONK
-    //   tokenB: "0x55d398326f99059fF775485246999027B3197955", // USDT
-    //   fee: 0,
-    // },
 
   ]
 

@@ -84,10 +84,12 @@ export const PageTabs = () => {
           <Trans>NFTs</Trans>
         </MenuItem>
       )}
-     
-
       {
-        !connectedChainId || (connectedChainId === 10000 || connectedChainId === 56)
+        !connectedChainId || (
+          connectedChainId === 10000 ||
+          connectedChainId === 56 ||
+          connectedChainId === 8453
+        )
           ?
 
           <>  <MenuItem href="/staking" >
@@ -105,9 +107,9 @@ export const PageTabs = () => {
         </MenuItem>
       </Box>
 
-      <MenuItem 
-      href="https://bridge.goblins.cash/"
-      target='_blank'
+      <MenuItem
+        href="https://bridge.goblins.cash/"
+        target='_blank'
       >
         Bridge
       </MenuItem>
