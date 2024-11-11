@@ -133,9 +133,9 @@ export const routingApi = createApi({
 
           const requestBody = {
             tokenInChainId,
-            tokenIn,
+            tokenInAddress: tokenIn,
             tokenOutChainId,
-            tokenOut,
+            tokenOutAddress: tokenOut,
             amount,
             sendPortionEnabled,
             type: isExactInput(tradeType) ? 'EXACT_INPUT' : 'EXACT_OUTPUT',
@@ -146,11 +146,13 @@ export const routingApi = createApi({
 
           const baseURL = gatewayDNSUpdateEnabled ? UNISWAP_GATEWAY_DNS_URL : UNISWAP_API_URL
           const response = await fetch({
-            method: 'POST',
+            method: 'GET',
             url: `${baseURL}/quote`,
             body: JSON.stringify(requestBody),
             headers: {
+              'Content-Type': 'application/json',
               'x-request-source': 'uniswap-web',
+              
             },
           })
 
