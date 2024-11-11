@@ -57,7 +57,7 @@ async function getQuote(
   const amount = CurrencyAmount.fromRawAmount(baseCurrency, JSBI.BigInt(amountRaw))
   // TODO (WEB-2055): explore initializing client side routing on first load (when amountRaw is null) if there are enough users using client-side router preference.
   const swapRoute = await router.route(amount, quoteCurrency, tradeType, { fee: { fee: new Percent(25, 10_000), recipient: interFaceFeeAddress[tokenIn.chainId] }, slippageTolerance: new Percent(15, 100), type: SwapType.UNIVERSAL_ROUTER }, routerConfig)
-// console.log(swapRoute, "<========swapRoute")
+console.log(swapRoute, "<========swapRoute")
   if (!swapRoute) {
     return { state: QuoteState.NOT_FOUND }
   }

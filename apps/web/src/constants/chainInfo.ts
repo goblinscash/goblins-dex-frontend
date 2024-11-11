@@ -231,7 +231,7 @@ const CHAIN_INFO: ChainInfoMap = {
     defaultListUrl: BASE_LIST,
     docs: 'https://docs.base.org',
     explorer: 'https://basescan.org/',
-    infoLink: 'https://info.uniswap.org/#/base/',
+    infoLink: 'https://info.goblins.cash/#/base/',
     label: 'Base',
     statusPage: 'https://status.base.org/',
     nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },

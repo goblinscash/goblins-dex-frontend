@@ -73,7 +73,35 @@ export const cryptoData = [
     explorerLink: "https://bscscan.com/",
     blockExplorerUrls: ["https://bscscan.com/"],
     nativeCurrency: { name: "Binance Coin", symbol: "BNB", decimals: 18 },
-  }  
+  },
+  // Base chain
+  {
+    label: "Base Chain",
+    symbol: "ETH",
+    name: "Base Ether",
+    type: "Base",
+    chainName: "Base Mainnet",
+    rpcUrls: [
+      "https://base.publicnode.com/",
+      "https://mainnet.base.org",
+      "https://base.blockpi.network/v1/rpc/public"
+    ],
+    chainId: 8453,
+    rpcUrl: "https://1rpc.io/base",
+    contractAddress: process.env.REACT_APP_BASE_STAKING_CONTRACT,
+    // nftManagerContractAddress: process.env.REACT_APP_BASE_NFT_MANAGER_CONTRACT,
+    nftManagerContractAddress: "0x3f11feF6633f9aF950426fEe3eaE6e68943E28A0",
+    stakeContractAddress: "",
+    migrationAddress: "",
+    compoundAddress: process.env.REACT_APP_BASE_COMPOUND_CONTRACT,
+    explorerLink: "https://basescan.org/",
+    blockExplorerUrls: ["https://basescan.org/"],
+    nativeCurrency: {
+      "name": "Base Ether",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+  }
 ];
 
 export const graphQLUrl = {
@@ -85,7 +113,7 @@ export const graphQLUrl = {
 export const priceGraphQl =
   "https://graph.dfd.cash/subgraphs/name/goblins/subgraph-v3";
 
-export const supportedChainIds = [56, 97, 10000];
+export const supportedChainIds = [56, 97, 10000, 8453];
 
 export const getUniqueToken = (data) => {
   const uniqueTokenIds = new Set(data.map((item) => item.tokenId));
@@ -149,7 +177,7 @@ export const getSymbols = {
   "0xbc2f884680c95a02cea099da2f524b366d9028ba": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0xBc2F884680c95A02cea099dA2F524b366d9028Ba/logo.png",
   "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0xBc9bD8DDe6C5a8e1CBE293356E02f5984693b195/logo.png",
   "0xbbef77270d6425e113e1e37f008cf141a9fc215a": Icon8,
-  
+
   "0x6c6b3e0f1a7b3513c55e1f288c99d53441990613": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x6c6b3E0F1a7B3513c55E1f288C99d53441990613/logo.png",
   "0x9ca6f10d19cbda52bbd615f7e1f1821386abe3d1": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x9Ca6F10D19CBDa52bBd615f7E1F1821386Abe3D1/logo.png",
   "0x21ba72ff5b25add1dc3d42cab987f1c4e0466814": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x21BA72Ff5b25AdD1Dc3d42Cab987f1c4e0466814/logo.png",
