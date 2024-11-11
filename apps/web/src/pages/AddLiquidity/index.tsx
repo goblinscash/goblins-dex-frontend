@@ -77,6 +77,8 @@ const StyledBodyWrapper = styled(BodyWrapper)<{ $hasExistingPosition: boolean }>
 
 export default function AddLiquidityWrapper() {
   const { chainId } = useWeb3React()
+
+
   if (isSupportedChain(chainId)) {
     return <AddLiquidity />
   } else {
@@ -437,41 +439,37 @@ function AddLiquidity() {
     const maxPrice = pricesAtLimit[Bound.UPPER]
     if (maxPrice) searchParams.set('maxPrice', maxPrice.toSignificant(5))
     setSearchParams(searchParams)
-  }, [getSetFullRange, pricesAtLimit, searchParams, setSearchParams])
+  }, [getSetFullRange, pricesAtLimit, searchParams])
 
   // START: sync values with query string
   const oldSearchParams = usePrevious(searchParams)
   // use query string as an input to onInput handlers
-  useEffect(() => {
-    const minPrice = searchParams.get('minPrice')
-    const oldMinPrice = oldSearchParams?.get('minPrice')
-    if (
-      minPrice &&
-      typeof minPrice === 'string' &&
-      !isNaN(minPrice as any) &&
-      (!oldMinPrice || oldMinPrice !== minPrice)
-    ) {
-      onLeftRangeInput(minPrice)
-    }
-    // disable eslint rule because this hook only cares about the url->input state data flow
-    // input state -> url updates are handled in the input handlers
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams])
-  useEffect(() => {
-    const maxPrice = searchParams.get('maxPrice')
-    const oldMaxPrice = oldSearchParams?.get('maxPrice')
-    if (
-      maxPrice &&
-      typeof maxPrice === 'string' &&
-      !isNaN(maxPrice as any) &&
-      (!oldMaxPrice || oldMaxPrice !== maxPrice)
-    ) {
-      onRightRangeInput(maxPrice)
-    }
-    // disable eslint rule because this hook only cares about the url->input state data flow
-    // input state -> url updates are handled in the input handlers
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams])
+  // useEffect(() => {
+  //   const minPrice = searchParams.get('minPrice')
+  //   const oldMinPrice = oldSearchParams?.get('minPrice')
+  //   if (
+  //     minPrice &&
+  //     typeof minPrice === 'string' &&
+  //     !isNaN(minPrice as any) &&
+  //     (!oldMinPrice || oldMinPrice !== minPrice)
+  //   ) {
+  //     onLeftRangeInput(minPrice)
+  //   }
+
+  // }, [searchParams])
+  // useEffect(() => {
+  //   const maxPrice = searchParams.get('maxPrice')
+  //   const oldMaxPrice = oldSearchParams?.get('maxPrice')
+  //   if (
+  //     maxPrice &&
+  //     typeof maxPrice === 'string' &&
+  //     !isNaN(maxPrice as any) &&
+  //     (!oldMaxPrice || oldMaxPrice !== maxPrice)
+  //   ) {
+  //     onRightRangeInput(maxPrice)
+  //   }
+
+  // }, [searchParams])
   // END: sync values with query string
 
   const Buttons = () =>
@@ -570,6 +568,8 @@ function AddLiquidity() {
     addressesAreEquivalent(owner, account) || addressesAreEquivalent(existingPositionDetails?.operator, account)
   const showOwnershipWarning = Boolean(hasExistingPosition && account && !ownsNFT)
 
+
+  console.log(noLiquidity, "<====noLiquidity")
   return (
     <>
       <ScrollablePage>
@@ -687,6 +687,7 @@ function AddLiquidity() {
 
               {!hasExistingPosition && (
                 <>
+
                   <DynamicSection gap="md" disabled={!feeAmount || invalidPool}>
                     <RowBetween>
                       <ThemedText.DeprecatedLabel>
@@ -764,6 +765,9 @@ function AddLiquidity() {
                   <DynamicSection gap="md" disabled={!feeAmount || invalidPool}>
                     {!noLiquidity ? (
                       <>
+
+
+                      <h1>sdfsfsdfdf</h1>
                         {Boolean(price && baseCurrency && quoteCurrency && !noLiquidity) && (
                           <AutoColumn gap="2px" style={{ marginTop: '0.5rem' }}>
                             <Trans>
@@ -798,6 +802,8 @@ function AddLiquidity() {
                       </>
                     ) : (
                       <AutoColumn gap="md">
+
+
                         {noLiquidity && (
                           <BlueCard
                             style={{
@@ -859,6 +865,7 @@ function AddLiquidity() {
                       </AutoColumn>
                     )}
                   </DynamicSection>
+
                 </>
               )}
               <div>

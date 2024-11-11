@@ -54,7 +54,6 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
 
     // Finding the selected pool by hash
     const selectedPool = addresses.find(address => address.hash === selectedHash);
-    console.log(selectedPool, "selectedPool")
 
     if (selectedPool) {
       setFields((prev) => ({
@@ -124,6 +123,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
       e.preventDefault();
       if (validateSubmit()) return;
 
+      
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       setLoading(true);
 
@@ -252,15 +252,20 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                         required
                       />
 
+
                       <button
                         type="button"
                         className="absolute icn right-2 top-1/2 transform -translate-y-1/2 text-gray-500" // Positioned inside input
                         style={{ right: 5, zIndex: 999, top: "50%" }}
                         onClick={toggleDropdown}
                       >
+
+
                         ▼
+
+
                       </button>
-                      {showSelect && (
+                     {showSelect && (
                         <select
                           className="absolute left-0 mt-2 form-control rounded w-full"
                           onChange={handleSelectChange}

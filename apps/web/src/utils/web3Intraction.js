@@ -479,23 +479,17 @@ class Web3Intraction {
           "claimReward",
           [keys[0], walletAddress, 0]
         );
-
         const multicallData = contract.interface.encodeFunctionData(
           "multicall",
           [[unStakeToken, stakeToken, claimReward]]
         );
-
         const tx = {
           to: this.contractDetails?.contractAddress,
           data: multicallData,
           value: ethers.utils.parseEther("0"), // Amount of Ether to send with the transaction
         };
-
         const response = await this.SIGNER.sendTransaction(tx);
-
         let receipt = await response.wait(); // Wait for the transaction to be mined
-        console.log(receipt, "<===receipt");
-
         resolve(receipt);
       } catch (error) {
         // console.log(error, "<===error in buy");

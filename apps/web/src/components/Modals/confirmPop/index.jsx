@@ -113,7 +113,6 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim }) => {
         );
         let stakes = await web3.getStakes(tokenId, detail.incentiveId);
 
-        console.log(stakes, tokenId, "<===stakes");
         if (
           stakes.liquidity > 0 ||
           stakes.secondsPerLiquidityInsideInitialX128 > 0

@@ -1,3 +1,4 @@
+import React from "react"
 import { Trans } from '@lingui/macro'
 import { Currency, Price, Token } from '@uniswap/sdk-core'
 import { FeeAmount } from '@uniswap/v3-sdk'
@@ -65,7 +66,7 @@ function InfoBox({ message, icon }: { message?: ReactNode; icon: ReactNode }) {
   )
 }
 
-export default function LiquidityChartRangeInput({
+ function LiquidityChartRangeInput({
   currencyA,
   currencyB,
   feeAmount,
@@ -159,6 +160,7 @@ export default function LiquidityChartRangeInput({
 
   const isUninitialized = !currencyA || !currencyB || (formattedData === undefined && !isLoading)
 
+
   return (
     <AutoColumn gap="md" style={{ minHeight: '200px' }}>
       {isUninitialized ? (
@@ -207,3 +209,6 @@ export default function LiquidityChartRangeInput({
     </AutoColumn>
   )
 }
+
+
+export default React.memo(LiquidityChartRangeInput)

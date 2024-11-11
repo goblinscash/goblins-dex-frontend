@@ -117,11 +117,8 @@ function TokenTable({
   const tokenTableValues: any[] | undefined = useMemo(
     () =>
       tokens?.map((token) => {
-
         const greatestDateObject = token.tokenDayData && token.tokenDayData.length ? token.tokenDayData.reduce((max: any, obj: any) => obj.date > max.date ? obj : max, token.tokenDayData[0]) : null;
-
-        const tokenSortIndex = tokenSortRank[token?.id ?? NATIVE_CHAIN_ID]
-
+const tokenSortIndex = tokenSortRank[token?.id ?? NATIVE_CHAIN_ID]
         return {
           index: tokenSortIndex,
           tokenDescription: <TokenDescription token={token} />,
