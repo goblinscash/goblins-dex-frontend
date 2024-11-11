@@ -146,7 +146,7 @@ export const routingApi = createApi({
 
           const baseURL = gatewayDNSUpdateEnabled ? UNISWAP_GATEWAY_DNS_URL : UNISWAP_API_URL
           const response = await fetch({
-            method: 'GET',
+            method: 'POST',
             url: `${baseURL}/quote`,
             body: JSON.stringify(requestBody),
             headers: {
