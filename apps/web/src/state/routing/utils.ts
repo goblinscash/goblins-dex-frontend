@@ -192,7 +192,7 @@ function getClassicTradeDetails(
 
 
   const classicQuote =
-    data.routing === URAQuoteType.CLASSIC ? data.quote : data.allQuotes.find(isClassicQuoteResponse)?.quote
+    data.routing === URAQuoteType.CLASSIC ? data.quote : data.allQuotes?.find(isClassicQuoteResponse)?.quote
 
 
 

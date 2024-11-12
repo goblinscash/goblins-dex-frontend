@@ -62,7 +62,9 @@ console.log(swapRoute, "<========swapRoute")
     return { state: QuoteState.NOT_FOUND }
   }
 
-  return transformSwapRouteToGetQuoteResult(tradeType, amount, swapRoute, tokenIn.chainId)
+  const re = transformSwapRouteToGetQuoteResult(tradeType, amount, swapRoute, tokenIn.chainId)
+  console.log(re, "re")
+  return re
 }
 
 export async function getClientSideQuote(

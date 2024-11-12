@@ -7,6 +7,7 @@ import { logSwapQuoteRequest } from 'tracing/swapFlowLoggers'
 import { trace } from 'tracing/trace'
 
 import {
+  ClassicQuoteData,
   GetQuoteArgs,
   INTERNAL_ROUTER_PREFERENCE_PRICE,
   QuoteIntent,
@@ -141,20 +142,36 @@ export const routingApi = createApi({
             type: isExactInput(tradeType) ? 'EXACT_INPUT' : 'EXACT_OUTPUT',
             intent:
               args.routerPreference === INTERNAL_ROUTER_PREFERENCE_PRICE ? QuoteIntent.Pricing : QuoteIntent.Quote,
-            configs: getRoutingAPIConfig(args),
+            // configs: getRoutingAPIConfig(args),
           }
 
           const baseURL = gatewayDNSUpdateEnabled ? UNISWAP_GATEWAY_DNS_URL : UNISWAP_API_URL
-          const response = await fetch({
-            method: 'POST',
-            url: `${baseURL}/quote`,
-            body: JSON.stringify(requestBody),
-            headers: {
-              'Content-Type': 'application/json',
-              'x-request-source': 'uniswap-web',
-              
-            },
-          })
+
+          const params = {
+            tokenInAddress: tokenIn,
+            tokenInChainId: tokenInChainId.toString(),
+            tokenOutAddress: tokenOut,
+            tokenOutChainId: tokenOutChainId.toString(),
+            amount: amount.toString(),
+            type: isExactInput(tradeType) ? 'exactIn' : 'exactOut'
+          };
+
+
+          const queryString = new URLSearchParams(params).toString();
+          const fullUrl = `${baseURL}/quote?${queryString}`;
+
+          const response = await fetch(fullUrl)
+
+
+          // const response = await fetch({
+          //   method: 'POST',
+          //   url: `${baseURL}/quote`,
+          //   body: JSON.stringify(requestBody),
+          //   headers: {
+          //     'x-request-source': 'uniswap-web',
+
+          //   },
+          // })
 
           if (response.error) {
             try {
@@ -179,17 +196,43 @@ export const routingApi = createApi({
             }
           }
 
-          const uraQuoteResponse = response.data as URAQuoteResponse
-          const tradeResult = await transformQuoteToTrade(args, uraQuoteResponse, QuoteMethod.ROUTING_API)
-          return { data: { ...tradeResult, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration } }
+
+          interface Result {
+            state: QuoteState;
+            data: {
+              routing: URAQuoteType;
+              quote: URAQuoteResponse;
+              allQuotes: any[];
+            };
+          }
+
+
+          const result: Result = { state: QuoteState.SUCCESS, data: { routing: URAQuoteType.CLASSIC, quote: response.data as URAQuoteResponse, allQuotes: [] } }
+
+          let matchedPair = SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId] ? findPair(args.tokenInAddress, args.tokenOutAddress, SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId]) : 0
+          if (result.data) {
+            (result.data.quote as any)["portionBips"] = matchedPair ? matchedPair.fee : (result.data.quote as any)["portionBips"];
+          }
+          if (result.state === QuoteState.SUCCESS) {
+            //@ts-ignore
+            const trade = await transformQuoteToTrade(args, result.data, QuoteMethod.CLIENT_SIDE_FALLBACK);
+            return {
+              data: { ...trade, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration },
+            }
+          } else {
+            return { data: { ...result, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration } }
+          }
+          //   const uraQuoteResponse = response.data as URAQuoteResponse
+          //   const tradeResult = await transformQuoteToTrade(args, uraQuoteResponse, QuoteMethod.ROUTING_API)
+          //   return { data: { ...tradeResult, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration } }
         } catch (error: any) {
           console.warn(
-            `GetQuote failed on Unified Routing API, falling back to client: ${
-              error?.message ?? error?.detail ?? error
+            `GetQuote failed on Unified Routing API, falling back to client: ${error?.message ?? error?.detail ?? error
             }`
           )
         }
 
+        console.log("|||||")
         try {
           const { getRouter, getClientSideQuote } = await import('lib/hooks/routing/clientSideSmartOrderRouter')
           const router = getRouter(args.tokenInChainId)
@@ -197,7 +240,7 @@ export const routingApi = createApi({
           console.log(router, "<=====args, router, CLIENT_PARAMS")
           let quoteResult = await getClientSideQuote(args, router, CLIENT_PARAMS)
 
-console.log(quoteResult, "<====quoteResult")
+          console.log(quoteResult, "<====quoteResult")
 
           let matchedPair = SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId] ? findPair(args.tokenInAddress, args.tokenOutAddress, SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId]) : 0
           if (quoteResult.data) {
