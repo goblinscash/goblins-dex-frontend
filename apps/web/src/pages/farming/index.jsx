@@ -57,6 +57,7 @@ const Dashboard = () => {
     sortKey: "startTime",
     sortOrder: "asc",
   });
+
   const [stake, setStake] = useState({
     isOpen: false,
     detail: null,
@@ -106,6 +107,8 @@ const Dashboard = () => {
     }));
   };
 
+
+  // old one
   const handleConfirm = (item, isRestake, isClaim) => {
     if (isBlocked)
       return toast.error("Our Product is unavailable in your location");
@@ -117,6 +120,7 @@ const Dashboard = () => {
       isClaim: isClaim || false,
     }));
   };
+
 
   const handleUnStake = (item) => {
     if (isBlocked)
@@ -194,38 +198,44 @@ const Dashboard = () => {
     if (!search) return;
 
     let data =
-      activeTab == 2
+      activeTab === 2
         ? myFarm
         : incentiveIds.filter((data) =>
-            activeTab == 1
+            activeTab === 1
               ? !data.isEnded
-              : activeTab == 3
+              : activeTab === 3
               ? data.isEnded
-              : data.isEnded == "xyz"
+              : data.isEnded === "xyz"
           );
 
-    let filteredData = data.filter(
-      (item) =>
-        item.getPoolDetail.token0Symbol
-          .toLowerCase()
-          .includes(search.toLowerCase()) ||
-        item.getPoolDetail.token1Symbol
-          .toLowerCase()
-          .includes(search.toLowerCase())
-    );
+          let filteredData = data?.filter((item) => {
+            const token0Symbol = item.getPoolDetail.token0Symbol || "";
+            const token1Symbol = item.getPoolDetail.token1Symbol || "";
+      
+            return (
+              token0Symbol.toLowerCase().includes(search.toLowerCase()) ||
+              token1Symbol.toLowerCase().includes(search.toLowerCase())
+            );
+          });
+          console.log("Filtered data length:", filteredData.length);
 
-    activeTab == 2
-      ? setFilteredMyFarm(filteredData)
-      : setFilteredIncentiveIds(filteredData);
+          if (activeTab === 2) {
+            setFilteredMyFarm(filteredData);
+          } else {
+            setFilteredIncentiveIds(filteredData);
+          }
   }
 
   function clearSearch(e) {
     e.preventDefault();
     if (!search) return;
 
-    activeTab == 2
-      ? setFilteredMyFarm(myFarm)
-      : setFilteredIncentiveIds(incentiveIds);
+    // Reset filtered data based on activeTab
+    if (activeTab === 2) {
+      setFilteredMyFarm(myFarm);
+    } else {
+      setFilteredIncentiveIds(incentiveIds);
+    }
 
     setSearch("");
   }
@@ -268,7 +278,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (wallet.chainId && wallet.address) {
       dispatch(
-        Act.nftList({
+        Act.ownerNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: true,
@@ -276,7 +286,7 @@ const Dashboard = () => {
       );
 
       dispatch(
-        Act.nftList({
+        Act.contractNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: false,
@@ -284,7 +294,7 @@ const Dashboard = () => {
       );
 
       dispatch(
-        Act.nftList({
+        Act.withdrawNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
@@ -292,7 +302,7 @@ const Dashboard = () => {
       );
 
       dispatch(
-        Act.nftList({
+        Act.stakedNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           stakedNft: true,
@@ -326,12 +336,14 @@ const Dashboard = () => {
   }, [wallet.chainId, activeTab]);
 
   useEffect(() => {
-    activeTab == 2
-      ? setFilteredMyFarm(myFarm)
-      : setFilteredIncentiveIds(incentiveIds);
-
+    // Reset filtered data when activeTab changes
+    if (activeTab === 2) {
+      setFilteredMyFarm(myFarm);
+    } else {
+      setFilteredIncentiveIds(incentiveIds);
+    }
     setSearch("");
-  }, [activeTab]);
+  }, [activeTab, myFarm, incentiveIds]);
 
   useEffect(() => {
     setFilteredIncentiveIds(incentiveIds);
@@ -598,6 +610,7 @@ const Dashboard = () => {
                       handleRestake={handleConfirm}
                       isBlocked={isBlocked}
                       handleSort={handleSort}
+                      myFarmload={myFarmload}
                     />
                   )}
                 </div>

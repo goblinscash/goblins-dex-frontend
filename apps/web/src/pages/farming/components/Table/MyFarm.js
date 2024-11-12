@@ -1,23 +1,105 @@
+import { useState } from "react";
 import moment from "moment";
-
 // img
 import loader from "assets/farmingAssets/Images/loading.gif";
 import sortIcon from "assets/farmingAssets/Images/sort.svg";
-
 import { getSymbols } from "helpers/constants";
 import { toFixedCustm } from "helpers/utils";
+import Web3Intraction from "utils/web3Intraction";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFarm, withdrawNft } from "state/action";
+import { toast } from "react-toastify";
 
 function MyFarm({
   wallet,
   loading,
   incentiveIds,
-  handleUnStake,
+  handleUnStake,  //used before with confirmation pop up
   handleStaked,
   handleWithdraw,
   isBlocked,
-  handleRestake,
+  myFarmload,
   handleSort,
 }) {
+  const dispatch = useDispatch()
+  const { currentNetwork } = useSelector((state) => state.dashboard);
+
+  const [internalLoading, setInternalLoading] = useState(false)
+
+  // adding funtion to skip confirmation modal
+  const handleClaim = async (e, detail) => {
+    try {
+      e.preventDefault();
+      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      setInternalLoading(true)
+      await web3.mutliCallReStake(
+        [
+          detail.key.rewardToken,
+          detail.key.pool,
+          detail.key.startTime,
+          detail.key.endTime,
+          detail.key.refundee,
+        ],
+        detail.tokenId,
+        wallet.address
+      );
+    } catch (error) {
+      console.log(error, "<====error");
+      toast.error(error);
+    }finally{
+      setInternalLoading(false)
+
+    }
+  };
+
+  const handleunStake = async (e, detail) => {
+    try {
+      e.preventDefault();
+      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      setInternalLoading(true);
+      await web3.mutliCallUnstake(
+        [
+          detail.key.rewardToken,
+          detail.key.pool,
+          detail.key.startTime,
+          detail.key.endTime,
+          detail.key.refundee,
+        ],
+        detail.tokenId,
+        wallet.address
+      );
+
+      dispatch(
+        updateFarm({
+          data: {
+            chainId: wallet.chainId,
+            type: "Unstake",
+            walletAddress: wallet.address,
+            incentiveId: detail.incentiveId,
+          },
+        })
+      );
+
+      dispatch(
+        withdrawNft({
+          chainId: wallet.chainId,
+          walletAddress: wallet.address,
+          withdrawNft: true,
+        })
+      );
+
+      // handleConfirm();
+      myFarmload();
+    } catch (error) {
+      console.log(error, "<====error");
+      toast.error(error);
+    } finally {
+      setInternalLoading(false)
+    }
+  };
+
+
+
   return (
     <>
       <div className="py-4 text-right">
@@ -156,7 +238,7 @@ function MyFarm({
                   </div>
                 </td>
               </tr>
-            ) : loading ? (
+            ) : loading  ? (
               <tr>
                 <td
                   className="py-3 px-6 text-left border-b border-gray-600 transparent"
@@ -236,13 +318,10 @@ function MyFarm({
                           />
                         ) : (
 
-                       <>
-                       
-                       <p>{item?.getPoolDetail?.token1Symbol}</p>
-          
+                          <>
 
-
-                       </>
+                            <p>{item?.getPoolDetail?.token1Symbol}</p>
+                          </>
                         )}
 
                         <span className="ml-2">
@@ -300,6 +379,7 @@ function MyFarm({
                     </p>
                   </td>
 
+                  {/* ----------Removing confirmation modal---------- */}
                   <td
                     colSpan={6}
                     className="py-3 px-6 text-left border-b border-gray-600 transparent"
@@ -309,22 +389,24 @@ function MyFarm({
                       <div className="flex items-center">
                         <p className={`   capitalize mr-2`}>
                           <button
-                            onClick={(e) => handleRestake(item, true)}
+                            // onClick={(e) => handleRestake(item, true)}  //previous---
+                            onClick={(e) => handleClaim(e, item)}
                             className="btn flex items-center commonBtn justify-center rounded"
                             style={{ background: "#00ff00" }}
-                            disabled={isBlocked || item.rewardInfo?.reward <= 0}
+                            disabled={isBlocked || item.rewardInfo?.reward <= 0 || internalLoading}
                           >
-                            {"Claim"}
+                            {!internalLoading ? "Claim":"Loading..."}
                           </button>
                         </p>
                         <p className={`   capitalize mr-2`}>
                           <button
-                            onClick={(e) => handleUnStake(item, true)}
+                            // onClick={(e) => handleUnStake(item, true)} //previous---
+                            onClick={(e) => handleunStake(e, item)}
                             className="btn flex items-center commonBtn justify-center rounded"
                             style={{ background: "#00ff00" }}
-                            disabled={isBlocked || item.isUnstaked}
+                            disabled={isBlocked || item.isUnstaked || internalLoading}
                           >
-                            {"UnStake"}
+                             {!internalLoading ? "Unstake":"Loading..."}
                           </button>
                         </p>
                       </div>

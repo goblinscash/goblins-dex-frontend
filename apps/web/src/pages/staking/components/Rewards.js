@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import styles from "../staking.module.scss";
 
 // image
-import logo from "assets/farmingAssets/Images/wbchlogo.png";
+import wbchlogo from "assets/farmingAssets/Images/wbchlogo.png";
 // import logo from "components/Logo/ChainSymbols/sbch.svg";
 
 //hooks && helpers
@@ -37,6 +37,7 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
       console.log(error, "<====error");
     }
   };
+
   return (
     <div className="lg:col-span-4 sm:col-span-6 col-span-12">
       <div
@@ -49,7 +50,7 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
               {toCommas(Number(details?.earnedAmount || 0).toFixed(4)) + " "}
               {details?.rewardSymbol ? details.rewardSymbol : ""}
               <img
-                src={logo}
+                src={details?.rewardSymbol === "WBCH" ? wbchlogo : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartchain/assets/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf/logo.png"}
                 height={100}
                 className="max-w-full flex-shrink-0 object-contain ms-2"
                 width={100}

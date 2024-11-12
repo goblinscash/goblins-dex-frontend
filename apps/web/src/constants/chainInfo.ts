@@ -188,16 +188,27 @@ const CHAIN_INFO: ChainInfoMap = {
     defaultListUrl: CELO_LIST,
   },
   [ChainId.BNB]: {
+    // @ts-ignore
     networkType: NetworkType.L1,
+    // @ts-ignore
     blockWaitMsBeforeWarning: ms(`10m`),
+    // @ts-ignore
     bridge: 'https://cbridge.celer.network/1/56',
+    // @ts-ignore
     docs: 'https://docs.bnbchain.org/',
+    // @ts-ignore
     explorer: 'https://bscscan.com/',
-    infoLink: 'https://info.uniswap.org/#/bnb/',
+    // @ts-ignore
+    infoLink: 'https://info.goblins.cash/#/bnb/',
+    // @ts-ignore
     label: 'BNB Chain',
+    // @ts-ignore
     nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
+    // @ts-ignore
     defaultListUrl: PLASMA_BNB_LIST,
+    // @ts-ignore
     color: darkTheme.chain_56,
+    // @ts-ignore
     backgroundColor: darkTheme.chain_56_background,
   },
   [ChainId.AVALANCHE]: {

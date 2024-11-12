@@ -61,6 +61,7 @@ export function PoolDetailsTransactionsTable({
     sortBy: Transaction_OrderBy.Timestamp,
     sortDirection: OrderDirection.Desc,
   })
+
   const { transactions, loading, loadMore, error } = usePoolTransactions(
     poolAddress,
     chainId,

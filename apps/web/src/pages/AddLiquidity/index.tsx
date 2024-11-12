@@ -431,11 +431,12 @@ function AddLiquidity() {
 
   const handleSetFullRange = useCallback(() => {
     getSetFullRange()
-
     const minPrice = pricesAtLimit[Bound.LOWER]
+
     if (minPrice) searchParams.set('minPrice', minPrice.toSignificant(5))
     const maxPrice = pricesAtLimit[Bound.UPPER]
     if (maxPrice) searchParams.set('maxPrice', maxPrice.toSignificant(5))
+
     setSearchParams(searchParams)
   }, [getSetFullRange, pricesAtLimit, searchParams, setSearchParams])
 
@@ -457,6 +458,7 @@ function AddLiquidity() {
     // input state -> url updates are handled in the input handlers
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams])
+
   useEffect(() => {
     const maxPrice = searchParams.get('maxPrice')
     const oldMaxPrice = oldSearchParams?.get('maxPrice')

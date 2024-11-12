@@ -23,19 +23,82 @@ const slice = createSlice({
   initialState: { ...initialState },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(Act.nftList.pending, (state, action) => ({
+    // builder.addCase(Act.nftList.pending, (state, action) => ({
+    //   ...state,
+    //   loading: true,
+    // }));
+    // builder.addCase(Act.nftList.fulfilled, (state, { payload }) => ({
+    //   ...state,
+    //   loading: false,
+    //   ownerNftlist: payload.ownerNft ? payload.data : state.ownerNftlist,
+    //   stakedNftlist: payload.stakedNft ? payload.data : state.stakedNftlist,
+    //   withdrawNftlist: payload.withdrawNft ? payload.data : state.withdrawNftlist,
+    //   contractNftlist: payload.ownerNft === false ? payload.data : state.contractNftlist,
+    // }));
+    // builder.addCase(Act.nftList.rejected, (state, action) => ({
+    //   ...state,
+    //   loading: false,
+    // }));
+
+
+    builder.addCase(Act.ownerNft.pending, (state, action) => ({
       ...state,
       loading: true,
     }));
-    builder.addCase(Act.nftList.fulfilled, (state, { payload }) => ({
+    builder.addCase(Act.ownerNft.fulfilled, (state, { payload }) => ({
       ...state,
       loading: false,
-      ownerNftlist: payload.ownerNft ? payload.data : state.ownerNftlist,
-      stakedNftlist: payload.stakedNft ? payload.data : state.stakedNftlist,
-      withdrawNftlist: payload.withdrawNft ? payload.data : state.withdrawNftlist,
-      contractNftlist: payload.ownerNft === false ? payload.data : state.contractNftlist,
+      ownerNftlist: payload,
+
     }));
-    builder.addCase(Act.nftList.rejected, (state, action) => ({
+    builder.addCase(Act.ownerNft.rejected, (state, action) => ({
+      ...state,
+      loading: false,
+    }));
+
+
+    builder.addCase(Act.stakedNft.pending, (state, action) => ({
+      ...state,
+      loading: true,
+    }));
+    builder.addCase(Act.stakedNft.fulfilled, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      stakedNftlist: payload,
+
+    }));
+    builder.addCase(Act.stakedNft.rejected, (state, action) => ({
+      ...state,
+      loading: false,
+    }));
+
+
+    builder.addCase(Act.withdrawNft.pending, (state, action) => ({
+      ...state,
+      loading: true,
+    }));
+    builder.addCase(Act.withdrawNft.fulfilled, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      withdrawNftlist: payload,
+
+    }));
+    builder.addCase(Act.withdrawNft.rejected, (state, action) => ({
+      ...state,
+      loading: false,
+    }));
+
+    builder.addCase(Act.contractNft.pending, (state, action) => ({
+      ...state,
+      loading: true,
+    }));
+    builder.addCase(Act.contractNft.fulfilled, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      contractNftlist: payload,
+
+    }));
+    builder.addCase(Act.contractNft.rejected, (state, action) => ({
       ...state,
       loading: false,
     }));

@@ -13,7 +13,7 @@ import styles from "./StakePop.module.scss";
 import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 
-import { nftList, updateMyFarm } from "state/action";
+import {  stakedNft, updateMyFarm, withdrawNft } from "state/action";
 
 const customOption = (props) => (
   <div className="custom-option flex items-center py-2" {...props.innerProps}>
@@ -108,7 +108,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
       );
 
       dispatch(
-        nftList({
+        stakedNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           stakedNft: true,
@@ -116,7 +116,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
       );
 
       dispatch(
-        nftList({
+        withdrawNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,

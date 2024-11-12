@@ -10,7 +10,7 @@ import styles from "./StakePop.module.scss";
 //helpers
 import {useWallet} from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
-import { nftList } from "state/action";
+import {  ownerNft, withdrawNft } from "state/action";
 
 const customOption = (props) => (
   <div className="custom-option flex items-center py-2" {...props.innerProps}>
@@ -53,7 +53,7 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
       await web3.withdrawToken(tokenId, wallet.address);
 
       dispatch(
-        nftList({
+        ownerNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: true,
@@ -61,7 +61,7 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
       );
 
       dispatch(
-        nftList({
+        withdrawNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,

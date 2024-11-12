@@ -22,6 +22,8 @@ import {
   DAI_POLYGON,
   ETH_BSC,
   GOB,
+  FLOKI,
+  BONK, SHIB, PEPE,DOGE,
   nativeOnChain,
   OP,
   PORTAL_ETH_CELO,
@@ -57,7 +59,10 @@ import {
   DOGE_BSC,
   FLOKI_BSC,
   PEPE_BSC,
-  WDOGE_BCH
+  // WDOGE_BCH,
+  SHIB_BSC, //SHIB adding
+  BONK_BSC, //Bonk
+  GOB_BSC,
 } from './tokens'
 
 type ChainTokenList = {
@@ -67,7 +72,6 @@ type ChainTokenList = {
 type ChainCurrencyList = {
   readonly [chainId: number]: Currency[]
 }
-
 
 type FeePairs = {
   readonly [chainId: number]: { tokenA: string; tokenB: string; fee: number; }[];
@@ -139,7 +143,7 @@ export const COMMON_BASES: ChainCurrencyList = {
   [ChainId.CELO]: [nativeOnChain(ChainId.CELO), CEUR_CELO, CUSD_CELO, PORTAL_ETH_CELO, PORTAL_USDC_CELO, WBTC_CELO],
   [ChainId.CELO_ALFAJORES]: [nativeOnChain(ChainId.CELO_ALFAJORES), CUSD_CELO_ALFAJORES, CEUR_CELO_ALFAJORES],
 
-  [ChainId.BNB]: [nativeOnChain(ChainId.BNB), DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC,FLOKI_BSC, PEPE_BSC],
+  [ChainId.BNB]: [nativeOnChain(ChainId.BNB), DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC, FLOKI_BSC, PEPE_BSC, SHIB_BSC, BONK_BSC, GOB_BSC],
 
   [ChainId.AVALANCHE]: [
     nativeOnChain(ChainId.AVALANCHE),
@@ -148,7 +152,10 @@ export const COMMON_BASES: ChainCurrencyList = {
     USDT_AVALANCHE,
     WETH_AVALANCHE,
   ],
-  [ChainId.SMARTBCH]: [nativeOnChain(ChainId.SMARTBCH), WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, USDT_SBCH, BC_BCH, GOB, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC, WDOGE_BCH ],
+  [ChainId.SMARTBCH]: [
+    nativeOnChain(ChainId.SMARTBCH),
+     WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, 
+     USDT_SBCH, BC_BCH, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC, GOB, BONK,SHIB,PEPE,DOGE,FLOKI],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -186,7 +193,7 @@ export const PINNED_PAIRS: { readonly [chainId: number]: [Token, Token][] } = {
 
 
 export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
-  [ChainId.SMARTBCH]:[
+  [ChainId.SMARTBCH]: [
     {
       tokenA: "0xbc2f884680c95a02cea099da2f524b366d9028ba", ///bcUSDT
       tokenB: "0xbbb3700F33fCb64437Dc28A7Beb6b21f5cC76FB9", ///bbUSDT
@@ -202,7 +209,7 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       tokenB: "0xbbb3700F33fCb64437Dc28A7Beb6b21f5cC76FB9", ///bbUSDT
       fee: 0,
     },
- 
+
 
     {
       tokenA: "0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04", ///WBCH
@@ -226,56 +233,90 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       fee: 0,
     }
 
-   
-    
+
+
   ],
   [ChainId.BNB]: [
-      {
-        tokenA: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
-        tokenB: "0x55d398326f99059fF775485246999027B3197955", // USDT
-        fee: 0,
-      },
-      {
-        tokenA: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
-        tokenB: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB
-        fee: 0,
-      },
-      {
-        tokenA: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
-        tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
-        fee: 0,
-      },
-      {
-        tokenA: "0x55d398326f99059fF775485246999027B3197955", // USDT
-        tokenB: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB
-        fee: 0,
-      },
-      {
-        tokenA: "0x55d398326f99059fF775485246999027B3197955", // USDT
-        tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
-        fee: 0,
-      },
-      {
-        tokenA: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB
-        tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
-        fee: 0,
-      },
-  
-      {
-        tokenA: "BNB", // WBNB
-        tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
-        fee: 0,
-      },
-      {
-        tokenA: "BNB", // WBNB
-        tokenB: "0x55d398326f99059fF775485246999027B3197955", // USDT
-        fee: 0,
-      },
-      {
-        tokenA: "BNB", // WBNB
-        tokenB: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
-        fee: 0,
-      },
-    ]
+    {
+      tokenA: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
+      tokenB: "0x55d398326f99059fF775485246999027B3197955", // USDT
+      fee: 0,
+    },
+    {
+      tokenA: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
+      tokenB: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB
+      fee: 0,
+    },
+    {
+      tokenA: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
+      tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
+      fee: 0,
+    },
+    {
+      tokenA: "0x55d398326f99059fF775485246999027B3197955", // USDT
+      tokenB: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB
+      fee: 0,
+    },
+    {
+      tokenA: "0x55d398326f99059fF775485246999027B3197955", // USDT
+      tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
+      fee: 0,
+    },
+    {
+      tokenA: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB
+      tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
+      fee: 0,
+    },
+
+    {
+      tokenA: "BNB", // WBNB
+      tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
+      fee: 0,
+    },
+    {
+      tokenA: "BNB", // WBNB
+      tokenB: "0x55d398326f99059fF775485246999027B3197955", // USDT
+      fee: 0,
+    },
+    {
+      tokenA: "BNB", // WBNB
+      tokenB: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
+      fee: 0,
+    },
+
+    // Adding Shib
+    // {
+    //   tokenA: "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D", // SHIB
+    //   tokenB: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
+    //   fee: 0,
+    // },
+    // {
+    //   tokenA: "BNB", // WBNB
+    //   tokenB: "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D", // SHIB
+    //   fee: 0,
+    // },
+    // {
+    //   tokenA: "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D", // SHIB
+    //   tokenB: "0x55d398326f99059fF775485246999027B3197955", // USDT
+    //   fee: 0,
+    // },
+    // Adding BONK
+    // {
+    //   tokenA: "0xA697e272a73744b343528C3Bc4702F2565b2F422", // BONK
+    //   tokenB: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
+    //   fee: 0,
+    // },
+    // {
+    //   tokenA: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB
+    //   tokenB: "0xA697e272a73744b343528C3Bc4702F2565b2F422", // BONK
+    //   fee: 0,
+    // },
+    // {
+    //   tokenA: "0xA697e272a73744b343528C3Bc4702F2565b2F422", // BONK
+    //   tokenB: "0x55d398326f99059fF775485246999027B3197955", // USDT
+    //   fee: 0,
+    // },
+
+  ]
 
 }

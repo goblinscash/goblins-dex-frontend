@@ -8,7 +8,7 @@ import styles from "./StakePop.module.scss";
 //helpers
 import {useWallet} from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
-import { nftList, updateFarm } from "state/action";
+import {  updateFarm, withdrawNft } from "state/action";
 
 const UnStakePopup = ({ handleConfirm, detail, myFarmload }) => {
   const wallet = useWallet();
@@ -47,7 +47,7 @@ const UnStakePopup = ({ handleConfirm, detail, myFarmload }) => {
       );
 
       dispatch(
-        nftList({
+        withdrawNft({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,

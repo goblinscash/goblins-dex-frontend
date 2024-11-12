@@ -74,15 +74,14 @@ export function FOTTooltipContent() {
 
 function SwapFeeTooltipContent({ hasFee }: { hasFee: boolean }) {
   const message = hasFee ? (
-    <Trans>
-      This fee is applied on select token pairs to ensure the best experience with Gobswap. It is paid in the output
-      token and has already been factored into the quote.
-    </Trans>
+    <>
+      This fee is applied on select token pairs to ensure the best experience with Gobswap. It is paid in the output token and has already been factored into the quote.
+    </>
   ) : (
-    <Trans>
+    <>
       This fee is applied on select token pairs to ensure the best experience with Gobswap. There is no fee associated
       with this swap.
-    </Trans>
+    </>
   )
   return (
     <>

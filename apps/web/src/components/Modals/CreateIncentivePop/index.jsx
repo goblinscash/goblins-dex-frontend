@@ -32,6 +32,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
     endDate: "",
   });
   const [showSelect, setShowSelect] = useState(false);
+  const [showSelect2, setShowSelect2] = useState(false);
 
   const { topPools, loading: subgraphLoading, error } = useTopPools(wallet.chainId, "totalValueLockedUSD", "desc")
 
@@ -70,9 +71,27 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
     setShowSelect(false);
   };
 
+  const handleNewSelectChange = (e) => {
+    const selectedRewardAddress = e.target.value;
+
+    // console.log(selectedRewardAddress, "selectedRewardAddress")
+
+    setFields((prev) => ({
+      ...prev,
+      rewardAddress: selectedRewardAddress,
+    }));
+
+    setShowSelect2(false);
+  };
+
   const toggleDropdown = () => {
     setShowSelect((prev) => !prev);
   };
+  const toggleDropdown2 = () => {
+    setShowSelect2((prev) => !prev);
+  };
+  const GobRewardAddrss = "0x56381cb87c8990971f3e9d948939e1a95ea113a3"
+
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -80,6 +99,16 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
     setFields((pre) => ({
       ...pre,
       [name]: value,
+    }));
+  };
+
+  // New handleChange for specific rewardAddress
+  const handleNewChange = (e) => {
+    const { name, value } = e.target;
+
+    setFields((prev) => ({
+      ...prev,
+      [name]: value,  // Updates only the relevant field
     }));
   };
 
@@ -172,7 +201,6 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
       console.log(error, "<<==err");
     }
   };
-
 
   return (
     <>
@@ -323,9 +351,27 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                             className="form-control rounded"
                             name="rewardAddress"
                             value={fields.rewardAddress}
-                            onChange={handleChange}
+                            onChange={handleNewChange}  // Using new handleNewChange
                             required
                           />
+                          <button
+                            type="button"
+                            className="absolute icn right-2 top-1/2 transform -translate-y-1/2 text-gray-500"
+                            style={{ right: 5, zIndex: 999, top: "50%" }}
+                            onClick={toggleDropdown2}
+                          >
+                            ▼
+                          </button>
+                          {showSelect2 && (
+                            <select
+                              className="absolute left-0 mt-2 form-control rounded w-full"
+                              onChange={handleNewSelectChange}  // Using new handleNewSelectChange
+                              value={fields.rewardAddress}
+                            >
+                              <option value="">Select Address</option>
+                              <option value={GobRewardAddrss}>{GobRewardAddrss}</option>
+                            </select>
+                          )}
                         </div>
                       </div>
                       <div className="col-span-4">
