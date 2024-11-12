@@ -18,6 +18,7 @@ import IconDoge from "assets/farmingAssets/icons/0xba2ae424d960c26247dd6c32edc70
 import IconUSDC from "assets/farmingAssets/icons/0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d.png";
 import IconBONK from "assets/farmingAssets/icons/0xa697e272a73744b343528c3bc4702f2565b2f422.png";
 import IconPEPE from "assets/farmingAssets/icons/0x25d887ce7a35172c62febfd67a1856f20faebb00.png";
+import IconSHIB from "assets/farmingAssets/icons/0x2859e4544c4bb03966803b044a93563bd2d0dd4d.png";
 import IconPEPEBCH from "assets/farmingAssets/icons/0x8CF81850Aa9D5a4E3Df180AFBaF0d2093A3F3379.png";
 import IconBonkBCH from "assets/farmingAssets/icons/0x799351F408a51A0Ca5fdB4CD9E93157D8703b70A.png"
 
@@ -73,7 +74,7 @@ export const cryptoData = [
     explorerLink: "https://bscscan.com/",
     blockExplorerUrls: ["https://bscscan.com/"],
     nativeCurrency: { name: "Binance Coin", symbol: "BNB", decimals: 18 },
-  }  
+  }
 ];
 
 export const graphQLUrl = {
@@ -148,7 +149,7 @@ export const getSymbols = {
   "0xbc2f884680c95a02cea099da2f524b366d9028ba": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0xBc2F884680c95A02cea099dA2F524b366d9028Ba/logo.png",
   "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0xBc9bD8DDe6C5a8e1CBE293356E02f5984693b195/logo.png",
   "0xbbef77270d6425e113e1e37f008cf141a9fc215a": Icon8,
-  
+
   "0x6c6b3e0f1a7b3513c55e1f288c99d53441990613": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x6c6b3E0F1a7B3513c55E1f288C99d53441990613/logo.png",
   "0x9ca6f10d19cbda52bbd615f7e1f1821386abe3d1": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x9Ca6F10D19CBDa52bBd615f7E1F1821386Abe3D1/logo.png",
   "0x21ba72ff5b25add1dc3d42cab987f1c4e0466814": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x21BA72Ff5b25AdD1Dc3d42Cab987f1c4e0466814/logo.png",
@@ -162,6 +163,7 @@ export const getSymbols = {
   "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d": IconUSDC, // for bsc
   "0xa697e272a73744b343528c3bc4702f2565b2f422": IconBONK,
   "0x25d887ce7a35172c62febfd67a1856f20faebb00": IconPEPE,
+  "0x2859e4544c4bb03966803b044a93563bd2d0dd4d": IconSHIB,
   "0x701aca29ae0f5d24555f1e8a6cf007541291d110": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartchain/assets/0x701ACA29AE0F5d24555f1E8A6Cf007541291d110/logo.png"
   // 0x55d398326f99059ff775485246999027b3197955
 };

@@ -1,7 +1,7 @@
-import moment from "moment";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 ///css
 import "assets/styles/main.css";
@@ -10,7 +10,6 @@ import styles from "./Dashboard.module.scss";
 // //component
 import CreateIncentivePop from "components/Modals/CreateIncentivePop";
 import StakePop from "components/Modals/StakePop";
-
 import ConfirmPopup from "components/Modals/confirmPop";
 import UnStakePopup from "components/Modals/unStake";
 import WithdrawPop from "components/Modals/withdrawPop";
@@ -57,7 +56,6 @@ const Dashboard = () => {
     sortKey: "startTime",
     sortOrder: "asc",
   });
-
   const [stake, setStake] = useState({
     isOpen: false,
     detail: null,
@@ -77,7 +75,6 @@ const Dashboard = () => {
     isOpen: false,
     detail: null,
   });
-
   const [staked, setStaked] = useState({
     isOpen: false,
     isClaimAll: false,
@@ -96,6 +93,7 @@ const Dashboard = () => {
 
     setIncentiveForm(!incentiveForm);
   };
+
   const handleStake = (item, isUnstake) => {
     if (isBlocked)
       return toast.error(" Our Product is unavailable in your location");
@@ -389,7 +387,8 @@ const Dashboard = () => {
             isClaim={confirm.isClaim}
           />,
           document.body
-        )}
+        )
+        }
 
       {unStake.isOpen &&
         createPortal(
@@ -399,7 +398,8 @@ const Dashboard = () => {
             myFarmload={myFarmload}
           />,
           document.body
-        )}
+        )
+        }
 
       {stake.isOpen && (
         <StakePop
@@ -412,11 +412,13 @@ const Dashboard = () => {
             (data) => !data.isEnded && getCurrentUnix > data.key?.startTime
           )}
         />
-      )}
+      )
+      }
 
       {withdraw.isOpen && (
         <WithdrawPop handleWithdrawPop={handleWithdraw} detail={stake.detail} />
-      )}
+      )
+      }
 
       {staked.isOpen && (
         <StakedPop
@@ -532,6 +534,9 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="col-span-12">
+
+
+
               {/* <div className={`${styles.tabContent} tabContent pt-3`}>
                 {tabs &&
                   tabs.length > 0 &&
@@ -544,10 +549,16 @@ const Dashboard = () => {
                     );
                   })}
               </div> */}
+
+
+
+
               <div
                 className="cardCstm box pb-3 rounded-xl"
                 style={{ background: "#002628" }}
               >
+
+
                 {activeTab === 3 && (
                   <div className="topHead p-3 flex items-center justify-end">
                     <div className="flex items-center gap-2">
@@ -570,6 +581,8 @@ const Dashboard = () => {
                     </div>
                   </div>
                 )}
+
+
                 <div className="cardBody">
                   {activeTab == 3 && toggleEnded ? (
                     <ClaimTable
