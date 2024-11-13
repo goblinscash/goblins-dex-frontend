@@ -83,6 +83,14 @@ export const graphQLUrl = {
   97: "https://api.studio.thegraph.com/query/78445/v3stakerminwidths/0.0.5",
 };
 
+export const GOBAddress = {
+  10000: "0x56381cb87c8990971f3e9d948939e1a95ea113a3",
+  56: "0x701aca29ae0f5d24555f1e8a6cf007541291d110",
+ 
+};
+
+
+
 export const priceGraphQl = "https://graph.dfd.cash/subgraphs/name/goblins/subgraph-v3";
 
 export const supportedChainIds = [56, 97, 10000];

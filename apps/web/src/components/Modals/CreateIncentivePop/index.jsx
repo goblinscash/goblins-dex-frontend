@@ -15,6 +15,7 @@ import Web3Intraction from "utils/web3Intraction";
 import { getCheckSumAddress } from "helpers/utils";
 import { updateFarm } from "state/action";
 import { TablePool, useTopPools } from 'graphql/thegraph/TopPools'
+import { GOBAddress } from "helpers/constants";
 
 
 const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
@@ -369,7 +370,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                               value={fields.rewardAddress}
                             >
                               <option value="">Select Address</option>
-                              <option value={GobRewardAddrss}>{GobRewardAddrss}</option>
+                              <option value={GOBAddress[wallet.chainId]}>{GOBAddress[wallet.chainId]}</option>
                             </select>
                           )}
                         </div>
