@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import moment from "moment";
-
-///css
-import "assets/styles/main.css";
-import styles from "./Dashboard.module.scss";
+import { createPortal } from "react-dom";
 
 // //component
 import CreateIncentivePop from "components/Modals/CreateIncentivePop";
@@ -16,15 +13,18 @@ import WithdrawPop from "components/Modals/withdrawPop";
 import ClaimTable from "./components/Table/ClaimedTable";
 import CommonTable from "./components/Table/Common";
 import MyFarmTable from "./components/Table/MyFarm";
+import StakedPop from "components/Modals/StakedPop";
 
 //hooks
 import { getSortedData } from "helpers/constants";
 import { useWallet } from "hooks/useWallet";
 
 //action
-import StakedPop from "components/Modals/StakedPop";
-import { createPortal } from "react-dom";
 import * as Act from "state/action";
+
+///css
+import styles from "./Dashboard.module.scss";
+import "assets/styles/main.css";
 
 const Dashboard = () => {
   const { currentNetwork, isBlocked } = useSelector((state) => state.dashboard);
@@ -36,18 +36,15 @@ const Dashboard = () => {
     myFarmLoading: farmLoading,
     myFarmList: myFarm,
     deletedFarmLoading: endedLoading,
-    deletedFarmList: endedFarms,
-    updateLoading,
+    deletedFarmList: endedFarms
   } = useSelector((state) => state.Incentive);
-
-  const wallet = useWallet();
-
   const tabs = [
     { id: 1, name: "Active", component: "asdfasd" },
     { id: 2, name: "My Farms", component: "ASdf" },
     { id: 3, name: "Ended", component: "ASdf" },
   ];
 
+  const wallet = useWallet();
   const [search, setSearch] = useState("");
   const [incentiveForm, setIncentiveForm] = useState("");
   const [filteredIncentiveIds, setFilteredIncentiveIds] = useState([]);
@@ -357,6 +354,7 @@ const Dashboard = () => {
     }
   }, [sortingData.sortKey, sortingData.sortOrder]);
 
+
   return (
     <>
       {
@@ -371,7 +369,9 @@ const Dashboard = () => {
         )
       }
 
-      {confirm.isOpen &&
+      {
+
+        confirm.isOpen &&
         createPortal(
           <ConfirmPopup
             handleConfirm={handleConfirm}
@@ -388,9 +388,11 @@ const Dashboard = () => {
           />,
           document.body
         )
-        }
+        
+      }
 
-      {unStake.isOpen &&
+      {
+        unStake.isOpen &&
         createPortal(
           <UnStakePopup
             handleConfirm={handleUnStake}
@@ -401,7 +403,8 @@ const Dashboard = () => {
         )
         }
 
-      {stake.isOpen && (
+      {
+      stake.isOpen && (
         <StakePop
           handleStake={handleStake}
           detail={stake.detail}
@@ -415,19 +418,22 @@ const Dashboard = () => {
       )
       }
 
-      {withdraw.isOpen && (
+      {
+      withdraw.isOpen && (
         <WithdrawPop handleWithdrawPop={handleWithdraw} detail={stake.detail} />
       )
       }
 
-      {staked.isOpen && (
+      {
+      staked.isOpen && (
         <StakedPop
           handleStaked={handleStaked}
           myFarm={myFarm}
           isClaimAll={staked.isClaimAll || false}
           setActiveTab={setActiveTab}
         />
-      )}
+      )
+      }
       <section className={`${styles.Dashboard} Dashboard py-3 relative w-full`}>
         <div className="container mx-auto">
           <div className="grid gap-3 grid-cols-12">
@@ -584,7 +590,8 @@ const Dashboard = () => {
 
 
                 <div className="cardBody">
-                  {activeTab == 3 && toggleEnded ? (
+                  {activeTab == 3 && toggleEnded ? 
+                  (
                     <ClaimTable
                       wallet={wallet}
                       moment={moment}
@@ -597,7 +604,9 @@ const Dashboard = () => {
                       handleSort={handleSort}
                       toggleEnded={toggleEnded}
                     />
-                  ) : [1, 3].includes(activeTab) ? (
+                  ) 
+                  : [1, 3].includes(activeTab) ? 
+                  (
                     <CommonTable
                       wallet={wallet}
                       moment={moment}
@@ -609,7 +618,9 @@ const Dashboard = () => {
                       isBlocked={isBlocked}
                       handleSort={handleSort}
                     />
-                  ) : (
+                  )
+                   : 
+                  (
                     <MyFarmTable
                       wallet={wallet}
                       moment={moment}
@@ -625,7 +636,9 @@ const Dashboard = () => {
                       handleSort={handleSort}
                       myFarmload={myFarmload}
                     />
-                  )}
+                  )
+                  
+                  }
                 </div>
               </div>
             </div>
