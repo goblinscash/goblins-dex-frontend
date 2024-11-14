@@ -20,6 +20,7 @@ function MyFarm({
   isBlocked,
   myFarmload,
   handleSort,
+  setActiveTab
 }) {
   const dispatch = useDispatch()
   const { currentNetwork } = useSelector((state) => state.dashboard);
@@ -87,7 +88,8 @@ function MyFarm({
           withdrawNft: true,
         })
       );
-
+      
+      setActiveTab(1)
       // handleConfirm();
       myFarmload();
     } catch (error) {

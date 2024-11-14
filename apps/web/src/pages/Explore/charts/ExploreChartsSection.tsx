@@ -388,10 +388,10 @@ const ChainInfo: Record<number, string> = {
         {
     (chainId === 10000 || chainId === 56) &&
     <div className='tabNav'>
-      <button onClick={() => handleTab(2)} className={`${tab === 2 ? "active" : ""}`}>
+      <button onClick={() => handleTab(1)} className={`${tab === 2 ? "active" : ""}`}>
         Pool
       </button>
-      <button onClick={() => handleTab(1)} className={`${tab === 1 ? "active" : ""}`}>
+      <button onClick={() => handleTab(2)} className={`${tab === 1 ? "active" : ""}`}>
         Staking
       </button>
     </div>

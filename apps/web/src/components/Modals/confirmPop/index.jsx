@@ -12,7 +12,7 @@ import useDebounce from "hooks/useDebounceFunction";
 import {useWallet} from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 
-const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim }) => {
+const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim,setActiveTab }) => {
   const wallet = useWallet();
   const dispatch = useDispatch();
   const { currentNetwork } = useSelector((state) => state.dashboard);
@@ -49,7 +49,9 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim }) => {
 
       setLoading(false);
       handleConfirm();
+
       load();
+      setActiveTab(1)
     } catch (error) {
       console.log(error, "<====error");
       setLoading(false);
@@ -76,6 +78,7 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim }) => {
       setLoading(false);
       handleConfirm();
       load();
+      setActiveTab(1)
     } catch (error) {
       console.log(error, "<====error");
       setLoading(false);
