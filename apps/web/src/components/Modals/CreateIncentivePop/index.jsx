@@ -302,7 +302,6 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                             </option>
                           ))}
                         </select>
-
                       )}
                     </div>
                   </div>
@@ -423,7 +422,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                           <input
                             type="datetime-local"
                             placeholder=""
-                            className=" rounded"
+                            className="form-control rounded"
                             name="startDate"
                             value={fields.startDate}
                             onChange={handleChange}
@@ -442,7 +441,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                           <input
                             type="datetime-local"
                             placeholder=""
-                            className=" rounded"
+                            className="form-control rounded"
                             name="endDate"
                             value={fields.endDate}
                             onChange={handleChange}

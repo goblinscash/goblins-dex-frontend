@@ -38,6 +38,7 @@ const Dashboard = () => {
     deletedFarmLoading: endedLoading,
     deletedFarmList: endedFarms
   } = useSelector((state) => state.Incentive);
+
   const tabs = [
     { id: 1, name: "Active", component: "asdfasd" },
     { id: 2, name: "My Farms", component: "ASdf" },
@@ -114,6 +115,9 @@ const Dashboard = () => {
       isRestake: isRestake || false,
       isClaim: isClaim || false,
     }));
+
+  
+
   };
 
 
@@ -385,6 +389,7 @@ const Dashboard = () => {
             }
             isRestake={confirm.isRestake}
             isClaim={confirm.isClaim}
+            setActiveTab={setActiveTab}
           />,
           document.body
         )
@@ -635,9 +640,9 @@ const Dashboard = () => {
                       isBlocked={isBlocked}
                       handleSort={handleSort}
                       myFarmload={myFarmload}
+                      setActiveTab={setActiveTab}
                     />
                   )
-                  
                   }
                 </div>
               </div>
