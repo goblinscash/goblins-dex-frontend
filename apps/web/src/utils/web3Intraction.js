@@ -637,21 +637,20 @@ class Web3Intraction {
           this.contractDetails?.contractAddress,
           true
         );
-
+        let getRewards = await contract.getRewardInfo(keys, tokenId);
         // Encode the function calls
-        const unStakeToken = await contract.interface.encodeFunctionData(
-          "unstakeToken",
-          [keys, tokenId]
-        );
-
         const claimReward = await contract.interface.encodeFunctionData(
           "claimReward",
           [keys[0], walletAddress, 0]
         );
-
+        const unStakeToken = await contract.interface.encodeFunctionData(
+          "unstakeToken",
+          [keys, tokenId]
+        );
+        let multicallMethod = getRewards.secondsInsideX128.toString() > 0 ? [unStakeToken, claimReward] : [unStakeToken]
         const multicallData = contract.interface.encodeFunctionData(
           "multicall",
-          [[unStakeToken, claimReward]]
+          [multicallMethod]
         );
 
         const tx = {
@@ -666,7 +665,7 @@ class Web3Intraction {
 
         resolve(receipt);
       } catch (error) {
-        // console.log(error, "<===error in buy");
+        console.log(error, "<===error in mutliCallUnstake");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
@@ -714,11 +713,18 @@ class Web3Intraction {
           unStakeData.push(unStakeToken);
 
 
-          const claimReward = await contract.interface.encodeFunctionData(
-            "claimReward",
-            [keys[i][0], walletAddress, 0]
-          );
-          unStakeData.push(claimReward);
+          let getRewards = await contract.getRewardInfo(keys[i], tokenId);
+
+          if (getRewards.secondsInsideX128.toString() > 0) {
+
+            const claimReward = await contract.interface.encodeFunctionData(
+              "claimReward",
+              [keys[i][0], walletAddress, 0]
+            );
+            unStakeData.push(claimReward);
+          }
+
+
 
         }
         // Encode the function calls
