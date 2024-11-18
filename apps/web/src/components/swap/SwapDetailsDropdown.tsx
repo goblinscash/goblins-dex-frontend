@@ -104,7 +104,6 @@ function AdvancedSwapDetails(props: SwapDetailsProps & { open: boolean }) {
   if (!trade) return null
 
   const lineItemProps = { trade, allowedSlippage, format, syncing }
-
   return (
     <AnimatedDropdown open={open}>
       <SwapDetailsWrapper gap="md" data-testid="advanced-swap-details">

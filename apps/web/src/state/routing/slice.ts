@@ -21,6 +21,8 @@ import {
 } from './types'
 import { isExactInput, transformQuoteToTrade } from './utils'
 import { SET_INTERFACE_FEE_FOR_PAIRS } from 'constants/routing'
+import { interFaceFeeAddress } from 'constants/common'
+import { CurrencyAmount } from '@uniswap/sdk-core'
 
 const UNISWAP_API_URL = process.env.REACT_APP_UNISWAP_API_URL
 const UNISWAP_GATEWAY_DNS_URL = process.env.REACT_APP_UNISWAP_GATEWAY_DNS
@@ -45,6 +47,10 @@ interface QuoteQueryParams {
   permitExpiration?: string;
   permitSigDeadline?: string;
   permitNonce?: string;
+  portionBips?: number;
+  portionAmount?: number;
+  portionRecipient?: string;
+  protocols?: string;
 }
 
 interface Result {
@@ -164,6 +170,7 @@ export const routingApi = createApi({
             tokenOutSymbol
           } = args
 
+          console.log(args, "argsargs")
           const requestBody = {
             tokenInChainId,
             tokenInAddress: tokenIn,
@@ -178,6 +185,8 @@ export const routingApi = createApi({
           }
 
           const baseURL = gatewayDNSUpdateEnabled ? UNISWAP_GATEWAY_DNS_URL : UNISWAP_API_URL
+          let _portionBips = 25
+          let _portionAmount = 0
 
           const params: QuoteQueryParams = {
             tokenInAddress: tokenInSymbol == "WBCH" ? "BCH" : tokenIn,
@@ -185,24 +194,20 @@ export const routingApi = createApi({
             tokenOutAddress: tokenOutSymbol == "WBCH" ? "BCH" : tokenOut,
             tokenOutChainId: tokenOutChainId,
             amount: amount.toString(),
-            type: isExactInput(tradeType) ? 'exactIn' : 'exactOut'
+            type: isExactInput(tradeType) ? 'exactIn' : 'exactOut',
+            slippageTolerance: '5',
+            portionBips: _portionBips,
+            portionAmount: _portionAmount,
+            portionRecipient: interFaceFeeAddress[tokenInChainId],
+            enableUniversalRouter: true,
+            protocols: 'v2,v3,mixed'
           };
 
           const queryString = new URLSearchParams(params as any).toString();
           const fullUrl = `${baseURL}/quote?${queryString}`;
 
-          console.log(args, "arggg")
           const response = await fetch(fullUrl)
 
-          // const response = await fetch({
-          //   method: 'POST',
-          //   url: `${baseURL}/quote`,
-          //   body: JSON.stringify(requestBody),
-          //   headers: {
-          //     'x-request-source': 'uniswap-web',
-
-          //   },
-          // })
 
           if (response.error) {
             try {
@@ -228,23 +233,10 @@ export const routingApi = createApi({
           }
 
           const result: Result = { state: QuoteState.SUCCESS, data: { routing: URAQuoteType.CLASSIC, quote: response.data as URAQuoteResponse, allQuotes: [] } }
-
-          let matchedPair = SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId] ? findPair(args.tokenInAddress, args.tokenOutAddress, SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId]) : 0
-          if (result.data) {
-            (result.data.quote as any)["portionBips"] = matchedPair ? matchedPair.fee : (result.data.quote as any)["portionBips"];
-          }
-          if (result.state === QuoteState.SUCCESS) {
-            //@ts-ignore
-            const trade = await transformQuoteToTrade(args, result.data, QuoteMethod.CLIENT_SIDE_FALLBACK);
-            return {
-              data: { ...trade, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration },
-            }
-          } else {
-            return { data: { ...result, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration } }
-          }
-          //   const uraQuoteResponse = response.data as URAQuoteResponse
-          //   const tradeResult = await transformQuoteToTrade(args, uraQuoteResponse, QuoteMethod.ROUTING_API)
-          //   return { data: { ...tradeResult, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration } }
+          //@ts-ignore
+          const uraQuoteResponse = result.data as URAQuoteResponse
+          const tradeResult = await transformQuoteToTrade(args, uraQuoteResponse, QuoteMethod.ROUTING_API)
+          return { data: { ...tradeResult, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration } }
         } catch (error: any) {
           console.warn(
             `GetQuote failed on Unified Routing API, falling back to client: ${error?.message ?? error?.detail ?? error
@@ -263,6 +255,7 @@ export const routingApi = createApi({
           }
           if (quoteResult.state === QuoteState.SUCCESS) {
             const trade = await transformQuoteToTrade(args, quoteResult.data, QuoteMethod.CLIENT_SIDE_FALLBACK);
+            console.log(trade, "trade$")
             return {
               data: { ...trade, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration },
             }

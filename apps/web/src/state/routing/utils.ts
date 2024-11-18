@@ -169,9 +169,10 @@ function getTradeCurrencies(
 function getSwapFee(data: ClassicQuoteData | URADutchOrderQuoteData): SwapFeeInfo | undefined {
   const { portionAmount, portionBips, portionRecipient } = data
 
+  console.log(portionAmount, portionBips, portionRecipient, "%%%%")
 
   if (!portionAmount || !portionBips || !portionRecipient) return undefined
-  // console.log( new Percent(5, BIPS_BASE), "<=====portionBips, BIPS_BASE")
+  console.log( new Percent(5, BIPS_BASE), "<=====portionBips, BIPS_BASE")
   return {
     recipient: portionRecipient,
     percent: new Percent(portionBips, BIPS_BASE),
