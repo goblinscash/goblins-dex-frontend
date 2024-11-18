@@ -1,3 +1,4 @@
+import { useState } from "react";
 import moment from "moment";
 // img
 import loader from "assets/farmingAssets/Images/loading.gif";
@@ -6,7 +7,7 @@ import { getSymbols } from "helpers/constants";
 import { toFixedCustm } from "helpers/utils";
 import Web3Intraction from "utils/web3Intraction";
 import { useDispatch, useSelector } from "react-redux";
-import {  updateFarm, withdrawNft } from "state/action";
+import { updateFarm, withdrawNft } from "state/action";
 import { toast } from "react-toastify";
 
 function MyFarm({
@@ -19,17 +20,19 @@ function MyFarm({
   isBlocked,
   myFarmload,
   handleSort,
+  setActiveTab
 }) {
-  const dispatch= useDispatch()
+  const dispatch = useDispatch()
   const { currentNetwork } = useSelector((state) => state.dashboard);
+
+  const [internalLoading, setInternalLoading] = useState(false)
 
   // adding funtion to skip confirmation modal
   const handleClaim = async (e, detail) => {
     try {
       e.preventDefault();
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      // console.log(web3, "webbbbbbbbbbbbb")
-      // await web3.claimRewards(detail.key.rewardToken, wallet.address);
+      setInternalLoading(true)
       await web3.mutliCallReStake(
         [
           detail.key.rewardToken,
@@ -44,6 +47,9 @@ function MyFarm({
     } catch (error) {
       console.log(error, "<====error");
       toast.error(error);
+    }finally{
+      setInternalLoading(false)
+
     }
   };
 
@@ -51,7 +57,7 @@ function MyFarm({
     try {
       e.preventDefault();
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      // setLoading(true);
+      setInternalLoading(true);
       await web3.mutliCallUnstake(
         [
           detail.key.rewardToken,
@@ -82,13 +88,15 @@ function MyFarm({
           withdrawNft: true,
         })
       );
-      // setLoading(false);
+      
+      setActiveTab(1)
       // handleConfirm();
       myFarmload();
     } catch (error) {
       console.log(error, "<====error");
-      // setLoading(false);
       toast.error(error);
+    } finally {
+      setInternalLoading(false)
     }
   };
 
@@ -232,7 +240,7 @@ function MyFarm({
                   </div>
                 </td>
               </tr>
-            ) : loading ? (
+            ) : loading  ? (
               <tr>
                 <td
                   className="py-3 px-6 text-left border-b border-gray-600 transparent"
@@ -387,9 +395,9 @@ function MyFarm({
                             onClick={(e) => handleClaim(e, item)}
                             className="btn flex items-center commonBtn justify-center rounded"
                             style={{ background: "#00ff00" }}
-                            disabled={isBlocked || item.rewardInfo?.reward <= 0}
+                            disabled={isBlocked || item.rewardInfo?.reward <= 0 || internalLoading}
                           >
-                            {"Claim"}
+                            {!internalLoading ? "Claim":"Loading..."}
                           </button>
                         </p>
                         <p className={`   capitalize mr-2`}>
@@ -398,9 +406,9 @@ function MyFarm({
                             onClick={(e) => handleunStake(e, item)}
                             className="btn flex items-center commonBtn justify-center rounded"
                             style={{ background: "#00ff00" }}
-                            disabled={isBlocked || item.isUnstaked}
+                            disabled={isBlocked || item.isUnstaked || internalLoading}
                           >
-                            {"UnStake"}
+                             {!internalLoading ? "Unstake":"Loading..."}
                           </button>
                         </p>
                       </div>
