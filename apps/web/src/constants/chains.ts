@@ -83,6 +83,8 @@ export const L1_CHAIN_IDS = [
   // ChainId.CELO,
   // ChainId.CELO_ALFAJORES,
   ChainId.BNB,
+  ChainId.BASE,
+
   // ChainId.AVALANCHE,
 ] as const
 

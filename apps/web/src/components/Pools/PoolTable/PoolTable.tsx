@@ -92,7 +92,6 @@ export type PoolTableSortState = {
     // const chainId = supportedChainIdFromGQLChain(chainName)
   const { topPools, loading, error } = useTopPools(chainId, sortState.sortBy, sortState.sortDirection)
 
-
   useEffect(() => {
     if (window?.ethereum) {
       // @ts-ignore

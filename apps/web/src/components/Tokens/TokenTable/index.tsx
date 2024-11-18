@@ -71,7 +71,8 @@ function TokenDescription({ token }: { token: TokenList }) {
 export function TopTokensTable() {
   const ChinInfo:any = {
     56 : "BNB",
-    10000: "SMARTBCH"
+    10000: "SMARTBCH",
+    8453: "BASE",
   }
   // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
   // const chainId = supportedChainIdFromGQLChain(chainName)

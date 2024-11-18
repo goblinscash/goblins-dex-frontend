@@ -7,7 +7,6 @@ import { logSwapQuoteRequest } from 'tracing/swapFlowLoggers'
 import { trace } from 'tracing/trace'
 
 import {
-  ClassicQuoteData,
   GetQuoteArgs,
   INTERNAL_ROUTER_PREFERENCE_PRICE,
   QuoteIntent,
@@ -18,9 +17,9 @@ import {
   TradeResult,
   URAQuoteResponse,
   URAQuoteType,
-} from './types'
-import { isExactInput, transformQuoteToTrade } from './utils'
-import { SET_INTERFACE_FEE_FOR_PAIRS } from 'constants/routing'
+} from './types';
+import { isExactInput, transformQuoteToTrade } from './utils';
+import { SET_INTERFACE_FEE_FOR_PAIRS } from 'constants/routing';
 
 const UNISWAP_API_URL = process.env.REACT_APP_UNISWAP_API_URL
 const UNISWAP_GATEWAY_DNS_URL = process.env.REACT_APP_UNISWAP_GATEWAY_DNS
@@ -28,46 +27,14 @@ if (UNISWAP_API_URL === undefined || UNISWAP_GATEWAY_DNS_URL === undefined) {
   throw new Error(`UNISWAP_API_URL and UNISWAP_GATEWAY_DNS_URL must be defined environment variables`)
 }
 
-interface QuoteQueryParams {
-  tokenInAddress: string;
-  tokenInChainId: number;
-  tokenOutAddress: string;
-  tokenOutChainId: number;
-  amount: string;
-  type?: 'exactIn' | 'exactOut';
-  recipient?: string;
-  slippageTolerance?: string;
-  deadline?: string;
-  algorithm?: string;
-  enableUniversalRouter?: boolean;
-  permitSignature?: string;
-  permitAmount?: string;
-  permitExpiration?: string;
-  permitSigDeadline?: string;
-  permitNonce?: string;
-}
-
-interface Result {
-  state: QuoteState;
-  data: {
-    routing: URAQuoteType;
-    quote: URAQuoteResponse;
-    allQuotes: any[];
-  };
-}
-
-
-
 const CLIENT_PARAMS = {
   protocols: [Protocol.V2, Protocol.V3, Protocol.MIXED],
 }
 
 const protocols: Protocol[] = [Protocol.V3]
 
-// routing API quote query params: https://github.com/Uniswap/routing-api/blob/main/lib/handlers/quote/schema/quote-schema.ts
 const DEFAULT_QUERY_PARAMS = {
   protocols,
-  // this should be removed once BE fixes issue where enableUniversalRouter is required for fees to work
   enableUniversalRouter: true,
 }
 
@@ -150,117 +117,90 @@ export const routingApi = createApi({
       async queryFn(args, _api, _extraOptions, fetch) {
         logSwapQuoteRequest(args.tokenInChainId, args.routerPreference, false)
         const quoteStartMark = performance.mark(`quote-fetch-start-${Date.now()}`)
-        try {
-          const {
-            tokenInAddress: tokenIn,
-            tokenInChainId,
-            tokenOutAddress: tokenOut,
-            tokenOutChainId,
-            amount,
-            tradeType,
-            sendPortionEnabled,
-            gatewayDNSUpdateEnabled,
-            tokenInSymbol,
-            tokenOutSymbol
-          } = args
+        // try {
+        //   const {
+        //     tokenInAddress: tokenIn,
+        //     tokenInChainId,
+        //     tokenOutAddress: tokenOut,
+        //     tokenOutChainId,
+        //     amount,
+        //     tradeType,
+        //     sendPortionEnabled,
+        //     gatewayDNSUpdateEnabled,
+        //   } = args
 
-          const requestBody = {
-            tokenInChainId,
-            tokenInAddress: tokenIn,
-            tokenOutChainId,
-            tokenOutAddress: tokenOut,
-            amount,
-            sendPortionEnabled,
-            type: isExactInput(tradeType) ? 'EXACT_INPUT' : 'EXACT_OUTPUT',
-            intent:
-              args.routerPreference === INTERNAL_ROUTER_PREFERENCE_PRICE ? QuoteIntent.Pricing : QuoteIntent.Quote,
-            configs: getRoutingAPIConfig(args),
-          }
+        //   const requestBody = {
+        //     tokenInChainId,
+        //     tokenIn,
+        //     tokenOutChainId,
+        //     tokenOut,
+        //     amount,
+        //     sendPortionEnabled,
+        //     type: isExactInput(tradeType) ? 'EXACT_INPUT' : 'EXACT_OUTPUT',
+        //     intent:
+        //       args.routerPreference === INTERNAL_ROUTER_PREFERENCE_PRICE ? QuoteIntent.Pricing : QuoteIntent.Quote,
+        //     configs: getRoutingAPIConfig(args),
+        //   }
 
-          const baseURL = gatewayDNSUpdateEnabled ? UNISWAP_GATEWAY_DNS_URL : UNISWAP_API_URL
+        //   const baseURL = gatewayDNSUpdateEnabled ? UNISWAP_GATEWAY_DNS_URL : UNISWAP_API_URL
+        //   const response = await fetch({
+        //     method: 'POST',
+        //     url: `${baseURL}/quote`,
+        //     body: JSON.stringify(requestBody),
+        //     headers: {
+        //       'x-request-source': 'uniswap-web',
+        //     },
+        //   })
 
-          const params: QuoteQueryParams = {
-            tokenInAddress: tokenInSymbol == "WBCH" ? "BCH" : tokenIn,
-            tokenInChainId: tokenInChainId,
-            tokenOutAddress: tokenOutSymbol == "WBCH" ? "BCH" : tokenOut,
-            tokenOutChainId: tokenOutChainId,
-            amount: amount.toString(),
-            type: isExactInput(tradeType) ? 'exactIn' : 'exactOut'
-          };
+        //   if (response.error) {
+        //     try {
+        //       // cast as any here because we do a runtime check on it being an object before indexing into .errorCode
+        //       const errorData = response.error.data as { errorCode?: string; detail?: string }
+        //       // NO_ROUTE should be treated as a valid response to prevent retries.
+        //       if (
+        //         typeof errorData === 'object' &&
+        //         (errorData?.errorCode === 'NO_ROUTE' || errorData?.detail === 'No quotes available')
+        //       ) {
+        //         sendAnalyticsEvent('No quote received from routing API', {
+        //           requestBody,
+        //           response,
+        //           routerPreference: args.routerPreference,
+        //         })
+        //         return {
+        //           data: { state: QuoteState.NOT_FOUND, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration },
+        //         }
+        //       }
+        //     } catch {
+        //       throw response.error
+        //     }
+        //   }
 
-          const queryString = new URLSearchParams(params as any).toString();
-          const fullUrl = `${baseURL}/quote?${queryString}`;
+        //   const uraQuoteResponse = response.data as URAQuoteResponse
+        //   const tradeResult = await transformQuoteToTrade(args, uraQuoteResponse, QuoteMethod.ROUTING_API)
+        //   return { data: { ...tradeResult, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration } }
+        // } catch (error: any) {
+        //   console.warn(
+        //     `GetQuote failed on Unified Routing API, falling back to client: ${
+        //       error?.message ?? error?.detail ?? error
+        //     }`
+        //   )
+        // }
 
-          console.log(args, "arggg")
-          const response = await fetch(fullUrl)
-
-          // const response = await fetch({
-          //   method: 'POST',
-          //   url: `${baseURL}/quote`,
-          //   body: JSON.stringify(requestBody),
-          //   headers: {
-          //     'x-request-source': 'uniswap-web',
-
-          //   },
-          // })
-
-          if (response.error) {
-            try {
-              // cast as any here because we do a runtime check on it being an object before indexing into .errorCode
-              const errorData = response.error.data as { errorCode?: string; detail?: string }
-              // NO_ROUTE should be treated as a valid response to prevent retries.
-              if (
-                typeof errorData === 'object' &&
-                (errorData?.errorCode === 'NO_ROUTE' || errorData?.detail === 'No quotes available')
-              ) {
-                sendAnalyticsEvent('No quote received from routing API', {
-                  requestBody,
-                  response,
-                  routerPreference: args.routerPreference,
-                })
-                return {
-                  data: { state: QuoteState.NOT_FOUND, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration },
-                }
-              }
-            } catch {
-              throw response.error
-            }
-          }
-
-          const result: Result = { state: QuoteState.SUCCESS, data: { routing: URAQuoteType.CLASSIC, quote: response.data as URAQuoteResponse, allQuotes: [] } }
-
-          let matchedPair = SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId] ? findPair(args.tokenInAddress, args.tokenOutAddress, SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId]) : 0
-          if (result.data) {
-            (result.data.quote as any)["portionBips"] = matchedPair ? matchedPair.fee : (result.data.quote as any)["portionBips"];
-          }
-          if (result.state === QuoteState.SUCCESS) {
-            //@ts-ignore
-            const trade = await transformQuoteToTrade(args, result.data, QuoteMethod.CLIENT_SIDE_FALLBACK);
-            return {
-              data: { ...trade, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration },
-            }
-          } else {
-            return { data: { ...result, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration } }
-          }
-          //   const uraQuoteResponse = response.data as URAQuoteResponse
-          //   const tradeResult = await transformQuoteToTrade(args, uraQuoteResponse, QuoteMethod.ROUTING_API)
-          //   return { data: { ...tradeResult, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration } }
-        } catch (error: any) {
-          console.warn(
-            `GetQuote failed on Unified Routing API, falling back to client: ${error?.message ?? error?.detail ?? error
-            }`
-          )
-        }
         try {
           const { getRouter, getClientSideQuote } = await import('lib/hooks/routing/clientSideSmartOrderRouter')
           const router = getRouter(args.tokenInChainId)
 
+          console.log(router, "<=====router")
+          
           let quoteResult = await getClientSideQuote(args, router, CLIENT_PARAMS)
 
+          console.log(quoteResult, "<=====quoteResult")
           let matchedPair = SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId] ? findPair(args.tokenInAddress, args.tokenOutAddress, SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId]) : 0
           if (quoteResult.data) {
             quoteResult.data.quote["portionBips"] = matchedPair ? matchedPair.fee : quoteResult.data.quote["portionBips"];
           }
+
+
           if (quoteResult.state === QuoteState.SUCCESS) {
             const trade = await transformQuoteToTrade(args, quoteResult.data, QuoteMethod.CLIENT_SIDE_FALLBACK);
             return {

@@ -234,9 +234,6 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       tokenB: "0xbb7b43eb950C0fDBb645D7d05a27395Ed8D944fA", ///bbBCH
       fee: 0,
     }
-
-
-
   ],
   [ChainId.BNB]: [
     {
@@ -269,7 +266,6 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
       fee: 0,
     },
-
     {
       tokenA: "BNB", // WBNB
       tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
@@ -285,8 +281,5 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       tokenB: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
       fee: 0,
     },
-
-
   ]
-
 }

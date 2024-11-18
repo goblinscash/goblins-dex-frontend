@@ -56,9 +56,10 @@ export default function RecentTransactions() {
 
   const ChinInfo:any = {
     56 : "BNB",
-    10000: "SMARTBCH"
+    10000: "SMARTBCH",
+    8453: "BASE"
   }
-  console.log(chainId, "chainId", chainName)
+
 
   useEffect(() => {
     if (window?.ethereum) {

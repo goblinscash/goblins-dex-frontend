@@ -11,7 +11,7 @@ const CHAIN_SUBGRAPH_URL: Record<number, string> = {
   [ChainId.CELO]: 'https://api.thegraph.com/subgraphs/name/jesse-sawa/uniswap-celo?source=uniswap',
   [ChainId.BNB]: 'https://graph-bsc.goblins.cash/subgraphs/name/goblins/bsc-subgraph-v3',
   [ChainId.AVALANCHE]: 'https://api.thegraph.com/subgraphs/name/lynnshaoyu/uniswap-v3-avax?source=uniswap',
-  [ChainId.BASE]: 'https://api.studio.thegraph.com/query/48211/uniswap-v3-base/version/latest?source=uniswap',
+  [ChainId.BASE]: 'https://graph-base.goblins.cash/subgraphs/name/goblins/base-subgraph-v3',
   [ChainId.SMARTBCH]: 'https://graph.dfd.cash/subgraphs/name/goblins/subgraph-v3',
 }
 
@@ -23,7 +23,7 @@ const CHAIN_BLOCK_SUBGRAPH_URL: Record<number, string> = {
   [ChainId.CELO]: 'https://api.thegraph.com/subgraphs/name/jesse-sawa/celo-blocks?source=uniswap',
   [ChainId.BNB]: 'https://graph-bsc.goblins.cash/subgraphs/name/goblins/bsc-subgraph-v3',
   [ChainId.AVALANCHE]: 'https://api.thegraph.com/subgraphs/name/lynnshaoyu/avalanche-blocks?source=uniswap',
-  [ChainId.BASE]: 'https://api.studio.thegraph.com/query/48211/base-blocks/version/latest?source=uniswap',
+  [ChainId.BASE]: 'https://graph-base.goblins.cash/subgraphs/name/goblins/base-subgraph-v3',
 }
 
 const httpLink = new HttpLink({ uri: CHAIN_SUBGRAPH_URL[ChainId.MAINNET] })
@@ -79,6 +79,10 @@ export const chainToApolloClient: Record<number, ApolloClient<NormalizedCacheObj
     cache: new InMemoryCache(),
     uri: CHAIN_SUBGRAPH_URL[ChainId.SMARTBCH],
   }),
+  [ChainId.BASE]: new ApolloClient({
+    cache: new InMemoryCache(),
+    uri: CHAIN_SUBGRAPH_URL[ChainId.BASE],
+  }),
 }
 
 export const chainToApolloBlockClient: Record<number, ApolloClient<NormalizedCacheObject>> = {
@@ -113,5 +117,10 @@ export const chainToApolloBlockClient: Record<number, ApolloClient<NormalizedCac
   [ChainId.SMARTBCH]: new ApolloClient({
     cache: new InMemoryCache(),
     uri: CHAIN_SUBGRAPH_URL[ChainId.SMARTBCH],
+  }),
+
+  [ChainId.BASE]: new ApolloClient({
+    cache: new InMemoryCache(),
+    uri: CHAIN_SUBGRAPH_URL[ChainId.BASE],
   }),
 }
