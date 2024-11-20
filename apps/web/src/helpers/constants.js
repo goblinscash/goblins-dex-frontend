@@ -72,6 +72,28 @@ export const cryptoData = [
     explorerLink: "https://bscscan.com/",
     blockExplorerUrls: ["https://bscscan.com/"],
     nativeCurrency: { name: "Binance Coin", symbol: "BNB", decimals: 18 },
+  },
+  {
+    label: "Base Network",
+    symbol: "BASE",
+    name: "Base Network",
+    type: "BASE",
+    chainName: "Base Network",
+    rpcUrls: [
+      "https://bsc-dataseed.binance.org/",
+      "https://bsc-dataseed1.defibit.io/",
+      "https://bsc-dataseed1.ninicoin.io/"
+    ],
+    chainId: 8453,
+    rpcUrl: "https://bsc-dataseed.binance.org/",
+    contractAddress: process.env.REACT_APP_BASE_STAKING_CONTRACT,
+    nftManagerContractAddress: process.env.REACT_APP_BASE_NFT_MANAGER_CONTRACT,
+    stakeContractAddress: process.env.REACT_APP_BASE_TOKEN_STAKING_CONTRACT,
+    migrationAddress: process.env.REACT_APP_BASE_MIGRATION_STAKING_CONTRACT,
+    compoundAddress: process.env.REACT_APP_BASE_COMPOUND_CONTRACT,
+    explorerLink: "https://basescan.com/",
+    blockExplorerUrls: ["https://basescan.com/"],
+    nativeCurrency: { name: "Base", symbol: "Base", decimals: 18 },
   }
 ];
 
