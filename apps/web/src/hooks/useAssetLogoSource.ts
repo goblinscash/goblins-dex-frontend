@@ -20,7 +20,10 @@ function parseLogoSources(uris: string[]) {
 // Parses uri's, favors non-coingecko images, and improves coingecko logo quality
 function prioritizeLogoSources(uris: string[]) {
   const parsedUris = uris.map((uri) => uriToHttp(uri)).flat(1)
-  const preferredUris: string[] = []
+  const preferredUris: string[] = [];
+
+
+  console.log(preferredUris, "<====preferredUris")
 
   // Consolidate duplicate coingecko urls into one fallback source
   let coingeckoUrl: string | undefined = undefined
@@ -54,11 +57,19 @@ function getInitialUrl(
     return celoLogo
   }
 
+
   if (checksummedAddress) {
-    if (chainId == 10000 || 56) {
+    if (chainId == 10000) {
       return `https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
-    } else {
-      console.log(`https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`, "******")
+    }
+
+
+
+    else {
+
+
+
+
       return `https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
     }
   } else {
