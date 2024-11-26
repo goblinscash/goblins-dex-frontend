@@ -1,4 +1,7 @@
+import { useState, useEffect } from "react";
 import moment from "moment";
+import axios from "axios"
+
 // img
 import loader from "assets/farmingAssets/Images/loading.gif";
 import sortIcon from "assets/farmingAssets/Images/sort.svg";
@@ -6,7 +9,7 @@ import { getSymbols } from "helpers/constants";
 import { toFixedCustm } from "helpers/utils";
 import Web3Intraction from "utils/web3Intraction";
 import { useDispatch, useSelector } from "react-redux";
-import {  updateFarm, withdrawNft } from "state/action";
+import { updateFarm, withdrawNft } from "state/action";
 import { toast } from "react-toastify";
 
 function MyFarm({
@@ -19,17 +22,41 @@ function MyFarm({
   isBlocked,
   myFarmload,
   handleSort,
+  setActiveTab
 }) {
-  const dispatch= useDispatch()
+  const dispatch = useDispatch()
   const { currentNetwork } = useSelector((state) => state.dashboard);
+
+  const [internalLoading, setInternalLoading] = useState(false)
+
+  const [tokenList, setTokenList] = useState(null)
+  useEffect(() => {
+
+    const uri = 'https://raw.githubusercontent.com/ethereum-optimism/ethereum-optimism.github.io/master/optimism.tokenlist.json';
+
+    axios.get(uri).then((res) => {
+      if (res.data.tokens) {
+
+        setTokenList(res.data.tokens.reduce((acc, token) => {
+          acc[token.address.toLowerCase()] = token.logoURI;
+          return acc;
+        }, {}))
+        
+      } else {
+        return null
+      }
+    }).catch((err) => {
+      console.log(err)
+    })
+
+  }, [])
 
   // adding funtion to skip confirmation modal
   const handleClaim = async (e, detail) => {
     try {
       e.preventDefault();
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      // console.log(web3, "webbbbbbbbbbbbb")
-      // await web3.claimRewards(detail.key.rewardToken, wallet.address);
+      setInternalLoading(true)
       await web3.mutliCallReStake(
         [
           detail.key.rewardToken,
@@ -44,6 +71,9 @@ function MyFarm({
     } catch (error) {
       console.log(error, "<====error");
       toast.error(error);
+    }finally{
+      setInternalLoading(false)
+
     }
   };
 
@@ -51,7 +81,7 @@ function MyFarm({
     try {
       e.preventDefault();
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      // setLoading(true);
+      setInternalLoading(true);
       await web3.mutliCallUnstake(
         [
           detail.key.rewardToken,
@@ -82,13 +112,15 @@ function MyFarm({
           withdrawNft: true,
         })
       );
-      // setLoading(false);
+      
+      setActiveTab(1)
       // handleConfirm();
       myFarmload();
     } catch (error) {
       console.log(error, "<====error");
-      // setLoading(false);
       toast.error(error);
+    } finally {
+      setInternalLoading(false)
     }
   };
 
@@ -232,7 +264,7 @@ function MyFarm({
                   </div>
                 </td>
               </tr>
-            ) : loading ? (
+            ) : loading  ? (
               <tr>
                 <td
                   className="py-3 px-6 text-left border-b border-gray-600 transparent"
@@ -276,7 +308,9 @@ function MyFarm({
             ) : (
               incentiveIds &&
               incentiveIds?.length > 0 &&
-              incentiveIds.map((item, key) => (
+              incentiveIds.map((item, key) => {
+
+                return(
                 <tr
                   key={key}
                   className="border-b border-gray-200 hover:bg-gray-100 cursor-pointer"
@@ -288,18 +322,27 @@ function MyFarm({
                   >
                     <div className="flex items-center gap-2">
                       <div className="imgWrp flex-shrink-0 flex items-center">
-                        {getSymbols[item?.getPoolDetail?.token0Address] ? (
-                          <img
-                            src={getSymbols[item?.getPoolDetail?.token0Address]}
-                            alt=""
-                            className="rounded-pill max-w-full object-cover shadow-sm"
-                            height={1000}
-                            width={1000}
-                            style={{ height: 30, width: 30 }}
-                          />
-                        ) : (
-                          item?.getPoolDetail?.token0Symbol + " / "
-                        )}
+                      {getSymbols[item?.getPoolDetail?.token0Address] ? (
+                        <img
+                          src={getSymbols[item?.getPoolDetail?.token0Address]}
+                          alt=""
+                          className="rounded-pill max-w-full object-cover shadow-sm"
+                          height={1000}
+                          width={1000}
+                          style={{ height: 30, width: 30 }}
+                        />
+                      ): tokenList&& tokenList[item?.getPoolDetail?.token0Address] ? (
+                        <img
+                          src={tokenList[item?.getPoolDetail?.token0Address]}
+                          alt=""
+                          className="rounded-pill max-w-full object-cover shadow-sm"
+                          height={1000}
+                          width={1000}
+                          style={{ height: 30, width: 30 }}
+                        />
+                      ) : (
+                        item?.getPoolDetail?.token0Symbol + "/ "
+                      )}
 
                         {getSymbols[item?.getPoolDetail?.token1Address] ? (
                           <img
@@ -309,6 +352,15 @@ function MyFarm({
                             height={1000}
                             width={1000}
                             style={{ height: 30, width: 30, marginLeft: -10 }}
+                          />
+                        ) : tokenList && tokenList[item?.getPoolDetail?.token1Address.toLowerCase()] ? (
+                          <img
+                            src={tokenList[item?.getPoolDetail?.token1Address.toLowerCase()]}
+                            alt=""
+                            className="rounded-pill max-w-full object-cover shadow-sm"
+                            height={1000}
+                            width={1000}
+                            style={{ height: 30, width: 30 }}
                           />
                         ) : (
 
@@ -387,9 +439,9 @@ function MyFarm({
                             onClick={(e) => handleClaim(e, item)}
                             className="btn flex items-center commonBtn justify-center rounded"
                             style={{ background: "#00ff00" }}
-                            disabled={isBlocked || item.rewardInfo?.reward <= 0}
+                            disabled={isBlocked || item.rewardInfo?.reward <= 0 || internalLoading}
                           >
-                            {"Claim"}
+                            {!internalLoading ? "Claim":"Loading..."}
                           </button>
                         </p>
                         <p className={`   capitalize mr-2`}>
@@ -398,16 +450,16 @@ function MyFarm({
                             onClick={(e) => handleunStake(e, item)}
                             className="btn flex items-center commonBtn justify-center rounded"
                             style={{ background: "#00ff00" }}
-                            disabled={isBlocked || item.isUnstaked}
+                            disabled={isBlocked || item.isUnstaked || internalLoading}
                           >
-                            {"UnStake"}
+                             {!internalLoading ? "Unstake":"Loading..."}
                           </button>
                         </p>
                       </div>
                     }
                   </td>
                 </tr>
-              ))
+              )})
             )}
             {/* Add more rows as needed */}
           </tbody>
