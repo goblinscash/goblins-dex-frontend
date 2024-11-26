@@ -148,6 +148,9 @@ export const makeComputeData = async (key) => {
   });
 };
 
+
+
+
 export const getSymbols = {
   "0x3743ec0673453e5009310c727ba4eaf7b3a1cc04": Icon1, //BCH on bch
   "0x56381cb87c8990971f3e9d948939e1a95ea113a3": Icon2,
