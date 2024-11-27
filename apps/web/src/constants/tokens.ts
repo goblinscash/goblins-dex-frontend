@@ -229,6 +229,8 @@ export const SHIB_BSC = new Token(ChainId.BNB, '0x2859e4544C4bB03966803b044A9356
 export const BONK_BSC = new Token(ChainId.BNB, '0xA697e272a73744b343528C3Bc4702F2565b2F422', 5, 'BONK', 'BONK')
 export const GOB_BSC = new Token(ChainId.BNB, '0x701ACA29AE0F5d24555f1E8A6Cf007541291d110', 9, 'GOB', 'GOB')
 
+export const WBNB =new Token(ChainId.BNB, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB')
+
 export const USDC_AVALANCHE = new Token(
   ChainId.AVALANCHE,
   '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
