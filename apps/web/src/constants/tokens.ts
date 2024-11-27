@@ -401,8 +401,8 @@ export const HERRY_BCH = new Token(
   ChainId.SMARTBCH,
   '0x85689bE665562c06Aa052e0E2A2422b286d30C44',
   8,
-  'HERRY',
-  'HERRY'
+  'BITCOIN',
+  'BITCOIN'
 )
 
 export const MOG_BCH = new Token(
