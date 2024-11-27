@@ -189,7 +189,7 @@ export const getSymbols = {
 };
 
 export const getSortedData = (arr, sortKey, sortOrder) => {
-  console.log(arr, sortKey, sortOrder, "<====arr, sortKey, sortOrder");
+
   if (!arr || !arr.length) {
     return [];
   } else {
