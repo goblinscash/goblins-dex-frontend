@@ -2,14 +2,11 @@ import { ethers } from "ethers";
 import computeABI from "utils/ABI/computeABi.json";
 
 //img
-
 import Icon1 from "assets/farmingAssets/icons/0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04.png";
 import Icon2 from "assets/farmingAssets/icons/0x56381cB87C8990971f3e9d948939e1a95eA113a3.png";
 import Icon4 from "assets/farmingAssets/icons/0xbb10B6D11db70f33417b08e0B87042275C933Bb9.png";
 import Icon3 from "assets/farmingAssets/icons/0xbb2A35cc3e3dDb679fe30A82051633bC822e4191.png";
 import Icon5 from "assets/farmingAssets/icons/0xbbb3700F33fCb64437Dc28A7Beb6b21f5cC76FB9.png";
-import Icon6 from "assets/farmingAssets/icons/0xBc2F884680c95A02cea099dA2F524b366d9028Ba.png";
-import Icon7 from "assets/farmingAssets/icons/0xBc9bD8DDe6C5a8e1CBE293356E02f5984693b195.png";
 import Icon8 from "assets/farmingAssets/icons/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf.png";
 import Icon9 from "assets/farmingAssets/icons/0x55d398326f99059fF775485246999027B3197955.png";
 import Icon_1 from "assets/farmingAssets/icons/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c.png";
@@ -18,9 +15,7 @@ import IconDoge from "assets/farmingAssets/icons/0xba2ae424d960c26247dd6c32edc70
 import IconUSDC from "assets/farmingAssets/icons/0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d.png";
 import IconBONK from "assets/farmingAssets/icons/0xa697e272a73744b343528c3bc4702f2565b2f422.png";
 import IconPEPE from "assets/farmingAssets/icons/0x25d887ce7a35172c62febfd67a1856f20faebb00.png";
-import IconSHIB from "assets/farmingAssets/icons/0x2859e4544c4bb03966803b044a93563bd2d0dd4d.png";
-import IconPEPEBCH from "assets/farmingAssets/icons/0x8CF81850Aa9D5a4E3Df180AFBaF0d2093A3F3379.png";
-import IconBonkBCH from "assets/farmingAssets/icons/0x799351F408a51A0Ca5fdB4CD9E93157D8703b70A.png"
+
 
 export const cryptoData = [
   {
@@ -86,10 +81,7 @@ export const graphQLUrl = {
 export const GOBAddress = {
   10000: "0x56381cb87c8990971f3e9d948939e1a95ea113a3",
   56: "0x701aca29ae0f5d24555f1e8a6cf007541291d110",
- 
 };
-
-
 
 export const priceGraphQl = "https://graph.dfd.cash/subgraphs/name/goblins/subgraph-v3";
 
@@ -167,6 +159,10 @@ export const getSymbols = {
   "0x799351f408a51a0ca5fdb4cd9e93157d8703b70a": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x799351F408a51A0Ca5fdB4CD9E93157D8703b70A/logo.png",
   "0x8cf81850aa9d5a4e3df180afbaf0d2093a3f3379": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x8CF81850Aa9D5a4E3Df180AFBaF0d2093A3F3379/logo.png",
   "0x8ff795a6f4d97e7887c79bea79aba5cc76444adf": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartchain/assets/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf/logo.png", //BCH-bsc
+
+
+
+
   "0xfb5b838b6cfeedc2873ab27866079ac55363d37e": Icon10,
   "0x55d398326f99059ff775485246999027b3197955": Icon9,
   "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c": Icon_1,
@@ -174,6 +170,9 @@ export const getSymbols = {
   "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d": IconUSDC, // for bsc
   "0xa697e272a73744b343528c3bc4702f2565b2f422": IconBONK,
   "0x25d887ce7a35172c62febfd67a1856f20faebb00": IconPEPE,
+
+
+
   "0x701aca29ae0f5d24555f1e8a6cf007541291d110": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartchain/assets/0x701ACA29AE0F5d24555f1E8A6Cf007541291d110/logo.png",
 
   "0x617599b1177d56d130da5fd5cf896e3f186eb6f1": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x617599B1177d56d130Da5FD5cf896E3f186eB6f1/logo.png",
@@ -212,3 +211,7 @@ export const getSortedData = (arr, sortKey, sortOrder) => {
     return sortedArr;
   }
 };
+
+
+
+
