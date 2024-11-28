@@ -15,6 +15,7 @@ class Web3Intraction {
   constructor(currentNetwork, provider) {
     if (provider || window.ethereum) {
       this.PROVIDER = provider;
+      this.PROVIDER = provider;
       this.SIGNER = this.PROVIDER.getSigner();
     } else if (currentNetwork) {
       this.PROVIDER = new ethers.providers.JsonRpcProvider(
@@ -27,6 +28,7 @@ class Web3Intraction {
       ...currentNetwork,
     };
     this.walletType = currentNetwork.label;
+    this.chainId = currentNetwork.chainId;
   }
 
   /**
@@ -46,6 +48,23 @@ class Web3Intraction {
         JSON.parse(abi),
         isSigner ? this.SIGNER : this.PROVIDER
       );
+
+      return contract;
+    } catch (error) {
+      console.log("error", error);
+      return null;
+    }
+  };
+
+  contractInstance = (abi, address, _provider) => {
+    try {
+      let contract = new Contract(
+        address,
+        JSON.parse(abi),
+        new ethers.providers.JsonRpcProvider(_provider)
+      );
+
+      // let contract = new ethers.Contract(address, abi, new ethers.providers.JsonRpcProvider(_provider));
 
       return contract;
     } catch (error) {
@@ -1252,10 +1271,27 @@ class Web3Intraction {
           true
         );
 
-        console.log(this.contractDetails.stakeContractAddress, "ch1")
+        let getStakingContract = await contract.stakingToken();
+
+        const bscInstance = this.contractInstance(
+          JSON.stringify(TokenABI),
+          "0x701ACA29AE0F5d24555f1E8A6Cf007541291d110",
+          "https://bsc.drpc.org"
+        )
+
+
+        console.log("currentNetwork", this.chainId)
+        let bscDecimal = 0;
+        let bscSupply = 0
+        if (this.chainId == 10000) {
+          bscDecimal = await bscInstance.decimals()
+          bscSupply = await bscInstance.totalSupply()
+          bscSupply = bscSupply.toString() / 10 ** bscDecimal;
+        }
+
         let walletAddress = this.SIGNER.getAddress();
 
-        let getStakingContract = await contract.stakingToken();
+
 
 
         let getRewardsContract = await contract.rewardsToken();
@@ -1271,7 +1307,10 @@ class Web3Intraction {
         earnedAmount = earnedAmount.toString() / 10 ** rewardToken.tokenDecimal;
 
         let totalSupply = await contract.totalSupply();
+
         totalSupply = totalSupply.toString() / 10 ** stakeToken.tokenDecimal;
+
+        let _tokenTotalSupply = parseInt(stakeToken.totalSupply - bscSupply)
 
         resolve({
           balance: parseFloat(stakedAmount) + parseFloat(stakeToken.balance),
@@ -1281,7 +1320,7 @@ class Web3Intraction {
           earnedAmount: earnedAmount,
           rewardSymbol: rewardToken.symbol,
           stakeSymbol: stakeToken.symbol,
-          tokenTotalSupply: parseInt(stakeToken.totalSupply),
+          tokenTotalSupply: _tokenTotalSupply,
           unStackTotalSupply:
             parseInt(stakeToken.totalSupply) - parseInt(totalSupply),
         });

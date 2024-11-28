@@ -23,6 +23,7 @@ import { isExactInput, transformQuoteToTrade } from './utils'
 import { SET_INTERFACE_FEE_FOR_PAIRS } from 'constants/routing'
 import { interFaceFeeAddress } from 'constants/common'
 import { CurrencyAmount } from '@uniswap/sdk-core'
+import { useSwapContext } from 'state/swap/SwapContext'
 
 const UNISWAP_API_URL = process.env.REACT_APP_UNISWAP_API_URL
 const UNISWAP_GATEWAY_DNS_URL = process.env.REACT_APP_UNISWAP_GATEWAY_DNS
@@ -121,6 +122,7 @@ function getRoutingAPIConfig(args: GetQuoteArgs): RoutingConfig {
   return [uniswapx, classic]
 }
 
+
 export const routingApi = createApi({
   reducerPath: 'routingApi',
   baseQuery: fetchBaseQuery(),
@@ -167,10 +169,13 @@ export const routingApi = createApi({
             sendPortionEnabled,
             gatewayDNSUpdateEnabled,
             tokenInSymbol,
-            tokenOutSymbol
+            tokenOutSymbol,
+            slippageTolerance
           } = args
+          // const formatPercentInput = useFormatPercentInput()
 
-          console.log(args, "argsargs")
+          // If isPercent is true, convert to percentage
+          console.log(args, "argsargs",slippageTolerance)
           const requestBody = {
             tokenInChainId,
             tokenInAddress: tokenIn,
