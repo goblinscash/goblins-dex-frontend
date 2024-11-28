@@ -80,9 +80,7 @@ export const cryptoData = [
     type: "BASE",
     chainName: "Base Network",
     rpcUrls: [
-      "https://bsc-dataseed.binance.org/",
-      "https://bsc-dataseed1.defibit.io/",
-      "https://bsc-dataseed1.ninicoin.io/"
+      "https://base-rpc.publicnode.com",
     ],
     chainId: 8453,
     rpcUrl: "https://bsc-dataseed.binance.org/",

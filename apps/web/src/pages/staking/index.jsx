@@ -50,11 +50,16 @@ const Staking = () => {
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       let detail = await web3.getDetailInfo();
       console.log(details, "detail", currentNetwork)
-      let data = await web3.getTokenBalance(
-        currentNetwork?.chainId == 56 ? "0x701ACA29AE0F5d24555f1E8A6Cf007541291d110" :
-          "0x47c61F29B1458d234409Ebbe4B6a70F3b16528EF"
-      );
 
+      let data = await web3.getTokenBalance(
+        currentNetwork?.chainId === 56
+          ? "0x701ACA29AE0F5d24555f1E8A6Cf007541291d110" // BSC
+          : currentNetwork?.chainId === 10000
+            ? "0x47c61F29B1458d234409Ebbe4B6a70F3b16528EF" // SmartBCH
+            : currentNetwork?.chainId === 8453
+              ? "0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3" // Base
+              : "" // Fallback (optional)
+      );
 
       setDetails({
         ...detail,
@@ -310,7 +315,7 @@ const Staking = () => {
                       // href="/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
                       href={
                         currentNetwork?.chainId == 56 ? "/#/swap?inputCurrency=0x8ff795a6f4d97e7887c79bea79aba5cc76444adf&outputCurrency=0x701aca29ae0f5d24555f1e8a6cf007541291d110&chain=bsc"
-                        : "/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
+                          : "/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
                       }
                       target="_blank"
                       onClick={(e) => (isBlocked ? e.preventDefault() : false)}

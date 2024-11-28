@@ -1279,12 +1279,9 @@ class Web3Intraction {
           "https://bsc.drpc.org"
         )
 
-
-        console.log("currentNetwork", this.chainId)
-        let bscDecimal = 0;
         let bscSupply = 0
         if (this.chainId == 10000) {
-          bscDecimal = await bscInstance.decimals()
+          let bscDecimal = await bscInstance.decimals()
           bscSupply = await bscInstance.totalSupply()
           bscSupply = bscSupply.toString() / 10 ** bscDecimal;
         }
@@ -1296,6 +1293,7 @@ class Web3Intraction {
 
         let getRewardsContract = await contract.rewardsToken();
         let stakeToken = await this.getTokenBalance(getStakingContract);
+
         let rewardToken = await this.getTokenSymbolAndDecimal(
           getRewardsContract
         );
@@ -1311,7 +1309,6 @@ class Web3Intraction {
         totalSupply = totalSupply.toString() / 10 ** stakeToken.tokenDecimal;
 
         let _tokenTotalSupply = parseInt(stakeToken.totalSupply - bscSupply)
-
         resolve({
           balance: parseFloat(stakedAmount) + parseFloat(stakeToken.balance),
           stakedAmount: parseFloat(stakedAmount),
