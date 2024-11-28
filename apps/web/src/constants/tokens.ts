@@ -229,6 +229,8 @@ export const SHIB_BSC = new Token(ChainId.BNB, '0x2859e4544C4bB03966803b044A9356
 export const BONK_BSC = new Token(ChainId.BNB, '0xA697e272a73744b343528C3Bc4702F2565b2F422', 5, 'BONK', 'BONK')
 export const GOB_BSC = new Token(ChainId.BNB, '0x701ACA29AE0F5d24555f1E8A6Cf007541291d110', 9, 'GOB', 'GOB')
 
+export const WBNB =new Token(ChainId.BNB, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB')
+
 export const USDC_AVALANCHE = new Token(
   ChainId.AVALANCHE,
   '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
@@ -385,6 +387,52 @@ export const WDOGE_BCH = new Token(
   'dcWDOGE',
   'dcWDOGE'
 )
+
+
+export const SPX_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0x617599B1177d56d130Da5FD5cf896E3f186eB6f1',
+  8,
+  'SPX',
+  'SPX'
+)
+
+export const HERRY_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0x85689bE665562c06Aa052e0E2A2422b286d30C44',
+  8,
+  'BITCOIN',
+  'BITCOIN'
+)
+
+export const MOG_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0x0dF6A7169132265Bb4f2b0Fac0a37b26ea6F93Fc',
+  18,
+  'MOG',
+  'MOG'
+)
+
+export const Neiro_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0x751C9c9F98f839E97b039BE2d5A66b92c622335F',
+  9,
+  'Neiro',
+  'Neiro'
+)
+
+
+export const DEGEN_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0xB6B54DDE7282fbcD19Cb1d447dFE425454a831Eb',
+  18,
+  'DEGEN',
+  'DEGEN'
+)
+
+
+
+
 
 export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } = {
   ...(WETH9 as Record<ChainId, Token>),

@@ -63,6 +63,8 @@ import {
   SHIB_BSC, //SHIB adding
   BONK_BSC, //Bonk
   GOB_BSC,
+  SPX_BCH,HERRY_BCH, MOG_BCH, Neiro_BCH,DEGEN_BCH,
+  WBNB
 } from './tokens'
 
 type ChainTokenList = {
@@ -142,7 +144,8 @@ export const COMMON_BASES: ChainCurrencyList = {
   [ChainId.CELO]: [nativeOnChain(ChainId.CELO), CEUR_CELO, CUSD_CELO, PORTAL_ETH_CELO, PORTAL_USDC_CELO, WBTC_CELO],
   [ChainId.CELO_ALFAJORES]: [nativeOnChain(ChainId.CELO_ALFAJORES), CUSD_CELO_ALFAJORES, CEUR_CELO_ALFAJORES],
 
-  [ChainId.BNB]: [nativeOnChain(ChainId.BNB), DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC, FLOKI_BSC, PEPE_BSC, SHIB_BSC, BONK_BSC, GOB_BSC],
+  [ChainId.BNB]: [nativeOnChain(ChainId.BNB),WBNB, DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC, FLOKI_BSC, PEPE_BSC, SHIB_BSC, BONK_BSC, GOB_BSC],
+
 
   // Base chain
   [ChainId.BASE]: [nativeOnChain(ChainId.BASE), WRAPPED_NATIVE_CURRENCY[ChainId.BASE] as Token, USDC_BASE],
@@ -157,7 +160,9 @@ export const COMMON_BASES: ChainCurrencyList = {
   [ChainId.SMARTBCH]: [
     nativeOnChain(ChainId.SMARTBCH),
      WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, 
-     USDT_SBCH, BC_BCH, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC, GOB, BONK,SHIB,PEPE,DOGE,FLOKI],
+     USDT_SBCH, BC_BCH, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC, GOB, BONK,SHIB,PEPE,DOGE,FLOKI,
+     SPX_BCH,HERRY_BCH, MOG_BCH, Neiro_BCH,DEGEN_BCH
+    ],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend

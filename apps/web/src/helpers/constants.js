@@ -2,7 +2,6 @@ import { ethers } from "ethers";
 import computeABI from "utils/ABI/computeABi.json";
 
 //img
-
 import Icon1 from "assets/farmingAssets/icons/0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04.png";
 import Icon2 from "assets/farmingAssets/icons/0x56381cB87C8990971f3e9d948939e1a95eA113a3.png";
 import Icon4 from "assets/farmingAssets/icons/0xbb10B6D11db70f33417b08e0B87042275C933Bb9.png";
@@ -105,10 +104,7 @@ export const GOBAddress = {
   10000: "0x56381cb87c8990971f3e9d948939e1a95ea113a3",
   56: "0x701aca29ae0f5d24555f1e8a6cf007541291d110",
   8453: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
- 
 };
-
-
 
 export const priceGraphQl = "https://graph.dfd.cash/subgraphs/name/goblins/subgraph-v3";
 
@@ -167,6 +163,9 @@ export const makeComputeData = async (key) => {
   });
 };
 
+
+
+
 export const getSymbols = {
   "0x3743ec0673453e5009310c727ba4eaf7b3a1cc04": Icon1, //BCH on bch
   "0x56381cb87c8990971f3e9d948939e1a95ea113a3": Icon2,
@@ -179,9 +178,14 @@ export const getSymbols = {
   "0x6c6b3e0f1a7b3513c55e1f288c99d53441990613": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x6c6b3E0F1a7B3513c55E1f288C99d53441990613/logo.png",
   "0x9ca6f10d19cbda52bbd615f7e1f1821386abe3d1": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x9Ca6F10D19CBDa52bBd615f7E1F1821386Abe3D1/logo.png",
   "0x21ba72ff5b25add1dc3d42cab987f1c4e0466814": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x21BA72Ff5b25AdD1Dc3d42Cab987f1c4e0466814/logo.png",
+  "0x2859e4544c4bb03966803b044a93563bd2d0dd4d": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x21BA72Ff5b25AdD1Dc3d42Cab987f1c4e0466814/logo.png",
   "0x799351f408a51a0ca5fdb4cd9e93157d8703b70a": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x799351F408a51A0Ca5fdB4CD9E93157D8703b70A/logo.png",
   "0x8cf81850aa9d5a4e3df180afbaf0d2093a3f3379": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x8CF81850Aa9D5a4E3Df180AFBaF0d2093A3F3379/logo.png",
   "0x8ff795a6f4d97e7887c79bea79aba5cc76444adf": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartchain/assets/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf/logo.png", //BCH-bsc
+
+
+
+
   "0xfb5b838b6cfeedc2873ab27866079ac55363d37e": Icon10,
   "0x55d398326f99059ff775485246999027b3197955": Icon9,
   "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c": Icon_1,
@@ -189,13 +193,25 @@ export const getSymbols = {
   "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d": IconUSDC, // for bsc
   "0xa697e272a73744b343528c3bc4702f2565b2f422": IconBONK,
   "0x25d887ce7a35172c62febfd67a1856f20faebb00": IconPEPE,
-  "0x2859e4544c4bb03966803b044a93563bd2d0dd4d": IconSHIB,
-  "0x701aca29ae0f5d24555f1e8a6cf007541291d110": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartchain/assets/0x701ACA29AE0F5d24555f1E8A6Cf007541291d110/logo.png"
+
+
+
+  "0x701aca29ae0f5d24555f1e8a6cf007541291d110": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartchain/assets/0x701ACA29AE0F5d24555f1E8A6Cf007541291d110/logo.png",
+
+  "0x617599b1177d56d130da5fd5cf896e3f186eb6f1": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x617599B1177d56d130Da5FD5cf896E3f186eB6f1/logo.png",
+
+  "0x85689be665562c06aa052e0e2a2422b286d30c44": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x85689bE665562c06Aa052e0E2A2422b286d30C44/logo.png",
+
+  "0x0df6a7169132265bb4f2b0fac0a37b26ea6f93fc": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x0dF6A7169132265Bb4f2b0Fac0a37b26ea6F93Fc/logo.png",
+
+  "0x751c9c9f98f839e97b039be2d5a66b92c622335f": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x751C9c9F98f839E97b039BE2d5A66b92c622335F/logo.png",
+
+  "0xb6b54dde7282fbcd19cb1d447dfe425454a831eb": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0xB6B54DDE7282fbcD19Cb1d447dFE425454a831Eb/logo.png",
   // 0x55d398326f99059ff775485246999027b3197955
 };
 
 export const getSortedData = (arr, sortKey, sortOrder) => {
-  console.log(arr, sortKey, sortOrder, "<====arr, sortKey, sortOrder");
+
   if (!arr || !arr.length) {
     return [];
   } else {
@@ -218,3 +234,7 @@ export const getSortedData = (arr, sortKey, sortOrder) => {
     return sortedArr;
   }
 };
+
+
+
+
