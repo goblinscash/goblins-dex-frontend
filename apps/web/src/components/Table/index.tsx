@@ -97,6 +97,30 @@ export function Table<Data extends RowData>({
     getCoreRowModel: getCoreRowModel(),
   })
 
+  function countLeadingZerosAfterDecimal(num: any) {
+    const numStr = parseFloat(num).toFixed(6);
+
+    const decimalIndex = numStr.indexOf(".");
+    if (parseFloat(num) >= 0.0009) {
+      return <><p style={{ fontSize: 18, margin: 0, marginLeft: "auto", color: "#9B9B9B" }}>${numStr}</p></>
+    }
+
+    const fractionalPart = numStr.slice(decimalIndex + 1);
+
+    let zeroCount = 0;
+    let remainingNumber = "";
+    for (const char of fractionalPart) {
+      if (char === "0" && remainingNumber === "") {
+        zeroCount++;
+      } else {
+        remainingNumber += char;
+      }
+    }
+
+
+    return <><p style={{ fontSize: 18, margin: 0, marginLeft: "auto", color: "#9B9B9B" }}>$0.0<sub style={{ fontSize: 10 }}>{zeroCount}</sub>{remainingNumber}</p></>
+  }
+
   return (
     <div>
       <ScrollSync>
@@ -144,22 +168,18 @@ export function Table<Data extends RowData>({
                     ))}
                   </DataRow>
                 ))
-                :table?.getRowModel().rows.map((row) => {
+                : table?.getRowModel().rows.map((row) => {
                   const cells = row.getVisibleCells().map((cell) => (
                     <CellContainer key={cell.id}>
-                    {cell.column.id === 'price' && cell.getValue() !== undefined ? (
-                            // parseFloat(
-                            //   // @ts-ignore
-                            //   cell?.getValue()
-                            //   ).toFixed(6)
-                              flexRender(cell.column.columnDef.cell, cell.getContext())
-                    ) : (
-                      flexRender(cell.column.columnDef.cell, cell.getContext())
-                    )}
-                  </CellContainer>
+                      {cell.column.id === 'price' && cell.getValue() !== undefined ? (
+                        <>{countLeadingZerosAfterDecimal(cell.getValue())}</>
+                      ) : (
+                        flexRender(cell.column.columnDef.cell, cell.getContext())
+                      )}
+                    </CellContainer>
                   ));
 
-              
+
                   const rowOriginal = row.original as any
                   return 'link' in rowOriginal && typeof rowOriginal.link === 'string' ? (
                     <TableRowLink to={rowOriginal.link} key={row.id}>
