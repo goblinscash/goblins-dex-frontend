@@ -202,7 +202,7 @@ export const routingApi = createApi({
             portionBips: matchedPair ? matchedPair.fee : _portionBips,
             portionAmount: _portionAmount,
             portionRecipient: interFaceFeeAddress[tokenInChainId],
-            enableUniversalRouter: true,
+            // enableUniversalRouter: true,
             protocols: 'v2,v3,mixed'
           };
 
@@ -210,7 +210,7 @@ export const routingApi = createApi({
           const fullUrl = `${baseURL}/quote?${queryString}`;
 
           const response = await fetch(fullUrl)
-
+console.log(response, "result")
 
           if (response.error) {
             try {
@@ -236,9 +236,13 @@ export const routingApi = createApi({
           }
 
           const result: Result = { state: QuoteState.SUCCESS, data: { routing: URAQuoteType.CLASSIC, quote: response.data as URAQuoteResponse, allQuotes: [] } }
+console.log(result, "result")
+        
+        
           //@ts-ignore
           const uraQuoteResponse = result.data as URAQuoteResponse
           const tradeResult = await transformQuoteToTrade(args, uraQuoteResponse, QuoteMethod.ROUTING_API)
+          console.log(tradeResult, "res+")
           return { data: { ...tradeResult, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration } }
         } catch (error: any) {
           console.warn(
@@ -251,6 +255,8 @@ export const routingApi = createApi({
           const router = getRouter(args.tokenInChainId)
 
           let quoteResult = await getClientSideQuote(args, router, CLIENT_PARAMS)
+
+          console.log(quoteResult, "<===quoteResult")
 
           let matchedPair = SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId] ? findPair(args.tokenInAddress, args.tokenOutAddress, SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId]) : 0
           if (quoteResult.data) {
