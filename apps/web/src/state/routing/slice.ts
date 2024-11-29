@@ -170,12 +170,9 @@ export const routingApi = createApi({
             gatewayDNSUpdateEnabled,
             tokenInSymbol,
             tokenOutSymbol,
-            slippageTolerance
           } = args
-          // const formatPercentInput = useFormatPercentInput()
 
-          // If isPercent is true, convert to percentage
-          console.log(args, "argsargs",slippageTolerance)
+          console.log(args, "argsargs")
           const requestBody = {
             tokenInChainId,
             tokenInAddress: tokenIn,
@@ -192,6 +189,7 @@ export const routingApi = createApi({
           const baseURL = gatewayDNSUpdateEnabled ? UNISWAP_GATEWAY_DNS_URL : UNISWAP_API_URL
           let _portionBips = 25
           let _portionAmount = 0
+          let matchedPair = SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId] ? findPair(args.tokenInAddress, args.tokenOutAddress, SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId]) : 0
 
           const params: QuoteQueryParams = {
             tokenInAddress: tokenInSymbol == "WBCH" ? "BCH" : tokenIn,
@@ -201,7 +199,7 @@ export const routingApi = createApi({
             amount: amount.toString(),
             type: isExactInput(tradeType) ? 'exactIn' : 'exactOut',
             slippageTolerance: '5',
-            portionBips: _portionBips,
+            portionBips: matchedPair ? matchedPair.fee : _portionBips,
             portionAmount: _portionAmount,
             portionRecipient: interFaceFeeAddress[tokenInChainId],
             enableUniversalRouter: true,

@@ -74,7 +74,7 @@ export default function Pools({ account }: { account: string }) {
   if (filteredPositions.length === 0) {
     return <EmptyWalletModule type="pool" onNavigateClick={toggleWalletDrawer} />
   }
-
+  console.log(openPositions, "closedPositions", closedPositions)
   return (
     <PortfolioTabWrapper>
       {openPositions.map((positionInfo) => (

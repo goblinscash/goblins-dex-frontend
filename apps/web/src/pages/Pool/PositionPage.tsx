@@ -610,7 +610,6 @@ function PositionPageContent() {
 
   const compound = useCallback(
     async () => {
-
       try {
         setCompoundCollecting(true)
         const web3 = new Web3Intraction(currentNetwork, wallet.provider);

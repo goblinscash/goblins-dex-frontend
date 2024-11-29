@@ -1515,6 +1515,7 @@ class Web3Intraction {
    */
   compoundPool = async (tokenId, walletAddress) => {
     tokenId = tokenId.toString();
+    console.log(tokenId, "tokenId")
     return new Promise(async (resolve, reject) => {
       try {
         const contract = this.getContract(
@@ -1522,6 +1523,7 @@ class Web3Intraction {
           this.contractDetails?.nftManagerContractAddress,
           true
         );
+
         const approve = await contract.interface.encodeFunctionData("approve", [
           this.contractDetails.compoundAddress,
           tokenId,
@@ -1541,17 +1543,24 @@ class Web3Intraction {
           [[approve, safeTransferFrom]]
         );
 
+
         const tx = {
           to: this.contractDetails?.nftManagerContractAddress,
           data: multicallData,
           value: ethers.utils.parseEther("0"), // Amount of Ether to send with the transaction
         };
 
-        const response = await this.SIGNER.sendTransaction(tx);
+        let response;
+        if (this.chainId == 8453) {
+          response = await this.SIGNER.sendTransaction({
+            ...tx,
+            gasLimit: ethers.utils.hexlify(5000000),
+          });
+        } else {
+          response = await this.SIGNER.sendTransaction(tx)
+        }
 
-        let receipt = await response.wait(); // Wait for the transaction to be mined
-        console.log(receipt, "<===receipt");
-
+        let receipt = await response.wait();
         resolve(receipt);
       } catch (error) {
         console.log(error, "<===error in compoundPool");
@@ -1570,8 +1579,6 @@ class Web3Intraction {
       }
     });
   };
-
-
 
 
   changeRange = async (data, tokenId, walletAddress) => {
