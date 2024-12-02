@@ -258,11 +258,6 @@ function CommonTable({
             newData &&
             newData?.length > 0 &&
             newData.map((item, key) => {
-
-
-
-
-
               return (
                 <tr
                   key={key}

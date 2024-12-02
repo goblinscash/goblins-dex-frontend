@@ -10,7 +10,6 @@ import styles from "./Dashboard.module.scss";
 // //component
 import CreateIncentivePop from "components/Modals/CreateIncentivePop";
 import StakePop from "components/Modals/StakePop";
-
 import ConfirmPopup from "components/Modals/confirmPop";
 import UnStakePopup from "components/Modals/unStake";
 import WithdrawPop from "components/Modals/withdrawPop";
@@ -88,7 +87,6 @@ const Dashboard = () => {
   const showTab = (tab) => {
     setActiveTab(tab);
   };
-
   const handleIncentiveForm = () => {
     if (!wallet.isActive) return toast.error("Please connect wallet!");
     if (isBlocked)
@@ -106,8 +104,6 @@ const Dashboard = () => {
       isUnstake: isUnstake || null,
     }));
   };
-
-
   // old one
   const handleConfirm = (item, isRestake, isClaim) => {
     if (isBlocked)
@@ -120,8 +116,6 @@ const Dashboard = () => {
       isClaim: isClaim || false,
     }));
   };
-
-
   const handleUnStake = (item) => {
     if (isBlocked)
       return toast.error(" Our Product is unavailable in your location");
@@ -131,7 +125,6 @@ const Dashboard = () => {
       detail: item || null,
     }));
   };
-
   const handleWithdraw = (item) => {
     if (isBlocked)
       return toast.error(" Our Product is unavailable in your location");
@@ -141,7 +134,6 @@ const Dashboard = () => {
       detail: item || null,
     }));
   };
-
   const handleStaked = (isClaimAll) => {
     if (isBlocked)
       return toast.error(" Our Product is unavailable in your location");
@@ -151,7 +143,6 @@ const Dashboard = () => {
       isClaimAll: isClaimAll || false,
     });
   };
-
   const load = () => {
     dispatch(
       Act.farmList({
@@ -160,7 +151,6 @@ const Dashboard = () => {
       })
     );
   };
-
   const myFarmUpdate = async () => {
     dispatch(
       Act.updateMyFarm({
@@ -169,13 +159,11 @@ const Dashboard = () => {
       })
     );
   };
-
   useEffect(() => {
     if (wallet.chainId && wallet.address) {
       myFarmUpdate();
     }
   }, [wallet.chainId, wallet.address]);
-
   const loadEnded = () => {
     dispatch(
       Act.deletedFarmList({
@@ -184,7 +172,6 @@ const Dashboard = () => {
       })
     );
   };
-
   const myFarmload = () => {
     dispatch(
       Act.myFarmList({
@@ -193,7 +180,6 @@ const Dashboard = () => {
       })
     );
   };
-
   function filterByTokenSymbol() {
     if (!search) return;
 
@@ -201,31 +187,30 @@ const Dashboard = () => {
       activeTab === 2
         ? myFarm
         : incentiveIds.filter((data) =>
-            activeTab === 1
-              ? !data.isEnded
-              : activeTab === 3
+          activeTab === 1
+            ? !data.isEnded
+            : activeTab === 3
               ? data.isEnded
               : data.isEnded === "xyz"
-          );
+        );
 
-          let filteredData = data?.filter((item) => {
-            const token0Symbol = item.getPoolDetail.token0Symbol || "";
-            const token1Symbol = item.getPoolDetail.token1Symbol || "";
-      
-            return (
-              token0Symbol.toLowerCase().includes(search.toLowerCase()) ||
-              token1Symbol.toLowerCase().includes(search.toLowerCase())
-            );
-          });
-          console.log("Filtered data length:", filteredData.length);
+    let filteredData = data?.filter((item) => {
+      const token0Symbol = item.getPoolDetail.token0Symbol || "";
+      const token1Symbol = item.getPoolDetail.token1Symbol || "";
 
-          if (activeTab === 2) {
-            setFilteredMyFarm(filteredData);
-          } else {
-            setFilteredIncentiveIds(filteredData);
-          }
+      return (
+        token0Symbol.toLowerCase().includes(search.toLowerCase()) ||
+        token1Symbol.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+    console.log("Filtered data length:", filteredData.length);
+
+    if (activeTab === 2) {
+      setFilteredMyFarm(filteredData);
+    } else {
+      setFilteredIncentiveIds(filteredData);
+    }
   }
-
   function clearSearch(e) {
     e.preventDefault();
     if (!search) return;
@@ -239,7 +224,6 @@ const Dashboard = () => {
 
     setSearch("");
   }
-
   const handleSort = (key) => {
     if (sortingData.sortKey === key) {
       setSortingData((pre) => ({
@@ -254,7 +238,6 @@ const Dashboard = () => {
       }));
     }
   };
-
   const filterBySorting = () => {
     let arr = activeTab == 2 ? filteredMyFarm : filteredIncentiveIds;
     let sortedData = getSortedData(
@@ -267,14 +250,12 @@ const Dashboard = () => {
       ? setFilteredMyFarm(sortedData)
       : setFilteredIncentiveIds(sortedData);
   };
-
   // load incentives
   useEffect(() => {
     if (activeTab == 2) {
       myFarmload();
     }
   }, [activeTab, wallet.chainId, wallet.address]);
-
   useEffect(() => {
     if (wallet.chainId && wallet.address) {
       dispatch(
@@ -310,7 +291,6 @@ const Dashboard = () => {
       );
     }
   }, [wallet.chainId, wallet.address]);
-
   useEffect(() => {
     if (currentNetwork && wallet.provider && activeTab == 3) {
       loadEnded();
@@ -323,7 +303,6 @@ const Dashboard = () => {
     wallet.chainId,
     wallet.address,
   ]);
-
   useEffect(() => {
     if (wallet.chainId) {
       if (activeTab == 1) {
@@ -334,7 +313,6 @@ const Dashboard = () => {
       }
     }
   }, [wallet.chainId, activeTab]);
-
   useEffect(() => {
     // Reset filtered data when activeTab changes
     if (activeTab === 2) {
@@ -344,15 +322,12 @@ const Dashboard = () => {
     }
     setSearch("");
   }, [activeTab, myFarm, incentiveIds]);
-
   useEffect(() => {
     setFilteredIncentiveIds(incentiveIds);
   }, [incentiveIds]);
-
   useEffect(() => {
     setFilteredMyFarm(myFarm);
   }, [myFarm]);
-
   useEffect(() => {
     if (sortingData.sortKey && sortingData.sortOrder) {
       filterBySorting();
@@ -372,8 +347,8 @@ const Dashboard = () => {
           document.body
         )
       }
-
-      {confirm.isOpen &&
+      {
+        confirm.isOpen &&
         createPortal(
           <ConfirmPopup
             handleConfirm={handleConfirm}
@@ -382,15 +357,15 @@ const Dashboard = () => {
               activeTab == 3 && toggleEnded
                 ? loadEnded
                 : activeTab == 2
-                ? myFarmload
-                : load
+                  ? myFarmload
+                  : load
             }
             isRestake={confirm.isRestake}
             isClaim={confirm.isClaim}
           />,
           document.body
-        )}
-
+        )
+      }
       {unStake.isOpen &&
         createPortal(
           <UnStakePopup
@@ -400,7 +375,6 @@ const Dashboard = () => {
           />,
           document.body
         )}
-
       {stake.isOpen && (
         <StakePop
           handleStake={handleStake}
@@ -413,11 +387,9 @@ const Dashboard = () => {
           )}
         />
       )}
-
       {withdraw.isOpen && (
         <WithdrawPop handleWithdrawPop={handleWithdraw} detail={stake.detail} />
       )}
-
       {staked.isOpen && (
         <StakedPop
           handleStaked={handleStaked}
@@ -447,9 +419,8 @@ const Dashboard = () => {
                             style={{ minWidth: 100 }}
                             key={key}
                             onClick={() => showTab(item.id)}
-                            className={`${
-                              activeTab === item.id && "active"
-                            } tab-button  relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
+                            className={`${activeTab === item.id && "active"
+                              } tab-button  relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
                           >
                             {item.name}
                           </button>
@@ -483,7 +454,7 @@ const Dashboard = () => {
                     className="form-control rounded pl-8"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    // style={{ minWidth: 400 }}
+                  // style={{ minWidth: 400 }}
                   />
 
                   {search !== "" && (
@@ -562,9 +533,8 @@ const Dashboard = () => {
                         }}
                       >
                         <span
-                          className={`toggle-indicator ${
-                            toggleEnded ? "translate-right" : "translate-left"
-                          }`}
+                          className={`toggle-indicator ${toggleEnded ? "translate-right" : "translate-left"
+                            }`}
                         />
                       </div>
                     </div>
