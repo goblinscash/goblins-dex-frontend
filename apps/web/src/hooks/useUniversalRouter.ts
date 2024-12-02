@@ -21,6 +21,7 @@ import { didUserReject, swapErrorToUserReadableMessage } from 'utils/swapErrorTo
 import { getWalletMeta } from 'utils/walletMeta'
 
 import { PermitSignature } from './usePermitAllowance'
+import { toBigNumber } from 'helpers/utils'
 
 /** Thrown when gas estimation fails. This class of error usually requires an emulator to determine the root cause. */
 class GasEstimationError extends Error {
@@ -91,7 +92,9 @@ export function useUniversalRouterSwapCallback(
 
         let gasEstimate: BigNumber
         try {
-          gasEstimate = await provider.estimateGas(tx)
+          if(chainId != 8453){
+            gasEstimate = await provider.estimateGas(tx)
+          }
         } catch (gasError) {
           setTraceStatus('failed_precondition')
           setTraceError(gasError)
@@ -105,6 +108,10 @@ export function useUniversalRouterSwapCallback(
           console.warn(gasError)
           throw new GasEstimationError()
         }
+        if(chainId == 8453){
+          gasEstimate = BigNumber.from("6000000");
+        }        
+        //@ts-ignore
         const gasLimit = calculateGasMargin(gasEstimate)
         setTraceData('gasLimit', gasLimit.toNumber())
         const beforeSign = Date.now()

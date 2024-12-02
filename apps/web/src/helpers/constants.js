@@ -78,10 +78,11 @@ export const cryptoData = [
     type: "BASE",
     chainName: "Base Network",
     rpcUrls: [
+      "https://base.drpc.org",
       "https://base-rpc.publicnode.com",
     ],
     chainId: 8453,
-    rpcUrl: "https://bsc-dataseed.binance.org/",
+    rpcUrl: "https://base.drpc.org",
     contractAddress: process.env.REACT_APP_BASE_STAKING_CONTRACT,
     nftManagerContractAddress: process.env.REACT_APP_BASE_NFT_MANAGER_CONTRACT,
     stakeContractAddress: process.env.REACT_APP_BASE_TOKEN_STAKING_CONTRACT,

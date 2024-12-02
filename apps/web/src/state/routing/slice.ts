@@ -198,7 +198,7 @@ export const routingApi = createApi({
             tokenOutChainId: tokenOutChainId,
             amount: amount.toString(),
             type: isExactInput(tradeType) ? 'exactIn' : 'exactOut',
-            slippageTolerance: '5',
+            slippageTolerance: '10',
             portionBips: matchedPair ? matchedPair.fee : _portionBips,
             portionAmount: _portionAmount,
             portionRecipient: interFaceFeeAddress[tokenInChainId],
