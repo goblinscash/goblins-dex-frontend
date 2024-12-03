@@ -80,9 +80,10 @@ export const cryptoData = [
     rpcUrls: [
       "https://base.drpc.org",
       "https://base-rpc.publicnode.com",
+      "https://base.api.onfinality.io/public"
     ],
     chainId: 8453,
-    rpcUrl: "https://base.drpc.org",
+    rpcUrl: "https://base.api.onfinality.io/public",
     contractAddress: process.env.REACT_APP_BASE_STAKING_CONTRACT,
     nftManagerContractAddress: process.env.REACT_APP_BASE_NFT_MANAGER_CONTRACT,
     stakeContractAddress: process.env.REACT_APP_BASE_TOKEN_STAKING_CONTRACT,
