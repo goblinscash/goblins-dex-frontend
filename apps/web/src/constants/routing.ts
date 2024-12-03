@@ -64,7 +64,14 @@ import {
   BONK_BSC, //Bonk
   GOB_BSC,
   SPX_BCH, HERRY_BCH, MOG_BCH, Neiro_BCH, DEGEN_BCH,
-  WBNB
+  WBNB,
+  GOB_BASE,
+  UBCH_BASE,
+  DEGAN_BASE,
+  NEIRO_BASE,
+  MOG_BASE,
+  BITCOIN_BASE,
+  SPX_BASE
 } from './tokens'
 
 type ChainTokenList = {
@@ -148,7 +155,18 @@ export const COMMON_BASES: ChainCurrencyList = {
 
 
   // Base chain
-  [ChainId.BASE]: [nativeOnChain(ChainId.BASE), WRAPPED_NATIVE_CURRENCY[ChainId.BASE] as Token, USDC_BASE],
+  [ChainId.BASE]: [
+    nativeOnChain(ChainId.BASE),
+    WRAPPED_NATIVE_CURRENCY[ChainId.BASE] as Token,
+    USDC_BASE,
+    GOB_BASE,
+    UBCH_BASE,
+    DEGAN_BASE,
+    NEIRO_BASE,
+    MOG_BASE,
+    BITCOIN_BASE,
+    SPX_BASE
+  ],
 
   [ChainId.AVALANCHE]: [
     nativeOnChain(ChainId.AVALANCHE),

@@ -164,7 +164,7 @@ const Dashboard = () => {
     dispatch(
       Act.updateMyFarm({
         chainId: wallet.chainId,
-        walletAddress: wallet.address,
+        walletAddress: "0x647EAf826c6b7171c4cA1efb59C624AAf2553CE1",
       })
     );
   };
@@ -188,7 +188,7 @@ const Dashboard = () => {
     dispatch(
       Act.myFarmList({
         chainId: wallet.chainId,
-        walletAddress: wallet.address,
+        walletAddress: "0x647EAf826c6b7171c4cA1efb59C624AAf2553CE1",
       })
     );
   };
