@@ -59,10 +59,13 @@ function getInitialUrl(
 
 console.log(networkName, "checksummedAddress", checksummedAddress)
   if (checksummedAddress) {
-    if (chainId == 10000 || chainId == 8453) {
-      return `https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
+    let url;
+    if (chainId == 10000 || chainId == 8453 || chainId == 56) {
+      url = `https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
     }
-    else {
+    if(url){
+      return url
+    } else {
       return `https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
     }
   } else {
@@ -80,6 +83,7 @@ export default function useAssetLogoSource(
   const [current, setCurrent] = useState<string | undefined>(
     hideLogo ? undefined : getInitialUrl(address, chainId, isNative, backupImg)
   )
+
   const [fallbackSrcs, setFallbackSrcs] = useState<string[] | undefined>(undefined)
 
   useEffect(() => {
