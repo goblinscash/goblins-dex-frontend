@@ -265,9 +265,8 @@ function CommonTable({
               //   const [token1Logo] = useTokenLogoSource(item?.getPoolDetail?.token0Address, wallet.chainId, false);
 
 
-              //   console.log(token1Logo, "<====token1Logo")
+                // console.log(item, "<====token1Logo")
               // }
-
 
               return (
                 <tr
@@ -281,8 +280,7 @@ function CommonTable({
                   >
                     <div className={`${styles.flexWrp} flex items-center gap-2`}>
                       <div className="imgWrp flex-shrink-0 flex items-center">
-                        {/* {item?.getPoolDetail?.token0Symbol} /{" "}
-                      {item?.getPoolDetail?.token1Symbol} */}
+                        {console.log(getSymbols[item?.getPoolDetail?.token0Address], "PPPPPPP", item?.getPoolDetail?.token0Address)}
                         {getSymbols[item?.getPoolDetail?.token0Address] ? (
                           <img
                             src={getSymbols[item?.getPoolDetail?.token0Address]}
