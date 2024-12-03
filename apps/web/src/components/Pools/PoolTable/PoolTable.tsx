@@ -18,6 +18,7 @@ import { ThemedText } from 'theme/components'
 import { NumberType, useFormatter } from 'utils/formatNumbers'
 
 import { DoubleCurrencyAndChainLogo } from '../PoolDetails/PoolDetailsHeader'
+import { useWallet } from 'hooks/useWallet'
 
 const TableWrapper = styled.div`
   margin: 0 auto;
@@ -79,36 +80,24 @@ export type PoolTableSortState = {
 }
 
 
-  // for removing network filter
-  export function TopPoolTable() {
+// for removing network filter
+export function TopPoolTable() {
+  const wallet = useWallet()
+  const [chainId, setChainId] = useState(10000);
+  const [sortState, setSortMethod] = useState<PoolTableSortState>({
+    sortBy: Pool_OrderBy.TotalValueLockedUsd,
+    sortDirection: OrderDirection.Desc,
+  })
 
-    const [chainId, setChainId] = useState(10000);
-    const [sortState, setSortMethod] = useState<PoolTableSortState>({
-      sortBy: Pool_OrderBy.TotalValueLockedUsd,
-      sortDirection: OrderDirection.Desc,
-    })
-  
-    // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
-    // const chainId = supportedChainIdFromGQLChain(chainName)
+  // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
+  // const chainId = supportedChainIdFromGQLChain(chainName)
   const { topPools, loading, error } = useTopPools(chainId, sortState.sortBy, sortState.sortDirection)
 
   useEffect(() => {
-    if (window?.ethereum) {
-      // @ts-ignore
-      window?.ethereum?.on('chainChanged', (chainId) => {
-        setChainId(parseInt(chainId, 16))
-    
-        // Reload the page or handle the network switch logic
-        // window.location.reload();
-      });
-      // @ts-ignore
-    window?.ethereum.request({ method: 'eth_chainId' })
-    // @ts-ignore
-    .then((chainId) => {
-      setChainId(parseInt(chainId, 16))
-    })    
-    }    
-  },[])
+    if (wallet?.chainId && wallet.isActive) {
+      setChainId(wallet.chainId || 10000)
+    }
+  }, [wallet?.chainId])
 
   const handleHeaderClick = useCallback(
     (newSortMethod: Pool_OrderBy) => {
@@ -196,103 +185,103 @@ export function PoolsTable({
     return [
       !hiddenColumns?.includes(PoolTableColumns.Index)
         ? columnHelper.accessor((row) => row.index, {
-            id: 'index',
-            header: () => (
-              <Cell justifyContent="center" minWidth={44}>
-                <ThemedText.BodySecondary>#</ThemedText.BodySecondary>
-              </Cell>
-            ),
-            cell: (index) => (
-              <Cell justifyContent="center" loading={loading} minWidth={44}>
-                <ThemedText.BodySecondary>{index.getValue?.()}</ThemedText.BodySecondary>
-              </Cell>
-            ),
-          })
+          id: 'index',
+          header: () => (
+            <Cell justifyContent="center" minWidth={44}>
+              <ThemedText.BodySecondary>#</ThemedText.BodySecondary>
+            </Cell>
+          ),
+          cell: (index) => (
+            <Cell justifyContent="center" loading={loading} minWidth={44}>
+              <ThemedText.BodySecondary>{index.getValue?.()}</ThemedText.BodySecondary>
+            </Cell>
+          ),
+        })
         : null,
       !hiddenColumns?.includes(PoolTableColumns.PoolDescription)
         ? columnHelper.accessor((row) => row.poolDescription, {
-            id: 'poolDescription',
-            header: () => (
-              <Cell justifyContent="flex-start" minWidth={240} grow>
-                <ThemedText.BodySecondary>
-                  <Trans>Pool</Trans>
-                </ThemedText.BodySecondary>
-              </Cell>
-            ),
-            cell: (poolDescription) => (
-              <Cell justifyContent="flex-start" loading={loading} minWidth={240} grow>
-                {poolDescription.getValue?.()}
-              </Cell>
-            ),
-          })
+          id: 'poolDescription',
+          header: () => (
+            <Cell justifyContent="flex-start" minWidth={240} grow>
+              <ThemedText.BodySecondary>
+                <Trans>Pool</Trans>
+              </ThemedText.BodySecondary>
+            </Cell>
+          ),
+          cell: (poolDescription) => (
+            <Cell justifyContent="flex-start" loading={loading} minWidth={240} grow>
+              {poolDescription.getValue?.()}
+            </Cell>
+          ),
+        })
         : null,
       !hiddenColumns?.includes(PoolTableColumns.Transactions)
         ? columnHelper.accessor((row) => row.txCount, {
-            id: 'transactions',
-            header: () => (
-              <Cell justifyContent="flex-end" minWidth={120} grow>
-                <ClickableHeaderRow $justify="flex-end" onClick={() => handleHeaderClick(Pool_OrderBy.TxCount)}>
-                  {sortState.sortBy === Pool_OrderBy.TxCount && <HeaderArrow direction={sortState.sortDirection} />}
-                  <ThemedText.BodySecondary>
-                    <Trans>Transactions</Trans>            
-                  </ThemedText.BodySecondary>
-                </ClickableHeaderRow>
-              </Cell>
-            ),
-            cell: (txCount) => (
-              <Cell justifyContent="flex-end" loading={loading} minWidth={120} grow>
+          id: 'transactions',
+          header: () => (
+            <Cell justifyContent="flex-end" minWidth={120} grow>
+              <ClickableHeaderRow $justify="flex-end" onClick={() => handleHeaderClick(Pool_OrderBy.TxCount)}>
+                {sortState.sortBy === Pool_OrderBy.TxCount && <HeaderArrow direction={sortState.sortDirection} />}
                 <ThemedText.BodySecondary>
-                  {formatNumber({ input: txCount.getValue?.(), type: NumberType.NFTCollectionStats })}
+                  <Trans>Transactions</Trans>
                 </ThemedText.BodySecondary>
-              </Cell>
-            ),
-          })
+              </ClickableHeaderRow>
+            </Cell>
+          ),
+          cell: (txCount) => (
+            <Cell justifyContent="flex-end" loading={loading} minWidth={120} grow>
+              <ThemedText.BodySecondary>
+                {formatNumber({ input: txCount.getValue?.(), type: NumberType.NFTCollectionStats })}
+              </ThemedText.BodySecondary>
+            </Cell>
+          ),
+        })
         : null,
       !hiddenColumns?.includes(PoolTableColumns.TVL)
         ? columnHelper.accessor((row) => row.tvl, {
-            id: 'tvl',
-            header: () => (
-              <Cell minWidth={120} grow>
-                <ClickableHeaderRow
-                  $justify="flex-end"
-                  onClick={() => handleHeaderClick(Pool_OrderBy.TotalValueLockedUsd)}
-                >
-                  {sortState.sortBy === Pool_OrderBy.TotalValueLockedUsd && (
-                    <HeaderArrow direction={sortState.sortDirection} />
-                  )}
-                  <ThemedText.BodySecondary>
-                    <Trans>TVL</Trans>
-                  </ThemedText.BodySecondary>
-                </ClickableHeaderRow>
-              </Cell>
-            ),
-            cell: (tvl) => (
-              <Cell loading={loading} minWidth={120} grow>
+          id: 'tvl',
+          header: () => (
+            <Cell minWidth={120} grow>
+              <ClickableHeaderRow
+                $justify="flex-end"
+                onClick={() => handleHeaderClick(Pool_OrderBy.TotalValueLockedUsd)}
+              >
+                {sortState.sortBy === Pool_OrderBy.TotalValueLockedUsd && (
+                  <HeaderArrow direction={sortState.sortDirection} />
+                )}
                 <ThemedText.BodySecondary>
-                  {formatNumber({ input: tvl.getValue?.(), type: NumberType.FiatTokenStats })}
+                  <Trans>TVL</Trans>
                 </ThemedText.BodySecondary>
-              </Cell>
-            ),
-          })
+              </ClickableHeaderRow>
+            </Cell>
+          ),
+          cell: (tvl) => (
+            <Cell loading={loading} minWidth={120} grow>
+              <ThemedText.BodySecondary>
+                {formatNumber({ input: tvl.getValue?.(), type: NumberType.FiatTokenStats })}
+              </ThemedText.BodySecondary>
+            </Cell>
+          ),
+        })
         : null,
       !hiddenColumns?.includes(PoolTableColumns.Volume24h)
         ? columnHelper.accessor((row) => row.volume24h, {
-            id: 'volume24h',
-            header: () => (
-              <Cell minWidth={120} grow>
-                <ThemedText.BodySecondary>
-                  <Trans> Volume</Trans>
-                </ThemedText.BodySecondary>
-              </Cell>
-            ),
-            cell: (volume24h) => (
-              <Cell minWidth={120} loading={loading} grow>
-                <ThemedText.BodySecondary>
-                  {formatNumber({ input: volume24h.getValue?.(), type: NumberType.FiatTokenStats })}
-                </ThemedText.BodySecondary>
-              </Cell>
-            ),
-          })
+          id: 'volume24h',
+          header: () => (
+            <Cell minWidth={120} grow>
+              <ThemedText.BodySecondary>
+                <Trans> Volume</Trans>
+              </ThemedText.BodySecondary>
+            </Cell>
+          ),
+          cell: (volume24h) => (
+            <Cell minWidth={120} loading={loading} grow>
+              <ThemedText.BodySecondary>
+                {formatNumber({ input: volume24h.getValue?.(), type: NumberType.FiatTokenStats })}
+              </ThemedText.BodySecondary>
+            </Cell>
+          ),
+        })
         : null,
       // !hiddenColumns?.includes(PoolTableColumns.VolumeWeek)
       //   ? columnHelper.accessor((row) => row.volumeWeek, {

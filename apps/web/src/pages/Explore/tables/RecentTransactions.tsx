@@ -19,6 +19,7 @@ import { Transaction, TransactionType, useRecentTransactions } from 'graphql/the
 import { useActiveLocalCurrency } from 'hooks/useActiveLocalCurrency'
 import { useActiveLocale } from 'hooks/useActiveLocale'
 import { useOnClickOutside } from 'hooks/useOnClickOutside'
+import { useWallet } from 'hooks/useWallet'
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import { ExternalLink as ExternalLinkIcon } from 'react-feather'
 import { useParams } from 'react-router-dom'
@@ -34,6 +35,7 @@ type ExploreTxTableSortState = {
 }
 
 export default function RecentTransactions() {
+  const wallet = useWallet()
   const theme = useTheme()
   const locale = useActiveLocale()
   const activeLocalCurrency = useActiveLocalCurrency()
@@ -52,7 +54,7 @@ export default function RecentTransactions() {
   // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
   // const chainId = supportedChainIdFromGQLChain(chainName) 
   const [chainId, setChainId] = useState(10000);
-  const [chainName, setChainName] = useState("SMARTBCH" as String); 
+  const [chainName, setChainName] = useState("SMARTBCH" as String);
 
   const ChinInfo:any = {
     56 : "BNB",
@@ -62,21 +64,13 @@ export default function RecentTransactions() {
 
 
   useEffect(() => {
-    if (window?.ethereum) {
-      // @ts-ignore
-      window?.ethereum?.on('chainChanged', (chainId) => {
-        setChainId(parseInt(chainId, 16))
-        setChainName(ChinInfo[parseInt(chainId, 16)])
-      });
-      // @ts-ignore
-    window?.ethereum.request({ method: 'eth_chainId' })
-    // @ts-ignore
-    .then((chainId) => {
-      setChainId(parseInt(chainId, 16))
-      setChainName(ChinInfo[parseInt(chainId, 16)])
-    })    
-    }    
-  },[])
+    if (ChinInfo[parseInt(wallet.chainId)]) {
+
+      setChainId(parseInt(wallet.chainId))
+      setChainName(ChinInfo[wallet.chainId] || "Unknown Chain");
+
+    }
+  }, [wallet?.chainId])
 
   const [sortState, setSortMethod] = useState<ExploreTxTableSortState>({
     sortBy: Transaction_OrderBy.Timestamp,
