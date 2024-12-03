@@ -22,6 +22,7 @@ import { NumberType, useFormatter } from 'utils/formatNumbers'
 import { DeltaArrow, DeltaText } from '../TokenDetails/Delta'
 import QueryTokenLogo from 'components/Logo/QueryTokenLogo'
 import { useWeb3React } from '@web3-react/core'
+import { useWallet } from 'hooks/useWallet'
 
 const TableWrapper = styled.div`
   margin: 0 auto;
@@ -69,37 +70,27 @@ function TokenDescription({ token }: { token: TokenList }) {
 
 // for removing network filter
 export function TopTokensTable() {
-  const ChinInfo:any = {
-    56 : "BNB",
+  const ChinInfo: any = {
+    56: "BNB",
     10000: "SMARTBCH"
   }
   // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
   // const chainId = supportedChainIdFromGQLChain(chainName)
+  const wallet = useWallet()
   const [chainId, setChainId] = useState(10000);
-  const [chainName, setChainName] = useState(chainId && ChinInfo[chainId] as String); 
+  const [chainName, setChainName] = useState(chainId && ChinInfo[chainId] as String);
 
-  
+
   // console.log(chainId, "chainId+", chainName)
 
   useEffect(() => {
-    if (window?.ethereum) {
-      // @ts-ignore
-      window?.ethereum?.on('chainChanged', (chainId) => {
-        setChainId(parseInt(chainId, 16))
-        setChainName(ChinInfo[parseInt(chainId, 16)])
-      });
+    if (ChinInfo[parseInt(wallet.chainId)]) {
+      setChainId(wallet.chainId)
+      setChainName(ChinInfo[wallet.chainId])
+    }
+  }, [wallet?.chainId])
 
-    // @ts-ignore
-    window?.ethereum.request({ method: 'eth_chainId' })
-    // @ts-ignore
-    .then((chainId) => {
-      setChainId(parseInt(chainId, 16))
-      setChainName(ChinInfo[parseInt(chainId, 16)])
-    })    
-    } 
-  },[])
-
-//@ts-ignore
+  //@ts-ignore
   const { tokens, tokenSortRank, loadingTokens, error } = useTopTokens(chainName)
 
 
