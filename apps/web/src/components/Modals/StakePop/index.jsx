@@ -146,7 +146,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       );
       setLoading(false);
       handleStake();
-      setActiveTab(2);
+     
     } catch (error) {
       setLoading(false);
 
@@ -210,7 +210,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
 
       setLoading(false);
       handleStake();
-      setActiveTab(2);
+   
     } catch (error) {
       setLoading(false);
 

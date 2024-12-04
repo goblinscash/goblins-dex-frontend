@@ -88,7 +88,6 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
 
     if(isClaimAll){
       await web3.mutliCallClaimAll(makeKeys, tokenId, wallet.address);
-
       toast.success(`Successfully Claim All.`);
     }else{
       await web3.mutliCallUnstakeAll(makeKeys, tokenId, wallet.address);

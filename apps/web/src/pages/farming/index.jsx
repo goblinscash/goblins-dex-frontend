@@ -161,14 +161,14 @@ const Dashboard = () => {
     );
   };
 
-  const myFarmUpdate = async () => {
-    dispatch(
-      Act.updateMyFarm({
-        chainId: wallet.chainId,
-        walletAddress: "0x647EAf826c6b7171c4cA1efb59C624AAf2553CE1",
-      })
-    );
-  };
+  // const myFarmUpdate = async () => {
+  //   dispatch(
+  //     Act.updateMyFarm({
+  //       chainId: wallet.chainId,
+  //       walletAddress: "0x647EAf826c6b7171c4cA1efb59C624AAf2553CE1",
+  //     })
+  //   );
+  // };
 
   // useEffect(() => {
   //   if (wallet.chainId && wallet.address) {
