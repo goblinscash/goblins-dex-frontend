@@ -228,6 +228,10 @@ function MinimalStatDisplay({ title, value, time }: { title: ReactNode; value: n
 }
 
 export function ExploreChartsSection() {
+  const currNetwork = localStorage.getItem('currentNetwork');
+  //@ts-ignore
+  let _chain = JSON.parse(currNetwork)?.chainId
+
   const wallet = useWallet()
   const [tab, setTab] = useState(1)
   const [usdPrice, setUsdPrice] = useState<any>(0)
@@ -235,7 +239,7 @@ export function ExploreChartsSection() {
   // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
   // const chainId = supportedChainIdFromGQLChain(chainName)
 
-  const [chainId, setChainId] = useState<number>(10000);
+  const [chainId, setChainId] = useState<number>(_chain);
   const [chainName, setChainName] = useState<string>("SMARTBCH");
 
 

@@ -19,6 +19,7 @@ import { NumberType, useFormatter } from 'utils/formatNumbers'
 
 import { DoubleCurrencyAndChainLogo } from '../PoolDetails/PoolDetailsHeader'
 import { useWallet } from 'hooks/useWallet'
+import { chainParam } from 'utils/chains'
 
 const TableWrapper = styled.div`
   margin: 0 auto;
@@ -79,11 +80,14 @@ export type PoolTableSortState = {
   sortDirection: OrderDirection
 }
 
-
 // for removing network filter
 export function TopPoolTable() {
+  const currNetwork = localStorage.getItem('currentNetwork');
+  //@ts-ignore
+  let _chain = JSON.parse(currNetwork)?.chainId
+  const [chainId, setChainId] = useState(_chain);
   const wallet = useWallet()
-  const [chainId, setChainId] = useState(10000);
+
   const [sortState, setSortMethod] = useState<PoolTableSortState>({
     sortBy: Pool_OrderBy.TotalValueLockedUsd,
     sortDirection: OrderDirection.Desc,
