@@ -19,7 +19,6 @@ import { NumberType, useFormatter } from 'utils/formatNumbers'
 
 import { DoubleCurrencyAndChainLogo } from '../PoolDetails/PoolDetailsHeader'
 import { useWallet } from 'hooks/useWallet'
-import { chainParam } from 'utils/chains'
 
 const TableWrapper = styled.div`
   margin: 0 auto;

@@ -71,7 +71,7 @@ export const GOB_BASE = new Token(ChainId.BASE, '0xcDBa3E4C5c505F37CfbBB7aCCF20D
 export const UBCH_BASE = new Token(ChainId.BASE, '0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F', 18, 'uBCH', 'uBCH')
 export const DEGAN_BASE = new Token(ChainId.BASE, '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed', 18, 'DEGAN', 'DEGAN')
 export const NEIRO_BASE = new Token(ChainId.BASE, '0x5Ca35eBC4f25B042d2cAE75914c7e882E631fA9A', 9, 'Neiro', 'Neiro')
-export const MOG_BASE = new Token(ChainId.BASE, '0x2a06A17CBC6d0032Cac2c6696DA90f29D39a1a29', 18, 'Mog', 'Mog')
+export const MOG_BASE = new Token(ChainId.BASE, '0x2Da56AcB9Ea78330f947bD57C54119Debda7AF71', 18, 'Mog', 'Mog')
 export const BITCOIN_BASE = new Token(ChainId.BASE, '0x2a06A17CBC6d0032Cac2c6696DA90f29D39a1a29', 8, 'BITCOIN', 'BITCOIN')
 export const SPX_BASE = new Token(ChainId.BASE, '0x50dA645f148798F68EF2d7dB7C1CB22A6819bb2C', 8, 'SPX', 'SPX')
 
