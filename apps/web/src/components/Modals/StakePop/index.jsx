@@ -13,7 +13,7 @@ import styles from "./StakePop.module.scss";
 import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 
-import { contractNft,  ownerNft, stakedNft, updateFarm, withdrawNft } from "state/action";
+import { contractNft, ownerNft, stakedNft, updateFarm, withdrawNft } from "state/action";
 import ActiveStakingTable from "./ActiveStakingTable";
 
 const customOption = (props) => (
@@ -32,12 +32,13 @@ const customOption = (props) => (
   </div>
 );
 
+
 const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
   const wallet = useWallet();
   const dispatch = useDispatch();
 
   const { currentNetwork } = useSelector((state) => state.dashboard);
-  const { contractNftlist, ownerNftlist } = useSelector((state) => state.nft);
+  const { contractNftlist, contractNftLoading, ownerNftlist, ownerNftLoading } = useSelector((state) => state.nft);
 
   const [loading, setLoading] = useState(false);
   const [farmLoading, setfarmLoading] = useState(false);
@@ -257,7 +258,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       setfarmList([]);
       // if(activeTabNew ==1)
     }
-  }, [activeTabNew]);
+  }, [activeTabNew , ownerNftlist, contractNftlist]);
 
   useEffect(() => {
     if (activeTabNew == 2 && tokenId && activeFarm.length && currentNetwork) {
@@ -269,6 +270,9 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
     if (loading) return;
     setActiveTabNew(tab);
   };
+
+
+  console.log(ownerNftlist, contractNftlist,ownerNftLoading, contractNftLoading, "<=====nfts")
 
   return (
     <>
@@ -308,20 +312,18 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
               // key={key}
               onClick={() => showTab(1)}
               disabled={activeTabNew === 2 && loading}
-              className={`${
-                activeTabNew === 1 && "active"
-              } tab-button    relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
+              className={`${activeTabNew === 1 && "active"
+                } tab-button    relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
             >
-              {activeTabNew === 2 && loading ? "Loading..." : " Single Stake"}
+              {activeTabNew === 2 && loading ? "Loading..." : "Single Stake"}
             </button>
             <button
               style={{ minWidth: 100 }}
               // key={key}
               onClick={() => showTab(2)}
               disabled={activeTabNew === 1 && loading}
-              className={`${
-                activeTabNew === 2 && "active"
-              } tab-button    relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
+              className={`${activeTabNew === 2 && "active"
+                } tab-button    relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
             >
               {activeTabNew === 1 && loading ? "Loading..." : "Multi Stake"}
             </button>
@@ -330,9 +332,8 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
             <div
               // key={key}
               id="tabContent1"
-              className={`${
-                activeTabNew === 1 ? "" : "hidden"
-              } tab-content border-0`}
+              className={`${activeTabNew === 1 ? "" : "hidden"
+                } tab-content border-0`}
             >
               <div className="top flex items-center justify-between gap-2 pt-2 px-3">
                 <div className="left flex items-center gap-2">
@@ -351,14 +352,14 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                             htmlFor=""
                             className="form-label    px-2 z-10 text-white"
                           >
-                            {loading && !tokenIds.length
+                            {ownerNftLoading && !tokenIds.length
                               ? "NFT Loading..."
                               : !tokenIds.length
-                              ? "No Nft Found"
-                              : "Select NFT Token Id"}
+                                ? "No Nft Found"
+                                : "Select NFT Token Id"}
                           </label>
 
-                          {!loading && !tokenIds.length ? (
+                          { !tokenIds.length ? (
                             ""
                           ) : (
                             <>
@@ -385,7 +386,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                       <div className="col-span-12">
                         <button
                           type="submit"
-                          disabled={loading || !tokenIds.length}
+                          disabled={ownerNftLoading || loading || !tokenIds.length}
                           className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                         >
                           {loading ? (
@@ -405,9 +406,8 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
             <div
               // key={key}
               id="tabContent1"
-              className={`${
-                activeTabNew === 2 ? "" : "hidden"
-              } tab-content border-0`}
+              className={`${activeTabNew === 2 ? "" : "hidden"
+                } tab-content border-0`}
             >
               <div className="top flex items-center justify-between gap-2 pt-2 px-3">
                 <div className="left flex items-center gap-2">
@@ -426,14 +426,14 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                             htmlFor=""
                             className="form-label    px-2 z-10 text-white"
                           >
-                            {loading && !tokenIds.length
+                            {contractNftLoading && !tokenIds.length
                               ? "NFT Loading..."
                               : !tokenIds.length
-                              ? "No Nft Found"
-                              : "Select NFT Token Id"}
+                                ? "No Nft Found"
+                                : "Select NFT Token Id"}
                           </label>
 
-                          {!loading && !tokenIds.length ? (
+                          {!tokenIds.length ? (
                             ""
                           ) : (
                             <>
@@ -466,7 +466,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                       <div className="col-span-12">
                         <button
                           type="submit"
-                          disabled={loading || !tokenIds.length}
+                          disabled={contractNftLoading || loading || !tokenIds.length}
                           className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                         >
                           {loading ? (

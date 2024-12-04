@@ -164,16 +164,16 @@ const Dashboard = () => {
     dispatch(
       Act.updateMyFarm({
         chainId: wallet.chainId,
-        walletAddress: wallet.address,
+        walletAddress: "0x647EAf826c6b7171c4cA1efb59C624AAf2553CE1",
       })
     );
   };
 
-  useEffect(() => {
-    if (wallet.chainId && wallet.address) {
-      myFarmUpdate();
-    }
-  }, [wallet.chainId, wallet.address]);
+  // useEffect(() => {
+  //   if (wallet.chainId && wallet.address) {
+  //     myFarmUpdate();
+  //   }
+  // }, [wallet.chainId, wallet.address]);
 
   const loadEnded = () => {
     dispatch(
