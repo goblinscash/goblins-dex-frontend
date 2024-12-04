@@ -110,6 +110,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: true,
+          web3: web3,
         })
       );
 
@@ -118,6 +119,8 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: false,
+          web3: web3
+
         })
       );
 
@@ -126,6 +129,8 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
+          web3: web3
+
         })
       );
       dispatch(
@@ -133,6 +138,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           stakedNft: true,
+          web3: web3,
         })
       );
       toast.success(
@@ -185,6 +191,8 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
+          web3: web3
+
         })
       );
 
@@ -193,6 +201,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           stakedNft: true,
+          web3: web3,
         })
       );
       toast.success(
@@ -258,7 +267,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       setfarmList([]);
       // if(activeTabNew ==1)
     }
-  }, [activeTabNew , ownerNftlist, contractNftlist]);
+  }, [activeTabNew, ownerNftlist, contractNftlist]);
 
   useEffect(() => {
     if (activeTabNew == 2 && tokenId && activeFarm.length && currentNetwork) {
@@ -272,7 +281,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
   };
 
 
-  console.log(ownerNftlist, contractNftlist,ownerNftLoading, contractNftLoading, "<=====nfts")
+  console.log(ownerNftlist, contractNftlist, ownerNftLoading, contractNftLoading, "<=====nfts")
 
   return (
     <>
@@ -359,7 +368,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                                 : "Select NFT Token Id"}
                           </label>
 
-                          { !tokenIds.length ? (
+                          {!tokenIds.length ? (
                             ""
                           ) : (
                             <>

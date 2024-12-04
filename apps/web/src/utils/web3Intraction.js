@@ -14,7 +14,7 @@ import { makeByteData, makeByteDataForV3, toFixedCustm } from "../helpers/utils"
 class Web3Intraction {
   constructor(currentNetwork, provider) {
     if (provider || window.ethereum) {
-      this.PROVIDER = provider;
+  
       this.PROVIDER = provider;
       this.SIGNER = this.PROVIDER.getSigner();
     } else if (currentNetwork) {
@@ -905,6 +905,31 @@ class Web3Intraction {
         resolve(response.toString());
       } catch (error) {
         // console.log(error, "<===error in buy");
+        if (error?.code === -32603) {
+          return reject("insufficient funds for intrinsic transaction cost");
+        }
+        reject(error.reason || error.data?.message || error.message || error);
+      }
+    });
+  };
+
+
+  getTokenLiquidity = async (tokenId) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const contract = this.getContract(
+          JSON.stringify(NFTManager),
+          this.contractDetails?.nftManagerContractAddress,
+          true
+        );
+
+        const response = await contract.positions(tokenId);
+
+
+
+        resolve(response.liquidity.toString());
+      } catch (error) {
+        // console.log(error, "<===error in getTokenId");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }

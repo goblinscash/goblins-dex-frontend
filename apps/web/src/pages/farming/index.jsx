@@ -25,6 +25,7 @@ import * as Act from "state/action";
 ///css
 import styles from "./Dashboard.module.scss";
 import "assets/styles/main.css";
+import Web3Intraction from "utils/web3Intraction";
 
 const Dashboard = () => {
   const { currentNetwork, isBlocked } = useSelector((state) => state.dashboard);
@@ -281,6 +282,7 @@ const Dashboard = () => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: true,
+          web3: new Web3Intraction(currentNetwork, wallet.provider),
         })
       );
 
@@ -289,6 +291,7 @@ const Dashboard = () => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: false,
+          web3: new Web3Intraction(currentNetwork, wallet.provider),
         })
       );
 
@@ -297,6 +300,7 @@ const Dashboard = () => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
+          web3: new Web3Intraction(currentNetwork, wallet.provider),
         })
       );
 
@@ -305,6 +309,7 @@ const Dashboard = () => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           stakedNft: true,
+          web3: new Web3Intraction(currentNetwork, wallet.provider),
         })
       );
     }

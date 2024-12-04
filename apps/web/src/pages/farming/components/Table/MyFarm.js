@@ -86,6 +86,8 @@ function MyFarm({
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
+          web3: web3
+
         })
       );
       

@@ -51,6 +51,8 @@ const UnStakePopup = ({ handleConfirm, detail, myFarmload }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
+          web3: web3
+
         })
       );
       setLoading(false);
