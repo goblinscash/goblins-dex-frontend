@@ -281,7 +281,6 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
   };
 
 
-  console.log(ownerNftlist, contractNftlist, ownerNftLoading, contractNftLoading, "<=====nfts")
 
   return (
     <>
