@@ -203,7 +203,7 @@ export const routingApi = createApi({
             portionAmount: _portionAmount,
             portionRecipient: interFaceFeeAddress[tokenInChainId],
             enableUniversalRouter: true,
-            protocols: 'v2,v3,mixed'
+            // protocols: 'v2,v3,mixed'
           };
 
           const queryString = new URLSearchParams(params as any).toString();

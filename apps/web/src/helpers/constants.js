@@ -84,7 +84,7 @@ export const cryptoData = [
       "https://mainnet.base.org",
     ],
     chainId: 8453,
-    rpcUrl: "https://mainnet.base.org",
+    rpcUrl: "https://tame-black-mansion.base-mainnet.quiknode.pro/a1347f138fbb6cf8029da7feb2b3e6cdea5394a3",
     contractAddress: process.env.REACT_APP_BASE_STAKING_CONTRACT,
     nftManagerContractAddress: process.env.REACT_APP_BASE_NFT_MANAGER_CONTRACT,
     stakeContractAddress: process.env.REACT_APP_BASE_TOKEN_STAKING_CONTRACT,

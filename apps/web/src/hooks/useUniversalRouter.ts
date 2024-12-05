@@ -114,8 +114,8 @@ export function useUniversalRouterSwapCallback(
           throw new GasEstimationError()
         }
         if(chainId == 8453){
-          gasEstimate = BigNumber.from("8000000");
-          // gasEstimate = await provider.estimateGas(tx)
+          // gasEstimate = BigNumber.from("8000000");
+          gasEstimate = await provider.estimateGas(tx)
         }        
         //@ts-ignore
         const gasLimit = calculateGasMargin(gasEstimate)
