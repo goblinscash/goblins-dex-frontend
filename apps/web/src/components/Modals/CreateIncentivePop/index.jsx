@@ -190,13 +190,16 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
               reward: fields.rewardAmount,
             },
           },
+          callback: (err) => {
+            load();
+            setLoading(false);
+            handleIncentiveForm();
+            if (!err) {
+              toast.success("Farm created successfully, some time it will take some seconds for reflect in list!");
+            }
+          }
         })
       );
-
-      load();
-      setLoading(false);
-      handleIncentiveForm();
-      toast.success("Farm created successfully, some time it will take some seconds for reflect in list!");
     } catch (error) {
       setLoading(false);
       toast.error(error);

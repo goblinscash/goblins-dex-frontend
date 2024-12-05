@@ -81,7 +81,7 @@ export const cryptoData = [
       "https://base.drpc.org",
       "https://base-rpc.publicnode.com",
       "https://base-pokt.nodies.app",
-      "https://mainnet.base.org"
+      "https://mainnet.base.org",
     ],
     chainId: 8453,
     rpcUrl: "https://mainnet.base.org",
@@ -192,7 +192,7 @@ export const getSymbols = {
   "0x617599b1177d56d130da5fd5cf896e3f186eb6f1": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x617599B1177d56d130Da5FD5cf896E3f186eB6f1/logo.png",
   "0x85689be665562c06aa052e0e2a2422b286d30c44": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x85689bE665562c06Aa052e0E2A2422b286d30C44/logo.png",
   "0x0df6a7169132265bb4f2b0fac0a37b26ea6f93fc": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x0dF6A7169132265Bb4f2b0Fac0a37b26ea6F93Fc/logo.png",
-  "0x751c9c9f98f839e97b039be2d5a66b92c622335f": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x751C9c9F98f839E97b039BE2d5A66b92c622335F/logo.png",
+  "0x751c9c9f98f839e97b039be2d5a66b92c622335f": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x5Ca35eBC4f25B042d2cAE75914c7e882E631fA9A/logo.png",
   "0xb6b54dde7282fbcd19cb1d447dfe425454a831eb": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0xB6B54DDE7282fbcD19Cb1d447dFE425454a831Eb/logo.png",
   // 0x55d398326f99059ff775485246999027b3197955
 };
