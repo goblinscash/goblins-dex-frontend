@@ -80,10 +80,11 @@ export const cryptoData = [
     rpcUrls: [
       "https://base.drpc.org",
       "https://base-rpc.publicnode.com",
-      "https://base-pokt.nodies.app"
+      "https://base-pokt.nodies.app",
+      "https://mainnet.base.org"
     ],
     chainId: 8453,
-    rpcUrl: "https://base-pokt.nodies.app",
+    rpcUrl: "https://mainnet.base.org",
     contractAddress: process.env.REACT_APP_BASE_STAKING_CONTRACT,
     nftManagerContractAddress: process.env.REACT_APP_BASE_NFT_MANAGER_CONTRACT,
     stakeContractAddress: process.env.REACT_APP_BASE_TOKEN_STAKING_CONTRACT,

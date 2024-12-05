@@ -206,6 +206,11 @@ const Staking = () => {
     getUsdPrice();
   }, []);
 
+  const swapLink = {
+    56: "/#/swap?inputCurrency=0x8ff795a6f4d97e7887c79bea79aba5cc76444adf&outputCurrency=0x701aca29ae0f5d24555f1e8a6cf007541291d110&chain=bsc",
+    8453: "/#/swap?inputCurrency=0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F&outputCurrency=0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3&chain=base",
+    10000: "/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
+  }
 
   return (
     <>
@@ -303,7 +308,7 @@ const Staking = () => {
                     GOB Price: ${price?.GOBInPrice || 0}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    {details.sGob > 0 && currentNetwork?.chainId !== 56 && (
+                    {details.sGob > 0 && currentNetwork?.chainId !== 56 && currentNetwork?.chainId !== 8453 && (
                       <button
                         onClick={handleMigrationPopup}
                         className="btn flex items-center justify-center commonBtn font-extrabold"
@@ -312,11 +317,7 @@ const Staking = () => {
                       </button>
                     )}
                     <a
-                      // href="/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
-                      href={
-                        currentNetwork?.chainId == 56 ? "/#/swap?inputCurrency=0x8ff795a6f4d97e7887c79bea79aba5cc76444adf&outputCurrency=0x701aca29ae0f5d24555f1e8a6cf007541291d110&chain=bsc"
-                          : "/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
-                      }
+                      href={swapLink[currentNetwork?.chainId]}
                       target="_blank"
                       onClick={(e) => (isBlocked ? e.preventDefault() : false)}
                     >

@@ -8,6 +8,7 @@ import {
   BB_USDC,
   BB_USDT,
   BC_BCH,
+  BC_BNB,
   BTC_BSC,
   BUSD_BSC,
   CEUR_CELO,
@@ -179,7 +180,7 @@ export const COMMON_BASES: ChainCurrencyList = {
     nativeOnChain(ChainId.SMARTBCH),
     WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token,
     USDT_SBCH, BC_BCH, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC, GOB, BONK, SHIB, PEPE, DOGE, FLOKI,
-    SPX_BCH, HERRY_BCH, MOG_BCH, Neiro_BCH, DEGEN_BCH
+    SPX_BCH, HERRY_BCH, MOG_BCH, Neiro_BCH, DEGEN_BCH, BC_BNB
   ],
 }
 

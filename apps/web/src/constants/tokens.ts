@@ -69,7 +69,7 @@ export const PORTAL_USDC_CELO = new Token(
 export const USDC_BASE = new Token(ChainId.BASE, '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913', 6, 'USDC', 'USD Coin')
 export const GOB_BASE = new Token(ChainId.BASE, '0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3', 9, 'GOB', 'GOB')
 export const UBCH_BASE = new Token(ChainId.BASE, '0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F', 18, 'uBCH', 'uBCH')
-export const DEGAN_BASE = new Token(ChainId.BASE, '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed', 18, 'DEGAN', 'DEGAN')
+export const DEGAN_BASE = new Token(ChainId.BASE, '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed', 18, 'DEGEN', 'DEGEN')
 export const NEIRO_BASE = new Token(ChainId.BASE, '0x5Ca35eBC4f25B042d2cAE75914c7e882E631fA9A', 9, 'Neiro', 'Neiro')
 export const MOG_BASE = new Token(ChainId.BASE, '0x2Da56AcB9Ea78330f947bD57C54119Debda7AF71', 18, 'Mog', 'Mog')
 export const BITCOIN_BASE = new Token(ChainId.BASE, '0x2a06A17CBC6d0032Cac2c6696DA90f29D39a1a29', 8, 'BITCOIN', 'BITCOIN')
@@ -296,6 +296,8 @@ export const USDT_SBCH = new Token(
   'bcUSDT',
   'bcUSDT'
 )
+export const BC_BNB = new Token(ChainId.SMARTBCH, '0xBc7b858B5694D485AD17c89675649cE44De21BEa', 18, 'bcBNB', 'bcBNB')
+
 export const BC_BCH = new Token(
   ChainId.SMARTBCH,
   '0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195',

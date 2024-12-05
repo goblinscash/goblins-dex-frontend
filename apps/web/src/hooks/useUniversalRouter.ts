@@ -73,7 +73,6 @@ export function useUniversalRouterSwapCallback(
         if (chainId !== connectedChainId) throw new WrongChainError()
 
         setTraceData('slippageTolerance', options.slippageTolerance.toFixed(2))
-console.log("xyz1111111", options.slippageTolerance)
         const { calldata: data, value } = SwapRouter.swapERC20CallParameters(trade, {
           slippageTolerance: options.slippageTolerance,
           deadlineOrPreviousBlockhash: options.deadline?.toString(),
@@ -81,7 +80,11 @@ console.log("xyz1111111", options.slippageTolerance)
           fee: options.feeOptions,
           flatFee: options.flatFeeOptions,
         })
-        console.log(trade, "+++",options,"xyz22222222", data, value)
+        console.log(trade, "+++++",
+          options.permit,
+          options.feeOptions,
+          options.flatFeeOptions,
+          "xyz22222222", "++",value, account, UNIVERSAL_ROUTER_ADDRESS(chainId))
 
         const tx = {
           from: account,
@@ -98,7 +101,6 @@ console.log("xyz1111111", options.slippageTolerance)
             gasEstimate = await provider.estimateGas(tx)
           }
         } catch (gasError) {
-          console.log("xyz44444")
           setTraceStatus('failed_precondition')
           setTraceError(gasError)
           sendAnalyticsEvent(SwapEventName.SWAP_ESTIMATE_GAS_CALL_FAILED, {
@@ -112,13 +114,13 @@ console.log("xyz1111111", options.slippageTolerance)
           throw new GasEstimationError()
         }
         if(chainId == 8453){
-          gasEstimate = BigNumber.from("6000000");
+          gasEstimate = BigNumber.from("8000000");
+          // gasEstimate = await provider.estimateGas(tx)
         }        
         //@ts-ignore
         const gasLimit = calculateGasMargin(gasEstimate)
         setTraceData('gasLimit', gasLimit.toNumber())
         const beforeSign = Date.now()
-        console.log("xyz555555555")
         const response = await provider
           .getSigner()
           .sendTransaction({ ...tx, gasLimit })
@@ -150,14 +152,12 @@ console.log("xyz1111111", options.slippageTolerance)
             }
             return response
           })
-        console.log("xyz66666666666")
         
         return {
           type: TradeFillType.Classic as const,
           response,
         }
       } catch (swapError: unknown) {
-        console.log(swapError, "xyz77777")
         if (swapError instanceof ModifiedSwapError) throw swapError
 
         // GasEstimationErrors are already traced when they are thrown.

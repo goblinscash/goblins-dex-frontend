@@ -57,7 +57,6 @@ function getInitialUrl(
     return celoLogo
   }
 
-console.log(networkName, "checksummedAddress", checksummedAddress)
   if (checksummedAddress) {
     let url;
     if (chainId == 10000 || chainId == 8453 || chainId == 56) {

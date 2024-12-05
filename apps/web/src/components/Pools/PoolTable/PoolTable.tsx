@@ -12,7 +12,6 @@ import { chainIdToBackendName, supportedChainIdFromGQLChain, validateUrlChainPar
 import { OrderDirection, Pool_OrderBy, Token } from 'graphql/thegraph/__generated__/types-and-hooks'
 import { TablePool, useTopPools } from 'graphql/thegraph/TopPools'
 import { useCurrency } from 'hooks/Tokens'
-import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { ThemedText } from 'theme/components'
 import { NumberType, useFormatter } from 'utils/formatNumbers'
