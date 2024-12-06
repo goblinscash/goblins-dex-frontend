@@ -379,7 +379,6 @@ const Dashboard = () => {
       }
 
       {
-
         confirm.isOpen &&
         createPortal(
           <ConfirmPopup
@@ -397,10 +396,8 @@ const Dashboard = () => {
             setActiveTab={setActiveTab}
           />,
           document.body
-        )
-        
+        ) 
       }
-
       {
         unStake.isOpen &&
         createPortal(
