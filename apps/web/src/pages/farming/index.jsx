@@ -176,11 +176,13 @@ const Dashboard = () => {
   //   }
   // }, [wallet.chainId, wallet.address]);
 
-  const loadEnded = () => {
+  const loadEnded = (reCallContract) => {
     dispatch(
       Act.deletedFarmList({
         chainId: wallet.chainId,
         walletAddress: wallet.address,
+        reCallContract: reCallContract || false
+
       })
     );
   };

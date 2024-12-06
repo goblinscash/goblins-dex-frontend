@@ -94,13 +94,14 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim,setActiv
       await web3.claimRewards(detail.key.rewardToken, wallet.address);
       setLoading(false);
       handleConfirm();
-      load();
+      load(true);
     } catch (error) {
       console.log(error, "<====error");
       setLoading(false);
       toast.error(error);
     }
   };
+
 
   const loadTokenIds = useDebounce(async () => {
     if (isRestake || isClaim) return;
