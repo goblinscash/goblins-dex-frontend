@@ -64,7 +64,7 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
         <div className="contentBody lg:px-4 w-full">
           <div className="claimInput mt-4 my-2 text-center">
             <h6 className="m-0 font-extrabold py-2 text-lg ">APR: </h6>
-            <h6 className="m-0 font-extrabold py-2 text-lg ">{apr}%</h6>
+            <h6 className="m-0 font-extrabold py-2 text-lg ">{apr || 0}%</h6>
           </div>
 
           <div className="btnWrpper text-center mt-3">

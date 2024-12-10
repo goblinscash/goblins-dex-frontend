@@ -16,6 +16,8 @@ export function subgraph(subgraphUrl) {
 
 export function getUSDPrice(subgraphUrl) {
   return async function (query, variables) {
+
+ 
     const res = await fetch(subgraphUrl, {
       method: "POST",
       headers: {

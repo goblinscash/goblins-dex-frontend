@@ -17,7 +17,7 @@ import Withdraw from "./components/Withdraw";
 //hooks && helpers
 // import {useWallet} from "hooks/useWallet";
 import * as request from "helpers/apiRequests";
-import { priceGraphQl } from "helpers/constants";
+import { GOBAddress, priceGraphQl, WBCHAddress } from "helpers/constants";
 import { toCommas } from "helpers/utils";
 import Web3Intraction from "utils/web3Intraction";
 
@@ -27,6 +27,9 @@ import { useWallet } from "hooks/useWallet";
 import MigrationPop from "components/Modals/MigrationPop";
 import { createPortal } from "react-dom";
 import styles from "./staking.module.scss";
+import { getTokenUSDPrice } from "graphQl/requests";
+
+
 
 const Staking = () => {
   const { currentNetwork, isBlocked } = useSelector((state) => state.dashboard);
@@ -49,7 +52,7 @@ const Staking = () => {
       setLoading(true);
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       let detail = await web3.getDetailInfo();
-      console.log(details, "detail", currentNetwork)
+
 
       let data = await web3.getTokenBalance(
         currentNetwork?.chainId === 56
@@ -91,98 +94,28 @@ const Staking = () => {
     }
   };
 
-  const getUsdPrice = async () => {
+  const getUsdPrice = async (GobAddress= "0x56381cb87c8990971f3e9d948939e1a95ea113a3") => {
     try {
-      const getUSDPrice = request.getUSDPrice(priceGraphQl);
+      
+      const _tokenUSDPrice = getTokenUSDPrice(priceGraphQl[wallet.chainId])
+      const GobPrice = await _tokenUSDPrice(GOBAddress[wallet.chainId])
+      const WBCHPrice = await _tokenUSDPrice(WBCHAddress[wallet.chainId])
 
-      const GobAndWbchPair = await getUSDPrice(
-        `query {
-          pool(id:"0x2f19229617f37abfc990c8f6952bee5c8d4c1797"){
-            id
-            sqrtPrice
-            id
-            liquidity
-            token0 {
-              id
-              decimals
-              name
-              symbol
-            }
-            token1 {
-              id
-              decimals
-              name
-              symbol
-            }
-            token0Price
-            token1Price
-            volumeUSD
-          }  
-       }`,
-        {}
-      );
-      const WbchAndbcUsdtPair = await getUSDPrice(
-        `query {
-          pool(id:"0x934f434a226ed5b6c4f7fc9a2dc5dc0467bddee7"){
-            id
-            sqrtPrice
-            id
-            liquidity
-            token0 {
-              id
-              decimals
-              name
-              symbol
-            }
-            token1 {
-              id
-              decimals
-              name
-              symbol
-            }
-            token0Price
-            token1Price
-            volumeUSD
-          }  
-       }`,
-        {}
-      );
-      const priceData1 = await getUSDPrice(
-        `query {
-          pool(id:"0x934f434a226ed5b6c4f7fc9a2dc5dc0467bddee7"){
-            id
-            sqrtPrice
-            id
-            liquidity
-            token0 {
-              id
-              decimals
-              name
-              symbol
-            }
-            token1 {
-              id
-              decimals
-              name
-              symbol
-            }
-            token0Price
-            token1Price
-            volumeUSD
-          }  
-       }`,
-        {}
-      );
 
-      let getGobPrice =
-        parseFloat(WbchAndbcUsdtPair.pool.token1Price) *
-        parseFloat(GobAndWbchPair.pool.token0Price);
+      
+      console.log(GobPrice,WBCHPrice, "<====GobPrice")
+
+
+
 
       setPrice({
-        GOBInPrice: Number(getGobPrice || 0).toFixed(2),
-        WBCHInPrice: Number(priceData1?.pool?.token1Price || 0).toFixed(2),
+        GOBInPrice: Number(GobPrice || 0).toFixed(2),
+        WBCHInPrice: Number(WBCHPrice || 0).toFixed(2),
       });
-    } catch (error) { }
+    } catch (error) {
+
+      console.log(error, "<====err")
+    }
   };
 
   useEffect(() => {
@@ -204,7 +137,7 @@ const Staking = () => {
 
   useEffect(() => {
     getUsdPrice();
-  }, []);
+  }, [wallet.chainId]);
 
   const swapLink = {
     56: "/#/swap?inputCurrency=0x8ff795a6f4d97e7887c79bea79aba5cc76444adf&outputCurrency=0x701aca29ae0f5d24555f1e8a6cf007541291d110&chain=bsc",

@@ -257,7 +257,7 @@ export function ExploreChartsSection() {
 
   const getUsdPrice = async () => {
     try {
-      const getUSDPrice = request.getUSDPrice(priceGraphQl);
+      const getUSDPrice = request.getUSDPrice(priceGraphQl[10000]);
 
       const priceData = await getUSDPrice(
         `query {

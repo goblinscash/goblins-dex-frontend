@@ -530,9 +530,8 @@ const Dashboard = () => {
             </div>
             <div className="col-span-12">
 
-
-
-              {/* <div className={`${styles.tabContent} tabContent pt-3`}>
+              {/*
+               <div className={`${styles.tabContent} tabContent pt-3`}>
                 {tabs &&
                   tabs.length > 0 &&
                   tabs.map((item, key) => {
@@ -543,10 +542,8 @@ const Dashboard = () => {
                       </div>
                     );
                   })}
-              </div> */}
-
-
-
+              </div> 
+              */}
 
               <div
                 className="cardCstm box pb-3 rounded-xl"
@@ -554,7 +551,9 @@ const Dashboard = () => {
               >
 
 
-                {activeTab === 3 && (
+                {activeTab === 3 
+                && 
+                (
                   <div className="topHead p-3 flex items-center justify-end">
                     <div className="flex items-center gap-2">
                       <label htmlFor="" className="form-label m-0  themeClr">
@@ -574,7 +573,8 @@ const Dashboard = () => {
                       </div>
                     </div>
                   </div>
-                )}
+                )
+                }
 
 
                 <div className="cardBody">

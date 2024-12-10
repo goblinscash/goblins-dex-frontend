@@ -108,7 +108,19 @@ export const GOBAddress = {
   8453: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
 };
 
-export const priceGraphQl = "https://graph.dfd.cash/subgraphs/name/goblins/subgraph-v3";
+export const WBCHAddress = {
+  10000: "0x3743ec0673453e5009310c727ba4eaf7b3a1cc04",
+  56: "0x8ff795a6f4d97e7887c79bea79aba5cc76444adf",
+  8453: "0x7be0cc2cadcd4a8f9901b4a66244dcdd9bd02e0f"
+};
+
+export const priceGraphQl = {
+  "10000": "https://graph.dfd.cash/subgraphs/name/goblins/subgraph-v3",
+  "56": "https://graph-bsc.goblins.cash/subgraphs/name/goblins/bsc-subgraph-v3",
+  "8453": "https://graph-base.goblins.cash/subgraphs/name/goblins/base-subgraph-v3"
+}
+
+
 
 export const supportedChainIds = [56, 97, 10000, 8453];
 
