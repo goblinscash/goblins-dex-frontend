@@ -32,6 +32,7 @@ import { priceGraphQl } from 'helpers/constants'
 import { ButtonPrimary } from 'components/Button'
 
 import "assets/styles/globalCustom.css"
+import { useWallet } from 'hooks/useWallet'
 
 const EXPLORE_CHART_HEIGHT_PX = 368
 const EXPLORE_PRICE_SOURCES = [PriceSource.SubgraphV3]
@@ -171,7 +172,7 @@ function VolumeChartSection({ data }: { data: StackedBarsData[] }) {
   )
 }
 
-function TVLChartSection({ data, totalTvl, title }: { data: StackedLineData[], totalTvl: any, title:string }) {
+function TVLChartSection({ data, totalTvl, title }: { data: StackedLineData[], totalTvl: any, title: string }) {
   const theme = useTheme()
   const params = useMemo(
     () => ({
@@ -192,7 +193,7 @@ function TVLChartSection({ data, totalTvl, title }: { data: StackedLineData[], t
     <SectionContainer>
 
       {totalTvl ?
-        <MinimalStatDisplay title={<>Goblins TVL</>} value={totalTvl} time={<Trans>All time</Trans>} />:""}
+        <MinimalStatDisplay title={<>Goblins TVL</>} value={totalTvl} time={<Trans>All time</Trans>} /> : ""}
       <SectionTitle>
         {title}
       </SectionTitle>
@@ -227,20 +228,25 @@ function MinimalStatDisplay({ title, value, time }: { title: ReactNode; value: n
 }
 
 export function ExploreChartsSection() {
+  const currNetwork = localStorage.getItem('currentNetwork');
+  //@ts-ignore
+  let _chain = JSON.parse(currNetwork)?.chainId
+
+  const wallet = useWallet()
   const [tab, setTab] = useState(1)
   const [usdPrice, setUsdPrice] = useState<any>(0)
   const { transactions } = useAppSelector((state) => state.Incentive)
   // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
   // const chainId = supportedChainIdFromGQLChain(chainName)
 
-  const [chainId, setChainId] = useState<number>(10000);
+  const [chainId, setChainId] = useState<number>(_chain);
   const [chainName, setChainName] = useState<string>("SMARTBCH");
 
 
-const ChainInfo: Record<number, string> = {
-  56: "BNB",
-  10000: "SMARTBCH",
-};
+  const ChainInfo: Record<number, string> = {
+    56: "BNB",
+    10000: "SMARTBCH",
+  };
 
   const apolloClient = chainToApolloClient[chainId || ChainId.MAINNET]
   const { loading, error, data } = useChartQuery({
@@ -289,35 +295,14 @@ const ChainInfo: Record<number, string> = {
   useEffect(() => {
     getUsdPrice()
   }, [])
-// adding for one switcher-----------------
+  // adding for one switcher-----------------
   useEffect(() => {
-    if (window?.ethereum) {
-      // Listen for chain changes
-      // @ts-ignore
-      window.ethereum.on('chainChanged', (newChainId: string) => {
-        const parsedChainId = parseInt(newChainId, 16);
-        setChainId(parsedChainId);
-        setChainName(ChainInfo[parsedChainId] || "Unknown Chain");
-      });
-  
-      // Set initial chainId and chainName
-      window.ethereum
-      // @ts-ignore
-        .request({ method: 'eth_chainId' })
-        .then((initialChainId: string) => {
-          const parsedChainId = parseInt(initialChainId, 16);
-          setChainId(parsedChainId);
-          setChainName(ChainInfo[parsedChainId] || "Unknown Chain");
-        })
-        .catch(console.error);
+    if (wallet?.chainId && wallet.isActive) {
+      setChainId(wallet.chainId);
+      setChainName(ChainInfo[wallet.chainId] || "Unknown Chain");
     }
-  
-    return () => {
-      // @ts-ignore
-      window?.ethereum?.removeListener('chainChanged', setChainId);
-    };
-  }, []);
-  
+  }, [wallet?.chainId]);
+
   let makeDataForVolume = useMemo(() => (data?.uniswapDayDatas && Array.isArray(data?.uniswapDayDatas) && data?.uniswapDayDatas.length > 0
     ? data.uniswapDayDatas.map((data: any) => ({
       time: data.date,
@@ -385,17 +370,17 @@ const ChainInfo: Record<number, string> = {
     <>
       <ChartsContainer>
         <div className='tabContainer'>
-        {
-    (chainId === 10000 || chainId === 56) &&
-    <div className='tabNav'>
-      <button onClick={() => handleTab(2)} className={`${tab === 2 ? "active" : ""}`}>
-        Pool
-      </button>
-      <button onClick={() => handleTab(1)} className={`${tab === 1 ? "active" : ""}`}>
-        Staking
-      </button>
-    </div>
-  }
+          {
+            (chainId === 10000 || chainId === 56) &&
+            <div className='tabNav'>
+              <button onClick={() => handleTab(1)} className={`${tab === 2 ? "active" : ""}`}>
+                Pool
+              </button>
+              <button onClick={() => handleTab(2)} className={`${tab === 1 ? "active" : ""}`}>
+                Staking
+              </button>
+            </div>
+          }
           {/* <div className="tabContent">
            {tab == 1 ? <>TAb 1 Content</> : tab == 2 ? <>Tab 2 Content</> : <></>}
          </div> */}

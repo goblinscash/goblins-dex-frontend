@@ -36,7 +36,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
   const dispatch = useDispatch();
 
   const { currentNetwork } = useSelector((state) => state.dashboard);
-  const { stakedNftlist } = useSelector((state) => state.nft);
+  const { stakedNftlist, stakedNftLoading } = useSelector((state) => state.nft);
 
   const [loading, setLoading] = useState(false);
 
@@ -88,7 +88,6 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
 
     if(isClaimAll){
       await web3.mutliCallClaimAll(makeKeys, tokenId, wallet.address);
-
       toast.success(`Successfully Claim All.`);
     }else{
       await web3.mutliCallUnstakeAll(makeKeys, tokenId, wallet.address);
@@ -112,6 +111,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           stakedNft: true,
+          web3: web3
         })
       );
 
@@ -120,6 +120,8 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
+          web3: web3
+
         })
       );
     } catch (error) {
@@ -195,7 +197,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
                             htmlFor=""
                             className="form-label    px-2 z-10 text-white"
                           >
-                            {loading && !tokenIds.length
+                            {stakedNftLoading && !tokenIds.length
                               ? "NFT Loading..."
                               : !tokenIds.length
                               ? "No Nft Found"

@@ -8,6 +8,7 @@ import {
   BB_USDC,
   BB_USDT,
   BC_BCH,
+  BC_BNB,
   BTC_BSC,
   BUSD_BSC,
   CEUR_CELO,
@@ -23,7 +24,7 @@ import {
   ETH_BSC,
   GOB,
   FLOKI,
-  BONK, SHIB, PEPE,DOGE,
+  BONK, SHIB, PEPE, DOGE,
   nativeOnChain,
   OP,
   PORTAL_ETH_CELO,
@@ -63,6 +64,15 @@ import {
   SHIB_BSC, //SHIB adding
   BONK_BSC, //Bonk
   GOB_BSC,
+  SPX_BCH, HERRY_BCH, MOG_BCH, Neiro_BCH, DEGEN_BCH,
+  WBNB,
+  GOB_BASE,
+  UBCH_BASE,
+  DEGAN_BASE,
+  NEIRO_BASE,
+  MOG_BASE,
+  BITCOIN_BASE,
+  SPX_BASE
 } from './tokens'
 
 type ChainTokenList = {
@@ -142,10 +152,22 @@ export const COMMON_BASES: ChainCurrencyList = {
   [ChainId.CELO]: [nativeOnChain(ChainId.CELO), CEUR_CELO, CUSD_CELO, PORTAL_ETH_CELO, PORTAL_USDC_CELO, WBTC_CELO],
   [ChainId.CELO_ALFAJORES]: [nativeOnChain(ChainId.CELO_ALFAJORES), CUSD_CELO_ALFAJORES, CEUR_CELO_ALFAJORES],
 
-  [ChainId.BNB]: [nativeOnChain(ChainId.BNB), DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC, FLOKI_BSC, PEPE_BSC, SHIB_BSC, BONK_BSC, GOB_BSC],
+  [ChainId.BNB]: [nativeOnChain(ChainId.BNB), WBNB, DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC, FLOKI_BSC, PEPE_BSC, SHIB_BSC, BONK_BSC, GOB_BSC],
+
 
   // Base chain
-  [ChainId.BASE]: [nativeOnChain(ChainId.BASE), WRAPPED_NATIVE_CURRENCY[ChainId.BASE] as Token, USDC_BASE],
+  [ChainId.BASE]: [
+    nativeOnChain(ChainId.BASE),
+    WRAPPED_NATIVE_CURRENCY[ChainId.BASE] as Token,
+    USDC_BASE,
+    GOB_BASE,
+    UBCH_BASE,
+    DEGAN_BASE,
+    NEIRO_BASE,
+    MOG_BASE,
+    BITCOIN_BASE,
+    SPX_BASE
+  ],
 
   [ChainId.AVALANCHE]: [
     nativeOnChain(ChainId.AVALANCHE),
@@ -156,8 +178,10 @@ export const COMMON_BASES: ChainCurrencyList = {
   ],
   [ChainId.SMARTBCH]: [
     nativeOnChain(ChainId.SMARTBCH),
-     WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token, 
-     USDT_SBCH, BC_BCH, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC, GOB, BONK,SHIB,PEPE,DOGE,FLOKI],
+    WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token,
+    USDT_SBCH, BC_BCH, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC, GOB, BONK, SHIB, PEPE, DOGE, FLOKI,
+    SPX_BCH, HERRY_BCH, MOG_BCH, Neiro_BCH, DEGEN_BCH, BC_BNB
+  ],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -211,8 +235,6 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       tokenB: "0xbbb3700F33fCb64437Dc28A7Beb6b21f5cC76FB9", ///bbUSDT
       fee: 0,
     },
-
-
     {
       tokenA: "0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04", ///WBCH
       tokenB: "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195", ///bcBCH
@@ -223,7 +245,6 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       tokenB: "0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195", ///bcBCH
       fee: 0,
     },
-
     {
       tokenA: "0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04", ///WBCH
       tokenB: "0xbb7b43eb950C0fDBb645D7d05a27395Ed8D944fA", ///bbBCH
@@ -234,9 +255,6 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       tokenB: "0xbb7b43eb950C0fDBb645D7d05a27395Ed8D944fA", ///bbBCH
       fee: 0,
     }
-
-
-
   ],
   [ChainId.BNB]: [
     {
@@ -269,7 +287,6 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
       fee: 0,
     },
-
     {
       tokenA: "BNB", // WBNB
       tokenB: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3", // DAI
@@ -285,8 +302,6 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       tokenB: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", // USDC
       fee: 0,
     },
-
-
-  ]
-
+  ],
+  [ChainId.BASE]: []
 }

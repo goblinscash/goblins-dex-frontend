@@ -91,14 +91,15 @@ export const PageTabs = () => {
           connectedChainId === 8453
         )
           ?
-
           <>  <MenuItem href="/staking" >
             <Trans>Staking</Trans>
           </MenuItem>
             <MenuItem href="/farming">
               <Trans>Farming</Trans>
             </MenuItem>
-          </> : ""}
+          </> 
+          : 
+          ""}
 
 
       <Box display={{ sm: 'flex', lg: 'none', xxl: 'flex' }} width="full">

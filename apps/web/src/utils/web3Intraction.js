@@ -14,6 +14,7 @@ import { makeByteData, makeByteDataForV3, toFixedCustm } from "../helpers/utils"
 class Web3Intraction {
   constructor(currentNetwork, provider) {
     if (provider || window.ethereum) {
+  
       this.PROVIDER = provider;
       this.SIGNER = this.PROVIDER.getSigner();
     } else if (currentNetwork) {
@@ -27,6 +28,7 @@ class Web3Intraction {
       ...currentNetwork,
     };
     this.walletType = currentNetwork.label;
+    this.chainId = currentNetwork.chainId;
   }
 
   /**
@@ -46,6 +48,23 @@ class Web3Intraction {
         JSON.parse(abi),
         isSigner ? this.SIGNER : this.PROVIDER
       );
+
+      return contract;
+    } catch (error) {
+      console.log("error", error);
+      return null;
+    }
+  };
+
+  contractInstance = (abi, address, _provider) => {
+    try {
+      let contract = new Contract(
+        address,
+        JSON.parse(abi),
+        new ethers.providers.JsonRpcProvider(_provider)
+      );
+
+      // let contract = new ethers.Contract(address, abi, new ethers.providers.JsonRpcProvider(_provider));
 
       return contract;
     } catch (error) {
@@ -631,21 +650,20 @@ class Web3Intraction {
           this.contractDetails?.contractAddress,
           true
         );
-
+        let getRewards = await contract.getRewardInfo(keys, tokenId);
         // Encode the function calls
-        const unStakeToken = await contract.interface.encodeFunctionData(
-          "unstakeToken",
-          [keys, tokenId]
-        );
-
         const claimReward = await contract.interface.encodeFunctionData(
           "claimReward",
           [keys[0], walletAddress, 0]
         );
-
+        const unStakeToken = await contract.interface.encodeFunctionData(
+          "unstakeToken",
+          [keys, tokenId]
+        );
+        let multicallMethod = getRewards.secondsInsideX128.toString() > 0 ? [unStakeToken, claimReward] : [unStakeToken]
         const multicallData = contract.interface.encodeFunctionData(
           "multicall",
-          [[unStakeToken, claimReward]]
+          [multicallMethod]
         );
 
         const tx = {
@@ -660,7 +678,7 @@ class Web3Intraction {
 
         resolve(receipt);
       } catch (error) {
-        // console.log(error, "<===error in buy");
+        console.log(error, "<===error in mutliCallUnstake");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
@@ -708,11 +726,18 @@ class Web3Intraction {
           unStakeData.push(unStakeToken);
 
 
-          const claimReward = await contract.interface.encodeFunctionData(
-            "claimReward",
-            [keys[i][0], walletAddress, 0]
-          );
-          unStakeData.push(claimReward);
+          let getRewards = await contract.getRewardInfo(keys[i], tokenId);
+
+          if (getRewards.secondsInsideX128.toString() > 0) {
+
+            const claimReward = await contract.interface.encodeFunctionData(
+              "claimReward",
+              [keys[i][0], walletAddress, 0]
+            );
+            unStakeData.push(claimReward);
+          }
+
+
 
         }
         // Encode the function calls
@@ -874,6 +899,31 @@ class Web3Intraction {
         resolve(response.toString());
       } catch (error) {
         // console.log(error, "<===error in buy");
+        if (error?.code === -32603) {
+          return reject("insufficient funds for intrinsic transaction cost");
+        }
+        reject(error.reason || error.data?.message || error.message || error);
+      }
+    });
+  };
+
+
+  getTokenLiquidity = async (tokenId) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const contract = this.getContract(
+          JSON.stringify(NFTManager),
+          this.contractDetails?.nftManagerContractAddress,
+          true
+        );
+
+        const response = await contract.positions(tokenId);
+
+
+
+        resolve(response.liquidity.toString());
+      } catch (error) {
+        // console.log(error, "<===error in getTokenId");
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }
@@ -1240,14 +1290,29 @@ class Web3Intraction {
           true
         );
 
-        console.log(this.contractDetails.stakeContractAddress, "ch1")
+        let getStakingContract = await contract.stakingToken();
+
+        const bscInstance = this.contractInstance(
+          JSON.stringify(TokenABI),
+          "0x701ACA29AE0F5d24555f1E8A6Cf007541291d110",
+          "https://bsc.drpc.org"
+        )
+
+        let bscSupply = 0
+        if (this.chainId == 10000) {
+          let bscDecimal = await bscInstance.decimals()
+          bscSupply = await bscInstance.totalSupply()
+          bscSupply = bscSupply.toString() / 10 ** bscDecimal;
+        }
+
         let walletAddress = this.SIGNER.getAddress();
 
-        let getStakingContract = await contract.stakingToken();
+
 
 
         let getRewardsContract = await contract.rewardsToken();
         let stakeToken = await this.getTokenBalance(getStakingContract);
+
         let rewardToken = await this.getTokenSymbolAndDecimal(
           getRewardsContract
         );
@@ -1259,8 +1324,10 @@ class Web3Intraction {
         earnedAmount = earnedAmount.toString() / 10 ** rewardToken.tokenDecimal;
 
         let totalSupply = await contract.totalSupply();
+
         totalSupply = totalSupply.toString() / 10 ** stakeToken.tokenDecimal;
 
+        let _tokenTotalSupply = parseInt(stakeToken.totalSupply - bscSupply)
         resolve({
           balance: parseFloat(stakedAmount) + parseFloat(stakeToken.balance),
           stakedAmount: parseFloat(stakedAmount),
@@ -1269,7 +1336,7 @@ class Web3Intraction {
           earnedAmount: earnedAmount,
           rewardSymbol: rewardToken.symbol,
           stakeSymbol: stakeToken.symbol,
-          tokenTotalSupply: parseInt(stakeToken.totalSupply),
+          tokenTotalSupply: _tokenTotalSupply,
           unStackTotalSupply:
             parseInt(stakeToken.totalSupply) - parseInt(totalSupply),
         });
@@ -1467,6 +1534,7 @@ class Web3Intraction {
    */
   compoundPool = async (tokenId, walletAddress) => {
     tokenId = tokenId.toString();
+    console.log(tokenId, "tokenId")
     return new Promise(async (resolve, reject) => {
       try {
         const contract = this.getContract(
@@ -1474,6 +1542,7 @@ class Web3Intraction {
           this.contractDetails?.nftManagerContractAddress,
           true
         );
+
         const approve = await contract.interface.encodeFunctionData("approve", [
           this.contractDetails.compoundAddress,
           tokenId,
@@ -1493,17 +1562,24 @@ class Web3Intraction {
           [[approve, safeTransferFrom]]
         );
 
+
         const tx = {
           to: this.contractDetails?.nftManagerContractAddress,
           data: multicallData,
           value: ethers.utils.parseEther("0"), // Amount of Ether to send with the transaction
         };
 
-        const response = await this.SIGNER.sendTransaction(tx);
+        let response;
+        if (this.chainId == 8453) {
+          response = await this.SIGNER.sendTransaction({
+            ...tx,
+            gasLimit: ethers.utils.hexlify(5000000),
+          });
+        } else {
+          response = await this.SIGNER.sendTransaction(tx)
+        }
 
-        let receipt = await response.wait(); // Wait for the transaction to be mined
-        console.log(receipt, "<===receipt");
-
+        let receipt = await response.wait();
         resolve(receipt);
       } catch (error) {
         console.log(error, "<===error in compoundPool");
@@ -1520,8 +1596,6 @@ class Web3Intraction {
       }
     });
   };
-
-
 
 
   changeRange = async (data, tokenId, walletAddress) => {

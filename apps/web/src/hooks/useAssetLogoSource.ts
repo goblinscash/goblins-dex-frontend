@@ -20,7 +20,10 @@ function parseLogoSources(uris: string[]) {
 // Parses uri's, favors non-coingecko images, and improves coingecko logo quality
 function prioritizeLogoSources(uris: string[]) {
   const parsedUris = uris.map((uri) => uriToHttp(uri)).flat(1)
-  const preferredUris: string[] = []
+  const preferredUris: string[] = [];
+
+
+  console.log(preferredUris, "<====preferredUris")
 
   // Consolidate duplicate coingecko urls into one fallback source
   let coingeckoUrl: string | undefined = undefined
@@ -55,10 +58,13 @@ function getInitialUrl(
   }
 
   if (checksummedAddress) {
-    if (chainId == 10000 || 56) {
-      return `https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
+    let url;
+    if (chainId == 10000 || chainId == 8453 || chainId == 56) {
+      url = `https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
+    }
+    if(url){
+      return url
     } else {
-      console.log(`https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`, "******")
       return `https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
     }
   } else {
@@ -76,6 +82,7 @@ export default function useAssetLogoSource(
   const [current, setCurrent] = useState<string | undefined>(
     hideLogo ? undefined : getInitialUrl(address, chainId, isNative, backupImg)
   )
+
   const [fallbackSrcs, setFallbackSrcs] = useState<string[] | undefined>(undefined)
 
   useEffect(() => {

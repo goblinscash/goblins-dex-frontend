@@ -207,6 +207,8 @@ export default function TokenDetails({
 
   // console.log(address, pageChainId, tokenQueryData, "<====data")
 
+
+
   const { token: detailedToken, didFetchFromChain } = useRelevantToken(address, pageChainId, tokenQueryData)
 
   const tokenWarning = address ? checkWarning(address) : null
@@ -289,6 +291,8 @@ export default function TokenDetails({
 
   const [chartType, setChartType] = useState<ChartType>(ChartType.PRICE)
   const [priceChartType, setPriceChartType] = useState<PriceChartType>(PriceChartType.LINE)
+
+
 
   // address will never be undefined if token is defined; address is checked here to appease typechecker
   if (detailedToken === undefined || !address) {

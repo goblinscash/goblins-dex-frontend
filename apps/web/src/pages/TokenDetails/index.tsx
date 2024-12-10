@@ -15,6 +15,7 @@ import { getTokenPageTitle } from './utils'
 import { chainToApolloClient } from 'graphql/thegraph/apollo'
 import { ChainId } from '@uniswap/sdk-core'
 
+
 const StyledPrefetchBalancesWrapper = styled(PrefetchBalancesWrapper)`
   display: contents;
 `

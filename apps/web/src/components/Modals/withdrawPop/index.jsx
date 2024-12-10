@@ -30,7 +30,7 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
   const wallet = useWallet();
   const dispatch = useDispatch();
   const { currentNetwork } = useSelector((state) => state.dashboard);
-  const { loading: reduxLoading, withdrawNftlist } = useSelector(
+  const { withdrawNftLoading: reduxLoading, withdrawNftlist } = useSelector(
     (state) => state.nft
   );
 
@@ -57,6 +57,7 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           ownerNft: true,
+          web3: web3,
         })
       );
 
@@ -65,6 +66,8 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
           chainId: wallet.chainId,
           walletAddress: wallet.address,
           withdrawNft: true,
+          web3: web3
+
         })
       );
       setLoading(false);

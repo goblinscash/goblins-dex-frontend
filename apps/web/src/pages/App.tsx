@@ -174,15 +174,9 @@ export default function App() {
 
   },[pathname])
 
-
-
   useEffect(() => {
     dispatch(detactCountryIp());
   }, []);
-
-
-
-
 
   if (shouldRedirectToAppInstall) {
     return null
@@ -263,8 +257,7 @@ function UserPropertyUpdater() {
   const rehydrated = useAppSelector((state) => state._persist.rehydrated)
 
   useEffect(() => {
-    // User properties *must* be set before sending corresponding event properties,
-    // so that the event contains the correct and up-to-date user properties.
+
     user.set(CustomUserProperties.USER_AGENT, navigator.userAgent)
     user.set(CustomUserProperties.BROWSER, getBrowser())
     user.set(CustomUserProperties.SCREEN_RESOLUTION_HEIGHT, window.screen.height)
@@ -296,5 +289,5 @@ function UserPropertyUpdater() {
     if (!rehydrated) return
     user.set(CustomUserProperties.ROUTER_PREFERENCE, routerPreference)
   }, [routerPreference, rehydrated])
-  return null
+  return null;
 }

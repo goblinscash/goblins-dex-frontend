@@ -4,7 +4,6 @@ import loader from "assets/farmingAssets/Images/loading.gif";
 
 function ActiveStakingTable({ list, handleSelect, selectedFarm, loading }) {
 
-  console.log(list, "11111111111111")
   return (
     <div className="overflow-x-auto">
       <table

@@ -1,5 +1,7 @@
+import React, { useEffect, useState } from "react";
 // img
 import loader from "assets/farmingAssets/Images/loading.gif";
+import axios from "axios"
 
 
 
@@ -14,6 +16,27 @@ function ClaimTable({
   isBlocked,
  
 }) {
+
+
+  const [tokenList, setTokenList] = useState(null)
+  useEffect(() => {
+    const uri = 'https://raw.githubusercontent.com/ethereum-optimism/ethereum-optimism.github.io/master/optimism.tokenlist.json';
+    axios.get(uri).then((res) => {
+      if (res.data.tokens) {
+
+        setTokenList(res.data.tokens.reduce((acc, token) => {
+          acc[token.address.toLowerCase()] = token.logoURI;
+          return acc;
+        }, {}))
+
+      } else {
+        return null
+      }
+    }).catch((err) => {
+      console.log(err)
+    })
+
+  }, [])
 
   return (
     <div className="overflow-x-auto">
@@ -130,7 +153,16 @@ function ClaimTable({
                           width={100}
                           style={{ height: 30, width: 30 }}
                         />
-                      ) : (
+                      ) : tokenList && tokenList[item?.key?.rewardToken.toLowerCase()] ? (
+                        <img
+                          src={tokenList[item?.key?.rewardToken.toLowerCase()]}
+                          alt=""
+                          className="rounded-pill max-w-full object-cover shadow-sm"
+                          height={1000}
+                          width={1000}
+                          style={{ height: 30, width: 30 }}
+                        />
+                      ): (
                         item?.getPoolDetail?.token0Symbol + " / "
                       )}
                     </div>

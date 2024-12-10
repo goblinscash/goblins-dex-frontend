@@ -67,6 +67,15 @@ export const PORTAL_USDC_CELO = new Token(
   'USDC (Portal from Ethereum)'
 )
 export const USDC_BASE = new Token(ChainId.BASE, '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913', 6, 'USDC', 'USD Coin')
+export const GOB_BASE = new Token(ChainId.BASE, '0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3', 9, 'GOB', 'GOB')
+export const UBCH_BASE = new Token(ChainId.BASE, '0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F', 18, 'uBCH', 'uBCH')
+export const DEGAN_BASE = new Token(ChainId.BASE, '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed', 18, 'DEGEN', 'DEGEN')
+export const NEIRO_BASE = new Token(ChainId.BASE, '0x5Ca35eBC4f25B042d2cAE75914c7e882E631fA9A', 9, 'Neiro', 'Neiro')
+export const MOG_BASE = new Token(ChainId.BASE, '0x2Da56AcB9Ea78330f947bD57C54119Debda7AF71', 18, 'Mog', 'Mog')
+export const BITCOIN_BASE = new Token(ChainId.BASE, '0x2a06A17CBC6d0032Cac2c6696DA90f29D39a1a29', 8, 'BITCOIN', 'BITCOIN')
+export const SPX_BASE = new Token(ChainId.BASE, '0x50dA645f148798F68EF2d7dB7C1CB22A6819bb2C', 8, 'SPX', 'SPX')
+
+
 
 export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
 export const DAI_ARBITRUM_ONE = new Token(
@@ -229,6 +238,8 @@ export const SHIB_BSC = new Token(ChainId.BNB, '0x2859e4544C4bB03966803b044A9356
 export const BONK_BSC = new Token(ChainId.BNB, '0xA697e272a73744b343528C3Bc4702F2565b2F422', 5, 'BONK', 'BONK')
 export const GOB_BSC = new Token(ChainId.BNB, '0x701ACA29AE0F5d24555f1E8A6Cf007541291d110', 9, 'GOB', 'GOB')
 
+export const WBNB =new Token(ChainId.BNB, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB')
+
 export const USDC_AVALANCHE = new Token(
   ChainId.AVALANCHE,
   '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
@@ -285,6 +296,8 @@ export const USDT_SBCH = new Token(
   'bcUSDT',
   'bcUSDT'
 )
+export const BC_BNB = new Token(ChainId.SMARTBCH, '0xBc7b858B5694D485AD17c89675649cE44De21BEa', 18, 'bcBNB', 'bcBNB')
+
 export const BC_BCH = new Token(
   ChainId.SMARTBCH,
   '0xbc9bd8dde6c5a8e1cbe293356e02f5984693b195',
@@ -385,6 +398,52 @@ export const WDOGE_BCH = new Token(
   'dcWDOGE',
   'dcWDOGE'
 )
+
+
+export const SPX_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0x617599B1177d56d130Da5FD5cf896E3f186eB6f1',
+  8,
+  'SPX',
+  'SPX'
+)
+
+export const HERRY_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0x85689bE665562c06Aa052e0E2A2422b286d30C44',
+  8,
+  'BITCOIN',
+  'BITCOIN'
+)
+
+export const MOG_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0x0dF6A7169132265Bb4f2b0Fac0a37b26ea6F93Fc',
+  18,
+  'MOG',
+  'MOG'
+)
+
+export const Neiro_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0x751C9c9F98f839E97b039BE2d5A66b92c622335F',
+  9,
+  'Neiro',
+  'Neiro'
+)
+
+
+export const DEGEN_BCH = new Token(
+  ChainId.SMARTBCH,
+  '0xB6B54DDE7282fbcD19Cb1d447dFE425454a831Eb',
+  18,
+  'DEGEN',
+  'DEGEN'
+)
+
+
+
+
 
 export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } = {
   ...(WETH9 as Record<ChainId, Token>),

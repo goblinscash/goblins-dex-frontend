@@ -11,6 +11,8 @@ import sortIcon from "assets/farmingAssets/Images/sort.svg";
 import styles from "../../Dashboard.module.scss"
 
 import { getSymbols } from "helpers/constants";
+import useTokenLogoSource from 'hooks/useAssetLogoSource'
+
 import { formatValue } from "helpers/utils";
 import useAssetLogoSource from "hooks/useAssetLogoSource";
 
@@ -53,7 +55,6 @@ function CommonTable({
 
   // filtering the data which have same pool and rewardtoken address
   const newData = incentiveIds.filter(item => item.key.rewardToken !== item.key.pool);
-
   return (
     <div className="overflow-x-auto" style={{ overflow: "auto" }}>
       <table
@@ -258,6 +259,15 @@ function CommonTable({
             newData &&
             newData?.length > 0 &&
             newData.map((item, key) => {
+
+              // if (!getSymbols[item?.getPoolDetail?.token0Address]) {
+
+              //   const [token1Logo] = useTokenLogoSource(item?.getPoolDetail?.token0Address, wallet.chainId, false);
+
+
+                // console.log(item, "<====token1Logo")
+              // }
+
               return (
                 <tr
                   key={key}
@@ -270,6 +280,7 @@ function CommonTable({
                   >
                     <div className={`${styles.flexWrp} flex items-center gap-2`}>
                       <div className="imgWrp flex-shrink-0 flex items-center">
+                        {console.log(getSymbols[item?.getPoolDetail?.token0Address], "PPPPPPP", item?.getPoolDetail?.token0Address)}
                         {getSymbols[item?.getPoolDetail?.token0Address] ? (
                           <img
                             src={getSymbols[item?.getPoolDetail?.token0Address]}
@@ -279,19 +290,9 @@ function CommonTable({
                             width={1000}
                             style={{ height: 30, width: 30 }}
                           />
-                        ) : tokenList && tokenList[item?.getPoolDetail?.token0Address] ? (
-                          <img
-                            src={tokenList[item?.getPoolDetail?.token0Address]}
-                            alt=""
-                            className="rounded-pill max-w-full object-cover shadow-sm"
-                            height={1000}
-                            width={1000}
-                            style={{ height: 30, width: 30 }}
-                          />
                         ) : (
                           item?.getPoolDetail?.token0Symbol + "/ "
                         )}
-
                         {getSymbols[item?.getPoolDetail?.token1Address] ? (
                           <img
                             src={getSymbols[item?.getPoolDetail?.token1Address]}
@@ -301,24 +302,9 @@ function CommonTable({
                             width={1000}
                             style={{ height: 30, width: 30, marginLeft: -10 }}
                           />
-                        ) : tokenList && tokenList[item?.getPoolDetail?.token1Address.toLowerCase()] ? (
-                          <img
-                            src={tokenList[item?.getPoolDetail?.token1Address.toLowerCase()]}
-                            alt=""
-                            className="rounded-pill max-w-full object-cover shadow-sm"
-                            height={1000}
-                            width={1000}
-                            style={{ height: 30, width: 30 }}
-                          />
                         ) : (
-
-                          <>
-
-                            <p>{item?.getPoolDetail?.token1Symbol}</p>
-                          </>
+                          item?.getPoolDetail?.token1Symbol
                         )}
-
-                       
                       </div>
                       <div className="">
                         <span className="whitespace-nowrap">

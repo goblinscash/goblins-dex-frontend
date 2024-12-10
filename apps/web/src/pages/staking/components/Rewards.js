@@ -50,7 +50,7 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
               {toCommas(Number(details?.earnedAmount || 0).toFixed(4)) + " "}
               {details?.rewardSymbol ? details.rewardSymbol : ""}
               <img
-                src={details?.rewardSymbol === "WBCH" ? wbchlogo : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartchain/assets/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf/logo.png"}
+                src={details?.rewardSymbol === "WBCH" ? wbchlogo : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F/logo.png"}
                 height={100}
                 className="max-w-full flex-shrink-0 object-contain ms-2"
                 width={100}

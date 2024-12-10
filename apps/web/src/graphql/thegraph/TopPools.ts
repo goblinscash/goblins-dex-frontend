@@ -51,6 +51,8 @@ export function useTopPools(
 
   // console.log(chainId, orderBy,orderDirection, "<======props")
   const apolloClient = chainToApolloClient[chainId || ChainId.MAINNET]
+
+  console.log(apolloClient, "<===apolloClient")
   const { loading, error, data } = useTopPoolsQuery({
     client: apolloClient,
     fetchPolicy: 'no-cache',

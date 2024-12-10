@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -15,6 +15,7 @@ import Web3Intraction from "utils/web3Intraction";
 import { getCheckSumAddress } from "helpers/utils";
 import { updateFarm } from "state/action";
 import { TablePool, useTopPools } from 'graphql/thegraph/TopPools'
+import { GOBAddress } from "helpers/constants";
 
 
 const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
@@ -35,6 +36,8 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
   const [showSelect2, setShowSelect2] = useState(false);
 
   const { topPools, loading: subgraphLoading, error } = useTopPools(wallet.chainId, "totalValueLockedUSD", "desc")
+
+
 
   const top7Pools = Array.isArray(topPools) ? topPools.slice(0, 7) : [];
   const extractedData = top7Pools.map(pool => ({
@@ -89,7 +92,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
   const toggleDropdown2 = () => {
     setShowSelect2((prev) => !prev);
   };
-  const GobRewardAddrss = "0x56381cb87c8990971f3e9d948939e1a95ea113a3"
+
 
 
   const handleChange = (e) => {
@@ -188,13 +191,16 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
               reward: fields.rewardAmount,
             },
           },
+          callback: (err) => {
+            load();
+            setLoading(false);
+            handleIncentiveForm();
+            if (!err) {
+              toast.success("Farm created successfully, some time it will take some seconds for reflect in list!");
+            }
+          }
         })
       );
-
-      load();
-      setLoading(false);
-      handleIncentiveForm();
-      toast.success("Farm created successfully, some time it will take some seconds for reflect in list!");
     } catch (error) {
       setLoading(false);
       toast.error(error);
@@ -253,6 +259,8 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
               </div>
               <form onSubmit={handleSubmit}>
                 <div className="grid gap-x-5 gap-y-8 grid-cols-12 py-3">
+
+
                   {/* <div className=" col-span-12">
                     <div className="flex items-center gap-2">
                       <label htmlFor="" className="form-label themeClr   m-0 px-2 z-10">
@@ -261,6 +269,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                       <SwitchBtn />{" "}
                     </div>
                   </div> */}
+
                   <div className=" col-span-12">
                     <div className="relative labelInput">
                       <label
@@ -306,7 +315,6 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                             </option>
                           ))}
                         </select>
-
                       )}
                     </div>
                   </div>
@@ -374,7 +382,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                               value={fields.rewardAddress}
                             >
                               <option value="">Select Address</option>
-                              <option value={GobRewardAddrss}>{GobRewardAddrss}</option>
+                              <option value={GOBAddress[wallet.chainId]}>{GOBAddress[wallet.chainId]}</option>
                             </select>
                           )}
                         </div>
@@ -427,7 +435,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                           <input
                             type="datetime-local"
                             placeholder=""
-                            className=" rounded"
+                            className="form-control rounded"
                             name="startDate"
                             value={fields.startDate}
                             onChange={handleChange}
@@ -446,7 +454,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                           <input
                             type="datetime-local"
                             placeholder=""
-                            className=" rounded"
+                            className="form-control rounded"
                             name="endDate"
                             value={fields.endDate}
                             onChange={handleChange}

@@ -8,7 +8,6 @@ export default function CurrencyLogo(
     currency?: Currency | null
   }
 ) {
-  
   return (
     <AssetLogo
       isNative={props.currency?.isNative}
