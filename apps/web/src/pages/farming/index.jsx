@@ -168,11 +168,13 @@ const Dashboard = () => {
   //   }
   // }, [wallet.chainId, wallet.address]);
 
-  const loadEnded = () => {
+  const loadEnded = (reCallContract) => {
     dispatch(
       Act.deletedFarmList({
         chainId: wallet.chainId,
         walletAddress: wallet.address,
+        reCallContract: reCallContract || false
+
       })
     );
   };
@@ -358,7 +360,6 @@ const Dashboard = () => {
       }
 
       {
-
         confirm.isOpen &&
         createPortal(
           <ConfirmPopup
@@ -376,10 +377,8 @@ const Dashboard = () => {
             setActiveTab={setActiveTab}
           />,
           document.body
-        )
-        
+        ) 
       }
-
       {
         unStake.isOpen &&
         createPortal(
@@ -449,7 +448,9 @@ const Dashboard = () => {
                           >
                             {item.name}
                           </button>
-                        ))}
+                        )
+                        )
+                        }
                     </div>
                   </div>
                 </div>
