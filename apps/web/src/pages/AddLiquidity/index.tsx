@@ -771,9 +771,6 @@ function AddLiquidity() {
                   <DynamicSection gap="md" disabled={!feeAmount || invalidPool}>
                     {!noLiquidity ? (
                       <>
-
-
-                      <h1>sdfsfsdfdf</h1>
                         {Boolean(price && baseCurrency && quoteCurrency && !noLiquidity) && (
                           <AutoColumn gap="2px" style={{ marginTop: '0.5rem' }}>
                             <Trans>
