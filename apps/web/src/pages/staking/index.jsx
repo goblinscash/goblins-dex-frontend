@@ -53,7 +53,6 @@ const Staking = () => {
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       let detail = await web3.getDetailInfo();
 
-
       let data = await web3.getTokenBalance(
         currentNetwork?.chainId === 56
           ? "0x701ACA29AE0F5d24555f1E8A6Cf007541291d110" // BSC
@@ -63,7 +62,6 @@ const Staking = () => {
               ? "0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3" // Base
               : "" // Fallback (optional)
       );
-
       setDetails({
         ...detail,
         unStakedAmountInDollar:
@@ -72,7 +70,7 @@ const Staking = () => {
         balanceInDollar: detail.balance * Number(price.GOBInPrice),
         sGob: data.balance,
       });
-
+      await getAPR(detail.totalSupply, price.WBCHInPrice, price.GOBInPrice);
       setLoading(false);
     } catch (error) {
       console.log(error, "<===err");
@@ -94,35 +92,25 @@ const Staking = () => {
     }
   };
 
-  const getUsdPrice = async (GobAddress= "0x56381cb87c8990971f3e9d948939e1a95ea113a3") => {
+  const getUsdPrice = async (GobAddress = "0x56381cb87c8990971f3e9d948939e1a95ea113a3") => {
     try {
-      
+
       const _tokenUSDPrice = getTokenUSDPrice(priceGraphQl[wallet.chainId])
       const GobPrice = await _tokenUSDPrice(GOBAddress[wallet.chainId])
       const WBCHPrice = await _tokenUSDPrice(WBCHAddress[wallet.chainId])
-
-
-      
-      console.log(GobPrice,WBCHPrice, "<====GobPrice")
-
-
-
-
+      console.log(GobPrice, WBCHPrice, "<====GobPrice")
       setPrice({
         GOBInPrice: Number(GobPrice || 0).toFixed(2),
         WBCHInPrice: Number(WBCHPrice || 0).toFixed(2),
       });
     } catch (error) {
-
       console.log(error, "<====err")
     }
   };
 
   useEffect(() => {
-    if (details.stakeSymbol && price.GOBInPrice && price.WBCHInPrice) {
-      getAPR(details.totalSupply, price.WBCHInPrice, price.GOBInPrice);
-    }
-  }, [details, price]);
+    getUsdPrice();
+  }, [wallet.chainId]);
 
   useEffect(() => {
     if (
@@ -135,9 +123,8 @@ const Staking = () => {
     }
   }, [wallet, currentNetwork, price]);
 
-  useEffect(() => {
-    getUsdPrice();
-  }, [wallet.chainId]);
+
+
 
   const swapLink = {
     56: "/#/swap?inputCurrency=0x8ff795a6f4d97e7887c79bea79aba5cc76444adf&outputCurrency=0x701aca29ae0f5d24555f1e8a6cf007541291d110&chain=bsc",
