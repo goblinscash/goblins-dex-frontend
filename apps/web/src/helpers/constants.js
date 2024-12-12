@@ -197,6 +197,9 @@ export const getSymbols = {
   "0x55d398326f99059ff775485246999027b3197955": Icon9,
   "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c": Icon_1,
   "0xba2ae424d960c26247dd6c32edc70b295c744c43": IconDoge,
+  "0xc993af7fa109e3dd17347c7ce612a5ed848f4b74": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x940181a94A35A4569E4529A3CDfB74e38FD98631/logo.png",
+
+
   "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d": IconUSDC, // for bsc
   "0xa697e272a73744b343528c3bc4702f2565b2f422": IconBONK,
   "0x25d887ce7a35172c62febfd67a1856f20faebb00": IconPEPE,
@@ -206,17 +209,19 @@ export const getSymbols = {
   "0x0df6a7169132265bb4f2b0fac0a37b26ea6f93fc": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x0dF6A7169132265Bb4f2b0Fac0a37b26ea6F93Fc/logo.png",
   "0x751c9c9f98f839e97b039be2d5a66b92c622335f": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x5Ca35eBC4f25B042d2cAE75914c7e882E631fA9A/logo.png",
   "0xb6b54dde7282fbcd19cb1d447dfe425454a831eb": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0xB6B54DDE7282fbcD19Cb1d447dFE425454a831Eb/logo.png",
+  "0x76d7062a70f5c129b6180baab2607c788a962b1b": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x940181a94A35A4569E4529A3CDfB74e38FD98631/logo.png",
+
   // Base
   "0x4ed4e862860bed51a9570b96d89af5e1b0efefed": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0xB6B54DDE7282fbcD19Cb1d447dFE425454a831Eb/logo.png",
   "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913/logo.png",
-  "0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3/logo.png",
-  "0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F/logo.png",
-  "0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed/logo.png",
-  "0x5Ca35eBC4f25B042d2cAE75914c7e882E631fA9A": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x5Ca35eBC4f25B042d2cAE75914c7e882E631fA9A/logo.png",
-  "0x2Da56AcB9Ea78330f947bD57C54119Debda7AF71": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x2Da56AcB9Ea78330f947bD57C54119Debda7AF71/logo.png",
-  "0x2a06A17CBC6d0032Cac2c6696DA90f29D39a1a29": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x2a06A17CBC6d0032Cac2c6696DA90f29D39a1a29/logo.png",
-  "0x50dA645f148798F68EF2d7dB7C1CB22A6819bb2C": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x50dA645f148798F68EF2d7dB7C1CB22A6819bb2C/logo.png",
-  "0x4200000000000000000000000000000000000006": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x4200000000000000000000000000000000000006/logo.png"
+  "0xcdba3e4c5c505f37cfbbb7accf20d57e793568e3": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3/logo.png",
+  "0x7be0cc2cadcd4a8f9901b4a66244dcdd9bd02e0f": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F/logo.png",
+  "0x5ca35ebc4f25b042d2cae75914c7e882e631fa9a": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x5Ca35eBC4f25B042d2cAE75914c7e882E631fA9A/logo.png",
+  "0x2da56acb9ea78330f947bd57c54119debda7af71": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x2Da56AcB9Ea78330f947bD57C54119Debda7AF71/logo.png",
+  "0x2a06a17cbc6d0032cac2c6696da90f29d39a1a29": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x2a06A17CBC6d0032Cac2c6696DA90f29D39a1a29/logo.png",
+  "0x50da645f148798f68ef2d7db7c1cb22a6819bb2c": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x50dA645f148798F68EF2d7dB7C1CB22A6819bb2C/logo.png",
+  "0x4200000000000000000000000000000000000006": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x4200000000000000000000000000000000000006/logo.png",
+  "0x940181a94a35a4569e4529a3cdfb74e38fd98631": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x940181a94A35A4569E4529A3CDfB74e38FD98631/logo.png",
 };
 
 export const getSortedData = (arr, sortKey, sortOrder) => {
