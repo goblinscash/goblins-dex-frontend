@@ -38,6 +38,12 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
     }
   };
 
+  const logo = {
+    "WBCH" : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04/logo.png",
+    "GOB" : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x56381cB87C8990971f3e9d948939e1a95eA113a3/logo.png",
+    "BCH": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F/logo.png"
+  }
+
   return (
     <div className="lg:col-span-4 sm:col-span-6 col-span-12">
       <div
@@ -50,7 +56,7 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
               {toCommas(Number(details?.earnedAmount || 0).toFixed(4)) + " "}
               {details?.rewardSymbol ? details.rewardSymbol : ""}
               <img
-                src={details?.rewardSymbol === "WBCH" ? wbchlogo : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F/logo.png"}
+                src={logo[details?.rewardSymbol]}
                 height={100}
                 className="max-w-full flex-shrink-0 object-contain ms-2"
                 width={100}

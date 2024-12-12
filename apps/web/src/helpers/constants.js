@@ -105,7 +105,7 @@ export const graphQLUrl = {
 export const GOBAddress = {
   10000: "0x56381cb87c8990971f3e9d948939e1a95ea113a3",
   56: "0x701aca29ae0f5d24555f1e8a6cf007541291d110",
-  8453: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+  8453: "0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3"
 };
 
 export const WBCHAddress = {
