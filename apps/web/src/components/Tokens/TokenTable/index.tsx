@@ -147,7 +147,7 @@ const tokenSortIndex = tokenSortRank[token?.id ?? NATIVE_CHAIN_ID]
           index: tokenSortIndex,
           tokenDescription: <TokenDescription token={token} />,
           totalSupply: token.totalSupply,
-          price: greatestDateObject ? greatestDateObject.priceUSD : 0,
+          price: greatestDateObject ? greatestDateObject?.open : 0,
           // percentChange1hr: (
           //   <>
           //     <DeltaArrow delta={delta1hr} />

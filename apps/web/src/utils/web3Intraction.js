@@ -1435,10 +1435,10 @@ class Web3Intraction {
 
         const secondsInAYear = 365 * 24 * 60 * 60;
 
-        const apr = GOBPrice > 0 ?
+        const apr = 
           ((rewardRate * WBCHPrice * secondsInAYear) /
             (totalSupply * GOBPrice)) *
-          100 : 0;
+          100;
 
         // console.log(apr, "<===apr")
 
