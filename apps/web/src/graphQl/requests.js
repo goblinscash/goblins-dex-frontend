@@ -23,8 +23,7 @@ export function getTokenUSDPrice(subgraphUrl) {
 
       const { data } = response.data;
 
-
-      return data?.token?.tokenDayData[0]?.open
+      return data?.token?.tokenDayData[0]?.close
     } catch (error) {
       throw new Error(`Error fetching data: ${error.message}`);
     }

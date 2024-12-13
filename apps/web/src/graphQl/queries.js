@@ -9,6 +9,7 @@ query ($id: String!) {
     totalValueLocked,
     tokenDayData(orderBy: date, orderDirection: desc){
       open
+      close
       date
     }    
   }
