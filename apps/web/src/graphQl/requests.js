@@ -29,3 +29,18 @@ export function getTokenUSDPrice(subgraphUrl) {
     }
   };
 }
+
+export async function getGobUSDPrice(chainId) {
+    try {
+      const apiUrl = `${process.env.REACT_APP_API_BASE_URL}/v1/price/gob`;
+        const params = { chainId }; 
+
+        const response = await axios.get(apiUrl, { params });
+
+      const { data } = response.data;
+
+      return data
+    } catch (error) {
+      throw new Error(`Error fetching data: ${error.message}`);
+    }
+}
