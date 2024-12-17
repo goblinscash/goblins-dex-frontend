@@ -45,10 +45,14 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
   const [activeTabNew, setActiveTabNew] = useState(1);
   const [selectedFarm, setSelectedFarm] = useState([]);
 
+<<<<<<< HEAD
   const [singleStakeTokenIds, setSingleStakeTokenIds] = useState([]);
 
   const [multiStakeTokenIds, setMultiStakeTokenIds] = useState([]);
   // const [singleStakeTokenIds, setSingleStakeTokenIds] = useState(ownerNftlist);
+=======
+  const [tokenIds, setTokenIds] = useState(ownerNftlist);
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
 
   const [tokenId, setTokenId] = useState(null);
   const [farmList, setfarmList] = useState(null);
@@ -149,7 +153,11 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       );
       setLoading(false);
       handleStake();
+<<<<<<< HEAD
 
+=======
+     
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
     } catch (error) {
       setLoading(false);
 
@@ -213,7 +221,11 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
 
       setLoading(false);
       handleStake();
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
     } catch (error) {
       setLoading(false);
 
@@ -222,6 +234,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
     }
   };
 
+<<<<<<< HEAD
   const getRelvantFarm = async (tokenId) => {
 
     let verifyTokenId = multiStakeTokenIds && multiStakeTokenIds.find((data) => data.value == tokenId);
@@ -231,6 +244,11 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
     let farm = [];
 
 
+=======
+  const getRelvantFarm = async () => {
+    const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+    let farm = [];
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
     setfarmLoading(true);
 
     try {
@@ -271,6 +289,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+<<<<<<< HEAD
       setSingleStakeTokenIds(ownerNftlist);
  
       // if(activeTabNew ==1)
@@ -287,15 +306,26 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+=======
+      setTokenIds(activeTabNew == 1 ? ownerNftlist : contractNftlist);
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
       setTokenId(null);
       setfarmList([]);
       // if(activeTabNew ==1)
     }
+<<<<<<< HEAD
   }, [activeTabNew]);
 
   useEffect(() => {
     if (activeTabNew == 2 && tokenId && activeFarm.length && currentNetwork) {
       getRelvantFarm(tokenId);
+=======
+  }, [activeTabNew, ownerNftlist, contractNftlist]);
+
+  useEffect(() => {
+    if (activeTabNew == 2 && tokenId && activeFarm.length && currentNetwork) {
+      getRelvantFarm();
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
     }
   }, [tokenId, activeFarm, currentNetwork, activeTabNew]);
 
@@ -305,6 +335,10 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
   };
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
   return (
     <>
       <div
@@ -383,14 +417,24 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                             htmlFor=""
                             className="form-label    px-2 z-10 text-white"
                           >
+<<<<<<< HEAD
                             {ownerNftLoading && !singleStakeTokenIds.length
                               ? "NFT Loading..."
                               : !singleStakeTokenIds.length
+=======
+                            {ownerNftLoading && !tokenIds.length
+                              ? "NFT Loading..."
+                              : !tokenIds.length
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
                                 ? "No Nft Found"
                                 : "Select NFT Token Id"}
                           </label>
 
+<<<<<<< HEAD
                           {!singleStakeTokenIds.length ? (
+=======
+                          {!tokenIds.length ? (
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
                             ""
                           ) : (
                             <>
@@ -398,10 +442,17 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                                 <Select
                                   classNamePrefix="goblin"
                                   // menuIsOpen
+<<<<<<< HEAD
                                   value={singleStakeTokenIds.find(
                                     (data) => data.value == tokenId
                                   )|| null}
                                   options={singleStakeTokenIds}
+=======
+                                  value={tokenIds.find(
+                                    (data) => data.value == tokenId
+                                  )}
+                                  options={tokenIds}
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
                                   components={{ Option: customOption }}
                                   menuPortalTarget={document.body}
                                   onChange={handleChange}
@@ -417,7 +468,11 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                       <div className="col-span-12">
                         <button
                           type="submit"
+<<<<<<< HEAD
                           disabled={ownerNftLoading || loading || !singleStakeTokenIds.length}
+=======
+                          disabled={ownerNftLoading || loading || !tokenIds.length}
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
                           className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                         >
                           {loading ? (
@@ -457,14 +512,24 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                             htmlFor=""
                             className="form-label    px-2 z-10 text-white"
                           >
+<<<<<<< HEAD
                             {contractNftLoading && !multiStakeTokenIds.length
                               ? "NFT Loading..."
                               : !multiStakeTokenIds.length
+=======
+                            {contractNftLoading && !tokenIds.length
+                              ? "NFT Loading..."
+                              : !tokenIds.length
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
                                 ? "No Nft Found"
                                 : "Select NFT Token Id"}
                           </label>
 
+<<<<<<< HEAD
                           {!multiStakeTokenIds.length ? (
+=======
+                          {!tokenIds.length ? (
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
                             ""
                           ) : (
                             <>
@@ -472,6 +537,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                                 <Select
                                   classNamePrefix="goblin"
                                   // menuIsOpen
+<<<<<<< HEAD
                                   value={multiStakeTokenIds.find(
                                     (data) => data.value == tokenId
                                   ) || null}
@@ -480,6 +546,15 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                                   menuPortalTarget={document.body}
                                   onChange={handleChange}
                                   isClearable
+=======
+                                  value={tokenIds.find(
+                                    (data) => data.value == tokenId
+                                  )}
+                                  options={tokenIds}
+                                  components={{ Option: customOption }}
+                                  menuPortalTarget={document.body}
+                                  onChange={handleChange}
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
                                 />
                               </div>
                             </>
@@ -498,7 +573,11 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                       <div className="col-span-12">
                         <button
                           type="submit"
+<<<<<<< HEAD
                           disabled={contractNftLoading || loading || !multiStakeTokenIds.length}
+=======
+                          disabled={contractNftLoading || loading || !tokenIds.length}
+>>>>>>> 9144b5f1df0f65e95a381a2cb03fdc9ae524f238
                           className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                         >
                           {loading ? (

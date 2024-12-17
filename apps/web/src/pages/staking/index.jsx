@@ -53,7 +53,6 @@ const Staking = () => {
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       let detail = await web3.getDetailInfo();
 
-
       let data = await web3.getTokenBalance(
         currentNetwork?.chainId === 56
           ? "0x701ACA29AE0F5d24555f1E8A6Cf007541291d110" // BSC

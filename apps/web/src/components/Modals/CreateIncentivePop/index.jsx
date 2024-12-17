@@ -289,7 +289,6 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                         required
                       />
 
-
                       <button
                         type="button"
                         className="absolute icn right-2 top-1/2 transform -translate-y-1/2 text-gray-500" // Positioned inside input

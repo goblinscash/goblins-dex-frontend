@@ -102,7 +102,6 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim,setActiv
     }
   };
 
-
   const loadTokenIds = useDebounce(async () => {
     if (isRestake || isClaim) return;
 

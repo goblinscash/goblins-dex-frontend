@@ -693,7 +693,6 @@ function AddLiquidity() {
 
               {!hasExistingPosition && (
                 <>
-
                   <DynamicSection gap="md" disabled={!feeAmount || invalidPool}>
                     <RowBetween>
                       <ThemedText.DeprecatedLabel>
@@ -868,7 +867,6 @@ function AddLiquidity() {
                       </AutoColumn>
                     )}
                   </DynamicSection>
-
                 </>
               )}
               <div>
