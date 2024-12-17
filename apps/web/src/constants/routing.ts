@@ -2,6 +2,8 @@
 import { ChainId, Currency, Token, WETH9 } from '@uniswap/sdk-core'
 
 import {
+  AERO_BCH,
+  AERO_BASE,
   ARB,
   BB_ETH,
   BB_BCH,
@@ -64,6 +66,7 @@ import {
   SHIB_BSC, //SHIB adding
   BONK_BSC, //Bonk
   GOB_BSC,
+  AERO_BSC,
   SPX_BCH, HERRY_BCH, MOG_BCH, Neiro_BCH, DEGEN_BCH,
   WBNB,
   GOB_BASE,
@@ -152,7 +155,7 @@ export const COMMON_BASES: ChainCurrencyList = {
   [ChainId.CELO]: [nativeOnChain(ChainId.CELO), CEUR_CELO, CUSD_CELO, PORTAL_ETH_CELO, PORTAL_USDC_CELO, WBTC_CELO],
   [ChainId.CELO_ALFAJORES]: [nativeOnChain(ChainId.CELO_ALFAJORES), CUSD_CELO_ALFAJORES, CEUR_CELO_ALFAJORES],
 
-  [ChainId.BNB]: [nativeOnChain(ChainId.BNB), WBNB, DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC, FLOKI_BSC, PEPE_BSC, SHIB_BSC, BONK_BSC, GOB_BSC],
+  [ChainId.BNB]: [nativeOnChain(ChainId.BNB), WBNB, DAI_BSC, USDC_BSC, USDT_BSC, BCH_BSC, DOGE_BSC, FLOKI_BSC, PEPE_BSC, SHIB_BSC, BONK_BSC, GOB_BSC, AERO_BSC],
 
 
   // Base chain
@@ -166,7 +169,8 @@ export const COMMON_BASES: ChainCurrencyList = {
     NEIRO_BASE,
     MOG_BASE,
     BITCOIN_BASE,
-    SPX_BASE
+    SPX_BASE,
+    AERO_BASE
   ],
 
   [ChainId.AVALANCHE]: [
@@ -180,7 +184,7 @@ export const COMMON_BASES: ChainCurrencyList = {
     nativeOnChain(ChainId.SMARTBCH),
     WRAPPED_NATIVE_CURRENCY[ChainId.SMARTBCH] as Token,
     USDT_SBCH, BC_BCH, BB_USDC, BB_USDT, BB_ETH, BB_BCH, BB_BTC, GOB, BONK, SHIB, PEPE, DOGE, FLOKI,
-    SPX_BCH, HERRY_BCH, MOG_BCH, Neiro_BCH, DEGEN_BCH, BC_BNB
+    SPX_BCH, HERRY_BCH, MOG_BCH, Neiro_BCH, DEGEN_BCH, BC_BNB, AERO_BCH
   ],
 }
 

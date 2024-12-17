@@ -6,10 +6,6 @@ import { toast } from "react-toastify";
 //css
 import styles from "../staking.module.scss";
 
-// image
-import wbchlogo from "assets/farmingAssets/Images/wbchlogo.png";
-// import logo from "components/Logo/ChainSymbols/sbch.svg";
-
 //hooks && helpers
 import { toCommas } from "helpers/utils";
 import { useWallet } from "hooks/useWallet";
@@ -38,6 +34,12 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
     }
   };
 
+  const logo = {
+    "WBCH" : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04/logo.png",
+    "GOB" : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x56381cB87C8990971f3e9d948939e1a95eA113a3/logo.png",
+    "BCH": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartchain/assets/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf/logo.png"
+  }
+
   return (
     <div className="lg:col-span-4 sm:col-span-6 col-span-12">
       <div
@@ -50,7 +52,7 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
               {toCommas(Number(details?.earnedAmount || 0).toFixed(4)) + " "}
               {details?.rewardSymbol ? details.rewardSymbol : ""}
               <img
-                src={details?.rewardSymbol === "WBCH" ? wbchlogo : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F/logo.png"}
+                src={logo[details?.rewardSymbol]}
                 height={100}
                 className="max-w-full flex-shrink-0 object-contain ms-2"
                 width={100}
@@ -64,7 +66,7 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
         <div className="contentBody lg:px-4 w-full">
           <div className="claimInput mt-4 my-2 text-center">
             <h6 className="m-0 font-extrabold py-2 text-lg ">APR: </h6>
-            <h6 className="m-0 font-extrabold py-2 text-lg ">{apr || 0}%</h6>
+            <h6 className="m-0 font-extrabold py-2 text-lg ">{isNaN(apr) ? 0 : apr}%</h6>
           </div>
 
           <div className="btnWrpper text-center mt-3">

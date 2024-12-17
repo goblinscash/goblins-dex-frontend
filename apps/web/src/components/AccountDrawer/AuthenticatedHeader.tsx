@@ -223,6 +223,7 @@ export default function AuthenticatedHeader({ account, openSettings }: { account
   const percentChange = portfolio?.tokensTotalDenominatedValueChange?.percentage?.value
   const [showDisconnectConfirm, setShowDisconnectConfirm] = useState(false)
 
+
   return (
     <AuthenticatedHeaderWrapper>
       <HeaderWrapper>

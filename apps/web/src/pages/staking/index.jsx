@@ -27,7 +27,7 @@ import { useWallet } from "hooks/useWallet";
 import MigrationPop from "components/Modals/MigrationPop";
 import { createPortal } from "react-dom";
 import styles from "./staking.module.scss";
-import { getTokenUSDPrice } from "graphQl/requests";
+import { getGobUSDPrice, getTokenUSDPrice } from "graphQl/requests";
 
 
 
@@ -62,7 +62,6 @@ const Staking = () => {
               ? "0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3" // Base
               : "" // Fallback (optional)
       );
-
       setDetails({
         ...detail,
         unStakedAmountInDollar:
@@ -71,7 +70,7 @@ const Staking = () => {
         balanceInDollar: detail.balance * Number(price.GOBInPrice),
         sGob: data.balance,
       });
-
+      // await getAPR(detail.totalSupply, price.WBCHInPrice, price.GOBInPrice);
       setLoading(false);
     } catch (error) {
       console.log(error, "<===err");
@@ -83,45 +82,38 @@ const Staking = () => {
     setMigration(!migration);
   };
 
-  const getAPR = async (totalSupply, BCHPrice, GOBPrice) => {
+  // const getAPR = async (totalSupply, BCHPrice, GOBPrice) => {
+  //   try {
+  //     const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+  //     let getApr = await web3.getAPR(totalSupply, BCHPrice, GOBPrice);
+  //     setApr(getApr);
+  //   } catch (error) {
+  //     setLoading(false);
+  //   }
+  // };
+
+  const getUsdPrice = async () => {
     try {
-      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      let getApr = await web3.getAPR(totalSupply, BCHPrice, GOBPrice);
-      setApr(getApr);
-    } catch (error) {
-      setLoading(false);
-    }
-  };
-
-  const getUsdPrice = async (GobAddress= "0x56381cb87c8990971f3e9d948939e1a95ea113a3") => {
-    try {
-      
-      const _tokenUSDPrice = getTokenUSDPrice(priceGraphQl[wallet.chainId])
-      const GobPrice = await _tokenUSDPrice(GOBAddress[wallet.chainId])
-      const WBCHPrice = await _tokenUSDPrice(WBCHAddress[wallet.chainId])
-
-
-      
-      console.log(GobPrice,WBCHPrice, "<====GobPrice")
-
-
-
-
+      setPrice({})
+      setApr(0)
+      // const _tokenUSDPrice = getTokenUSDPrice(priceGraphQl[wallet.chainId])
+      const price = await getGobUSDPrice(wallet.chainId)
+      // const WBCHPrice = await _tokenUSDPrice(WBCHAddress[wallet.chainId])
+      setApr(price?.apr)
       setPrice({
-        GOBInPrice: Number(GobPrice || 0).toFixed(2),
-        WBCHInPrice: Number(WBCHPrice || 0).toFixed(2),
+        GOBInPrice: price?.gobPrice || 0,
+        WBCHInPrice: price?.rewardTokenPrice || 0,
       });
     } catch (error) {
-
       console.log(error, "<====err")
     }
   };
 
   useEffect(() => {
-    if (details.stakeSymbol && price.GOBInPrice && price.WBCHInPrice) {
-      getAPR(details.totalSupply, price.WBCHInPrice, price.GOBInPrice);
+    if (wallet.chainId) {
+      getUsdPrice();
     }
-  }, [details, price]);
+  }, [wallet.chainId]);
 
   useEffect(() => {
     if (
@@ -134,15 +126,16 @@ const Staking = () => {
     }
   }, [wallet, currentNetwork, price]);
 
-  useEffect(() => {
-    getUsdPrice();
-  }, [wallet.chainId]);
+
+
 
   const swapLink = {
     56: "/#/swap?inputCurrency=0x8ff795a6f4d97e7887c79bea79aba5cc76444adf&outputCurrency=0x701aca29ae0f5d24555f1e8a6cf007541291d110&chain=bsc",
     8453: "/#/swap?inputCurrency=0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F&outputCurrency=0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3&chain=base",
     10000: "/#/swap?inputCurrency=0xBc2F884680c95A02cea099dA2F524b366d9028Ba&outputCurrency=0x56381cB87C8990971f3e9d948939e1a95eA113a3&chain=sbch"
   }
+
+  console.log(price, "priceprice")
 
   return (
     <>

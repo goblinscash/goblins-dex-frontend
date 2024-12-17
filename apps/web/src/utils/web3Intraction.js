@@ -14,7 +14,7 @@ import { makeByteData, makeByteDataForV3, toFixedCustm } from "../helpers/utils"
 class Web3Intraction {
   constructor(currentNetwork, provider) {
     if (provider || window.ethereum) {
-  
+
       this.PROVIDER = provider;
       this.SIGNER = this.PROVIDER.getSigner();
     } else if (currentNetwork) {
@@ -1291,11 +1291,10 @@ class Web3Intraction {
         );
 
         let getStakingContract = await contract.stakingToken();
-
         const bscInstance = this.contractInstance(
           JSON.stringify(TokenABI),
           "0x701ACA29AE0F5d24555f1E8A6Cf007541291d110",
-          "https://bsc.drpc.org"
+          "https://bsc-dataseed.binance.org/"
         )
 
         let bscSupply = 0
@@ -1436,7 +1435,7 @@ class Web3Intraction {
 
         const secondsInAYear = 365 * 24 * 60 * 60;
 
-        const apr =
+        const apr = 
           ((rewardRate * WBCHPrice * secondsInAYear) /
             (totalSupply * GOBPrice)) *
           100;

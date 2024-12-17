@@ -74,6 +74,7 @@ export const NEIRO_BASE = new Token(ChainId.BASE, '0x5Ca35eBC4f25B042d2cAE75914c
 export const MOG_BASE = new Token(ChainId.BASE, '0x2Da56AcB9Ea78330f947bD57C54119Debda7AF71', 18, 'Mog', 'Mog')
 export const BITCOIN_BASE = new Token(ChainId.BASE, '0x2a06A17CBC6d0032Cac2c6696DA90f29D39a1a29', 8, 'BITCOIN', 'BITCOIN')
 export const SPX_BASE = new Token(ChainId.BASE, '0x50dA645f148798F68EF2d7dB7C1CB22A6819bb2C', 8, 'SPX', 'SPX')
+export const AERO_BASE = new Token(ChainId.BASE, '0x940181a94A35A4569E4529A3CDfB74e38FD98631', 18, 'AERO', 'AERO')
 
 
 
@@ -237,6 +238,7 @@ export const PEPE_BSC = new Token(ChainId.BNB, '0x25d887Ce7a35172C62FeBFD67a1856
 export const SHIB_BSC = new Token(ChainId.BNB, '0x2859e4544C4bB03966803b044A93563Bd2D0DD4D', 18, 'SHIB', 'SHIB')
 export const BONK_BSC = new Token(ChainId.BNB, '0xA697e272a73744b343528C3Bc4702F2565b2F422', 5, 'BONK', 'BONK')
 export const GOB_BSC = new Token(ChainId.BNB, '0x701ACA29AE0F5d24555f1E8A6Cf007541291d110', 9, 'GOB', 'GOB')
+export const AERO_BSC = new Token(ChainId.BNB, '0x76d7062a70F5c129B6180BaAb2607c788A962B1b', 18, 'AERO', 'AERO')
 
 export const WBNB =new Token(ChainId.BNB, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB')
 
@@ -296,6 +298,8 @@ export const USDT_SBCH = new Token(
   'bcUSDT',
   'bcUSDT'
 )
+export const AERO_BCH = new Token(ChainId.SMARTBCH, '0xc993Af7fa109E3DD17347c7cE612a5Ed848F4B74', 18, 'AERO', 'AERO')
+
 export const BC_BNB = new Token(ChainId.SMARTBCH, '0xBc7b858B5694D485AD17c89675649cE44De21BEa', 18, 'bcBNB', 'bcBNB')
 
 export const BC_BCH = new Token(
@@ -440,8 +444,6 @@ export const DEGEN_BCH = new Token(
   'DEGEN',
   'DEGEN'
 )
-
-
 
 
 

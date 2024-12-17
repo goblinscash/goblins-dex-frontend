@@ -23,10 +23,24 @@ export function getTokenUSDPrice(subgraphUrl) {
 
       const { data } = response.data;
 
-
-      return data?.token?.tokenDayData[0]?.open
+      return data?.token?.tokenDayData[0]?.close
     } catch (error) {
       throw new Error(`Error fetching data: ${error.message}`);
     }
   };
+}
+
+export async function getGobUSDPrice(chainId) {
+    try {
+      const apiUrl = `${process.env.REACT_APP_API_BASE_URL}/price/gob`;
+        const params = { chainId }; 
+
+        const response = await axios.get(apiUrl, { params });
+
+      const { data } = response.data;
+
+      return data
+    } catch (error) {
+      throw new Error(`Error fetching data: ${error.message}`);
+    }
 }
