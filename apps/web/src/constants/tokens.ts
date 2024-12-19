@@ -75,6 +75,7 @@ export const MOG_BASE = new Token(ChainId.BASE, '0x2Da56AcB9Ea78330f947bD57C5411
 export const BITCOIN_BASE = new Token(ChainId.BASE, '0x2a06A17CBC6d0032Cac2c6696DA90f29D39a1a29', 8, 'BITCOIN', 'BITCOIN')
 export const SPX_BASE = new Token(ChainId.BASE, '0x50dA645f148798F68EF2d7dB7C1CB22A6819bb2C', 8, 'SPX', 'SPX')
 export const AERO_BASE = new Token(ChainId.BASE, '0x940181a94A35A4569E4529A3CDfB74e38FD98631', 18, 'AERO', 'AERO')
+export const VIRTUAL_BASE = new Token(ChainId.BASE, '0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b', 18, 'VIRTUAL', 'Virtual Protocol')
 
 
 
