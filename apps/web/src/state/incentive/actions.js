@@ -1,14 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as URL from "helpers/url_helper";
-import { post } from "helpers/api_helper";
+import { post, get } from "helpers/api_helper";
 
 
 
 export const farmList = createAsyncThunk("farmList", async (payload, Thunk) => {
-  console.log(payload.chainId, "payload")
   try {
-    let response = await post(URL.FARM_LIST, payload);
-    console.log(response, "+++++++++++++++++++++++")
+    let response = await get(`${URL.FARM_LIST}?chainId=${payload.chainId}&isEnded=${payload.isEnded}`, payload);
     return response.data;
   } catch (error) {
     callback && callback(error);
@@ -21,7 +19,8 @@ export const myFarmList = createAsyncThunk(
   "myFarmList",
   async (payload, Thunk) => {
     try {
-      let response = await post(URL.MY_FARM_LIST, payload);
+      console.log(payload, "payloadpayload")
+      let response = await get(`${URL.MY_FARM_LIST}?chainId=${payload.chainId}&wallet=${payload.walletAddress}`, payload);
       return response.data;
     } catch (error) {
       callback && callback(error);
@@ -64,6 +63,22 @@ export const updateFarm = createAsyncThunk(
   async ({ data, callback }, Thunk) => {
     try {
       let response = await post(URL.UPDATE_FARM, data);
+
+      callback && callback();
+      return response.data;
+    } catch (error) {
+      callback && callback(error);
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);
+
+export const createFarm = createAsyncThunk(
+  "createFarm",
+  async ({ data, callback }, Thunk) => {
+    try {
+      let response = await post(URL.CREATE_FARM, data);
 
       callback && callback();
       return response.data;

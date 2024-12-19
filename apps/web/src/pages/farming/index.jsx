@@ -46,6 +46,7 @@ const Dashboard = () => {
     { id: 3, name: "Ended", component: "ASdf" },
   ];
 
+ 
   const wallet = useWallet();
   const [search, setSearch] = useState("");
   const [incentiveForm, setIncentiveForm] = useState("");
@@ -209,7 +210,6 @@ const Dashboard = () => {
         token1Symbol.toLowerCase().includes(search.toLowerCase())
       );
     });
-    console.log("Filtered data length:", filteredData.length);
 
     if (activeTab === 2) {
       setFilteredMyFarm(filteredData);
