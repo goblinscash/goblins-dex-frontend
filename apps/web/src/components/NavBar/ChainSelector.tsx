@@ -32,7 +32,7 @@ const ChainSelectorWrapper = styled.div`
   position: relative;
 `
 
-const ChainSelectorButton = styled(BaseButton)<{ isOpen: boolean }>`
+const ChainSelectorButton = styled(BaseButton) <{ isOpen: boolean }>`
   display: flex;
   background: ${({ theme, isOpen }) => (isOpen ? theme.accent2 : 'none')};
   padding: 10px 8px;
@@ -62,9 +62,11 @@ function useWalletSupportedChains(): ChainId[] {
 }
 
 export const ChainSelector = ({ leftAlign }: { leftAlign?: boolean }) => {
-  const { chainId } = useWeb3React()
+  let { chainId } = useWeb3React()
+  //@ts-ignore
+ 
 
-  // const chainId = connectedChainId === 1 ? 10000 : connectedChainId
+  chainId =  chainId == 1 ? 10000 : chainId
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const isMobile = useIsMobile()
 

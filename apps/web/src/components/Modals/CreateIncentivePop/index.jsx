@@ -162,18 +162,18 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
       let startTimeStamp = convertToTimestamp(fields.startDate);
       let endTimeStamp = convertToTimestamp(fields.endDate);
 
-      // await web3.createIncentive(
-      //   [
-      //     fields.rewardAddress,
-      //     fields.incentiveAddress,
-      //     startTimeStamp,
-      //     endTimeStamp,
-      //     fields.refundeeAddress,
-      //   ],
-      //   fields.rewardAmount,
-      //   Number(fields.minimumWidth) * 100,
-      //   fields.rewardAddress
-      // );
+      await web3.createIncentive(
+        [
+          fields.rewardAddress,
+          fields.incentiveAddress,
+          startTimeStamp,
+          endTimeStamp,
+          fields.refundeeAddress,
+        ],
+        fields.rewardAmount,
+        Number(fields.minimumWidth) * 100,
+        fields.rewardAddress
+      );
 
       // Dispatch the create farm
       dispatch(

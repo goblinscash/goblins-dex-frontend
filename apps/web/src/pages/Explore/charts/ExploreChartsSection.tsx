@@ -189,6 +189,8 @@ function TVLChartSection({ data, totalTvl, title }: { data: StackedLineData[], t
     return <MinimalStatDisplay title={<>Goblins TVL</>} value={currentTVL} time={<Trans>All time</Trans>} />
   }
 
+  console.log(totalTvl, "totalTvl")
+
   return (
     <SectionContainer>
 
@@ -230,18 +232,15 @@ function MinimalStatDisplay({ title, value, time }: { title: ReactNode; value: n
 export function ExploreChartsSection() {
   const currNetwork = localStorage.getItem('currentNetwork');
   //@ts-ignore
-  let _chain = JSON.parse(currNetwork)?.chainId
+  let _chain = currNetwork == null ? 10000 : JSON.parse(currNetwork)?.chainId
 
   const wallet = useWallet()
   const [tab, setTab] = useState(1)
   const [usdPrice, setUsdPrice] = useState<any>(0)
   const { transactions } = useAppSelector((state) => state.Incentive)
-  // const chainName = validateUrlChainParam(useParams<{ chainName?: string }>().chainName)
-  // const chainId = supportedChainIdFromGQLChain(chainName)
 
   const [chainId, setChainId] = useState<number>(_chain);
   const [chainName, setChainName] = useState<string>("SMARTBCH");
-
 
   const ChainInfo: Record<number, string> = {
     56: "BNB",
@@ -371,7 +370,7 @@ export function ExploreChartsSection() {
       <ChartsContainer>
         <div className='tabContainer'>
           {
-            (chainId === 10000 || chainId === 56) &&
+            (chainId === 10000 || chainId === 56 || chainId === 8453) &&
             <div className='tabNav'>
               <button onClick={() => handleTab(1)} className={`${tab === 2 ? "active" : ""}`}>
                 Pool

@@ -82,7 +82,7 @@ export type PoolTableSortState = {
 export function TopPoolTable() {
   const currNetwork = localStorage.getItem('currentNetwork');
   //@ts-ignore
-  let _chain = JSON.parse(currNetwork)?.chainId
+  let _chain = currNetwork == null ? 10000 : JSON.parse(currNetwork)?.chainId
   const [chainId, setChainId] = useState(_chain);
   const wallet = useWallet()
 
