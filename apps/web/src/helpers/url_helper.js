@@ -14,6 +14,8 @@ export const NFT_LIST = "/nft/ownerNft";
 export const CREATE_FARM = "/farm/create"
 export const FARM_LIST = "/farm/list";
 export const MY_FARM_LIST = "/farm/myfarm";
+export const DEPOSIT_FARM = "/farm/deposit"
+export const DELETE_FARM =  "/farm/delete"
 
 
 

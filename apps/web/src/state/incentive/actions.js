@@ -48,7 +48,7 @@ export const deletedFarmList = createAsyncThunk(
   "deletedFarmList",
   async (payload, Thunk) => {
     try {
-      let response = await post(URL.DELETED_FARM_LIST, payload);
+      let response = await post(URL.DELETE_FARM, payload);
       return response.data;
     } catch (error) {
       callback && callback(error);
@@ -62,7 +62,8 @@ export const updateFarm = createAsyncThunk(
   "updateFarm",
   async ({ data, callback }, Thunk) => {
     try {
-      let response = await post(URL.UPDATE_FARM, data);
+      console.log(data, "data")
+      let response = await post(URL.DEPOSIT_FARM, data);
 
       callback && callback();
       return response.data;
@@ -79,6 +80,22 @@ export const createFarm = createAsyncThunk(
   async ({ data, callback }, Thunk) => {
     try {
       let response = await post(URL.CREATE_FARM, data);
+
+      callback && callback();
+      return response.data;
+    } catch (error) {
+      callback && callback(error);
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);
+
+export const endFarm = createAsyncThunk(
+  "createFarm",
+  async ({ data, callback }, Thunk) => {
+    try {
+      let response = await post(URL.DELETE_FARM, data);
 
       callback && callback();
       return response.data;

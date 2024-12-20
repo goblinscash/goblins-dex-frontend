@@ -7,7 +7,7 @@ import styles from "./StakePop.module.scss";
 
 //helpers
 import { toFixedCustm } from "helpers/utils";
-import { updateFarm } from "state/action";
+import { deletedFarmList, updateFarm } from "state/action";
 import useDebounce from "hooks/useDebounceFunction";
 import {useWallet} from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
@@ -37,13 +37,11 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim,setActiv
       );
 
       dispatch(
-        updateFarm({
-          data: {
+        deletedFarmList({
             chainId: wallet.chainId,
             type: "End",
-            walletAddress: wallet.address,
-            incentiveId: detail.incentiveId,
-          },
+            wallet: wallet.address,
+            farmId: detail.incentiveId,
         })
       );
 

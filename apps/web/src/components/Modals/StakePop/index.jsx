@@ -101,8 +101,8 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
             chainId: wallet.chainId,
             type: "Deposit",
             tokenId: tokenId,
-            walletAddress: wallet.address,
-            incentiveId: detail.incentiveId,
+            wallet: wallet.address,
+            farmId: detail.incentiveId,
             isMutliStake: false,
           },
         })
