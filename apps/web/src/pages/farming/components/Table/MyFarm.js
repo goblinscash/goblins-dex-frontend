@@ -41,7 +41,7 @@ function MyFarm({
           acc[token.address.toLowerCase()] = token.logoURI;
           return acc;
         }, {}))
-        
+
       } else {
         return null
       }
@@ -71,7 +71,7 @@ function MyFarm({
     } catch (error) {
       console.log(error, "<====error");
       toast.error(error);
-    }finally{
+    } finally {
       setInternalLoading(false)
 
     }
@@ -114,7 +114,7 @@ function MyFarm({
 
         })
       );
-      
+
       setActiveTab(1)
       // handleConfirm();
       myFarmload();
@@ -127,6 +127,24 @@ function MyFarm({
   };
 
 
+  const customLogo = (symbol) => {
+    console.log(symbol, "symbodsddl")
+    return (
+      <div
+        className="inline-flex items-center justify-center rounded-pill p-1"
+        style={{
+          height: 30,
+          width: 30,
+          background: "#00ff00",
+          fontSize: 10,
+          color: "#000",
+          fontWeight: 700
+        }}
+      >
+        <p classname="m-0">{symbol}</p>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -266,7 +284,7 @@ function MyFarm({
                   </div>
                 </td>
               </tr>
-            ) : loading  ? (
+            ) : loading ? (
               <tr>
                 <td
                   className="py-3 px-6 text-left border-b border-gray-600 transparent"
@@ -312,156 +330,154 @@ function MyFarm({
               incentiveIds?.length > 0 &&
               incentiveIds.map((item, key) => {
 
-                return(
-                <tr
-                  key={key}
-                  className="border-b border-gray-200 hover:bg-gray-100 cursor-pointer"
-                >
-                  <td
-                    createIncentive
-                    className="py-3 px-6 text-left border-b border-gray-600 transparent"
-                    style={{ background: "#002628" }}
+                return (
+                  <tr
+                    key={key}
+                    className="border-b border-gray-200 hover:bg-gray-100 cursor-pointer"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="imgWrp flex-shrink-0 flex items-center">
-                      {getSymbols[item?.getPoolDetail?.token0Address] ? (
-                        <img
-                          src={getSymbols[item?.getPoolDetail?.token0Address]}
-                          alt=""
-                          className="rounded-pill max-w-full object-cover shadow-sm"
-                          height={1000}
-                          width={1000}
-                          style={{ height: 30, width: 30 }}
-                        />
-                      ): tokenList&& tokenList[item?.getPoolDetail?.token0Address] ? (
-                        <img
-                          src={tokenList[item?.getPoolDetail?.token0Address]}
-                          alt=""
-                          className="rounded-pill max-w-full object-cover shadow-sm"
-                          height={1000}
-                          width={1000}
-                          style={{ height: 30, width: 30 }}
-                        />
-                      ) : (
-                        item?.getPoolDetail?.token0Symbol + "/ "
-                      )}
+                    <td
+                      createIncentive
+                      className="py-3 px-6 text-left border-b border-gray-600 transparent"
+                      style={{ background: "#002628" }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <div className="imgWrp flex-shrink-0 flex items-center">
+                          
+                          {getSymbols[item?.getPoolDetail?.token0Address] ? (
+                            <img
+                              src={getSymbols[item?.getPoolDetail?.token0Address]}
+                              alt=""
+                              className="rounded-pill max-w-full object-cover shadow-sm"
+                              height={1000}
+                              width={1000}
+                              style={{ height: 30, width: 30 }}
+                            />
+                          ) : tokenList && tokenList[item?.getPoolDetail?.token0Address] ? (
+                            <img
+                              src={tokenList[item?.getPoolDetail?.token0Address]}
+                              alt=""
+                              className="rounded-pill max-w-full object-cover shadow-sm"
+                              height={1000}
+                              width={1000}
+                              style={{ height: 30, width: 30 }}
+                            />
+                          ) : (
+                            customLogo(item?.getPoolDetail?.token0Symbol?.substring(0, 3))
+                          )}
 
-                        {getSymbols[item?.getPoolDetail?.token1Address] ? (
-                          <img
-                            src={getSymbols[item?.getPoolDetail?.token1Address]}
-                            alt=""
-                            className="rounded-pill max-w-full object-cover shadow-sm"
-                            height={1000}
-                            width={1000}
-                            style={{ height: 30, width: 30, marginLeft: -10 }}
-                          />
-                        ) : tokenList && tokenList[item?.getPoolDetail?.token1Address.toLowerCase()] ? (
-                          <img
-                            src={tokenList[item?.getPoolDetail?.token1Address.toLowerCase()]}
-                            alt=""
-                            className="rounded-pill max-w-full object-cover shadow-sm"
-                            height={1000}
-                            width={1000}
-                            style={{ height: 30, width: 30 }}
-                          />
-                        ) : (
+                          {getSymbols[item?.getPoolDetail?.token1Address] ? (
+                            <img
+                              src={getSymbols[item?.getPoolDetail?.token1Address]}
+                              alt=""
+                              className="rounded-pill max-w-full object-cover shadow-sm"
+                              height={1000}
+                              width={1000}
+                              style={{ height: 30, width: 30, marginLeft: -10 }}
+                            />
+                          ) : tokenList && tokenList[item?.getPoolDetail?.token1Address.toLowerCase()] ? (
+                            <img
+                              src={tokenList[item?.getPoolDetail?.token1Address.toLowerCase()]}
+                              alt=""
+                              className="rounded-pill max-w-full object-cover shadow-sm"
+                              height={1000}
+                              width={1000}
+                              style={{ height: 30, width: 30 }}
+                            />
+                          ) : (
+                            customLogo(item?.getPoolDetail?.token1Symbol?.substring(0, 3))
+                          )}
 
-                          <>
-
-                            <p>{item?.getPoolDetail?.token1Symbol}</p>
-                          </>
-                        )}
-
-                        <span className="ml-2">
-                          {" "}
-                          {item?.getPoolDetail?.token0Symbol +
-                            " / " +
-                            item?.getPoolDetail?.token1Symbol}
-                        </span>
+                          <span className="ml-2">
+                            {" "}
+                            {item?.getPoolDetail?.token0Symbol +
+                              " / " +
+                              item?.getPoolDetail?.token1Symbol}
+                          </span>
+                        </div>
+                        <div className="content">
+                          <p className="m-0 ">
+                            {" "}
+                            {Number(item.feeTier).toFixed(2)} %
+                          </p>
+                        </div>
                       </div>
-                      <div className="content">
-                        <p className="m-0 ">
-                          {" "}
-                          {Number(item.feeTier).toFixed(2)} %
-                        </p>
-                      </div>
-                    </div>
-                  </td>
+                    </td>
 
-                  <td
-                    className="py-3 px-6 text-left border-b border-gray-600 transparent"
-                    style={{ background: "#002628" }}
-                  >
-                    <p className={` m-0  capitalize`}>
-                      {" "}
-                      {toFixedCustm(item?.rewardInfo?.reward) + " " + item.rewardSymbol}{" "}
-                    </p>
-                  </td>
-                  <td
-                    className="py-3 px-6 text-left border-b border-gray-600 transparent"
-                    style={{ background: "#002628" }}
-                  >
-                    <a href={`/#/pools/${item.tokenId}`} target="_blank">
-                      <p className={` m-0  capitalize`}>{item.tokenId} </p>
-                    </a>
-                  </td>
+                    <td
+                      className="py-3 px-6 text-left border-b border-gray-600 transparent"
+                      style={{ background: "#002628" }}
+                    >
+                      <p className={` m-0  capitalize`}>
+                        {" "}
+                        {toFixedCustm(item?.rewardInfo?.reward) + " " + item.rewardSymbol}{" "}
+                      </p>
+                    </td>
+                    <td
+                      className="py-3 px-6 text-left border-b border-gray-600 transparent"
+                      style={{ background: "#002628" }}
+                    >
+                      <a href={`/#/pools/${item.tokenId}`} target="_blank">
+                        <p className={` m-0  capitalize`}>{item.tokenId} </p>
+                      </a>
+                    </td>
 
-                  <td
-                    className="py-3 px-6 text-left border-b border-gray-600 transparent"
-                    style={{ background: "#002628" }}
-                  >
-                    <p className={`m-0 capitalize text-white`}>
-                      {moment
-                        .unix(item.key?.startTime)
-                        .format("YYYY-MM-DD HH:mm")}
-                    </p>
-                  </td>
-                  <td
-                    className="py-3 px-6 text-left border-b border-gray-600 transparent"
-                    style={{ background: "#002628" }}
-                  >
-                    <p className={` m-0  capitalize text-white`}>
-                      {moment
-                        .unix(item.key?.endTime)
-                        .format("YYYY-MM-DD HH:mm")}
-                    </p>
-                  </td>
+                    <td
+                      className="py-3 px-6 text-left border-b border-gray-600 transparent"
+                      style={{ background: "#002628" }}
+                    >
+                      <p className={`m-0 capitalize text-white`}>
+                        {moment
+                          .unix(item.key?.startTime)
+                          .format("YYYY-MM-DD HH:mm")}
+                      </p>
+                    </td>
+                    <td
+                      className="py-3 px-6 text-left border-b border-gray-600 transparent"
+                      style={{ background: "#002628" }}
+                    >
+                      <p className={` m-0  capitalize text-white`}>
+                        {moment
+                          .unix(item.key?.endTime)
+                          .format("YYYY-MM-DD HH:mm")}
+                      </p>
+                    </td>
 
-                  {/* ----------Removing confirmation modal---------- */}
-                  <td
-                    colSpan={6}
-                    className="py-3 px-6 text-left border-b border-gray-600 transparent"
-                    style={{ background: "#002628" }}
-                  >
-                    {
-                      <div className="flex items-center">
-                        <p className={`   capitalize mr-2`}>
-                          <button
-                            // onClick={(e) => handleRestake(item, true)}  //previous---
-                            onClick={(e) => handleClaim(e, item)}
-                            className="btn flex items-center commonBtn justify-center rounded"
-                            style={{ background: "#00ff00" }}
-                            disabled={isBlocked || item.rewardInfo?.reward <= 0 || internalLoading}
-                          >
-                            {!internalLoading ? "Claim":"Loading..."}
-                          </button>
-                        </p>
-                        <p className={`   capitalize mr-2`}>
-                          <button
-                            // onClick={(e) => handleUnStake(item, true)} //previous---
-                            onClick={(e) => handleunStake(e, item)}
-                            className="btn flex items-center commonBtn justify-center rounded"
-                            style={{ background: "#00ff00" }}
-                            disabled={isBlocked || item.isUnstaked || internalLoading}
-                          >
-                             {!internalLoading ? "Unstake":"Loading..."}
-                          </button>
-                        </p>
-                      </div>
-                    }
-                  </td>
-                </tr>
-              )})
+                    {/* ----------Removing confirmation modal---------- */}
+                    <td
+                      colSpan={6}
+                      className="py-3 px-6 text-left border-b border-gray-600 transparent"
+                      style={{ background: "#002628" }}
+                    >
+                      {
+                        <div className="flex items-center">
+                          <p className={`   capitalize mr-2`}>
+                            <button
+                              // onClick={(e) => handleRestake(item, true)}  //previous---
+                              onClick={(e) => handleClaim(e, item)}
+                              className="btn flex items-center commonBtn justify-center rounded"
+                              style={{ background: "#00ff00" }}
+                              disabled={isBlocked || item.rewardInfo?.reward <= 0 || internalLoading}
+                            >
+                              {!internalLoading ? "Claim" : "Loading..."}
+                            </button>
+                          </p>
+                          <p className={`   capitalize mr-2`}>
+                            <button
+                              // onClick={(e) => handleUnStake(item, true)} //previous---
+                              onClick={(e) => handleunStake(e, item)}
+                              className="btn flex items-center commonBtn justify-center rounded"
+                              style={{ background: "#00ff00" }}
+                              disabled={isBlocked || item.isUnstaked || internalLoading}
+                            >
+                              {!internalLoading ? "Unstake" : "Loading..."}
+                            </button>
+                          </p>
+                        </div>
+                      }
+                    </td>
+                  </tr>
+                )
+              })
             )}
             {/* Add more rows as needed */}
           </tbody>
