@@ -16,6 +16,7 @@ export const FARM_LIST = "/farm/list";
 export const MY_FARM_LIST = "/farm/myfarm";
 export const DEPOSIT_FARM = "/farm/deposit"
 export const DELETE_FARM =  "/farm/delete"
+export const UNSTAKE_FARM =  "/farm/unstake"
 
 
 

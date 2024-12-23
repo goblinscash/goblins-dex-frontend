@@ -9,7 +9,7 @@ import { getSymbols } from "helpers/constants";
 import { toFixedCustm } from "helpers/utils";
 import Web3Intraction from "utils/web3Intraction";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFarm, withdrawNft } from "state/action";
+import { unstakeFarm, updateFarm, withdrawNft } from "state/action";
 import { toast } from "react-toastify";
 
 function MyFarm({
@@ -95,12 +95,12 @@ function MyFarm({
       );
 
       dispatch(
-        updateFarm({
+        unstakeFarm({
           data: {
             chainId: wallet.chainId,
             type: "Unstake",
-            walletAddress: wallet.address,
-            incentiveId: detail.incentiveId,
+            wallet: wallet.address,
+            farmId: detail._id,
           },
         })
       );

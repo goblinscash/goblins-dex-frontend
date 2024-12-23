@@ -19,7 +19,6 @@ export const myFarmList = createAsyncThunk(
   "myFarmList",
   async (payload, Thunk) => {
     try {
-      console.log(payload, "payloadpayload")
       let response = await get(`${URL.MY_FARM_LIST}?chainId=${payload.chainId}&wallet=${payload.walletAddress}`, payload);
       return response.data;
     } catch (error) {
@@ -35,20 +34,6 @@ export const updateMyFarm = createAsyncThunk(
   async (payload, Thunk) => {
     try {
       let response = await post(URL.UPDATE_MY_FARM, payload);
-      return response.data;
-    } catch (error) {
-      callback && callback(error);
-
-      return Thunk.rejectWithValue(error);
-    }
-  }
-);
-
-export const deletedFarmList = createAsyncThunk(
-  "deletedFarmList",
-  async (payload, Thunk) => {
-    try {
-      let response = await post(URL.DELETE_FARM, payload);
       return response.data;
     } catch (error) {
       callback && callback(error);
@@ -91,6 +76,40 @@ export const createFarm = createAsyncThunk(
   }
 );
 
+
+export const unstakeFarm = createAsyncThunk(
+  "createFarm",
+  async ({ data, callback }, Thunk) => {
+    try {
+      let response = await post(URL.UNSTAKE_FARM, data);
+
+      callback && callback();
+      return response.data;
+    } catch (error) {
+      callback && callback(error);
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);
+
+
+export const deletedFarmList = createAsyncThunk(
+  "deletedFarmList",
+  async (payload, Thunk) => {
+    try {
+      let response = await post(URL.DELETE_FARM, payload);
+      return response.data;
+    } catch (error) {
+      callback && callback(error);
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);
+
+
+
 export const endFarm = createAsyncThunk(
   "createFarm",
   async ({ data, callback }, Thunk) => {
@@ -107,7 +126,6 @@ export const endFarm = createAsyncThunk(
   }
 );
 
-
 export const getStakingtransaction = createAsyncThunk(
   "getStakingtransaction",
   async (payload, Thunk) => {
@@ -116,10 +134,10 @@ export const getStakingtransaction = createAsyncThunk(
         chainId: 10000
       });
 
-   
+
       return response.data;
     } catch (error) {
-   
+
 
       return Thunk.rejectWithValue(error);
     }

@@ -80,11 +80,6 @@ export function useUniversalRouterSwapCallback(
           fee: options.feeOptions,
           flatFee: options.flatFeeOptions,
         })
-        console.log(trade, "+++++",
-          options.permit,
-          options.feeOptions,
-          options.flatFeeOptions,
-          "xyz22222222", "++",value, account, UNIVERSAL_ROUTER_ADDRESS(chainId))
 
         const tx = {
           from: account,
@@ -93,7 +88,6 @@ export function useUniversalRouterSwapCallback(
           // TODO(https://github.com/Uniswap/universal-router-sdk/issues/113): universal-router-sdk returns a non-hexlified value.
           ...(value && !isZero(value) ? { value: toHex(value) } : {}),
         }
-        console.log(tx,"xyz33333333")
 
         let gasEstimate: BigNumber
         try {
