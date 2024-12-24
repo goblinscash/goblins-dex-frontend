@@ -76,7 +76,6 @@ export const createFarm = createAsyncThunk(
   }
 );
 
-
 export const unstakeFarm = createAsyncThunk(
   "createFarm",
   async ({ data, callback }, Thunk) => {
@@ -107,6 +106,39 @@ export const deletedFarmList = createAsyncThunk(
     }
   }
 );
+
+export const multiStake = createAsyncThunk(
+  "updateFarm",
+  async ({ data, callback }, Thunk) => {
+    try {
+      let response = await post(URL.MULTI_STAKE, data);
+
+      callback && callback();
+      return response.data;
+    } catch (error) {
+      callback && callback(error);
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);
+
+export const unstakeMultiFarm = createAsyncThunk(
+  "unstakesFarm",
+  async ({ data, callback }, Thunk) => {
+    try {
+      let response = await post(URL.UNSTAKE_ALL, data);
+
+      callback && callback();
+      return response.data;
+    } catch (error) {
+      callback && callback(error);
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);
+
 
 
 
