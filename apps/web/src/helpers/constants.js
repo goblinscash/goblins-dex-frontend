@@ -212,6 +212,10 @@ export const getSymbols = {
   "0x76d7062a70f5c129b6180baab2607c788a962b1b": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x940181a94A35A4569E4529A3CDfB74e38FD98631/logo.png",
 
   // Base
+  "0x4f9fd6be4a90f2620860d680c0d4d5fb53d1a825": "https://s2.coinmarketcap.com/static/img/coins/64x64/34103.png",
+  "0x1c5bb6156fdf1ca8d8d894ecc0f1981619d2cdba": "https://s3.ap-southeast-1.amazonaws.com/virtualprotocolcdn/name_9ec4ff0111.jpeg",
+  "0x7588880d9c78e81fade7b7e8dc0781e95995a792": "https://s2.coinmarketcap.com/static/img/coins/64x64/34317.png",
+  "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b/logo.png",
   "0x4ed4e862860bed51a9570b96d89af5e1b0efefed": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0xB6B54DDE7282fbcD19Cb1d447dFE425454a831Eb/logo.png",
   "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913/logo.png",
   "0xcdba3e4c5c505f37cfbbb7accf20d57e793568e3": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0xcDBa3E4C5c505F37CfbBB7aCCF20D57e793568E3/logo.png",

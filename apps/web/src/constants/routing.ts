@@ -2,6 +2,7 @@
 import { ChainId, Currency, Token, WETH9 } from '@uniswap/sdk-core'
 
 import {
+  VIRTUAL_BASE,
   AERO_BCH,
   AERO_BASE,
   ARB,
@@ -170,7 +171,8 @@ export const COMMON_BASES: ChainCurrencyList = {
     MOG_BASE,
     BITCOIN_BASE,
     SPX_BASE,
-    AERO_BASE
+    AERO_BASE,
+    VIRTUAL_BASE
   ],
 
   [ChainId.AVALANCHE]: [
