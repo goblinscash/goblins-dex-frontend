@@ -212,6 +212,7 @@ export const getSymbols = {
   "0x76d7062a70f5c129b6180baab2607c788a962b1b": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x940181a94A35A4569E4529A3CDfB74e38FD98631/logo.png",
 
   // Base
+  "0x2a9e9256e0d1ad0f7f9d7c7248cb7e2f06072deb":  "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x2A9e9256E0d1Ad0f7f9d7c7248cb7e2f06072DeB/logo.png",
   "0x4f9fd6be4a90f2620860d680c0d4d5fb53d1a825": "https://s2.coinmarketcap.com/static/img/coins/64x64/34103.png",
   "0x1c5bb6156fdf1ca8d8d894ecc0f1981619d2cdba": "https://s3.ap-southeast-1.amazonaws.com/virtualprotocolcdn/name_9ec4ff0111.jpeg",
   "0x7588880d9c78e81fade7b7e8dc0781e95995a792": "https://s2.coinmarketcap.com/static/img/coins/64x64/34317.png",

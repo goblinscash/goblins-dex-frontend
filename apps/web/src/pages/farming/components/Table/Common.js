@@ -55,6 +55,31 @@ function CommonTable({
 
   // filtering the data which have same pool and rewardtoken address
   const newData = incentiveIds.filter(item => item.key.rewardToken !== item.key.pool);
+
+  const customLogo = (symbol) => {
+    console.log(symbol, "symbodsddl")
+    return (
+      <div
+        className="inline-flex items-center justify-center rounded-pill p-1"
+        style={{
+          height: 30,
+          width: 30,
+          background: "#00ff00",
+          fontSize: 10,
+          color: "#000",
+          fontWeight: 700
+        }}
+      >
+        <p classname="m-0">{symbol}</p>
+      </div>
+    )
+  }
+
+  function shortenTokenString(input) {
+    if (input.length <= 8) return input;
+    return `${input.substring(0, 8)}..`;
+  }
+
   return (
     <div className="overflow-x-auto" style={{ overflow: "auto" }}>
       <table
@@ -265,7 +290,7 @@ function CommonTable({
               //   const [token1Logo] = useTokenLogoSource(item?.getPoolDetail?.token0Address, wallet.chainId, false);
 
 
-                // console.log(item, "<====token1Logo")
+              // console.log(item, "<====token1Logo")
               // }
 
               return (
@@ -280,7 +305,6 @@ function CommonTable({
                   >
                     <div className={`${styles.flexWrp} flex items-center gap-2`}>
                       <div className="imgWrp flex-shrink-0 flex items-center">
-                        {console.log(getSymbols[item?.getPoolDetail?.token0Address], "PPPPPPP", item?.getPoolDetail?.token0Address)}
                         {getSymbols[item?.getPoolDetail?.token0Address] ? (
                           <img
                             src={getSymbols[item?.getPoolDetail?.token0Address]}
@@ -291,7 +315,7 @@ function CommonTable({
                             style={{ height: 30, width: 30 }}
                           />
                         ) : (
-                          item?.getPoolDetail?.token0Symbol + "/ "
+                          customLogo(item?.getPoolDetail?.token0Symbol?.substring(0, 3))
                         )}
                         {getSymbols[item?.getPoolDetail?.token1Address] ? (
                           <img
@@ -303,15 +327,15 @@ function CommonTable({
                             style={{ height: 30, width: 30, marginLeft: -10 }}
                           />
                         ) : (
-                          item?.getPoolDetail?.token1Symbol
+                          customLogo(item?.getPoolDetail?.token1Symbol?.substring(0, 3))
                         )}
                       </div>
                       <div className="">
                         <span className="whitespace-nowrap">
                           {" "}
-                          {item?.getPoolDetail?.token0Symbol +
+                          {shortenTokenString(item?.getPoolDetail?.token0Symbol) +
                             " / " +
-                            item?.getPoolDetail?.token1Symbol}
+                            shortenTokenString(item?.getPoolDetail?.token1Symbol)}
                         </span>
                         <p className="m-0  whitespace-nowrap">
                           {Number(item.feeTier).toFixed(2)} %

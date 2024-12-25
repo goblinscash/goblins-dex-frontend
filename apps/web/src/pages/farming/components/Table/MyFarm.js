@@ -146,6 +146,11 @@ function MyFarm({
     )
   }
 
+  function shortenTokenString(input) {
+    if (input.length <= 8) return input;
+    return `${input.substring(0, 8)}..`;
+  }
+
   return (
     <>
       <div className="py-4 text-right">
@@ -341,8 +346,7 @@ function MyFarm({
                       style={{ background: "#002628" }}
                     >
                       <div className="flex items-center gap-2">
-                        <div className="imgWrp flex-shrink-0 flex items-center">
-                          
+                        <div className="imgWrp flex-shrink-0 flex items-center">                         
                           {getSymbols[item?.getPoolDetail?.token0Address] ? (
                             <img
                               src={getSymbols[item?.getPoolDetail?.token0Address]}
@@ -389,9 +393,9 @@ function MyFarm({
 
                           <span className="ml-2">
                             {" "}
-                            {item?.getPoolDetail?.token0Symbol +
+                            {shortenTokenString(item?.getPoolDetail?.token0Symbol) +
                               " / " +
-                              item?.getPoolDetail?.token1Symbol}
+                              shortenTokenString(item?.getPoolDetail?.token1Symbol)}
                           </span>
                         </div>
                         <div className="content">
