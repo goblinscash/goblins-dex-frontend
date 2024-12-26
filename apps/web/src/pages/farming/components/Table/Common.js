@@ -76,8 +76,8 @@ function CommonTable({
   }
 
   function shortenTokenString(input) {
-    if (input.length <= 8) return input;
-    return `${input.substring(0, 8)}..`;
+    if (input?.length <= 8) return input;
+    return `${input?.substring(0, 8)}..`;
   }
 
   return (
