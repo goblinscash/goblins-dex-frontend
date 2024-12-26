@@ -198,6 +198,7 @@ export const getSymbols = {
   "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c": Icon_1,
   "0xba2ae424d960c26247dd6c32edc70b295c744c43": IconDoge,
   "0xc993af7fa109e3dd17347c7ce612a5ed848f4b74": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x940181a94A35A4569E4529A3CDfB74e38FD98631/logo.png",
+  "0x2b7f108a6ee5e5b2f74a95678de2cf31c82ae8e7":  "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x2A9e9256E0d1Ad0f7f9d7c7248cb7e2f06072DeB/logo.png",
 
 
   "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d": IconUSDC, // for bsc
