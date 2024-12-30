@@ -263,10 +263,7 @@ function CommonTable({
 
               //   const [token1Logo] = useTokenLogoSource(item?.getPoolDetail?.token0Address, wallet.chainId, false);
 
-
-                // console.log(item, "<====token1Logo")
               // }
-
               return (
                 <tr
                   key={key}

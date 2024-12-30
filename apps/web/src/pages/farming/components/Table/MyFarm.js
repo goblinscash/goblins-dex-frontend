@@ -329,7 +329,6 @@ function MyFarm({
               incentiveIds &&
               incentiveIds?.length > 0 &&
               incentiveIds.map((item, key) => {
-
                 return (
                   <tr
                     key={key}
