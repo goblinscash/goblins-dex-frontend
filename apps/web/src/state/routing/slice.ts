@@ -172,7 +172,6 @@ export const routingApi = createApi({
             tokenOutSymbol,
           } = args
 
-          console.log(args, "argsargs")
           const requestBody = {
             tokenInChainId,
             tokenInAddress: tokenIn,

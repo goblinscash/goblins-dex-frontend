@@ -32,6 +32,41 @@ const BaseWrapper = styled.div<{ disable?: boolean }>`
   background-color: ${({ theme, disable }) => disable && theme.surface3};
 `
 
+const TokenListWrpper = styled.div<{ disable?: boolean }>`
+position: relative;
+ul {
+max-height: 220px;
+overflow: scroll;
+scrollbar-width: none;
+padding-top: 20px;
+list-style: none;
+padding: 0;
+margin: 0;
+  .token {
+  display: flex;
+  align-items: start;
+  border-radius: 5px;
+  padding: 10px;
+  gap: 10px;
+  transition: 0.4s;
+  &:hover{
+    background: #1b1b1b;
+    }
+   img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+   }
+    h4 {
+    margin :0}
+    p {
+    margin :0;
+    font-size: 12px;
+    color: #ddd}
+}
+  }
+`
+
 const formatAnalyticsEventProperties = (
   currency: Currency,
   searchQuery: string,
@@ -64,11 +99,12 @@ export default function CommonBases({
   isAddressSearch: string | false
   portfolioBalanceUsd?: number
 }) {
-  const bases = chainId !== undefined ? COMMON_BASES[chainId] ?? [] : []
+  let bases = chainId !== undefined ? COMMON_BASES[chainId] ?? [] : []
   const { account } = useWeb3React()
   const { data } = useCachedPortfolioBalancesQuery({ account })
   const portfolioBalanceUsd = data?.portfolios?.[0].tokensTotalDenominatedValue?.value
 
+  bases = bases.slice(0, 6);
   return bases.length > 0 ? (
     <AutoRow gap="4px">
       {bases.map((currency: Currency) => {

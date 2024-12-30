@@ -1,7 +1,9 @@
 import { ChainId } from '@uniswap/sdk-core'
+import { TokenInterface } from 'components/SearchModal/CurrencySearch'
 import useTokenLogoSource from 'hooks/useAssetLogoSource'
 import React, { useState } from 'react'
 import styled from 'styled-components'
+const { tokens } = require("@myswap/token-list");
 
 export const MissingImageLogo = styled.div<{ size?: string }>`
   --size: ${({ size }) => size};
@@ -55,7 +57,7 @@ const LogoContainer = styled.div`
 /**
  * Renders an image by prioritizing a list of sources, and then eventually a fallback triangle alert
  */
-export default function AssetLogo({
+export default function Logo({
   isNative,
   address,
   chainId = ChainId.MAINNET,
@@ -65,8 +67,12 @@ export default function AssetLogo({
   style
 }: AssetLogoProps) {
 
+  const bases = tokens.filter(
+    (item: TokenInterface) => item.chainId === chainId && item.address === address
+  );
 
-  const [src, nextSrc] = useTokenLogoSource(address, chainId, isNative, backupImg)
+  const src = bases.length > 0 ? bases[0].logoURI : backupImg;
+  const nextSrc = src
   const [imgLoaded, setImgLoaded] = useState(() => {
     const img = document.createElement('img')
     img.src = src ?? ''
