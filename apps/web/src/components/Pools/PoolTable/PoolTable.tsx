@@ -18,6 +18,7 @@ import { NumberType, useFormatter } from 'utils/formatNumbers'
 
 import { DoubleCurrencyAndChainLogo } from '../PoolDetails/PoolDetailsHeader'
 import { useWallet } from 'hooks/useWallet'
+import { shortenTokenString } from 'helpers/utils'
 
 const TableWrapper = styled.div`
   margin: 0 auto;
@@ -163,25 +164,42 @@ export function PoolsTable({
 }) {
 
   const { formatNumber } = useFormatter()
-  const poolTableValues: PoolTableValues[] | undefined = useMemo(
-    () =>
-      pools?.map((pool, index) => {
-        return {
-          index: index + 1,
-          poolDescription: (
-            <PoolDescription token0={pool.token0} token1={pool.token1} feeTier={pool.feeTier} chainId={chainId} />
-          ),
-          txCount: pool.txCount,
-          tvl: pool.tvl,
-          volume24h: pool.volume24h,
-          volumeWeek: pool.volumeWeek,
-          turnover: pool.turnover,
-          link: `/explore/pools/${chainIdToBackendName(chainId).toLowerCase()}/${pool.hash}`,
-        }
-      }) ?? [],
-    [chainId, pools]
-  )
-  // TODO(WEB-3236): once GQL BE Pool query add 1 day, 7 day, turnover sort support
+  
+  const poolTableValues: PoolTableValues[] = useMemo(() => {
+    const processedPools = pools?.map((pool) => ({
+      ...pool,
+      token0: {
+        ...pool.token0,
+        symbol: shortenTokenString(pool.token0.symbol),
+      },
+      token1: {
+        ...pool.token1,
+        symbol: shortenTokenString(pool.token1.symbol),
+      },
+    }));
+  
+    return (
+      processedPools?.map((pool, index) => ({
+        index: index + 1,
+        poolDescription: (
+          <PoolDescription
+            key={pool.hash}
+            token0={pool.token0}
+            token1={pool.token1}
+            feeTier={pool.feeTier}
+            chainId={chainId}
+          />
+        ),
+        txCount: pool.txCount,
+        tvl: pool.tvl,
+        volume24h: pool.volume24h,
+        volumeWeek: pool.volumeWeek,
+        turnover: pool.turnover,
+        link: `/explore/pools/${chainIdToBackendName(chainId).toLowerCase()}/${pool.hash}`,
+      })) ?? []
+    );
+  }, [chainId, pools]);
+
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<PoolTableValues>()
     return [

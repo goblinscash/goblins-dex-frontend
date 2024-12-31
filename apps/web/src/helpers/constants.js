@@ -26,7 +26,7 @@ export const cryptoData = [
     type: "SmartBCH",
     chainName: "Smart Bitcoin Cash",
     rpcUrls: [
-      "https://rpc-sbch.goblins.cash/",
+      "https://smartbch.greyh.at",
       "https://smartbch.greyh.at",
       "https://smartbch.greyh.at",
       "https://smartbch.fountainhead.cash/mainnet",
@@ -37,7 +37,7 @@ export const cryptoData = [
       "https://smartbch.devops.cash/mainnet",
     ],
     chainId: 10000,
-    rpcUrl: "https://rpc-sbch.goblins.cash/",
+    rpcUrl: "https://smartbch.greyh.at",
     contractAddress: process.env.REACT_APP_BCH_STAKING_CONTRACT,
     nftManagerContractAddress: process.env.REACT_APP_BCH_NFT_MANAGER_CONTRACT,
     stakeContractAddress: process.env.REACT_APP_BCH_TOKEN_STAKING_CONTRACT,

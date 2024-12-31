@@ -13,7 +13,7 @@ import styles from "../../Dashboard.module.scss"
 import { getSymbols } from "helpers/constants";
 import useTokenLogoSource from 'hooks/useAssetLogoSource'
 
-import { formatValue } from "helpers/utils";
+import { formatValue, shortenTokenString } from "helpers/utils";
 import useAssetLogoSource from "hooks/useAssetLogoSource";
 
 function CommonTable({
@@ -75,10 +75,6 @@ function CommonTable({
     )
   }
 
-  function shortenTokenString(input) {
-    if (input?.length <= 8) return input;
-    return `${input?.substring(0, 8)}..`;
-  }
 
   return (
     <div className="overflow-x-auto" style={{ overflow: "auto" }}>

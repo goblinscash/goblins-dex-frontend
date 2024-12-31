@@ -8,6 +8,7 @@ import { getLocaleTimeString } from 'components/Table/utils'
 import { supportedChainIdFromGQLChain, validateUrlChainParam } from 'graphql/data/util'
 import { OrderDirection, Token, Transaction_OrderBy } from 'graphql/thegraph/__generated__/types-and-hooks'
 import { PoolTransaction, PoolTransactionType, usePoolTransactions } from 'graphql/thegraph/PoolTransactions'
+import { shortenTokenString } from 'helpers/utils'
 import { useActiveLocalCurrency } from 'hooks/useActiveLocalCurrency'
 import { useActiveLocale } from 'hooks/useActiveLocale'
 import { useOnClickOutside } from 'hooks/useOnClickOutside'
@@ -188,7 +189,7 @@ export function PoolDetailsTransactionsTable({
           header: () => (
             <Cell loading={loading} minWidth={125} justifyContent="flex-end" grow>
               <StyledInternalLink to={`/explore/tokens/${chainName.toLowerCase()}/${token0?.id}`}>
-                <ThemedText.BodySecondary>{token0?.symbol}</ThemedText.BodySecondary>
+                <ThemedText.BodySecondary>{shortenTokenString(token0?.symbol)}</ThemedText.BodySecondary>
               </StyledInternalLink>
             </Cell>
           ),
@@ -212,7 +213,7 @@ export function PoolDetailsTransactionsTable({
           header: () => (
             <Cell loading={loading} minWidth={125} justifyContent="flex-end" grow>
               <StyledInternalLink to={`/explore/tokens/${chainName.toLowerCase()}/${token1?.id}`}>
-                <ThemedText.BodySecondary>{token1?.symbol}</ThemedText.BodySecondary>
+                <ThemedText.BodySecondary>{shortenTokenString(token1?.symbol)}</ThemedText.BodySecondary>
               </StyledInternalLink>
             </Cell>
           ),

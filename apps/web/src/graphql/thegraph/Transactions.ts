@@ -6,6 +6,7 @@ import {
   useTransactionsQuery,
 } from 'graphql/thegraph/__generated__/types-and-hooks'
 import { chainToApolloClient } from 'graphql/thegraph/apollo'
+import { shortenTokenString } from 'helpers/utils'
 import { useCallback, useMemo, useRef } from 'react'
 
 gql`
@@ -203,8 +204,8 @@ export function useRecentTransactions(
                 hash: t.id,
                 timestamp: t.timestamp,
                 sender: m.origin,
-                token0Symbol: m.pool.token0.symbol,
-                token1Symbol: m.pool.token1.symbol,
+                token0Symbol: shortenTokenString(m.pool.token0.symbol),
+                token1Symbol: shortenTokenString(m.pool.token1.symbol),
                 token0Address: m.pool.token0.id,
                 token1Address: m.pool.token1.id,
                 amountUSD: parseFloat(m.amountUSD),
@@ -220,8 +221,8 @@ export function useRecentTransactions(
                 hash: t.id,
                 timestamp: t.timestamp,
                 sender: m.origin,
-                token0Symbol: m.pool.token0.symbol,
-                token1Symbol: m.pool.token1.symbol,
+                token0Symbol: shortenTokenString(m.pool.token0.symbol),
+                token1Symbol: shortenTokenString(m.pool.token1.symbol),
                 token0Address: m.pool.token0.id,
                 token1Address: m.pool.token1.id,
                 amountUSD: parseFloat(m.amountUSD),
@@ -238,8 +239,8 @@ export function useRecentTransactions(
                 type: TransactionType.SWAP,
                 timestamp: t.timestamp,
                 sender: m.origin,
-                token0Symbol: m.pool.token0.symbol,
-                token1Symbol: m.pool.token1.symbol,
+                token0Symbol: shortenTokenString(m.pool.token0.symbol),
+                token1Symbol: shortenTokenString(m.pool.token1.symbol),
                 token0Address: m.pool.token0.id,
                 token1Address: m.pool.token1.id,
                 amountUSD: parseFloat(m.amountUSD),
