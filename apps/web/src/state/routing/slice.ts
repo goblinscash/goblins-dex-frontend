@@ -172,7 +172,6 @@ export const routingApi = createApi({
             tokenOutSymbol,
           } = args
 
-          console.log(args, "argsargs")
           const requestBody = {
             tokenInChainId,
             tokenInAddress: tokenIn,
@@ -240,6 +239,7 @@ export const routingApi = createApi({
           //@ts-ignore
           const uraQuoteResponse = result.data as URAQuoteResponse
           const tradeResult = await transformQuoteToTrade(args, uraQuoteResponse, QuoteMethod.ROUTING_API)
+
           return { data: { ...tradeResult, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration } }
         } catch (error: any) {
           console.warn(
@@ -259,7 +259,6 @@ export const routingApi = createApi({
           }
           if (quoteResult.state === QuoteState.SUCCESS) {
             const trade = await transformQuoteToTrade(args, quoteResult.data, QuoteMethod.CLIENT_SIDE_FALLBACK);
-            console.log(trade, "trade$")
             return {
               data: { ...trade, latencyMs: getQuoteLatencyMeasure(quoteStartMark).duration },
             }

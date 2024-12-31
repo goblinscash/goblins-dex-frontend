@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-restricted-imports
 import { t, Trans } from '@lingui/macro'
 import { InterfaceEventName, InterfaceModalName } from '@uniswap/analytics-events'
-import { Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
+import { ChainId, Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { Trace } from 'analytics'
 import useDebounce from 'hooks/useDebounce'
@@ -28,6 +28,10 @@ import CommonBases from './CommonBases'
 import { CurrencyListSectionTitle, CurrencyRow, formatAnalyticsEventProperties } from './CurrencyList'
 import CurrencyList from './CurrencyList'
 import { PaddedColumn, SearchInput, Separator } from './styled'
+import { COMMON_BASES } from 'constants/routing'
+import { logo } from 'components/NavBar/style.css'
+const { tokens } = require("@myswap/token-list");
+
 
 const ContentWrapper = styled(Column)`
   background-color: ${({ theme }) => theme.surface1};
@@ -50,6 +54,15 @@ interface CurrencySearchProps {
   onlyShowCurrenciesWithBalance?: boolean
 }
 
+export interface TokenInterface {
+  name: string;
+  symbol: string;
+  address: string;
+  chainId: number;
+  decimals: number;
+  logoURI: string;
+}
+
 export function CurrencySearch({
   selectedCurrency,
   onCurrencySelect,
@@ -65,7 +78,6 @@ export function CurrencySearch({
   const theme = useTheme()
 
   const [tokenLoaderTimerElapsed, setTokenLoaderTimerElapsed] = useState(false)
-
   // refs for fixed size lists
   const fixedList = useRef<FixedSizeList>()
 
@@ -231,8 +243,24 @@ export function CurrencySearch({
     return () => clearTimeout(tokenLoaderTimer)
   }, [])
 
-
-
+  let bases = chainId !== undefined ? tokens
+    .filter((item: TokenInterface) => {
+      const matchesQuery = debouncedQuery
+        ? item.name.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+        item.symbol.toLowerCase().includes(debouncedQuery.toLowerCase())
+        : true;
+      return item.chainId === chainId && matchesQuery;
+    })
+    .map(
+      (item: TokenInterface) =>
+        new Token(
+          chainId,
+          item.address,
+          item.decimals,
+          item.symbol,
+          item.name
+        )
+    ) ?? [] : [];
 
   return (
     <ContentWrapper>
@@ -295,13 +323,13 @@ export function CurrencySearch({
               }
             />
           </Column>
-        ) : sortedCombinedTokens?.length > 0 || filteredInactiveTokens?.length > 0 || isLoading ? (
+        ) : sortedCombinedTokens?.length >= 0 || filteredInactiveTokens?.length >= 0 || isLoading ? (
           <div style={{ flex: '1' }}>
             <AutoSizer disableWidth>
               {({ height }: { height: number }) => (
                 <CurrencyList
                   height={height}
-                  currencies={finalCurrencyList}
+                  currencies={bases}
                   onCurrencySelect={handleCurrencySelect}
                   otherCurrency={otherSelectedCurrency}
                   selectedCurrency={selectedCurrency}

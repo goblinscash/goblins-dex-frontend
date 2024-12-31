@@ -21,6 +21,7 @@ import { ClickableStyle, ThemedText } from 'theme/components'
 import { NumberType, useFormatter } from 'utils/formatNumbers'
 
 import { DetailBubble } from './shared'
+import { shortenTokenString } from 'helpers/utils'
 
 const HeaderText = styled(Text)`
   font-weight: 485;
@@ -149,7 +150,7 @@ const PoolBalanceTokenNames = ({ token, chainId }: { token: TokenFullData; chain
         {screenIsNotLarge && (
           <CurrencyLogo currency={token.currency} size="16px" style={{ marginRight: '4px', marginLeft: '4px' }} />
         )}
-        {token.symbol}
+        {shortenTokenString(token.symbol)}
       </StyledLink>
     </PoolBalanceTokenNamesContainer>
   )

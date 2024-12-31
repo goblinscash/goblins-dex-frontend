@@ -169,8 +169,6 @@ export const getStakingtransaction = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-
-
       return Thunk.rejectWithValue(error);
     }
   }

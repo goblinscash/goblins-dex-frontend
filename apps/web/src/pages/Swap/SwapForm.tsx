@@ -480,9 +480,6 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
   const isNewSwapFlowEnabled = useNewSwapFlow();
 
 
-
-
-
   return (
     <>
       <TokenSafetyModal

@@ -76,10 +76,11 @@ export const BITCOIN_BASE = new Token(ChainId.BASE, '0x2a06A17CBC6d0032Cac2c6696
 export const SPX_BASE = new Token(ChainId.BASE, '0x50dA645f148798F68EF2d7dB7C1CB22A6819bb2C', 8, 'SPX', 'SPX')
 export const AERO_BASE = new Token(ChainId.BASE, '0x940181a94A35A4569E4529A3CDfB74e38FD98631', 18, 'AERO', 'AERO')
 export const VIRTUAL_BASE = new Token(ChainId.BASE, '0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b', 18, 'VIRTUAL', 'Virtual Protocol')
+export const PTmUSDC_BASE = new Token(ChainId.BASE, '0x2A9e9256E0d1Ad0f7f9d7c7248cb7e2f06072DeB', 6, 'PT-mUSDC-26JUN2025', 'PT Moonwell USDC 26JUN2025')
 
 
 
-export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
+export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 8, 'DAI', 'Dai Stablecoin')
 export const DAI_ARBITRUM_ONE = new Token(
   ChainId.ARBITRUM_ONE,
   '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
@@ -299,6 +300,8 @@ export const USDT_SBCH = new Token(
   'bcUSDT',
   'bcUSDT'
 )
+
+export const PTmUSDC_BCH = new Token(ChainId.SMARTBCH, '0x2b7f108a6ee5e5B2F74a95678De2cF31c82AE8E7', 6, 'PT-mUSDC-26JUN2025', 'PT Moonwell USDC 26JUN2025')
 export const AERO_BCH = new Token(ChainId.SMARTBCH, '0xc993Af7fa109E3DD17347c7cE612a5Ed848F4B74', 18, 'AERO', 'AERO')
 
 export const BC_BNB = new Token(ChainId.SMARTBCH, '0xBc7b858B5694D485AD17c89675649cE44De21BEa', 18, 'bcBNB', 'bcBNB')

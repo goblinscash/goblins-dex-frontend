@@ -26,7 +26,7 @@ export const cryptoData = [
     type: "SmartBCH",
     chainName: "Smart Bitcoin Cash",
     rpcUrls: [
-      "https://rpc-sbch.goblins.cash/",
+      "https://smartbch.greyh.at",
       "https://smartbch.greyh.at",
       "https://smartbch.greyh.at",
       "https://smartbch.fountainhead.cash/mainnet",
@@ -37,7 +37,7 @@ export const cryptoData = [
       "https://smartbch.devops.cash/mainnet",
     ],
     chainId: 10000,
-    rpcUrl: "https://rpc-sbch.goblins.cash/",
+    rpcUrl: "https://smartbch.greyh.at",
     contractAddress: process.env.REACT_APP_BCH_STAKING_CONTRACT,
     nftManagerContractAddress: process.env.REACT_APP_BCH_NFT_MANAGER_CONTRACT,
     stakeContractAddress: process.env.REACT_APP_BCH_TOKEN_STAKING_CONTRACT,
@@ -198,6 +198,7 @@ export const getSymbols = {
   "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c": Icon_1,
   "0xba2ae424d960c26247dd6c32edc70b295c744c43": IconDoge,
   "0xc993af7fa109e3dd17347c7ce612a5ed848f4b74": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x940181a94A35A4569E4529A3CDfB74e38FD98631/logo.png",
+  "0x2b7f108a6ee5e5b2f74a95678de2cf31c82ae8e7":  "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x2A9e9256E0d1Ad0f7f9d7c7248cb7e2f06072DeB/logo.png",
 
 
   "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d": IconUSDC, // for bsc
@@ -212,6 +213,7 @@ export const getSymbols = {
   "0x76d7062a70f5c129b6180baab2607c788a962b1b": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x940181a94A35A4569E4529A3CDfB74e38FD98631/logo.png",
 
   // Base
+  "0x2a9e9256e0d1ad0f7f9d7c7248cb7e2f06072deb":  "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/base/assets/0x2A9e9256E0d1Ad0f7f9d7c7248cb7e2f06072DeB/logo.png",
   "0x4f9fd6be4a90f2620860d680c0d4d5fb53d1a825": "https://s2.coinmarketcap.com/static/img/coins/64x64/34103.png",
   "0x1c5bb6156fdf1ca8d8d894ecc0f1981619d2cdba": "https://s3.ap-southeast-1.amazonaws.com/virtualprotocolcdn/name_9ec4ff0111.jpeg",
   "0x7588880d9c78e81fade7b7e8dc0781e95995a792": "https://s2.coinmarketcap.com/static/img/coins/64x64/34317.png",

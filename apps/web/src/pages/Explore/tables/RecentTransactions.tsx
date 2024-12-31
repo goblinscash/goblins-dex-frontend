@@ -83,7 +83,6 @@ export default function RecentTransactions() {
     filter
   )
 
-
   const handleHeaderClick = useCallback(
     (newSortMethod: Transaction_OrderBy) => {
       if (sortState.sortBy === newSortMethod) {

@@ -20,6 +20,7 @@ import { ExplorerDataType, getExplorerLink } from 'utils/getExplorerLink'
 
 import { DoubleCurrencyAndChainLogo } from './PoolDetailsHeader'
 import { DetailBubble, SmallDetailBubble } from './shared'
+import { shortenTokenString } from 'helpers/utils'
 
 const TokenName = styled(ThemedText.BodyPrimary)`
   display: none;
@@ -135,10 +136,10 @@ export function PoolDetailsLink({ address, chainId, tokens, loading }: PoolDetai
         <TokenName>{isPool ? <Trans>Pool</Trans> : tokens[0]?.name}</TokenName>
         <SymbolText>
           {isPool ? (
-            `${tokens[0]?.symbol} / ${tokens[1]?.symbol}`
+            `${shortenTokenString(tokens[0]?.symbol)}/${tokens[1]?.symbol}`
           ) : (
             <Row gap="4px">
-              {tokens[0]?.symbol} <ChevronRight size={16} color={theme.neutral2} />
+              {shortenTokenString(tokens[0]?.symbol)} <ChevronRight size={16} color={theme.neutral2} />
             </Row>
           )}
         </SymbolText>

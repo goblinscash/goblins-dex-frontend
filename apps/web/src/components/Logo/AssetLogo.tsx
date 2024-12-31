@@ -62,7 +62,7 @@ export default function AssetLogo({
   symbol,
   backupImg,
   size = '24px',
-  style,
+  style
 }: AssetLogoProps) {
 
 

@@ -190,7 +190,7 @@ console.log(poolData, "poolData")
           loading={loading}
         />
         <PoolDetailsStats poolData={poolData} isReversed={isReversed} chainId={chainId} loading={loading} />
-        <TokenDetailsWrapper>
+         <TokenDetailsWrapper>
           <TokenDetailsHeader>
             <Trans>Links</Trans>
           </TokenDetailsHeader>

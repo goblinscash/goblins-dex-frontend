@@ -13,7 +13,7 @@ import styles from "../../Dashboard.module.scss"
 import { getSymbols } from "helpers/constants";
 import useTokenLogoSource from 'hooks/useAssetLogoSource'
 
-import { formatValue } from "helpers/utils";
+import { formatValue, shortenTokenString } from "helpers/utils";
 import useAssetLogoSource from "hooks/useAssetLogoSource";
 
 function CommonTable({
@@ -54,6 +54,27 @@ function CommonTable({
 
   // filtering the data which have same pool and rewardtoken address
   const newData = incentiveIds.filter(item => item.key.rewardToken !== item.key.pool);
+
+  const customLogo = (symbol) => {
+    console.log(symbol, "symbodsddl")
+    return (
+      <div
+        className="inline-flex items-center justify-center rounded-pill p-1"
+        style={{
+          height: 30,
+          width: 30,
+          background: "#00ff00",
+          fontSize: 10,
+          color: "#000",
+          fontWeight: 700
+        }}
+      >
+        <p classname="m-0">{symbol}</p>
+      </div>
+    )
+  }
+
+
   return (
     <div className="overflow-x-auto" style={{ overflow: "auto" }}>
       <table
@@ -286,7 +307,7 @@ function CommonTable({
                             style={{ height: 30, width: 30 }}
                           />
                         ) : (
-                          item?.getPoolDetail?.token0Symbol + "/ "
+                          customLogo(item?.getPoolDetail?.token0Symbol?.substring(0, 3))
                         )}
                         {getSymbols[item?.getPoolDetail?.token1Address] ? (
                           <img
@@ -298,15 +319,15 @@ function CommonTable({
                             style={{ height: 30, width: 30, marginLeft: -10 }}
                           />
                         ) : (
-                          item?.getPoolDetail?.token1Symbol
+                          customLogo(item?.getPoolDetail?.token1Symbol?.substring(0, 3))
                         )}
                       </div>
                       <div className="">
                         <span className="whitespace-nowrap">
                           {" "}
-                          {item?.getPoolDetail?.token0Symbol +
+                          {shortenTokenString(item?.getPoolDetail?.token0Symbol) +
                             " / " +
-                            item?.getPoolDetail?.token1Symbol}
+                            shortenTokenString(item?.getPoolDetail?.token1Symbol)}
                         </span>
                         <p className="m-0  whitespace-nowrap">
                           {Number(item.feeTier).toFixed(2)} %

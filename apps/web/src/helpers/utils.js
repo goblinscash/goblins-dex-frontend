@@ -193,3 +193,8 @@ export function toCommas(value) {
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return parts.join(".");
 }
+
+export function shortenTokenString(input) {
+  if (input?.length <= 8) return input;
+  return `${input?.substring(0, 8)}`;
+}
