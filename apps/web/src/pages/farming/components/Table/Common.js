@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from "react";
 import moment from "moment";
-import axios from "axios"
-
 
 // img
 import loader from "assets/farmingAssets/Images/loading.gif";
@@ -10,11 +7,8 @@ import sortIcon from "assets/farmingAssets/Images/sort.svg";
 // css
 import styles from "../../Dashboard.module.scss"
 
-import { getSymbols } from "helpers/constants";
-import useTokenLogoSource from 'hooks/useAssetLogoSource'
-
 import { formatValue, shortenTokenString } from "helpers/utils";
-import useAssetLogoSource from "hooks/useAssetLogoSource";
+const { tokenLogos } = require("@myswap/token-list");
 
 function CommonTable({
   wallet,
@@ -28,29 +22,6 @@ function CommonTable({
   toggleEnded,
 }) {
   let getCurrentUnix = moment().unix();
-
-
-  const [tokenList, setTokenList] = useState(null)
-  useEffect(() => {
-
-    const uri = 'https://raw.githubusercontent.com/ethereum-optimism/ethereum-optimism.github.io/master/optimism.tokenlist.json';
-
-    axios.get(uri).then((res) => {
-      if (res.data.tokens) {
-
-        setTokenList(res.data.tokens.reduce((acc, token) => {
-          acc[token.address.toLowerCase()] = token.logoURI;
-          return acc;
-        }, {}))
-
-      } else {
-        return null
-      }
-    }).catch((err) => {
-      console.log(err)
-    })
-
-  }, [])
 
 
   // filtering the data which have same pool and rewardtoken address
@@ -280,15 +251,6 @@ function CommonTable({
             newData &&
             newData?.length > 0 &&
             newData.map((item, key) => {
-
-              // if (!getSymbols[item?.getPoolDetail?.token0Address]) {
-
-              //   const [token1Logo] = useTokenLogoSource(item?.getPoolDetail?.token0Address, wallet.chainId, false);
-
-
-              // console.log(item, "<====token1Logo")
-              // }
-
               return (
                 <tr
                   key={key}
@@ -301,9 +263,9 @@ function CommonTable({
                   >
                     <div className={`${styles.flexWrp} flex items-center gap-2`}>
                       <div className="imgWrp flex-shrink-0 flex items-center">
-                        {getSymbols[item?.getPoolDetail?.token0Address] ? (
+                        {tokenLogos[item?.getPoolDetail?.token0Address] ? (
                           <img
-                            src={getSymbols[item?.getPoolDetail?.token0Address]}
+                            src={tokenLogos[item?.getPoolDetail?.token0Address]}
                             alt=""
                             className="rounded-pill max-w-full object-cover shadow-sm"
                             height={1000}
@@ -313,9 +275,9 @@ function CommonTable({
                         ) : (
                           customLogo(item?.getPoolDetail?.token0Symbol?.substring(0, 3))
                         )}
-                        {getSymbols[item?.getPoolDetail?.token1Address] ? (
+                        {tokenLogos[item?.getPoolDetail?.token1Address] ? (
                           <img
-                            src={getSymbols[item?.getPoolDetail?.token1Address]}
+                            src={tokenLogos[item?.getPoolDetail?.token1Address]}
                             alt=""
                             className="rounded-pill max-w-full object-cover shadow-sm"
                             height={1000}

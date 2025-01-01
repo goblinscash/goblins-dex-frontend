@@ -1,9 +1,8 @@
 import { ChainId } from '@uniswap/sdk-core'
 import { TokenInterface } from 'components/SearchModal/CurrencySearch'
-import useTokenLogoSource from 'hooks/useAssetLogoSource'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-const { tokens } = require("@myswap/token-list");
+const { tokenLogos } = require("@myswap/token-list");
 
 export const MissingImageLogo = styled.div<{ size?: string }>`
   --size: ${({ size }) => size};
@@ -67,11 +66,9 @@ export default function Logo({
   style
 }: AssetLogoProps) {
 
-  const bases = tokens.filter(
-    (item: TokenInterface) => item.chainId === chainId && item.address === address
-  );
+ 
 
-  const src = bases.length > 0 ? bases[0].logoURI : backupImg;
+  const src = tokenLogos[address?.toLocaleLowerCase() ?? '']
   const nextSrc = src
   const [imgLoaded, setImgLoaded] = useState(() => {
     const img = document.createElement('img')

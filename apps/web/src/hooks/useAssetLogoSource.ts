@@ -5,7 +5,7 @@ import { chainIdToNetworkName, getNativeLogoURI } from 'lib/hooks/useCurrencyLog
 import uriToHttp from 'lib/utils/uriToHttp'
 import { useCallback, useEffect, useState } from 'react'
 import { isAddress } from 'utils'
-
+const { tokenLogos } = require("@myswap/token-list");
 import celoLogo from '../assets/svg/celo_logo.svg'
 
 const BAD_SRCS: { [tokenAddress: string]: true } = {}
@@ -60,7 +60,8 @@ function getInitialUrl(
   if (checksummedAddress) {
     let url;
     if (chainId == 10000 || chainId == 8453 || chainId == 56) {
-      url = `https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
+      url = tokenLogos[checksummedAddress?.toLocaleLowerCase() ?? '']
+      // url = `https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/${networkName}/assets/${checksummedAddress}/logo.png`
     }
     if(url){
       return url

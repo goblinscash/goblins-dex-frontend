@@ -1,42 +1,13 @@
-import React, { useEffect, useState } from "react";
-// img
 import loader from "assets/farmingAssets/Images/loading.gif";
-import axios from "axios"
-
-
-
-import { getSymbols } from "helpers/constants";
-
+const { tokenLogos } = require("@myswap/token-list");
 
 function ClaimTable({
   wallet,
   loading,
   incentiveIds,
   handleConfirm,
-  isBlocked,
- 
+  isBlocked, 
 }) {
-
-
-  const [tokenList, setTokenList] = useState(null)
-  useEffect(() => {
-    const uri = 'https://raw.githubusercontent.com/ethereum-optimism/ethereum-optimism.github.io/master/optimism.tokenlist.json';
-    axios.get(uri).then((res) => {
-      if (res.data.tokens) {
-
-        setTokenList(res.data.tokens.reduce((acc, token) => {
-          acc[token.address.toLowerCase()] = token.logoURI;
-          return acc;
-        }, {}))
-
-      } else {
-        return null
-      }
-    }).catch((err) => {
-      console.log(err)
-    })
-
-  }, [])
 
   return (
     <div className="overflow-x-auto">
@@ -142,24 +113,13 @@ function ClaimTable({
                 >
                   <div className="flex items-center gap-2 flex-wrap">
                     <div className="imgWrp flex-shrink-0 flex items-center">
-                      {/* {item?.getPoolDetail?.token0Symbol} /{" "}
-                      {item?.getPoolDetail?.token1Symbol} */}
-                      {getSymbols[item?.key?.rewardToken] ? (
+                      {tokenLogos[item?.key?.rewardToken] ? (
                         <img
-                          src={getSymbols[item?.key?.rewardToken]}
+                          src={tokenLogos[item?.key?.rewardToken]}
                           alt=""
                           className="rounded-pill max-w-full object-cover shadow-sm"
                           height={100}
                           width={100}
-                          style={{ height: 30, width: 30 }}
-                        />
-                      ) : tokenList && tokenList[item?.key?.rewardToken.toLowerCase()] ? (
-                        <img
-                          src={tokenList[item?.key?.rewardToken.toLowerCase()]}
-                          alt=""
-                          className="rounded-pill max-w-full object-cover shadow-sm"
-                          height={1000}
-                          width={1000}
                           style={{ height: 30, width: 30 }}
                         />
                       ): (

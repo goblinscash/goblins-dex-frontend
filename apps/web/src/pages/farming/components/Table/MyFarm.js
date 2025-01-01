@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import moment from "moment";
-import axios from "axios"
 
 // img
 import loader from "assets/farmingAssets/Images/loading.gif";
 import sortIcon from "assets/farmingAssets/Images/sort.svg";
-import { getSymbols } from "helpers/constants";
 import { toFixedCustm } from "helpers/utils";
 import Web3Intraction from "utils/web3Intraction";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFarm, withdrawNft } from "state/action";
 import { toast } from "react-toastify";
+const { tokenLogos } = require("@myswap/token-list");
 
 function MyFarm({
   wallet,
@@ -28,28 +27,6 @@ function MyFarm({
   const { currentNetwork } = useSelector((state) => state.dashboard);
 
   const [internalLoading, setInternalLoading] = useState(false)
-
-  const [tokenList, setTokenList] = useState(null)
-  useEffect(() => {
-
-    const uri = 'https://raw.githubusercontent.com/ethereum-optimism/ethereum-optimism.github.io/master/optimism.tokenlist.json';
-
-    axios.get(uri).then((res) => {
-      if (res.data.tokens) {
-
-        setTokenList(res.data.tokens.reduce((acc, token) => {
-          acc[token.address.toLowerCase()] = token.logoURI;
-          return acc;
-        }, {}))
-
-      } else {
-        return null
-      }
-    }).catch((err) => {
-      console.log(err)
-    })
-
-  }, [])
 
   // adding funtion to skip confirmation modal
   const handleClaim = async (e, detail) => {
@@ -73,7 +50,6 @@ function MyFarm({
       toast.error(error);
     } finally {
       setInternalLoading(false)
-
     }
   };
 
@@ -347,18 +323,9 @@ function MyFarm({
                     >
                       <div className="flex items-center gap-2">
                         <div className="imgWrp flex-shrink-0 flex items-center">                         
-                          {getSymbols[item?.getPoolDetail?.token0Address] ? (
+                          {tokenLogos[item?.getPoolDetail?.token0Address] ? (
                             <img
-                              src={getSymbols[item?.getPoolDetail?.token0Address]}
-                              alt=""
-                              className="rounded-pill max-w-full object-cover shadow-sm"
-                              height={1000}
-                              width={1000}
-                              style={{ height: 30, width: 30 }}
-                            />
-                          ) : tokenList && tokenList[item?.getPoolDetail?.token0Address] ? (
-                            <img
-                              src={tokenList[item?.getPoolDetail?.token0Address]}
+                              src={tokenLogos[item?.getPoolDetail?.token0Address]}
                               alt=""
                               className="rounded-pill max-w-full object-cover shadow-sm"
                               height={1000}
@@ -369,23 +336,14 @@ function MyFarm({
                             customLogo(item?.getPoolDetail?.token0Symbol?.substring(0, 3))
                           )}
 
-                          {getSymbols[item?.getPoolDetail?.token1Address] ? (
+                          {tokenLogos[item?.getPoolDetail?.token1Address] ? (
                             <img
-                              src={getSymbols[item?.getPoolDetail?.token1Address]}
+                              src={tokenLogos[item?.getPoolDetail?.token1Address]}
                               alt=""
                               className="rounded-pill max-w-full object-cover shadow-sm"
                               height={1000}
                               width={1000}
                               style={{ height: 30, width: 30, marginLeft: -10 }}
-                            />
-                          ) : tokenList && tokenList[item?.getPoolDetail?.token1Address.toLowerCase()] ? (
-                            <img
-                              src={tokenList[item?.getPoolDetail?.token1Address.toLowerCase()]}
-                              alt=""
-                              className="rounded-pill max-w-full object-cover shadow-sm"
-                              height={1000}
-                              width={1000}
-                              style={{ height: 30, width: 30 }}
                             />
                           ) : (
                             customLogo(item?.getPoolDetail?.token1Symbol?.substring(0, 3))
