@@ -97,7 +97,7 @@ export const deletedFarmList = createAsyncThunk(
   "deletedFarmList",
   async (payload, Thunk) => {
     try {
-      let response = await post(URL.DELETE_FARM, payload);
+      let response = await get(`${URL.CLAIM_LIST}?chainId=${payload.chainId}&wallet=${payload.walletAddress}`, payload);
       return response.data;
     } catch (error) {
       callback && callback(error);
@@ -173,3 +173,4 @@ export const getStakingtransaction = createAsyncThunk(
     }
   }
 );
+

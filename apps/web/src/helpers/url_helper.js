@@ -19,6 +19,7 @@ export const DELETE_FARM =  "/farm/delete"
 export const UNSTAKE_FARM =  "/farm/unstake"
 export const MULTI_STAKE =  "/farm/multistake"
 export const UNSTAKE_ALL =  "/farm/unstakeall"
+export const CLAIM_LIST =  "/farm/claim"
 
 
 

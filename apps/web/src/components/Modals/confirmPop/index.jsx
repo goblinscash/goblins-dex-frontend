@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
+import * as URL from "helpers/url_helper";
 // css
 import styles from "./StakePop.module.scss";
 
@@ -9,10 +9,11 @@ import styles from "./StakePop.module.scss";
 import { toFixedCustm } from "helpers/utils";
 import { deletedFarmList, updateFarm } from "state/action";
 import useDebounce from "hooks/useDebounceFunction";
-import {useWallet} from "hooks/useWallet";
+import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
+import { post } from "helpers/api_helper";
 
-const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim,setActiveTab }) => {
+const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActiveTab }) => {
   const wallet = useWallet();
   const dispatch = useDispatch();
   const { currentNetwork } = useSelector((state) => state.dashboard);
@@ -37,11 +38,11 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim,setActiv
       );
 
       dispatch(
-        deletedFarmList({
-            chainId: wallet.chainId,
-            type: "End",
-            wallet: wallet.address,
-            farmId: detail._id,
+        endFarm({
+          chainId: wallet.chainId,
+          type: "End",
+          wallet: wallet.address,
+          farmId: detail._id,
         })
       );
 
@@ -49,7 +50,7 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim,setActiv
       handleConfirm();
 
       load();
-      setActiveTab(1)
+      setActiveTab(3)
     } catch (error) {
       console.log(error, "<====error");
       setLoading(false);
