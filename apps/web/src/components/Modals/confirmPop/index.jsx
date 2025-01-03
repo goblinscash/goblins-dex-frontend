@@ -7,7 +7,7 @@ import styles from "./StakePop.module.scss";
 
 //helpers
 import { toFixedCustm } from "helpers/utils";
-import { deletedFarmList, endFarm, updateFarm } from "state/action";
+import { deletedFarmList, farmList, endFarm, updateFarm } from "state/action";
 import useDebounce from "hooks/useDebounceFunction";
 import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
@@ -24,33 +24,40 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActi
     try {
       e.preventDefault();
 
-      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      setLoading(true);
-      await web3.endIncentive(
-        [
-          detail.key.rewardToken,
-          detail.key.pool,
-          detail.key.startTime,
-          detail.key.endTime,
-          detail.key.refundee,
-        ],
-        tokenIds
-      );
+      // const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      // setLoading(true);
+      // await web3.endIncentive(
+      //   [
+      //     detail.key.rewardToken,
+      //     detail.key.pool,
+      //     detail.key.startTime,
+      //     detail.key.endTime,
+      //     detail.key.refundee,
+      //   ],
+      //   tokenIds
+      // );
+
+      await post(URL.DELETE_FARM, {
+        chainId: wallet.chainId,
+        type: "End",
+        wallet: wallet.address,
+        farmId: detail._id,
+      });
 
       dispatch(
         endFarm({
           chainId: wallet.chainId,
-          type: "End",
+          type: "deletedFarmList",
           wallet: wallet.address,
           farmId: detail._id,
         })
       );
-
+      
       setLoading(false);
       handleConfirm();
 
       load();
-      setActiveTab(3)
+      setActiveTab(1)
     } catch (error) {
       console.log(error, "<====error");
       setLoading(false);
@@ -133,6 +140,16 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActi
   useEffect(() => {
     loadTokenIds();
   }, [isRestake, isClaim]);
+
+  useEffect(() => {
+    dispatch(
+      farmList({
+        chainId: wallet.chainId,
+        isEnded: true,
+      })
+    );
+  }, [loading]);
+
 
   return (
     <>
