@@ -24,18 +24,18 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActi
     try {
       e.preventDefault();
 
-      // const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-      // setLoading(true);
-      // await web3.endIncentive(
-      //   [
-      //     detail.key.rewardToken,
-      //     detail.key.pool,
-      //     detail.key.startTime,
-      //     detail.key.endTime,
-      //     detail.key.refundee,
-      //   ],
-      //   tokenIds
-      // );
+      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      setLoading(true);
+      await web3.endIncentive(
+        [
+          detail.key.rewardToken,
+          detail.key.pool,
+          detail.key.startTime,
+          detail.key.endTime,
+          detail.key.refundee,
+        ],
+        tokenIds
+      );
 
       await post(URL.DELETE_FARM, {
         chainId: wallet.chainId,
