@@ -7,7 +7,7 @@ import styles from "./StakePop.module.scss";
 
 //helpers
 import { toFixedCustm } from "helpers/utils";
-import { deletedFarmList, updateFarm } from "state/action";
+import { deletedFarmList, endFarm, updateFarm } from "state/action";
 import useDebounce from "hooks/useDebounceFunction";
 import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
