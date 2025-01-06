@@ -344,7 +344,6 @@ const Dashboard = () => {
     }
   }, [sortingData.sortKey, sortingData.sortOrder]);
 
-  console.log(stake.detail, "stake.detail")
 
   return (
     <>

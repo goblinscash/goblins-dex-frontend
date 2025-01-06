@@ -6,7 +6,7 @@ import * as URL from "helpers/url_helper";
 import styles from "./StakePop.module.scss";
 
 //helpers
-import { toFixedCustm } from "helpers/utils";
+import { sleep, toFixedCustm } from "helpers/utils";
 import { deletedFarmList, farmList, endFarm, updateFarm } from "state/action";
 import useDebounce from "hooks/useDebounceFunction";
 import { useWallet } from "hooks/useWallet";
@@ -37,27 +37,21 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActi
         tokenIds
       );
 
-      await post(URL.DELETE_FARM, {
-        chainId: wallet.chainId,
-        type: "End",
-        wallet: wallet.address,
-        farmId: detail._id,
-      });
-
       dispatch(
         endFarm({
-          chainId: wallet.chainId,
-          type: "deletedFarmList",
-          wallet: wallet.address,
-          farmId: detail._id,
+          data: {
+            chainId: wallet.chainId,
+            type: "updateFarm",
+            wallet: wallet.address,
+            farmId: detail._id,
+          }
         })
-      );
-      
+      );      
       setLoading(false);
-      handleConfirm();
-
+      await sleep(1000)
       load();
-      setActiveTab(1)
+      handleConfirm();
+      setActiveTab(3)
     } catch (error) {
       console.log(error, "<====error");
       setLoading(false);
@@ -140,15 +134,6 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActi
   useEffect(() => {
     loadTokenIds();
   }, [isRestake, isClaim]);
-
-  useEffect(() => {
-    dispatch(
-      farmList({
-        chainId: wallet.chainId,
-        isEnded: true,
-      })
-    );
-  }, [loading]);
 
 
   return (

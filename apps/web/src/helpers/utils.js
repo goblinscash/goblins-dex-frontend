@@ -198,3 +198,7 @@ export function shortenTokenString(input) {
   if (input?.length <= 8) return input;
   return `${input?.substring(0, 8)}`;
 }
+
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

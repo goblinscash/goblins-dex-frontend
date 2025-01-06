@@ -143,7 +143,7 @@ export const unstakeMultiFarm = createAsyncThunk(
 
 
 export const endFarm = createAsyncThunk(
-  "deletedFarmList",
+  "updateFarm",
   async ({ data, callback }, Thunk) => {
     try {
       let response = await post(URL.DELETE_FARM, data);
