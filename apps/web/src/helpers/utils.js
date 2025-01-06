@@ -148,10 +148,10 @@ export function toBigNumber(n) {
 
 export function toFixedCustm(x) {
   if (Math.abs(x) < 1.0) {
-    var e = parseInt(x.toString().split("e-")[1]);
+    var e = parseInt(x?.toString().split("e-")[1]);
     if (e) {
       x *= Math.pow(10, e - 1);
-      x = "0." + new Array(e).join("0") + x.toString().substring(2);
+      x = "0." + new Array(e).join("0") + x.toString()?.substring(2);
     }
   } else {
     var e = parseInt(x.toString().split("+")[1]);
@@ -197,4 +197,8 @@ export function toCommas(value) {
 export function shortenTokenString(input) {
   if (input?.length <= 8) return input;
   return `${input?.substring(0, 8)}`;
+}
+
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }

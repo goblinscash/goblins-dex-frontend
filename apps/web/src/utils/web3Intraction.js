@@ -437,7 +437,7 @@ class Web3Intraction {
             stakes.secondsPerLiquidityInsideInitialX128.toString(),
         });
       } catch (error) {
-        console.log(error, "<===error in getStakes");
+        console.log(error, "<===error in getStakes", incentiveId);
         if (error?.code === -32603) {
           return reject("insufficient funds for intrinsic transaction cost");
         }

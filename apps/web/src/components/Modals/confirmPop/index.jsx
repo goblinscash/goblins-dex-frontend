@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
+import * as URL from "helpers/url_helper";
 // css
 import styles from "./StakePop.module.scss";
 
 //helpers
-import { toFixedCustm } from "helpers/utils";
-import { updateFarm } from "state/action";
+import { sleep, toFixedCustm } from "helpers/utils";
+import { deletedFarmList, farmList, endFarm, updateFarm } from "state/action";
 import useDebounce from "hooks/useDebounceFunction";
-import {useWallet} from "hooks/useWallet";
+import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
+import { post } from "helpers/api_helper";
 
-const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim,setActiveTab }) => {
+const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActiveTab }) => {
   const wallet = useWallet();
   const dispatch = useDispatch();
   const { currentNetwork } = useSelector((state) => state.dashboard);
@@ -37,21 +38,20 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim,setActiv
       );
 
       dispatch(
-        updateFarm({
+        endFarm({
           data: {
             chainId: wallet.chainId,
-            type: "End",
-            walletAddress: wallet.address,
-            incentiveId: detail.incentiveId,
-          },
+            type: "updateFarm",
+            wallet: wallet.address,
+            farmId: detail._id,
+          }
         })
-      );
-
+      );      
       setLoading(false);
-      handleConfirm();
-
+      await sleep(1000)
       load();
-      setActiveTab(1)
+      handleConfirm();
+      setActiveTab(3)
     } catch (error) {
       console.log(error, "<====error");
       setLoading(false);
@@ -102,7 +102,6 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim,setActiv
     }
   };
 
-
   const loadTokenIds = useDebounce(async () => {
     if (isRestake || isClaim) return;
 
@@ -135,6 +134,7 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim,setActiv
   useEffect(() => {
     loadTokenIds();
   }, [isRestake, isClaim]);
+
 
   return (
     <>

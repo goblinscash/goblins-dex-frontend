@@ -1,13 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as URL from "helpers/url_helper";
-import { post } from "helpers/api_helper";
+import { post, get } from "helpers/api_helper";
 
 
 
 export const farmList = createAsyncThunk("farmList", async (payload, Thunk) => {
-  console.log(payload.chainId, "payload")
   try {
-    let response = await post(URL.FARM_LIST, payload);
+    let response = await get(`${URL.FARM_LIST}?chainId=${payload.chainId}&isEnded=${payload.isEnded}`, payload);
     return response.data;
   } catch (error) {
     callback && callback(error);
@@ -20,7 +19,7 @@ export const myFarmList = createAsyncThunk(
   "myFarmList",
   async (payload, Thunk) => {
     try {
-      let response = await post(URL.MY_FARM_LIST, payload);
+      let response = await get(`${URL.MY_FARM_LIST}?chainId=${payload.chainId}&wallet=${payload.walletAddress}`, payload);
       return response.data;
     } catch (error) {
       callback && callback(error);
@@ -44,11 +43,14 @@ export const updateMyFarm = createAsyncThunk(
   }
 );
 
-export const deletedFarmList = createAsyncThunk(
-  "deletedFarmList",
-  async (payload, Thunk) => {
+export const updateFarm = createAsyncThunk(
+  "updateFarm",
+  async ({ data, callback }, Thunk) => {
     try {
-      let response = await post(URL.DELETED_FARM_LIST, payload);
+      console.log(data, "data")
+      let response = await post(URL.DEPOSIT_FARM, data);
+
+      callback && callback();
       return response.data;
     } catch (error) {
       callback && callback(error);
@@ -58,11 +60,27 @@ export const deletedFarmList = createAsyncThunk(
   }
 );
 
-export const updateFarm = createAsyncThunk(
-  "updateFarm",
+export const createFarm = createAsyncThunk(
+  "createFarm",
   async ({ data, callback }, Thunk) => {
     try {
-      let response = await post(URL.UPDATE_FARM, data);
+      let response = await post(URL.CREATE_FARM, data);
+
+      callback && callback();
+      return response.data;
+    } catch (error) {
+      callback && callback(error);
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);
+
+export const unstakeFarm = createAsyncThunk(
+  "createFarm",
+  async ({ data, callback }, Thunk) => {
+    try {
+      let response = await post(URL.UNSTAKE_FARM, data);
 
       callback && callback();
       return response.data;
@@ -75,6 +93,71 @@ export const updateFarm = createAsyncThunk(
 );
 
 
+export const deletedFarmList = createAsyncThunk(
+  "deletedFarmList",
+  async (payload, Thunk) => {
+    try {
+      let response = await get(`${URL.CLAIM_LIST}?chainId=${payload.chainId}&wallet=${payload.walletAddress}`, payload);
+      return response.data;
+    } catch (error) {
+      callback && callback(error);
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);
+
+export const multiStake = createAsyncThunk(
+  "updateFarm",
+  async ({ data, callback }, Thunk) => {
+    try {
+      let response = await post(URL.MULTI_STAKE, data);
+
+      callback && callback();
+      return response.data;
+    } catch (error) {
+      callback && callback(error);
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);
+
+export const unstakeMultiFarm = createAsyncThunk(
+  "unstakesFarm",
+  async ({ data, callback }, Thunk) => {
+    try {
+      let response = await post(URL.UNSTAKE_ALL, data);
+
+      callback && callback();
+      return response.data;
+    } catch (error) {
+      callback && callback(error);
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);
+
+
+
+
+export const endFarm = createAsyncThunk(
+  "updateFarm",
+  async ({ data, callback }, Thunk) => {
+    try {
+      let response = await post(URL.DELETE_FARM, data);
+
+      callback && callback();
+      return response.data;
+    } catch (error) {
+      callback && callback(error);
+
+      return Thunk.rejectWithValue(error);
+    }
+  }
+);
+
 export const getStakingtransaction = createAsyncThunk(
   "getStakingtransaction",
   async (payload, Thunk) => {
@@ -83,12 +166,11 @@ export const getStakingtransaction = createAsyncThunk(
         chainId: 10000
       });
 
-   
+
       return response.data;
     } catch (error) {
-   
-
       return Thunk.rejectWithValue(error);
     }
   }
 );
+

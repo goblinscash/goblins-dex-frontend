@@ -23,7 +23,6 @@ function CommonTable({
 }) {
   let getCurrentUnix = moment().unix();
 
-
   // filtering the data which have same pool and rewardtoken address
   const newData = incentiveIds.filter(item => item.key.rewardToken !== item.key.pool);
 

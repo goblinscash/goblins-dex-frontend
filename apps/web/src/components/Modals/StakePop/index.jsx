@@ -13,7 +13,7 @@ import styles from "./StakePop.module.scss";
 import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 
-import { contractNft, ownerNft, stakedNft, updateFarm, withdrawNft } from "state/action";
+import { contractNft, multiStake, ownerNft, stakedNft, updateFarm, withdrawNft } from "state/action";
 import ActiveStakingTable from "./ActiveStakingTable";
 
 const customOption = (props) => (
@@ -101,8 +101,8 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
             chainId: wallet.chainId,
             type: "Deposit",
             tokenId: tokenId,
-            walletAddress: wallet.address,
-            incentiveId: detail.incentiveId,
+            wallet: wallet.address,
+            farmId: detail._id,
             isMutliStake: false,
           },
         })
@@ -149,7 +149,6 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       );
       setLoading(false);
       handleStake();
-
     } catch (error) {
       setLoading(false);
 
@@ -177,14 +176,14 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       await web3.multiStakeWithMultiCall(makeKeys, tokenId);
 
       dispatch(
-        updateFarm({
+        multiStake({
           data: {
             chainId: wallet.chainId,
-            type: "Deposit",
+            type: "MultiStake",
             tokenId: tokenId,
-            walletAddress: wallet.address,
-            isMutliStake: true,
+            wallet: wallet.address,
             incentiveId: selectedFarm.map((data) => data.incentiveId),
+            farmId: selectedFarm.map((data) => data._id)
           },
         })
       );
@@ -213,7 +212,6 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
 
       setLoading(false);
       handleStake();
-
     } catch (error) {
       setLoading(false);
 

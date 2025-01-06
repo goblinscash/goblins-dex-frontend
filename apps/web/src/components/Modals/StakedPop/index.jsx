@@ -13,7 +13,7 @@ import styles from "./StakePop.module.scss";
 import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 
-import {  stakedNft, updateMyFarm, withdrawNft } from "state/action";
+import { stakedNft, unstakeMultiFarm, updateMyFarm, withdrawNft } from "state/action";
 
 const customOption = (props) => (
   <div className="custom-option flex items-center py-2" {...props.innerProps}>
@@ -86,23 +86,27 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
         data.key.refundee,
       ]);
 
-    if(isClaimAll){
-      await web3.mutliCallClaimAll(makeKeys, tokenId, wallet.address);
-      toast.success(`Successfully Claim All.`);
-    }else{
-      await web3.mutliCallUnstakeAll(makeKeys, tokenId, wallet.address);
+      if (isClaimAll) {
+        await web3.mutliCallClaimAll(makeKeys, tokenId, wallet.address);
+        toast.success(`Successfully Claim All.`);
+      } else {
+        await web3.mutliCallUnstakeAll(makeKeys, tokenId, wallet.address);
 
-      toast.success(`#${tokenId} unstaked from all farms`);
-    }
+        toast.success(`#${tokenId} unstaked from all farms`);
+      }
 
       setLoading(false);
       handleStaked();
       setActiveTab(1);
 
       dispatch(
-        updateMyFarm({
-          chainId: wallet.chainId,
-          walletAddress: wallet.address,
+        unstakeMultiFarm({
+          data: {
+            type: "unstakesFarm",
+            chainId: wallet.chainId,
+            wallet: wallet.address,
+            tokenId: tokenId
+          }
         })
       );
 
@@ -150,6 +154,9 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
         <div
           className={`${styles.modalDialog} modalDialog p-2 relative mx-auto rounded-lg z-10`}
         >
+          <button onClick={handleMultiUnStakeAction}>
+            Jadoo
+          </button>
           <button
             onClick={handleStaked}
             disabled={loading}
@@ -200,8 +207,8 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
                             {stakedNftLoading && !tokenIds.length
                               ? "NFT Loading..."
                               : !tokenIds.length
-                              ? "No Nft Found"
-                              : "Select NFT Token Id"}
+                                ? "No Nft Found"
+                                : "Select NFT Token Id"}
                           </label>
 
                           {!loading && !tokenIds.length ? (
@@ -239,7 +246,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
                               <span className=""> Please wait...</span>
                             </div>
                           ) : (
-                            isClaimAll ? "Claim" :"UnStake" 
+                            isClaimAll ? "Claim" : "UnStake"
                           )
                           }
                         </button>

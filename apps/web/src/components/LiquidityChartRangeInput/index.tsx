@@ -160,7 +160,6 @@ function InfoBox({ message, icon }: { message?: ReactNode; icon: ReactNode }) {
 
   const isUninitialized = !currencyA || !currencyB || (formattedData === undefined && !isLoading)
 
-
   return (
     <AutoColumn gap="md" style={{ minHeight: '200px' }}>
       {isUninitialized ? (

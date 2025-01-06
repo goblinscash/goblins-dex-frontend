@@ -13,8 +13,8 @@ import logo from "assets/farmingAssets/Images/logo.png";
 import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 import { getCheckSumAddress } from "helpers/utils";
-import { updateFarm } from "state/action";
-import { TablePool, useTopPools } from 'graphql/thegraph/TopPools'
+import { createFarm } from "state/action";
+import { useTopPools } from 'graphql/thegraph/TopPools'
 import { GOBAddress } from "helpers/constants";
 
 
@@ -175,9 +175,9 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
         fields.rewardAddress
       );
 
-      // Dispatch the update for the farm
+      // Dispatch the create farm
       dispatch(
-        updateFarm({
+        createFarm({
           data: {
             chainId: wallet.chainId,
             type: "Create",
@@ -288,7 +288,6 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
                         onChange={handleChange}
                         required
                       />
-
 
                       <button
                         type="button"
