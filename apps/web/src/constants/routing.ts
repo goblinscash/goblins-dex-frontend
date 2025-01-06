@@ -314,5 +314,31 @@ export const SET_INTERFACE_FEE_FOR_PAIRS: FeePairs = {
       fee: 0,
     },
   ],
-  [ChainId.BASE]: []
+  [ChainId.BASE]: [
+    {
+      tokenA: "ETH",
+      tokenB: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", // USDC
+      fee: 0,
+    },
+    {
+      tokenA: "ETH",
+      tokenB: "0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F", // uBCH
+      fee: 0,
+    },
+    {
+      tokenA: "0x4200000000000000000000000000000000000006", //WETH
+      tokenB: "0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F", // uBCH
+      fee: 0,
+    },
+    {
+      tokenA: "0x4200000000000000000000000000000000000006", //WETH
+      tokenB: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", // USDC
+      fee: 0,
+    },
+    {
+      tokenA: "0x7bE0Cc2cADCD4A8f9901B4a66244DcDd9Bd02e0F", //uBCH
+      tokenB: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", // USDC
+      fee: 0,
+    },
+  ]
 }
