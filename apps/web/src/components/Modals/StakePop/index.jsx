@@ -15,6 +15,7 @@ import Web3Intraction from "utils/web3Intraction";
 
 import { contractNft, multiStake, ownerNft, stakedNft, updateFarm, withdrawNft } from "state/action";
 import ActiveStakingTable from "./ActiveStakingTable";
+import Loader2 from "components/Loader/Loader2";
 
 const customOption = (props) => (
   <div className="custom-option flex items-center py-2" {...props.innerProps}>
@@ -52,6 +53,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
 
   const [tokenId, setTokenId] = useState(null);
   const [farmList, setfarmList] = useState(null);
+  const [loadInteraction, setLoadInteraction] = useState(false)
 
   const handleChange = (token) => {
     // console.log(token.value, "<===val");
@@ -82,6 +84,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
     try {
       e.preventDefault();
       if (validateSubmit()) return;
+      setLoadInteraction(true)
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
 
       setLoading(true);
@@ -89,6 +92,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
 
       if (getPool.toLowerCase() !== detail.key.pool) {
         setLoading(false);
+        setLoadInteraction(false)
         return toast.error(
           `Nft Pool and farm pool must be same. so try to stake that nft in this pool ${getPool.toLowerCase()} Farm`
         );
@@ -149,11 +153,13 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       );
       setLoading(false);
       handleStake();
+      setLoadInteraction(false)
     } catch (error) {
       setLoading(false);
 
       toast.error(error);
       console.log(error, "<<==err");
+      setLoadInteraction(false)
     }
   };
 
@@ -164,6 +170,8 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
 
       if (!selectedFarm.length)
         return toast.error("Please select farm for multi stake!");
+
+      setLoadInteraction(true)
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       setLoading(true);
       let makeKeys = selectedFarm.map((data) => [
@@ -212,9 +220,10 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
 
       setLoading(false);
       handleStake();
+      setLoadInteraction(false)
     } catch (error) {
       setLoading(false);
-
+      setLoadInteraction(false)
       toast.error(error);
       console.log(error, "<<==err");
     }
@@ -305,6 +314,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
 
   return (
     <>
+     {loadInteraction && <Loader2 />}  
       <div
         className={`${styles.StakePop} fixed inset-0 flex items-center justify-center cstmModal`}
       >

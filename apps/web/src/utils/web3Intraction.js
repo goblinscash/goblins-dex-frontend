@@ -1298,16 +1298,13 @@ class Web3Intraction {
         )
 
         let bscSupply = 0
-        if (this.chainId == 10000) {
-          let bscDecimal = await bscInstance.decimals()
-          bscSupply = await bscInstance.totalSupply()
-          bscSupply = bscSupply.toString() / 10 ** bscDecimal;
-        }
+        // if (this.chainId == 10000) {
+        //   let bscDecimal = await bscInstance.decimals()
+        //   bscSupply = await bscInstance.totalSupply()
+        //   bscSupply = bscSupply.toString() / 10 ** bscDecimal;
+        // }
 
         let walletAddress = this.SIGNER.getAddress();
-
-
-
 
         let getRewardsContract = await contract.rewardsToken();
         let stakeToken = await this.getTokenBalance(getStakingContract);

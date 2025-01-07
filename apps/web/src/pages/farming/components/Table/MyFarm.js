@@ -9,6 +9,7 @@ import Web3Intraction from "utils/web3Intraction";
 import { useDispatch, useSelector } from "react-redux";
 import { unstakeFarm, withdrawNft } from "state/action";
 import { toast } from "react-toastify";
+import Loader2 from "components/Loader/Loader2";
 const { tokenLogos } = require("@myswap/token-list");
 
 function MyFarm({
@@ -28,6 +29,7 @@ function MyFarm({
 
   const [internalLoading, setInternalLoading] = useState(false)
 
+  const [loadInteraction, setLoadInteraction] = useState(false)
   // adding funtion to skip confirmation modal
   const handleClaim = async (e, detail) => {
     try {
@@ -58,6 +60,7 @@ function MyFarm({
       e.preventDefault();
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       setInternalLoading(true);
+      setLoadInteraction(true)
       await web3.mutliCallUnstake(
         [
           detail.key.rewardToken,
@@ -94,11 +97,14 @@ function MyFarm({
       setActiveTab(1)
       // handleConfirm();
       myFarmload();
+      setLoadInteraction(false)
     } catch (error) {
       console.log(error, "<====error");
       toast.error(error);
+      setLoadInteraction(false)
     } finally {
       setInternalLoading(false)
+      setLoadInteraction(false)
     }
   };
 
@@ -129,6 +135,7 @@ function MyFarm({
 
   return (
     <>
+    {loadInteraction && <Loader2 />}    
       <div className="py-4 text-right">
         <div className="flex items-center justify-end gap-10">
           <button

@@ -12,6 +12,7 @@ import useDebounce from "hooks/useDebounceFunction";
 import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 import { post } from "helpers/api_helper";
+import Loader2 from "components/Loader/Loader2";
 
 const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActiveTab }) => {
   const wallet = useWallet();
@@ -19,11 +20,12 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActi
   const { currentNetwork } = useSelector((state) => state.dashboard);
   const [loading, setLoading] = useState(false);
   const [tokenIds, setTokenIds] = useState(false);
+  const [loadInteraction, setLoadInteraction] = useState(false)
 
   const handleEndIncentive = async (e) => {
     try {
       e.preventDefault();
-
+      setLoadInteraction(true)
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       setLoading(true);
       await web3.endIncentive(
@@ -52,10 +54,12 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActi
       load();
       handleConfirm();
       setActiveTab(3)
+      setLoadInteraction(false)
     } catch (error) {
       console.log(error, "<====error");
       setLoading(false);
       toast.error(error);
+      setLoadInteraction(false)
     }
   };
 
@@ -138,6 +142,7 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActi
 
   return (
     <>
+    {loadInteraction && <Loader2 />}  
       <div
         className={`${styles.StakePop} fixed inset-0 flex items-center justify-center cstmModal`}
       >

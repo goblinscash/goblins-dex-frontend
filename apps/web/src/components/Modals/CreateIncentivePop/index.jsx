@@ -16,6 +16,7 @@ import { getCheckSumAddress } from "helpers/utils";
 import { createFarm } from "state/action";
 import { useTopPools } from 'graphql/thegraph/TopPools'
 import { GOBAddress } from "helpers/constants";
+import Loader2 from "components/Loader/Loader2";
 
 
 const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
@@ -34,7 +35,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
   });
   const [showSelect, setShowSelect] = useState(false);
   const [showSelect2, setShowSelect2] = useState(false);
-
+  const [loadInteraction, setLoadInteraction] = useState(false)
   const { topPools, loading: subgraphLoading, error } = useTopPools(wallet.chainId, "totalValueLockedUSD", "desc")
 
 
@@ -161,7 +162,7 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
 
       let startTimeStamp = convertToTimestamp(fields.startDate);
       let endTimeStamp = convertToTimestamp(fields.endDate);
-
+      setLoadInteraction(true)
       await web3.createIncentive(
         [
           fields.rewardAddress,
@@ -201,15 +202,18 @@ const CreateIncentivePop = ({ incentiveForm, setIncentiveForm, load }) => {
           }
         })
       );
+      setLoadInteraction(false)
     } catch (error) {
       setLoading(false);
       toast.error(error);
       console.log(error, "<<==err");
+      setLoadInteraction(false)
     }
   };
 
   return (
     <>
+    {loadInteraction && <Loader2 />} 
       <div
         className={`${styles.CreateIncentivePop} fixed inset-0 flex items-center justify-center cstmModal`}
       >

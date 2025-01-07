@@ -9,6 +9,7 @@ import styles from "./StakePop.module.scss";
 import {useWallet} from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 import {  updateFarm, withdrawNft } from "state/action";
+import Loader2 from "components/Loader/Loader2";
 
 const UnStakePopup = ({ handleConfirm, detail, myFarmload }) => {
   const wallet = useWallet();
@@ -17,10 +18,12 @@ const UnStakePopup = ({ handleConfirm, detail, myFarmload }) => {
   const { currentNetwork } = useSelector((state) => state.dashboard);
 
   const [loading, setLoading] = useState(false);
+  const [loadInteraction, setLoadInteraction] = useState(false)
 
   const handleunStake = async (e) => {
     try {
       e.preventDefault();
+      setLoadInteraction(true)
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       setLoading(true);
       await web3.mutliCallUnstake(
@@ -58,15 +61,18 @@ const UnStakePopup = ({ handleConfirm, detail, myFarmload }) => {
       setLoading(false);
       handleConfirm();
       myFarmload();
+      setLoadInteraction(false)
     } catch (error) {
       console.log(error, "<====error");
       setLoading(false);
       toast.error(error);
+      setLoadInteraction(false)
     }
   };
 
   return (
     <>
+    {loadInteraction && <Loader2 />}  
       <div
         className={`${styles.StakePop} fixed inset-0 flex items-center justify-center cstmModal`}
       >

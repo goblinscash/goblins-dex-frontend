@@ -14,6 +14,8 @@ import { useWallet } from "hooks/useWallet";
 import Web3Intraction from "utils/web3Intraction";
 
 import { stakedNft, unstakeMultiFarm, updateMyFarm, withdrawNft } from "state/action";
+import { truncate } from "fs";
+import Loader2 from "components/Loader/Loader2";
 
 const customOption = (props) => (
   <div className="custom-option flex items-center py-2" {...props.innerProps}>
@@ -37,7 +39,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
 
   const { currentNetwork } = useSelector((state) => state.dashboard);
   const { stakedNftlist, stakedNftLoading } = useSelector((state) => state.nft);
-
+  const [loadInteraction, setLoadInteraction] = useState(false)
   const [loading, setLoading] = useState(false);
 
   const [tokenIds, setTokenIds] = useState(stakedNftlist);
@@ -78,6 +80,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
 
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       setLoading(true);
+      setLoadInteraction(true)
       let makeKeys = getTokenFarms.map((data) => [
         data.key.rewardToken,
         data.key.pool,
@@ -128,11 +131,13 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
 
         })
       );
+      setLoadInteraction(false)
     } catch (error) {
       setLoading(false);
 
       toast.error(error);
       console.log(error, "<<==err");
+      setLoadInteraction(false)
     }
   };
 
@@ -147,6 +152,7 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
 
   return (
     <>
+    {loadInteraction && <Loader2 />}  
       <div
         className={`${styles.StakePop} fixed inset-0 flex items-center justify-center cstmModal`}
       >
