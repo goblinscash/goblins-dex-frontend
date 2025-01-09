@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 
 import { OrderDirection, Pool_OrderBy, Token, useTopPoolsQuery } from './__generated__/types-and-hooks'
 import { chainToApolloClient } from './apollo'
+import { element } from 'nft/css/reset.css'
 
 gql`
   query TopPools($orderBy: Pool_orderBy, $orderDirection: OrderDirection) {
@@ -49,7 +50,6 @@ export function useTopPools(
 ) {
 
 
-  // console.log(chainId, orderBy,orderDirection, "<======props")
   const apolloClient = chainToApolloClient[chainId || ChainId.MAINNET]
 
   const { loading, error, data } = useTopPoolsQuery({
@@ -57,6 +57,16 @@ export function useTopPools(
     fetchPolicy: 'no-cache',
     variables: { orderBy, orderDirection },
   })
+
+  if (data?.pools && data?.pools?.length) {
+    data.pools.forEach((element) => {
+      //@ts-ignore
+      const totalVolumeUsd = element?.poolDayData.reduce((acc: number, item: { volumeUSD: string }) => {
+        return acc + parseFloat(item.volumeUSD);
+      }, 0);
+      element.volumeUSD = totalVolumeUsd
+    })  
+  }
 
   return useMemo(() => {
     const topPools: TablePool[] | undefined = data?.pools

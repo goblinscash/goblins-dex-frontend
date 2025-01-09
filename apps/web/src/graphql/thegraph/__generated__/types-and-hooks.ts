@@ -5886,7 +5886,7 @@ export const TopPoolsDocument = gql`
     orderBy: $orderBy
     orderDirection: $orderDirection
     subgraphError: allow
-    where: { totalValueLockedUSD_gt: 100}
+    where: {totalValueLockedUSD_gt: 100} 
   ) {
     id
     txCount
@@ -5900,6 +5900,10 @@ export const TopPoolsDocument = gql`
     token1 {
       id
       symbol
+    }
+    poolDayData(first:1000, where:{date_not_in:[1728000000,1728172800 ]}){
+      volumeUSD
+      date
     }
     
   }
