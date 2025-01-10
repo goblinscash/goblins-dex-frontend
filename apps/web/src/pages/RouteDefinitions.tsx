@@ -106,7 +106,7 @@ export const routes: RouteDefinition[] = [
     path: '/',
     getTitle: () => t`Goblins | Trade crypto & NFTs safely on the top DeFi exchange`,
     getElement: (args) => {
-      return args.browserRouterEnabled && args.hash ? <Navigate to={args.hash.replace('#', '')} replace /> : <Explore />
+      return args.browserRouterEnabled && args.hash ? <Navigate to={args.hash.replace('', '')} replace /> : <Explore />
     },
   }),
   createRouteDefinition({

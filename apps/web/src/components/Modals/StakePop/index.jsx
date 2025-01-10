@@ -57,7 +57,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
 
   const handleChange = (token) => {
     // console.log(token.value, "<===val");
-    setTokenId(token.value);
+    setTokenId(token?.value);
   };
 
   const validateSubmit = () => {

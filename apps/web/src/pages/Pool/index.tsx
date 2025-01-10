@@ -197,6 +197,7 @@ export default function Pool() {
 
   const { positions, loading: positionsLoading } = useV3Positions(account)
 
+
   const [openPositions, closedPositions] = positions?.reduce<[PositionDetails[], PositionDetails[]]>(
     (acc, p) => {
       acc[p.liquidity?.isZero() ? 1 : 0].push(p)
@@ -204,6 +205,9 @@ export default function Pool() {
     },
     [[], []]
   ) ?? [[], []]
+
+
+  // console.log(positions?.length, "positionspositions", openPositions)
 
   const userSelectedPositionSet = useMemo(
     () => [...openPositions, ...(userHideClosedPositions ? [] : closedPositions)],

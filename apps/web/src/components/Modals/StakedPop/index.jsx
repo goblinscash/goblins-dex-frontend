@@ -160,9 +160,6 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
         <div
           className={`${styles.modalDialog} modalDialog p-2 relative mx-auto rounded-lg z-10`}
         >
-          <button onClick={handleMultiUnStakeAction}>
-            Jadoo
-          </button>
           <button
             onClick={handleStaked}
             disabled={loading}
