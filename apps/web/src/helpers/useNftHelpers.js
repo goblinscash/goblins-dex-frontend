@@ -160,12 +160,12 @@ export const loadStakeTokenIds = async (walletAddress, web3) => {
     return tokens;
 };
 
-export const loadUserNft = async (positions, web3) => {
+export const loadUserNft = async (positions, web3, status) => {
     const tokens = []
     try {
         for (let index = 0; index < positions.length; index++) {
             const element = positions[index];
-            const tokenId = parseInt(element.tokenId)
+            const tokenId = status ? parseInt(element.tokenId) : element
             let tokenURI = await web3.getTokenURI(tokenId);
 
             let base64String = tokenURI.replace(

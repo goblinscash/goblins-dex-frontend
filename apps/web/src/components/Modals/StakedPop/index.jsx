@@ -16,6 +16,7 @@ import Web3Intraction from "utils/web3Intraction";
 import { stakedNft, unstakeMultiFarm, updateMyFarm, withdrawNft } from "state/action";
 import { truncate } from "fs";
 import Loader2 from "components/Loader/Loader2";
+import { loadUserNft } from "helpers/useNftHelpers";
 
 const customOption = (props) => (
   <div className="custom-option flex items-center py-2" {...props.innerProps}>
@@ -38,16 +39,15 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
   const dispatch = useDispatch();
 
   const { currentNetwork } = useSelector((state) => state.dashboard);
-  const { stakedNftlist, stakedNftLoading } = useSelector((state) => state.nft);
+  // const { stakedNftlist, stakedNftLoading } = useSelector((state) => state.nft);
   const [loadInteraction, setLoadInteraction] = useState(false)
   const [loading, setLoading] = useState(false);
-
-  const [tokenIds, setTokenIds] = useState(stakedNftlist);
+  const [loadingNft, setLoadingNft] = useState(true);
+  const [tokenIds, setTokenIds] = useState([]);
 
   const [tokenId, setTokenId] = useState(null);
 
   const handleChange = (token) => {
-    // console.log(token.value, "<===val");
     setTokenId(token.value);
   };
 
@@ -76,7 +76,8 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
       e.preventDefault();
       if (validateSubmit()) return;
 
-      let getTokenFarms = myFarm.filter((farm) => farm.tokenId === tokenId);
+      let getTokenFarms = myFarm.filter((farm) => parseInt(farm.tokenId) === tokenId);
+
 
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       setLoading(true);
@@ -143,13 +144,24 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setTokenIds(stakedNftlist);
+      // setTokenIds(stakedNftlist);
       setTokenId(null);
-
-      // if(activeTabNew ==1)
+      if (myFarm?.length) {
+        loadNFT()
+      }
     }
-  }, []);
+  }, [myFarm]);
 
+
+  const loadNFT = async () => {
+    setLoadingNft(true)
+    const ids = myFarm.map((item) => parseInt(item.tokenId))
+
+    const web3 = new Web3Intraction(currentNetwork, wallet?.provider);
+    const nfts = await loadUserNft(ids, web3, false)
+    setTokenIds(nfts)
+    setLoadingNft(false)
+  }
   return (
     <>
     {loadInteraction && <Loader2 />}  
@@ -207,14 +219,14 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
                             htmlFor=""
                             className="form-label    px-2 z-10 text-white"
                           >
-                            {stakedNftLoading && !tokenIds.length
+                            {loadingNft && !tokenIds?.length
                               ? "NFT Loading..."
                               : !tokenIds.length
                                 ? "No Nft Found"
                                 : "Select NFT Token Id"}
                           </label>
 
-                          {!loading && !tokenIds.length ? (
+                          {!loading && !tokenIds?.length ? (
                             ""
                           ) : (
                             <>
