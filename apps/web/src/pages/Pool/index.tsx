@@ -206,9 +206,6 @@ export default function Pool() {
     [[], []]
   ) ?? [[], []]
 
-
-  // console.log(positions?.length, "positionspositions", openPositions)
-
   const userSelectedPositionSet = useMemo(
     () => [...openPositions, ...(userHideClosedPositions ? [] : closedPositions)],
     [closedPositions, openPositions, userHideClosedPositions]

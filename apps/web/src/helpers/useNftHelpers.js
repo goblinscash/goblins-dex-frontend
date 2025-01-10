@@ -38,9 +38,9 @@ export const loadWalletTokenIds = async (walletAddress, web3) => {
 };
 
 
-export const loadContractTokenIds = async ( walletAddress, web3) => {
+export const loadContractTokenIds = async (walletAddress, web3) => {
     let tokens = [];
-  
+
     for (let i = 0; i < 10000; i++) {
         try {
             let tokenId = await web3.getTokenId(
@@ -79,7 +79,7 @@ export const loadContractTokenIds = async ( walletAddress, web3) => {
 };
 
 
-export const loadWithdrawTokenIds = async ( walletAddress, web3) => {
+export const loadWithdrawTokenIds = async (walletAddress, web3) => {
     let tokens = [];
 
     for (let i = 0; i < 10000; i++) {
@@ -120,7 +120,7 @@ export const loadWithdrawTokenIds = async ( walletAddress, web3) => {
     return tokens;
 };
 
-export const loadStakeTokenIds = async ( walletAddress, web3) => {
+export const loadStakeTokenIds = async (walletAddress, web3) => {
     let tokens = [];
 
     for (let i = 0; i < 10000; i++) {
@@ -159,3 +159,33 @@ export const loadStakeTokenIds = async ( walletAddress, web3) => {
 
     return tokens;
 };
+
+export const loadUserNft = async (positions, web3) => {
+    const tokens = []
+    try {
+        for (let index = 0; index < positions.length; index++) {
+            const element = positions[index];
+            const tokenId = parseInt(element.tokenId)
+            let tokenURI = await web3.getTokenURI(tokenId);
+
+            let base64String = tokenURI.replace(
+                /^data:application\/json;base64,/,
+                ""
+            );
+
+            const decodedStr = Buffer.from(base64String, "base64").toString(
+                "utf-8"
+            );
+            const decodedData = JSON.parse(decodedStr);
+            tokens.push({
+                ...decodedData,
+                value: tokenId,
+                label: decodedData.name + ` (#${tokenId})`,
+            });
+        }
+    } catch (error) {
+        console.log(error, "<====error in loadWalletTokenIds");
+    }
+
+    return tokens
+}

@@ -16,6 +16,8 @@ import Web3Intraction from "utils/web3Intraction";
 import { contractNft, multiStake, ownerNft, stakedNft, updateFarm, withdrawNft } from "state/action";
 import ActiveStakingTable from "./ActiveStakingTable";
 import Loader2 from "components/Loader/Loader2";
+import { useV3Positions } from "hooks/useV3Positions";
+import { loadUserNft } from "helpers/useNftHelpers";
 
 const customOption = (props) => (
   <div className="custom-option flex items-center py-2" {...props.innerProps}>
@@ -54,6 +56,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
   const [tokenId, setTokenId] = useState(null);
   const [farmList, setfarmList] = useState(null);
   const [loadInteraction, setLoadInteraction] = useState(false)
+  const [loadingNft, setLoadingNft] = useState(true);
 
   const handleChange = (token) => {
     // console.log(token.value, "<===val");
@@ -276,13 +279,13 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
     }
   };
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setSingleStakeTokenIds(ownerNftlist);
- 
-      // if(activeTabNew ==1)
-    }
-  }, [ownerNftlist]);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     setSingleStakeTokenIds(ownerNftlist);
+
+  //     // if(activeTabNew ==1)
+  //   }
+  // }, [ownerNftlist]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -311,10 +314,33 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
     setActiveTabNew(tab);
   };
 
+  const { positions } = useV3Positions(wallet?.address)
+
+  const [openPositions] = positions?.reduce(
+    (acc, p) => {
+      acc[p.liquidity?.isZero() ? 1 : 0].push(p)
+      return acc
+    },
+    [[], []]
+  ) ?? [[], []]
+
+  useEffect(() => {
+    if (openPositions?.length) {
+      loadNFT()
+    }
+  }, [openPositions])
+
+  const loadNFT = async () => {
+    setLoadingNft(true)
+    const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+    const nfts = await loadUserNft(openPositions, web3)
+    setSingleStakeTokenIds(nfts)
+    setLoadingNft(false)
+  }
 
   return (
     <>
-     {loadInteraction && <Loader2 />}  
+      {loadInteraction && <Loader2 />}
       <div
         className={`${styles.StakePop} fixed inset-0 flex items-center justify-center cstmModal`}
       >
@@ -391,7 +417,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                             htmlFor=""
                             className="form-label    px-2 z-10 text-white"
                           >
-                            {ownerNftLoading && !singleStakeTokenIds.length
+                            {loadingNft && !singleStakeTokenIds.length
                               ? "NFT Loading..."
                               : !singleStakeTokenIds.length
                                 ? "No Nft Found"
@@ -408,7 +434,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                                   // menuIsOpen
                                   value={singleStakeTokenIds.find(
                                     (data) => data.value == tokenId
-                                  )|| null}
+                                  ) || null}
                                   options={singleStakeTokenIds}
                                   components={{ Option: customOption }}
                                   menuPortalTarget={document.body}
