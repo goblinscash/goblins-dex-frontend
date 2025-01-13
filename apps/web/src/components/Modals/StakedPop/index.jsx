@@ -156,9 +156,9 @@ const StakedPop = ({ handleStaked, myFarm, setActiveTab, isClaimAll }) => {
   const loadNFT = async () => {
     setLoadingNft(true)
     const ids = myFarm.map((item) => parseInt(item.tokenId))
-
+    const id = [...new Set(ids)];
     const web3 = new Web3Intraction(currentNetwork, wallet?.provider);
-    const nfts = await loadUserNft(ids, web3, false)
+    const nfts = await loadUserNft(id, web3, false)
     setTokenIds(nfts)
     setLoadingNft(false)
   }
