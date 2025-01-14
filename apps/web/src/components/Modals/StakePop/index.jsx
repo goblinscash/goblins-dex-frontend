@@ -333,7 +333,10 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
   const loadNFT = async () => {
     setLoadingNft(true)
     const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+    console.log(openPositions, "openPositions")
     const nfts = await loadUserNft(openPositions, web3, true)
+    console.log(nfts, "openPositions ++")
+
     setSingleStakeTokenIds(nfts)
     setLoadingNft(false)
   }
