@@ -18,6 +18,7 @@ import ActiveStakingTable from "./ActiveStakingTable";
 import Loader2 from "components/Loader/Loader2";
 import { useV3Positions } from "hooks/useV3Positions";
 import { loadUserNft } from "helpers/useNftHelpers";
+import { wait } from "lib/hooks/transactions/retry";
 
 const customOption = (props) => (
   <div className="custom-option flex items-center py-2" {...props.innerProps}>
@@ -327,16 +328,15 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
   useEffect(() => {
     if (openPositions?.length) {
       loadNFT()
+    } else {
+      wait(3000).then(() => setLoadingNft(false))      
     }
   }, [openPositions])
 
   const loadNFT = async () => {
     setLoadingNft(true)
     const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-    console.log(openPositions, "openPositions")
     const nfts = await loadUserNft(openPositions, web3, true)
-    console.log(nfts, "openPositions ++")
-
     setSingleStakeTokenIds(nfts)
     setLoadingNft(false)
   }
@@ -420,11 +420,11 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                             htmlFor=""
                             className="form-label    px-2 z-10 text-white"
                           >
-                            {loadingNft && !singleStakeTokenIds.length
+                            {loadingNft
                               ? "NFT Loading..."
-                              : !singleStakeTokenIds.length
-                                ? "No Nft Found"
-                                : "Select NFT Token Id"}
+                              : singleStakeTokenIds.length
+                                ? "Select NFT Token Id"
+                                : "No NFT Found"}
                           </label>
 
                           {!singleStakeTokenIds.length ? (
