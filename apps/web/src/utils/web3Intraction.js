@@ -660,6 +660,7 @@ class Web3Intraction {
           "unstakeToken",
           [keys, tokenId]
         );
+        
         let multicallMethod = getRewards.secondsInsideX128.toString() > 0 ? [unStakeToken, claimReward] : [unStakeToken]
         const multicallData = contract.interface.encodeFunctionData(
           "multicall",

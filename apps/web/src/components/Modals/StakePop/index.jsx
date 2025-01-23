@@ -64,6 +64,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
     setTokenId(token?.value);
   };
 
+  var isloaded = false
   const validateSubmit = () => {
     if (!wallet.address) {
       // await wallet.connect();
@@ -326,20 +327,23 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
   ) ?? [[], []]
 
   useEffect(() => {
+   if(loadingNft){
     if (openPositions?.length) {
       loadNFT()
     } else {
-      wait(3000).then(() => setLoadingNft(false))      
+      wait(3000).then(() => setLoadingNft(false))
     }
+   }
   }, [openPositions])
 
   const loadNFT = async () => {
-    setLoadingNft(true)
-    const web3 = new Web3Intraction(currentNetwork, wallet.provider);
-    const nfts = await loadUserNft(openPositions, web3, true)
-    setSingleStakeTokenIds(nfts)
-    setLoadingNft(false)
+      setLoadingNft(true)
+      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+      const nfts = await loadUserNft(openPositions, web3, true)
+      setSingleStakeTokenIds(nfts)
+      setLoadingNft(false)
   }
+  console.log(isloaded, "isloadedisloaded")
 
   return (
     <>
@@ -385,7 +389,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
             >
               {activeTabNew === 2 && loading ? "Loading..." : "Single Stake"}
             </button>
-            <button
+            {/* <button
               style={{ minWidth: 100 }}
               // key={key}
               onClick={() => showTab(2)}
@@ -394,7 +398,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                 } tab-button    relative text-white py-2 flex-shrink-0 text-base px-3 capitalize rounded text-gray-500`}
             >
               {activeTabNew === 1 && loading ? "Loading..." : "Multi Stake"}
-            </button>
+            </button> */}
           </div>
           <div className={`${styles.tabContent} tabContent pt-3`}>
             <div

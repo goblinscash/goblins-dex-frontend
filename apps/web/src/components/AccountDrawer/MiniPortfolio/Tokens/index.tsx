@@ -37,7 +37,6 @@ export default function Tokens({ account }: { account: string }) {
     () => splitHiddenTokens(tokenBalances ?? [], { hideSmallBalances, hideSpam }),
     [hideSmallBalances, tokenBalances, hideSpam]
   )
-
   if (!data) {
     return <PortfolioSkeleton />
   }
@@ -49,6 +48,7 @@ export default function Tokens({ account }: { account: string }) {
 
   const toggleHiddenTokens = () => setShowHiddenTokens((showHiddenTokens) => !showHiddenTokens)
 
+ 
   return (
     <PortfolioTabWrapper>
       {visibleTokens.map(

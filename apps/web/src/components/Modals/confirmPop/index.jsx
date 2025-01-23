@@ -28,6 +28,7 @@ const ConfirmPopup = ({ handleConfirm, detail, load, isRestake, isClaim, setActi
       setLoadInteraction(true)
       const web3 = new Web3Intraction(currentNetwork, wallet.provider);
       setLoading(true);
+      
       await web3.endIncentive(
         [
           detail.key.rewardToken,

@@ -148,7 +148,7 @@ function MyFarm({
           </button>
           {incentiveIds.length > 0 && (
             <>
-              <button
+              {/* <button
                 type="button"
                 onClick={(e) => handleStaked(null)}
                 disabled={isBlocked}
@@ -164,7 +164,7 @@ function MyFarm({
                 className=" commonBtn  mx-auto inline-flex items-center justify-end btn m-0"
               >
                 Claim All
-              </button>
+              </button> */}
             </>
           )}
         </div>
