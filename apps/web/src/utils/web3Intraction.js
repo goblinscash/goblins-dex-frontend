@@ -528,7 +528,7 @@ class Web3Intraction {
         );
         const multicallData = contract.interface.encodeFunctionData(
           "multicall",
-          [[unStakeToken, stakeToken, claimReward]]
+          [[unStakeToken, claimReward, stakeToken]]
         );
         const tx = {
           to: this.contractDetails?.contractAddress,
@@ -661,11 +661,17 @@ class Web3Intraction {
           [keys, tokenId]
         );
         
-        let multicallMethod = getRewards.secondsInsideX128.toString() > 0 ? [unStakeToken, claimReward] : [unStakeToken]
+        const withdrawToken = await contract.interface.encodeFunctionData(
+          "withdrawToken",
+          [tokenId, walletAddress, "0x"]
+        );
+
+        let multicallMethod = getRewards.secondsInsideX128.toString() > 0 ? [unStakeToken, claimReward, withdrawToken] : [unStakeToken, withdrawToken]
         const multicallData = contract.interface.encodeFunctionData(
           "multicall",
           [multicallMethod]
         );
+
 
         const tx = {
           to: this.contractDetails?.contractAddress,

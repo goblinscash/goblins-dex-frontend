@@ -159,6 +159,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       setLoading(false);
       handleStake();
       setLoadInteraction(false)
+      setLoadingNft(true)
     } catch (error) {
       setLoading(false);
 
