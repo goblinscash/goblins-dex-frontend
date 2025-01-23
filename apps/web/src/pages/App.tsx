@@ -175,7 +175,7 @@ export default function App() {
   },[pathname])
 
   useEffect(() => {
-    dispatch(detactCountryIp());
+    // dispatch(detactCountryIp());
   }, []);
 
   if (shouldRedirectToAppInstall) {
