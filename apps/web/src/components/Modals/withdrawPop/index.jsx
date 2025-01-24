@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Select from "react-select";
@@ -80,6 +80,28 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
     }
   };
 
+
+  const loadWithdrawNfts = async (e) => {
+    try {
+      const web3 = new Web3Intraction(currentNetwork, wallet.provider);
+
+      dispatch(
+        withdrawNft({
+          chainId: wallet.chainId,
+          walletAddress: wallet.address,
+          withdrawNft: true,
+          web3: web3
+
+        })
+      );
+    } catch (error) {
+      console.log(error, "<<==err");
+    }
+  };
+
+  useEffect(() => {
+    loadWithdrawNfts()
+  }, [])
   return (
     <>
       <div
@@ -96,7 +118,6 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
 
             <button
               onClick={handleWithdrawPop}
-              disabled={loading || reduxLoading}
               className="m-0 border-0 p-0 transparent    text-gray-400 "
             >
               <svg
