@@ -330,7 +330,9 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
    if(loadingNft){
     if (openPositions?.length) {
       loadNFT()
-    } 
+    } else {
+      wait(5000).then(() => setLoadingNft(false))
+    }
    }
   }, [openPositions])
 
