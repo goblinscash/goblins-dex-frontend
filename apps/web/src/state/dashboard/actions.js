@@ -19,15 +19,16 @@ export const detactCountryIp = createAsyncThunk(
   "detactCountryIp",
   async (payload, Thunk) => {
     try {
-      const response = await axios.get(`https://ipapi.co/json/`);
+      return false
+      // const response = await axios.get(`https://ipapi.co/json/`);
 
 
-      const { country_name, country_code } = response.data;
-      if (["USA","US"].includes(country_code)) {
-        return true;
-      } else {
-        return false;
-      }
+      // const { country_name, country_code } = response.data;
+      // if (["USA","US"].includes(country_code)) {
+      //   return true;
+      // } else {
+      //   return false;
+      // }
     } catch (error) {
 
       

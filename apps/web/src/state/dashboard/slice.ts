@@ -47,7 +47,7 @@ const slice = createSlice({
     builder.addCase(Act.detactCountryIp.fulfilled, (state, { payload }) => ({
       ...state,
       loading: false,
-      isBlocked: payload,
+      isBlocked: false,
       ipPop: payload,
     }));
     builder.addCase(Act.detactCountryIp.rejected, (state, action) => ({

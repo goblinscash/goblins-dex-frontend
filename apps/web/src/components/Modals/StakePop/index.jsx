@@ -64,7 +64,6 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
     setTokenId(token?.value);
   };
 
-  var isloaded = false
   const validateSubmit = () => {
     if (!wallet.address) {
       // await wallet.connect();
@@ -332,7 +331,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
     if (openPositions?.length) {
       loadNFT()
     } else {
-      wait(3000).then(() => setLoadingNft(false))
+      wait(4000).then(() => setLoadingNft(false))
     }
    }
   }, [openPositions])
@@ -344,7 +343,6 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
       setSingleStakeTokenIds(nfts)
       setLoadingNft(false)
   }
-  console.log(isloaded, "isloadedisloaded")
 
   return (
     <>
@@ -459,7 +457,7 @@ const StakePop = ({ handleStake, detail, setActiveTab, activeFarm }) => {
                       <div className="col-span-12">
                         <button
                           type="submit"
-                          disabled={ownerNftLoading || loading || !singleStakeTokenIds.length}
+                          disabled={loading || !singleStakeTokenIds.length}
                           className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                         >
                           {loading ? (

@@ -118,7 +118,7 @@ export default function App() {
   const originCountry = useAppSelector((state: AppState) => state.user.originCountry)
   const renderUkBannner = Boolean(originCountry) && originCountry === 'GB'
 
-
+console.log(renderUkBannner, "+++")
   useEffect(() => {
     window.scrollTo(0, 0)
     setScrollY(0)
