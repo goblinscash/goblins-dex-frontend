@@ -520,8 +520,10 @@ const Dashboard = () => {
                 <div className="right flex items-center gap-2">
                   <button
                     onClick={handleIncentiveForm}
-                    className="flex items-center justify-center btn commonBtn"
-                    disabled={isBlocked}
+                    className="flex items-center justify-center btn"
+                    // className="flex items-center justify-center btn commonBtn"
+                    style={{ background: "#74767b" }}
+                    disabled={true}
                   >
                     Create Farm
                   </button>
