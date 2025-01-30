@@ -100,8 +100,10 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
   };
 
   useEffect(() => {
-    loadWithdrawNfts()
-  }, [])
+    if (wallet?.address) {
+      loadWithdrawNfts()
+    }
+  }, [wallet])
   return (
     <>
       <div
@@ -182,7 +184,7 @@ const WithdrawPop = ({ handleWithdrawPop }) => {
                   <div className="col-span-12">
                     <button
                       type="submit"
-                      disabled={loading || reduxLoading}
+                      disabled={loading}
                       className=" commonBtn    mx-auto flex items-center justify-center btn w-full"
                     >
                       {loading ? (
