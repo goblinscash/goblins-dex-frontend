@@ -80,6 +80,7 @@ function MyFarm({
             type: "Unstake",
             wallet: wallet.address,
             farmId: detail._id,
+            tokenId: detail?.tokenId?.toString()
           },
         })
       );
