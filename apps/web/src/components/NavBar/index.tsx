@@ -27,6 +27,7 @@ import { MenuDropdown } from './MenuDropdown'
 import { More } from './More'
 import { SearchBar } from './SearchBar'
 import * as styles from './style.css'
+import CountdownTimer from 'components/Timer/Timer'
 
 const Nav = styled.nav`
   padding: ${({ theme }) => `${theme.navVerticalPad}px 12px`};
@@ -173,6 +174,11 @@ const Navbar = ({ blur }: { blur: boolean }) => {
             )}
             <Row display={{ sm: 'none', lg: 'flex' }}>
               <PageTabs />
+              <div>
+
+              <p style={{margin: 0, fontSize: 12 , textAlign: "center"}}>Aerodrome Fork on BSC – Coming Soon!</p>
+              <CountdownTimer targetDate='2025-06-01T23:59:59' />
+              </div>
             </Row>
           </Box>
           {/* <Box
