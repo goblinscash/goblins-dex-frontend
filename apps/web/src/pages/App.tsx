@@ -19,7 +19,7 @@ import { StatsigProvider, StatsigUser } from 'statsig-react'
 import styled from 'styled-components'
 import DarkModeQueryParamReader from 'theme/components/DarkModeQueryParamReader'
 import { useIsDarkMode } from 'theme/components/ThemeToggle'
-import { flexRowNoWrap } from 'theme/styles'
+import { flexColumnNoWrap, flexRowNoWrap } from 'theme/styles'
 import { Z_INDEX } from 'theme/zIndex'
 import { STATSIG_DUMMY_KEY } from 'tracing'
 import { isPathBlocked } from 'utils/blockedPaths'
@@ -81,7 +81,8 @@ const MobileBottomBar = styled.div`
 `
 
 const HeaderWrapper = styled.div<{ transparent?: boolean; bannerIsVisible?: boolean; scrollY: number }>`
-  ${flexRowNoWrap};
+  // ${flexRowNoWrap};
+  ${flexColumnNoWrap};
   background-color: ${({ theme, transparent }) => !transparent && theme.surface1};
   border-bottom: ${({ theme, transparent }) => !transparent && `1px solid ${theme.surface3}`};
   width: 100%;

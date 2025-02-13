@@ -58,7 +58,8 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
 export const TimerWrapper = styled.div`
   display: flex;
   gap: 5px;
-  align-items: center
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TimeBox = styled.div`
