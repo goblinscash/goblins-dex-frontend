@@ -378,7 +378,7 @@ function MyFarm({
                     >
                       <p className={` m-0  capitalize`}>
                         {" "}
-                        {toFixedCustm(item?.rewardInfo?.reward) + " " + item.rewardSymbol}{" "}
+                        {toFixedCustm(item?.rewardInfo?.reward || 0) + " " + item.rewardSymbol}{" "}
                       </p>
                     </td>
                     <td
