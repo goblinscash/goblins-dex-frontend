@@ -35,9 +35,9 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
   };
 
   const logo = {
-    "WBCH" : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04/logo.png",
-    "GOB" : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x56381cB87C8990971f3e9d948939e1a95eA113a3/logo.png",
-    "BCH": "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartchain/assets/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf/logo.png"
+    10000 : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x3743eC0673453E5009310C727Ba4eaF7b3a1cc04/logo.png",
+    8453 : "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartbch/assets/0x56381cB87C8990971f3e9d948939e1a95eA113a3/logo.png",
+    56: "https://raw.githubusercontent.com/goblinscash/goblins-icons/main/blockchains/smartchain/assets/0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf/logo.png"
   }
 
   return (
@@ -52,7 +52,7 @@ function Rewards({ details, getDetails, isBlocked, apr }) {
               {toCommas(Number(details?.earnedAmount || 0).toFixed(4)) + " "}
               {details?.rewardSymbol ? details.rewardSymbol : ""}
               <img
-                src={logo[details?.rewardSymbol]}
+                src={logo[currentNetwork?.chainId ? currentNetwork?.chainId : 10000]}
                 height={100}
                 className="max-w-full flex-shrink-0 object-contain ms-2"
                 width={100}
