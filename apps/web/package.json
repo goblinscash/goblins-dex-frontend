@@ -87,7 +87,7 @@
     "@ethersproject/experimental": "5.7.0",
     "@lingui/cli": "4.5.0",
     "@lingui/swc-plugin": "4.0.4",
-    "@myswap/token-list": "1.1.1",
+    "@myswap/token-list": "1.1.2",
     "@swc/core": "1.3.72",
     "@swc/jest": "0.2.29",
     "@swc/plugin-styled-components": "1.5.97",

@@ -5860,14 +5860,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@myswap/token-list@npm:1.1.1":
-  version: 1.1.1
-  resolution: "@myswap/token-list@npm:1.1.1"
+"@myswap/token-list@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@myswap/token-list@npm:1.1.2"
   dependencies:
     "@myswap/token-list": ^1.0.9
     i: ^0.3.7
     npm: ^11.0.0
-  checksum: 6992328e95535bf2aa96c2ded3e0c94d587d8c7b826fb13a1fc464741aee6e063f0625d707164432880bf93c837b0974cdae3d8bf53eb4340fcf05a945ec1c77
+  checksum: 081fe23428f5d03dbcd89af3abd5c1d59086e630e42447bbc4ac2d5f91955c8d67379fca52269467fe2341c48edba372fbad70e3a213683b739a526bee0478d6
   languageName: node
   linkType: hard
 
@@ -11609,7 +11609,7 @@ __metadata:
     "@lingui/swc-plugin": 4.0.4
     "@looksrare/sdk": 0.10.4
     "@metamask/jazzicon": 2.0.0
-    "@myswap/token-list": 1.1.1
+    "@myswap/token-list": 1.1.2
     "@opensea/seaport-js": 1.3.0
     "@popperjs/core": 2.11.8
     "@reach/dialog": 0.10.5
