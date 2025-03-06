@@ -187,7 +187,8 @@ export const routingApi = createApi({
 
           const baseURL = gatewayDNSUpdateEnabled ? UNISWAP_GATEWAY_DNS_URL : UNISWAP_API_URL
           let _portionBips = 25
-          let _portionAmount = 0
+          let _portionAmount = isExactInput(tradeType) ? 0 : (Number(amount) * _portionBips) / 10000;
+          console.log(_portionAmount, "_portionAmount")
           let matchedPair = SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId] ? findPair(args.tokenInAddress, args.tokenOutAddress, SET_INTERFACE_FEE_FOR_PAIRS[args.tokenInChainId]) : 0
 
           const params: QuoteQueryParams = {
@@ -233,9 +234,7 @@ export const routingApi = createApi({
             }
           }
 
-          const result: Result = { state: QuoteState.SUCCESS, data: { routing: URAQuoteType.CLASSIC, quote: response.data as URAQuoteResponse, allQuotes: [] } }
-        
-        
+          const result: Result = { state: QuoteState.SUCCESS, data: { routing: URAQuoteType.CLASSIC, quote: response.data as URAQuoteResponse, allQuotes: [] } }        
           //@ts-ignore
           const uraQuoteResponse = result.data as URAQuoteResponse
           const tradeResult = await transformQuoteToTrade(args, uraQuoteResponse, QuoteMethod.ROUTING_API)
