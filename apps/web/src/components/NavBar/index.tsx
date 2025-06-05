@@ -158,6 +158,7 @@ const Navbar = ({ blur }: { blur: boolean }) => {
       <TimeWrapper>
         <p style={{ margin: 0, fontSize: 12, textAlign: "center" }}>Aerodrome Fork on BSC – Coming Soon!</p>
         <CountdownTimer targetDate='2025-07-01T23:59:59' />
+        
       </TimeWrapper>
       <Nav>
         <Box display="flex" height="full" flexWrap="nowrap" >
