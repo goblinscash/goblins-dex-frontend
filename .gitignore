@@ -14,8 +14,9 @@ scripts/dist
 # next.js
 .next/
 out/
+devprotocol-git.sh
 
-
+devprotocol-git.sh
 # misc
 .DS_Store
 *.pem
