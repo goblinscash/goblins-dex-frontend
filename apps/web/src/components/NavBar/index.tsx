@@ -156,7 +156,7 @@ const Navbar = ({ blur }: { blur: boolean }) => {
     <>
       {/* {blur && <Blur />} */}
       <TimeWrapper>
-        <p style={{ margin: 0, fontSize: 12, textAlign: "center" }}>Goblins Cash V1 Shutdown</p>
+        <p style={{ margin: 0, fontSize: 12, textAlign: "center" }}></p>
         <CountdownTimer targetDate='2025-07-01T23:59:59' />
         
       </TimeWrapper>
